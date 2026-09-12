@@ -1,0 +1,14 @@
+{
+  "assets/brand/quantcorner-mark-dark.svg": "dfa3b9389c7524aa41b8685f9ee428bedbeb49d343e2485d8d7d4342bd35ec77",
+  "assets/brand/quantcorner-mark-light.svg": "4ef73633892d648259b5fd05ce37feb01778ef22222309e2b937435f66967c05",
+  "assets/fonts/noto-sans-thai-thai-400-normal.woff2": "57776453076ebf0fa935080e63c0ae656f1f1ecd5172112d59d3b259e0dd8796",
+  "assets/fonts/noto-sans-thai-thai-500-normal.woff2": "36aac83971765332c5d79f98bba123a4ed07aacd5f90c4634eecba7d46264014",
+  "assets/fonts/roboto-latin-400-normal.woff2": "e44c11f4834bdd4d6b6da7b8ee5eaebc8acb41250cd6bce5cc82ea8262140eaa",
+  "assets/fonts/roboto-latin-500-normal.woff2": "e5b29c36b2e7a2f4db58307359fa574004be43d39790e4b7a3cf80a7b16e8bb6",
+  "assets/fonts/roboto-latin-700-normal.woff2": "2bef6bc763635f137e6b49fc7d01d0d1f74e55413d92a21ce76c9c92c3457150",
+  "assets/fonts/roboto-mono-latin-500-normal.woff2": "ce7027efa5c894e8b244b0ca05ec121b6a85655957afd9c76c59b56910de7d4e",
+  "vendor/AnimatedList-JS-CSS.json": "d01a43d5ab553a1b13c8411e515c0e084471fa07d3c63d92f8eb75bb4dc02bc7",
+  "vendor/BlurText-JS-CSS.json": "9cf581ce3f1787a7f8758873ada5865c397849b3127285a614b1d5d57b8cd6b6",
+  "vendor/CountUp-JS-CSS.json": "6eda954cf34aa7f3170c93001cf2b1294ac93c3a90fd26f69bff9374b0109b79",
+  "vendor/Stepper-JS-CSS.json": "e63f712fcd32773a81710688f1b14cee012037bd1a235ce634104151eb1864ff"
+}

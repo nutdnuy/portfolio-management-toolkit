@@ -1,0 +1,30 @@
+{
+  "project": "Portfolio Management Toolkit",
+  "module": "Portfolio Insurance",
+  "created": "2026-09-12",
+  "visualRoute": "no-image-generator",
+  "source": {
+    "author": "Paulo José Martins Jorge da Silva",
+    "title": "Portfolio Insurance Strategies: Friend or Foe?",
+    "year": 2018,
+    "institution": "Universidade de Lisboa / ISEG",
+    "type": "Doctoral thesis in Management",
+    "repository": "https://hdl.handle.net/10400.5/16515",
+    "pdfPages": 169,
+    "mainTextPageOffset": 27,
+    "treatment": "Original Thai teaching synthesis with printed and PDF page citations; source PDF not redistributed.",
+    "numericExcerpt": "Table 5.2 Panel C, printed page 90 / PDF page 117; two scenarios transcribed and checked visually. Values are cumulative prospect scores, not investment returns."
+  },
+  "interactiveModels": {
+    "source": "src/math.mjs",
+    "dataType": "Newly authored deterministic hypothetical returns; not market data or thesis replication",
+    "window": "12 one-month returns; 13 observations including inception",
+    "initialWealth": 100,
+    "uiRiskFreeRate": 0,
+    "cppi": "Monthly rebalance, no leverage or shorts, fractional holdings, terminal floor target",
+    "benchmarks": ["Buy & Hold 100% risky", "Constant Mix 60% risky / 40% safe with monthly rebalancing"],
+    "costs": "No transaction costs, bid-ask spread, slippage, taxes or dividends",
+    "protectivePut": "One asset and one European put, held to expiry; hypothetical premium; no option pricing model",
+    "limitations": "No probability or forecasting claim; monthly observations omit intramonth losses; model does not include market impact, liquidity constraints or counterparty failure"
+  }
+}

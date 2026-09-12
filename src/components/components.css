@@ -1,0 +1,50 @@
+/* React Bits semantic adapter. Values come from the app's Material 2 tokens. */
+.rb-stepper, .rb-history, .rb-count-up, .rb-blur-text {
+  --rb-background: var(--background, #121212);
+  --rb-surface: var(--surface, #1e1e1e);
+  --rb-text: var(--text, rgba(255, 255, 255, .87));
+  --rb-muted: var(--muted, rgba(255, 255, 255, .6));
+  --rb-primary: var(--primary, #bb86fc);
+  --rb-on-primary: var(--on-primary, #000);
+  --rb-secondary: var(--secondary, #03dac6);
+  --rb-border: var(--border, rgba(255, 255, 255, .24));
+  --rb-focus: var(--primary, #bb86fc);
+  color: var(--rb-text);
+}
+.rb-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+.rb-count-up { font-variant-numeric: tabular-nums; }
+.rb-blur-word { display: inline-block; }
+.rb-stepper { border: 1px solid var(--rb-border); border-radius: 12px; overflow: hidden; background: var(--rb-surface); }
+.rb-step-indicators { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; padding: 12px; margin: 0; gap: 8px; border-bottom: 1px solid var(--rb-border); }
+.rb-step-indicator { display: flex; align-items: center; gap: 8px; min-height: 48px; width: 100%; padding: 8px; border: 1px solid transparent; border-radius: 6px; color: var(--rb-muted); background: transparent; font: inherit; font-size: 14px; text-align: left; cursor: pointer; }
+.rb-step-number { display: grid; flex-shrink: 0; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--rb-border); font-variant-numeric: tabular-nums; }
+.rb-step-indicator[aria-current="step"] { color: var(--rb-text); border-color: var(--rb-border); }
+.rb-step-indicator[aria-current="step"] .rb-step-number { color: var(--rb-on-primary); background: var(--rb-primary); border-color: var(--rb-primary); }
+.rb-step-panel { padding: 24px; min-width: 0; }
+.rb-step-panel h3:first-child { margin-top: 0; }
+.rb-step-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 24px; border-top: 1px solid var(--rb-border); }
+.rb-step-progress { color: var(--rb-muted); font-size: 13px; text-align: center; }
+.rb-button { min-height: 48px; padding: 10px 20px; border: 1px solid var(--rb-border); border-radius: 6px; font: inherit; font-size: 14px; font-weight: 500; background: transparent; color: var(--rb-text); cursor: pointer; }
+.rb-button-primary { background: var(--rb-primary); color: var(--rb-on-primary); border-color: var(--rb-primary); box-shadow: 0 2px 3px rgba(0,0,0,.2); }
+.rb-button:disabled { background: var(--rb-background); color: var(--rb-muted); border-color: var(--rb-border); box-shadow: none; cursor: not-allowed; }
+.rb-button:not(:disabled):hover, .rb-step-indicator:hover, .rb-scenario-button:hover { box-shadow: inset 0 0 0 1px var(--rb-primary); }
+.rb-button:active:not(:disabled) { transform: translateY(1px); box-shadow: none; }
+.rb-stepper button:focus-visible, .rb-history button:focus-visible, .rb-step-panel:focus-visible { outline: 2px solid var(--rb-focus); outline-offset: -3px; }
+.rb-empty { margin: 0; color: var(--rb-muted); font-size: 14px; }
+.rb-animated-list { display: grid; gap: 8px; list-style: none; padding: 0; margin: 0; }
+.rb-scenario-button { display: flex; justify-content: space-between; align-items: center; gap: 16px; width: 100%; min-height: 48px; padding: 12px 16px; border: 1px solid var(--rb-border); border-radius: 8px; background: var(--rb-surface); color: var(--rb-text); text-align: left; font: inherit; font-size: 14px; cursor: pointer; }
+.rb-scenario-button[aria-pressed="true"] { border-color: var(--rb-primary); }
+.rb-scenario-label { overflow-wrap: anywhere; }
+.rb-recall-label { flex-shrink: 0; color: var(--rb-primary); font-size: 12px; font-weight: 500; }
+@media (max-width: 540px) {
+  .rb-step-indicators { gap: 4px; padding: 8px; }
+  .rb-step-indicator { flex-direction: column; align-items: flex-start; gap: 8px; padding: 8px; font-size: 12px; }
+  .rb-step-panel { padding: 20px 16px; }
+  .rb-step-footer { padding: 12px 16px; }
+  .rb-button { padding: 10px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rb-blur-word { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .rb-stepper *, .rb-history * { transition-duration: 0s !important; animation: none !important; }
+  .rb-button:active:not(:disabled) { transform: none; }
+}

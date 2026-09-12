@@ -1,0 +1,8 @@
+node_modules/
+_site/
+.research/
+qa/output/
+.DS_Store
+.env
+.env.*
+*.log
