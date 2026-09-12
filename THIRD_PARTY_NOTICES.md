@@ -2,7 +2,7 @@
 
 ## Interface interactions
 
-CountUp, Stepper, AnimatedList, and BlurText are adapted from
+CountUp, Stepper, and AnimatedList are adapted from
 [DavidHDev/react-bits](https://github.com/DavidHDev/react-bits), pinned commit
 `8d1c5fa9ebee6e077e70c9e5c63b44e87dbeaecc`. The individual JS/CSS registry
 snapshots are retained in `vendor/*-JS-CSS.json` as source provenance for this
@@ -20,8 +20,9 @@ Adaptations replace upstream demonstration colors with QuantCorner / QuantSeras
 Material 2 semantic tokens; make reduced motion static; keep final numeric
 values immediately readable to assistive technology; use native buttons and
 ordered lists; remove document-wide keyboard interception; allow content to
-determine step height; and retain accessible, stable text for the one narrative
-headline reveal. See `docs/component-manifest.md` for purpose and verification.
+determine step height. A previously inspected BlurText registry snapshot is
+retained for provenance but is not rendered. See `docs/component-manifest.md`
+for purpose and verification.
 
 React, React DOM, Scheduler, Motion, and its bundled dependencies retain their
 package license notices in `vendor/`. Exact installed versions are recorded in
@@ -56,8 +57,9 @@ QuantCorner Research Coordinate Q marks and favicons are authentic owner
 approved assets copied unchanged from the canonical QuantCorner brand package.
 Its rules are retained in `assets/brand/README.md`. The mark's approved green
 evidence point is preserved as part of the logo; it is not a new UI palette.
-Dark and light marks are selected for their appropriate surface. These
-owner-controlled marks are not offered under the software dependency licenses.
+The favicon is used by the book; the full marks remain available as source
+assets. These owner-controlled marks are not offered under the software
+dependency licenses.
 
 ## Visual production
 
@@ -67,8 +69,13 @@ Design System. All rendered text, values, chart geometry, controls and layouts
 are native or deterministic. No generated artwork or decorative image filler
 is included in this work.
 
+The owner-selected book shell in `book.css` is reused from the owner's
+Quantitative Finance Notes project, following its Binomial Model chapter. The
+sidebar thumbnail is generated from the same illustrative CPPI/recovery
+calculation in `build.cjs`; it is not a research figure from the thesis.
+
 ## Educational source
 
 Paulo José Martins Jorge da Silva, *Portfolio Insurance Strategies: Friend or Foe?* (2018), doctoral thesis, Universidade de Lisboa / ISEG. Public repository: https://hdl.handle.net/10400.5/16515. The user-provided 169-page PDF was consulted locally. Original Thai teaching notes summarize its concepts and findings with printed/PDF page citations. Two selected scenarios from Table 5.2 Panel C (printed p. 90, PDF p. 117) are transcribed and labeled as CPT scores, not returns. No source PDF or original chart image is redistributed. Author and university rights remain with their owners.
 
-All toolkit market paths and worked examples are newly constructed teaching examples. The monthly CPPI simulation is not a replication of the thesis Monte Carlo study. See content/research.md and docs/methodology.md for scope.
+All toolkit market paths and worked examples are newly constructed teaching examples. The monthly CPPI simulation is not a replication of the thesis Monte Carlo study. See content/portfolio-insurance.md and docs/methodology.md for scope.

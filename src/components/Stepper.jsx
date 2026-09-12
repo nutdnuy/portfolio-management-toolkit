@@ -2,7 +2,7 @@
 import React, { Children, useId, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 
-const defaultLabels = ['Define protection', 'Allocate risk', 'Review outcomes'];
+const defaultLabels = ['กำหนด Floor', 'หา Cushion', 'จัดสรรเงิน'];
 
 export default function Stepper({ children }) {
   const steps = Children.toArray(children);
@@ -23,7 +23,7 @@ export default function Stepper({ children }) {
   if (!steps.length) return null;
 
   return <div className="rb-stepper" data-component="Stepper">
-    <ol className="rb-step-indicators" aria-label="Learning stages">
+    <ol className="rb-step-indicators" aria-label="ลำดับการคำนวณ">
       {steps.map((_, index) => <li key={index}>
         <button type="button" id={`${id}-step-${index}`} aria-current={active === index ? 'step' : undefined}
           aria-controls={`${id}-panel`} onClick={() => goTo(index)} className="rb-step-indicator">
@@ -39,9 +39,9 @@ export default function Stepper({ children }) {
       </motion.div>
     </section>
     <div className="rb-step-footer">
-      <button type="button" className="rb-button" disabled={active === 0} onClick={() => goTo(active - 1)}>Back</button>
-      <span className="rb-step-progress" role="status">Step {active + 1} of {steps.length}</span>
-      <button type="button" className="rb-button rb-button-primary" disabled={active === steps.length - 1} onClick={() => goTo(active + 1)}>Next</button>
+      <button type="button" className="rb-button" disabled={active === 0} onClick={() => goTo(active - 1)}>ย้อนกลับ</button>
+      <span className="rb-step-progress" role="status">ขั้น {active + 1} จาก {steps.length}</span>
+      <button type="button" className="rb-button rb-button-primary" disabled={active === steps.length - 1} onClick={() => goTo(active + 1)}>ถัดไป</button>
     </div>
   </div>;
 }

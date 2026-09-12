@@ -19,16 +19,16 @@ export default function AnimatedList({ items = [], onItemSelect }) {
   };
 
   return <div className="rb-history" data-component="AnimatedList">
-    <p className="rb-sr-only" role="status">{items.length} saved {items.length === 1 ? 'scenario' : 'scenarios'}</p>
-    {items.length === 0 ? <p className="rb-empty">Save a scenario to compare it with your next experiment.</p>
-      : <ol className="rb-animated-list" aria-label="Saved scenarios" onKeyDown={onArrowKey}>
+    <p className="rb-sr-only" role="status">บันทึกแล้ว {items.length} ชุด</p>
+    {items.length === 0 ? <p className="rb-empty">บันทึกชุดทดลองเพื่อนำมาเทียบกับครั้งถัดไป</p>
+      : <ol className="rb-animated-list" aria-label="ชุดทดลองที่บันทึกไว้" onKeyDown={onArrowKey}>
         {items.map((item, index) => <motion.li key={item.id}
           initial={reduced || seen.current.has(item.id) ? false : { opacity: 0.4, y: 8 }}
           animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : 0.2 }}>
           <button type="button" className="rb-scenario-button" aria-pressed={selected === item.id}
             onClick={() => { setSelected(item.id); onItemSelect?.(item, index); }}>
             <span className="rb-scenario-label">{item.label}</span>
-            <span className="rb-recall-label">{selected === item.id ? 'Loaded' : 'Recall'}</span>
+            <span className="rb-recall-label">{selected === item.id ? 'เรียกคืนแล้ว' : 'เรียกคืนค่า'}</span>
           </button>
         </motion.li>)}
       </ol>}

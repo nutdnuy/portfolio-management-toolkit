@@ -1,14 +1,16 @@
 {
   "title": "Portfolio Management Toolkit",
   "brand": "QuantCorner",
+  "author": "Nuth",
   "language": "th",
   "visualRoute": "no-image-generator",
   "designSystem": "QuantCorner / QuantSeras Material 2",
+  "defaultTheme": "light",
+  "reference": "https://nutdnuy.github.io/quantitative-finance-notes/binomial-model.html",
+  "notebook": "notebooks/portfolio-insurance.ipynb",
   "pages": [
-    {"file": "index", "title": "Overview", "icon": "book", "eyebrow": "THE TOOLKIT", "description": "เรียนรู้การบริหารพอร์ตผ่านงานวิจัยและเครื่องมือทดลอง เริ่มจาก Portfolio Insurance"},
-    {"file": "portfolio-insurance", "title": "Portfolio insurance", "icon": "shield-check", "eyebrow": "01 / FOUNDATIONS", "description": "เข้าใจ Floor, Cushion, CPPI, OBPI และต้นทุนของการป้องกันพอร์ต"},
-    {"file": "lab", "title": "Strategy lab", "icon": "chart-line", "eyebrow": "02 / INTERACTIVE TOOLS", "description": "ทดลอง CPPI เปรียบเทียบเส้นทางพอร์ต และคำนวณ Protective Put"},
-    {"file": "research", "title": "Research notes", "icon": "external-link", "eyebrow": "03 / RESEARCH & EVIDENCE", "description": "อ่านข้อค้นพบและข้อจำกัดของ Portfolio Insurance Strategies: Friend or Foe? (2018)"},
-    {"file": "glossary", "title": "Glossary", "icon": "search", "eyebrow": "REFERENCE / GLOSSARY", "description": "คำศัพท์การป้องกันพอร์ต พร้อมคำอธิบายภาษาไทยและแหล่งอ้างอิง"}
+    {"file": "index", "title": "Welcome", "description": "Portfolio Management Toolkit: บทเรียนภาษาไทยเรื่องการบริหารพอร์ต พร้อมสมการ ตัวอย่าง และ Python Notebook"},
+    {"file": "portfolio-insurance", "title": "Portfolio Insurance", "description": "Portfolio Insurance Strategies: Friend or Foe? เรียนรู้ Floor, CPPI, OBPI และต้นทุนการป้องกันพอร์ต ผ่านตัวอย่างและการทดลอง"},
+    {"file": "glossary", "title": "อภิธานศัพท์", "description": "คำศัพท์การบริหารพอร์ตและ Portfolio Insurance พร้อมลิงก์กลับบทเรียน"}
   ]
 }

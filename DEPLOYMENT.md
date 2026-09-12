@@ -6,7 +6,7 @@ The local build exports `_site/`, with relative links, bundled fonts and JavaScr
 
 ## GitHub Pages
 
-The included **Publish toolkit** workflow installs locked dependencies on Node.js 22, runs numerical checks, builds five static pages, checks local assets and anchors, uploads `_site/` and deploys Pages.
+The included **Publish toolkit** workflow installs locked dependencies on Node.js 22, runs numerical and executed-Notebook consistency checks, builds three book pages, checks local assets and anchors, uploads `_site/` and deploys Pages. The downloadable Notebook is committed; regenerate it locally when its chapter or model changes.
 
 After the owner chooses publication:
 

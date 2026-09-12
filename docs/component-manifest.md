@@ -1,81 +1,30 @@
-# Interaction and asset manifest
+# Book interaction and asset manifest
 
-Created before implementation: 2026-09-12.
+Date: 2026-09-12. Visual route: `no-image-generator` under `visual-generation/Nuth-v1`.
 
-Visual route: `no-image-generator` under `visual-generation/Nuth-v1`.
-Controlling system: QuantCorner / QuantSeras, exact Material Design 2;
-dark primary and light supporting, local Roboto / Noto Sans Thai / Roboto Mono.
+The owner selected the light Thai book layout of the Binomial Model lesson. The book uses native text and equations, a left contents column, inline experiments, print and Notebook downloads. Light is the default; readers may choose dark. QuantCorner / QuantSeras Material 2 tokens and local Roboto / Noto Sans Thai / Roboto Mono fonts are retained.
 
-## Planned React Bits families
+## Three component families
 
-| Family | Semantic purpose and location | Trigger | Reduced motion / static equivalence |
+| Family | Purpose and location | Trigger | Reduced motion / static equivalence |
 | --- | --- | --- | --- |
-| CountUp | Shows the result of a portfolio calculation in result metrics | Calculated value changes | Final value immediately; screen readers always receive the final value, never interpolation |
-| Stepper | Three-stage learning sequence: define protection, allocate risk, review outcomes | Reader chooses Back, Next, or a named stage | Same named native buttons, progress and content, without transition |
-| AnimatedList | Saved scenario history with recall | A saved run is appended; reader recalls a run | Same ordered list and native recall buttons, with new rows visible immediately |
-| BlurText | One narrative headline connects the opening question to the research | Headline first enters view | Identical headline rendered statically and available to screen readers immediately |
+| CountUp | Numeric results in the Put and CPPI inline experiments | Calculated value changes | Final value immediately; screen readers receive the final value rather than interpolation |
+| Stepper | Three stages of the worked allocation example | Native stage, Back and Next buttons | Identical named controls, progress and content without transition |
+| AnimatedList | Up to six saved CPPI assumptions with recall | Saving or recalling a run | Same ordered list and native recall buttons, with new rows visible immediately |
 
-Each family must render in a visible user state before being counted. Four
-families are planned for this research toolkit. No repeating or idle effects.
+No headline reveal, idle animation or marketing components are rendered. Each family is exercised in a visible user state by browser checks. Updated evidence is in `docs/verification.md` and local `qa/output/`.
 
-## Sourcing and adaptation
+## Source and adaptation
 
-The official shadcn MCP was called first. Its initial `@react-bits` search
-returned `NOT_CONFIGURED`; this project now declares the official registry in
-`components.json`. Registry inspection and pinned-source details will be
-recorded below before implementation.
+The official shadcn MCP search and detail calls returned `NOT_CONFIGURED`, including after this sibling project's registry declaration in `components.json`. The approved local fallback used verified React Bits Git HEAD `8d1c5fa9ebee6e077e70c9e5c63b44e87dbeaecc`. Complete JS/CSS source and registry snapshots were inspected before adaptation. Snapshots and the MIT + Commons Clause notice are retained in `vendor/`. BlurText was inspected in the initial work but is not used in the book.
 
-Both the search and item-detail MCP calls returned `NOT_CONFIGURED`, including
-after this new project's registry configuration was created. The MCP server
-is not reading the new sibling project configuration. The approved local
-fallback is therefore used: verified Git HEAD
-`8d1c5fa9ebee6e077e70c9e5c63b44e87dbeaecc`. Inspected the complete JS/CSS
-source for all four families and their `public/r/*-JS-CSS.json` registry
-snapshots before implementation. Each snapshot declares only
-`motion@^12.23.12`; this project pins the installed runtime in its lockfile.
-The four individual source snapshots are retained in `vendor/` for
-application provenance, together with the MIT + Commons Clause notice.
+Only semantic `--rb-*` adapters appear in component styling, mapped to the application's Material 2 tokens. Upstream demonstration palettes and gradients are removed. Runtime and CSS reduced-motion fallbacks preserve content. Native Tab order is retained; arrow navigation is limited to the saved-run list.
 
-Presentation is scoped to `src/components/components.css`, using semantic
-`--rb-*` adapters mapped to the application tokens. No upstream demonstration
-palette, decorative gradients or glow. The approved QuantCorner mark remains
-an unchanged authentic file, including its approved green evidence point.
-
-## Verification status
-
-Implementation complete in `src/components/`. All four entrypoints passed an
-independent esbuild browser bundle with the project's installed React 19.2.6
-and Motion 12.43.0. shadcn's audit checklist was retrieved after implementation.
-All icons were validated as SVGs with a 24px viewBox and 2px stroke. Exact
-source/font/brand checksums and icon URLs are retained in `vendor/` and
-`assets/icons/source.json`. Full licenses are retained.
-
-Component CSS contains only semantic variable references and approved Material
-2 fallback colors; upstream neon literals and gradients have been removed.
-Reduced motion has both runtime and CSS static fallbacks. Native Tab order is
-preserved; optional scenario-list arrow navigation is scoped to that list.
-
-Integrated browser verification completed on 2026-09-12: `npm run check:site`
-passed 41 checks. All four families render and perform their stated functions.
-Thirty page scans (five pages x 1440/390/320px x dark/light) found no page
-overflow, serious/critical accessibility findings, contrast violations, missing
-assets, or runtime errors. Keyboard, saved-run recall, all three steps, live
-metric updates, single headline reveal and static reduced-motion behavior
-passed. Exact evidence and eight screenshots are in `qa/output/`.
+The Tabler icon source URLs, SVG checksums and authentic 24px/2px construction are recorded in `assets/icons/source.json`. Font and owner-approved brand asset checksums and licenses are retained in `vendor/` and `assets/`. The book shell is reused from the owner's Quantitative Finance Notes layout. The sidebar's CPPI/recovery thumbnail is deterministic output of `build.cjs`.
 
 ## Integration API
 
-- `CountUp({to, digits = 2, className = ''})`: numeric output; callers supply
-  the metric's label and unit. The final value is available immediately through
-  a visually hidden span, while interpolation is hidden from screen readers.
-- `Stepper({children})`: three stage bodies; optional `data-step-title` on each
-  child overrides the default stage label. Back, Next, and numbered stage
-  buttons are native keyboard controls. The panel uses natural height.
-- `AnimatedList({items, onItemSelect})`: items have stable `id` and `label`;
-  callback receives `(item, index)`. New rows reveal once, saved history can be
-  recalled, and the empty state explains how to begin.
-- `BlurText({text, className = ''})`: inline text, suitable inside the caller's
-  `h1` or `h2`. Use once per narrative view.
-- Import `src/components/components.css` once. It maps `--rb-*` to app tokens
-  `--background`, `--surface`, `--text`, `--muted`, `--primary`, `--on-primary`,
-  `--secondary` and `--border`. App tokens control the light theme as well.
+- `CountUp({to, digits = 2, className = ''})`: callers supply label and unit. Final text is available immediately through a visually hidden span; interpolation is hidden from screen readers.
+- `Stepper({children})`: three stage bodies, with optional `data-step-title`. Native stage and navigation buttons; natural panel height.
+- `AnimatedList({items, onItemSelect})`: items contain stable `id` and `label`; callback receives `(item, index)` for recall.
+- Import `src/components/components.css` once. Application tokens control both themes.

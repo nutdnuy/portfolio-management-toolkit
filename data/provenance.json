@@ -22,9 +22,19 @@
     "initialWealth": 100,
     "uiRiskFreeRate": 0,
     "cppi": "Monthly rebalance, no leverage or shorts, fractional holdings, terminal floor target",
-    "benchmarks": ["Buy & Hold 100% risky", "Constant Mix 60% risky / 40% safe with monthly rebalancing"],
+    "benchmarks": [
+      "Buy & Hold 100% risky",
+      "Constant Mix 60% risky / 40% safe with monthly rebalancing"
+    ],
     "costs": "No transaction costs, bid-ask spread, slippage, taxes or dividends",
     "protectivePut": "One asset and one European put, held to expiry; hypothetical premium; no option pricing model",
     "limitations": "No probability or forecasting claim; monthly observations omit intramonth losses; model does not include market impact, liquidity constraints or counterparty failure"
+  },
+  "presentation": {
+    "format": "Thai book with sequential chapter and inline experiments",
+    "defaultTheme": "light",
+    "reference": "https://nutdnuy.github.io/quantitative-finance-notes/binomial-model.html",
+    "notebook": "notebooks/portfolio-insurance.ipynb",
+    "notebookGenerator": "scripts/make_notebook.py"
   }
 }

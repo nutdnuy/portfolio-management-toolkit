@@ -1,23 +1,54 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
-const root=path.resolve(import.meta.dirname,'../_site');
-const pages=JSON.parse(fs.readFileSync(path.join(root,'build-manifest.json'),'utf8')).pages;
-const failures=[];
-let checked=0;
-for(const page of pages){
- const html=fs.readFileSync(path.join(root,page),'utf8'),ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
- if(ids.length!==new Set(ids).size)failures.push(`${page}: duplicate id`);
- for(const match of html.matchAll(/(?:href|src)="([^"]+)"/g)){
-  const url=match[1];if(/^(?:https?:|mailto:|data:)/.test(url))continue;
-  const [file,fragment]=url.split('#'),target=path.resolve(root,file.split('?')[0]||page);checked++;
-  if(!target.startsWith(root+path.sep)||!fs.existsSync(target)){failures.push(`${page}: missing ${url}`);continue;}
-  if(fragment&&target.endsWith('.html')){const targetHTML=fs.readFileSync(target,'utf8');const id=decodeURIComponent(fragment);if(!targetHTML.includes(`id="${id}"`))failures.push(`${page}: missing anchor ${url}`);}
- }
+
+const root = path.resolve(import.meta.dirname, '../_site');
+const manifest = JSON.parse(fs.readFileSync(path.join(root, 'build-manifest.json'), 'utf8'));
+const failures = [];
+let checked = 0;
+assert.equal(manifest.format, 'book');
+assert.deepEqual(manifest.pages, ['index.html', 'portfolio-insurance.html', 'glossary.html']);
+
+function localReference(owner, reference) {
+  if (/^(?:https?:|mailto:|data:|tel:)/i.test(reference)) return;
+  checked++;
+  const url = reference.replaceAll('&amp;', '&');
+  const [file, fragment] = url.split('#');
+  const target = file ? path.resolve(path.dirname(owner), decodeURIComponent(file.split('?')[0])) : owner;
+  if (!target.startsWith(root + path.sep) || !fs.existsSync(target)) {
+    failures.push(`${path.relative(root, owner)}: missing or nonportable ${url}`);
+    return;
+  }
+  if (fragment && target.endsWith('.html')) {
+    const targetHTML = fs.readFileSync(target, 'utf8');
+    const id = decodeURIComponent(fragment);
+    if (![...targetHTML.matchAll(/\bid="([^"]+)"/g)].some(match => match[1] === id)) failures.push(`${path.relative(root, owner)}: missing anchor ${url}`);
+  }
 }
-for(const file of ['style.css','app.css','assets/katex/katex.min.css']){
- const full=path.join(root,file);const css=fs.readFileSync(full,'utf8');
- for(const match of css.matchAll(/url\(["']?([^"')]+)["']?\)/g)){const url=match[1];if(/^(data:|https?:)/.test(url))continue;checked++;if(!fs.existsSync(path.resolve(path.dirname(full),url.split('?')[0])))failures.push(`${file}: missing ${url}`);}
+
+// Include former entrypoint redirects and the license page as well as the book.
+const htmlFiles = fs.readdirSync(root, { recursive: true }).filter(name => name.endsWith('.html'));
+for (const name of htmlFiles) {
+  const owner = path.join(root, name), html = fs.readFileSync(owner, 'utf8');
+  const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  if (ids.length !== new Set(ids).size) failures.push(`${name}: duplicate id`);
+  for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) localReference(owner, match[1]);
 }
-assert.deepEqual(failures,[],failures.join('\n'));
-console.log(`Verified ${pages.length} pages and ${checked} local asset/link references including anchors and CSS fonts.`);
+for (const name of ['style.css', 'book.css', 'app.css', 'assets/katex/katex.min.css']) {
+  const owner = path.join(root, name);
+  if (!fs.existsSync(owner)) { failures.push(`Missing stylesheet ${name}`); continue; }
+  for (const match of fs.readFileSync(owner, 'utf8').matchAll(/url\(["']?([^"')]+)["']?\)/g)) localReference(owner, match[1]);
+}
+for (const name of ['index.md', 'portfolio-insurance.md', 'glossary.md']) {
+  const artifact = path.join(root, name);
+  if (!fs.existsSync(artifact) || fs.statSync(artifact).size === 0) failures.push(`Missing Markdown download ${name}`);
+}
+const notebookFile = path.join(root, 'notebooks/portfolio-insurance.ipynb');
+if (!fs.existsSync(notebookFile)) failures.push('Missing Notebook download notebooks/portfolio-insurance.ipynb');
+else {
+  const notebook = JSON.parse(fs.readFileSync(notebookFile, 'utf8'));
+  if (notebook.nbformat !== 4 || !notebook.cells?.length) failures.push('Notebook is not a populated nbformat 4 document');
+  if (notebook.cells?.some(cell => cell.outputs?.some(output => output.output_type === 'error'))) failures.push('Notebook contains an execution error');
+}
+assert.deepEqual(failures, [], failures.join('\n'));
+console.log(`Verified ${manifest.pages.length} book pages, ${htmlFiles.length} HTML files and ${checked} local references, including anchors, book.css, fonts, Markdown and Notebook downloads.`);

@@ -8,7 +8,9 @@
     "build": "node build.cjs",
     "build:pages": "npm run build && node qa/link-checks.mjs",
     "test": "node qa/math-checks.mjs",
-    "check:site": "node qa/browser-checks.cjs"
+    "check:site": "node qa/browser-checks.cjs",
+    "notebook": "python3 scripts/make_notebook.py",
+    "check:notebook": "python3 qa/notebook-checks.py"
   },
   "engines": {"node": ">=22"},
   "dependencies": {"motion": "12.43.0", "react": "19.2.6", "react-dom": "19.2.6", "katex": "0.16.22"},

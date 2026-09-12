@@ -1,6 +1,6 @@
 # Portfolio Management Toolkit
 
-เว็บไซต์ภาษาไทยสำหรับเรียนรู้การบริหารพอร์ตจากงานวิจัยและเครื่องมือทดลอง โดย QuantCorner เริ่มจากหมวด **Portfolio Insurance** อ้างอิงวิทยานิพนธ์ *Portfolio Insurance Strategies: Friend or Foe?* ของ Paulo José Martins Jorge da Silva (2018)
+หนังสือออนไลน์ภาษาไทยเรื่องการบริหารพอร์ต โดย QuantCorner เริ่มจากบท **Portfolio Insurance** อ้างอิงวิทยานิพนธ์ *Portfolio Insurance Strategies: Friend or Foe?* ของ Paulo José Martins Jorge da Silva (2018) ใช้รูปแบบเดียวกับ [บท Binomial Model](https://nutdnuy.github.io/quantitative-finance-notes/binomial-model.html): พื้นขาว สารบัญด้านซ้าย เนื้อหาต่อเนื่อง สมการ และเครื่องมือทดลองแทรกในบทเรียน
 
 โปรเจกต์นี้แยกจาก Quantitative Finance Notes ทั้งโฟลเดอร์ เนื้อหา การ build และพอร์ต preview เว็บไซต์เดิมไม่มีการแก้ไข
 
@@ -17,11 +17,10 @@ npm run dev
 
 ## เนื้อหาและเครื่องมือ
 
-- Overview: หน้าแรกของ Toolkit และกราฟตัวอย่าง
-- Portfolio insurance: Floor, Cushion, SLPI, OBPI, CPPI, TIPP, gap risk และ cash lock
-- Strategy lab: CPPI simulator, allocation walkthrough และ Protective Put calculator
-- Research notes: วิธีจำลอง EUT/CPT, ผลที่ตรวจจากต้นฉบับ และข้อจำกัด robo-advisor case study
-- Glossary: คำศัพท์พร้อมลิงก์กลับบทเรียน
+- Welcome: แนะนำหนังสือและวิธีอ่าน
+- Portfolio Insurance: บทเรียน 13 หัวข้อ เริ่มจาก Put และงบซื้อการป้องกัน สู่ Floor, CPPI, TIPP, Gap risk, Cash lock และหลักฐาน EUT/CPT/Robo-advisors พร้อมเครื่องมือทดลองในบท
+- อภิธานศัพท์: นิยามภาษาไทย ค้นหาคำ และลิงก์กลับไปยังตัวอย่าง
+- Notebook: คำอธิบายและสมการครบจากบทเรียน พร้อมโค้ด Python และกราฟที่คำนวณซ้ำได้
 
 Lab ใช้ 4 เส้นทางสมมติ 12 เดือน เปรียบเทียบ CPPI กับ Buy & Hold และ Constant Mix 60/40 ไม่ใช่ backtest หรือการทำซ้ำวิทยานิพนธ์ คำนวณใน browser ไม่มีการเรียกข้อมูลตลาด ไม่มี analytics และไม่ส่งพารามิเตอร์ไป server ดาวน์โหลดผลรายเดือนพร้อมพารามิเตอร์เป็น CSV ได้
 
@@ -35,7 +34,9 @@ Lab ใช้ 4 เส้นทางสมมติ 12 เดือน เป�
 | `src/app.jsx` | เครื่องมือทดลองและกราฟ |
 | `src/site.js` | ค้นหา เมนู และธีม |
 | `src/components/` | React Bits ที่ปรับสำหรับเว็บไซต์นี้ |
-| `style.css` | โครงหน้าและ design tokens |
+| `style.css`, `book.css` | บทเรียน เครื่องมือ และโครงหนังสือ |
+| `scripts/make_notebook.py` | สร้างและรัน Notebook จากเนื้อหาบทเรียน |
+| `notebooks/portfolio-insurance.ipynb` | Notebook ที่สร้างแล้วสำหรับดาวน์โหลด |
 | `assets/` | ฟอนต์และ approved assets ที่ใช้ในเครื่องได้ |
 | `build.cjs` | Static HTML, KaTeX และ JS bundling |
 | `_site/` | ผล build อัตโนมัติ ไม่แก้ตรงนี้ |
@@ -46,6 +47,8 @@ Lab ใช้ 4 เส้นทางสมมติ 12 เดือน เป�
 
 ```sh
 npm test
+npm run notebook       # Python 3.9+; ใช้ standard library
+npm run check:notebook
 npm run build:pages
 npm run check:site  # ต้องเปิด preview ที่พอร์ต 8764
 ```
@@ -54,4 +57,6 @@ npm run check:site  # ต้องเปิด preview ที่พอร์ต 
 
 ต้นฉบับ PDF และไฟล์ตรวจหลักฐานใน `.research/` เก็บในเครื่อง ไม่รวมใน Git/ชุดเว็บ ข้อมูลอ้างอิงสาธารณะ: https://hdl.handle.net/10400.5/16515 รายการสิทธิ์ของ dependencies และ assets อยู่ใน `THIRD_PARTY_NOTICES.md`
 
-Visual route: `no-image-generator` ตาม QuantCorner / QuantSeras Material 2; dark default และ light supporting. UI หลักเป็นภาษาอังกฤษ เนื้อหาเรียนรู้เป็นภาษาไทย ตามบริบทซีรีส์ของเจ้าของ
+เมื่อแก้เนื้อหาหรือแบบจำลอง ให้สร้าง Notebook ใหม่ก่อน build ดูแนวทางใน `EDITING.md`
+
+Visual route: `no-image-generator` ตาม QuantCorner / QuantSeras Material 2 ใช้ฟอนต์ Roboto / Noto Sans Thai / Roboto Mono ในเครื่อง พื้นขาวเป็นค่าเริ่มต้น มีธีมมืดให้เลือก ปุ่มและคำอธิบายเป็นภาษาไทยตามรูปแบบที่เจ้าของเลือก
