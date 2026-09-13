@@ -3,7 +3,7 @@ title: ยินดีต้อนรับ
 description: บทเรียนภาษาไทยเรื่องการจัดการพอร์ต เรียนรู้จากแนวคิด สมการ ตัวอย่าง และการทดลอง
 ---
 
-# Portfolio Management Toolkit
+# Portfolio Management Toolkit Notes
 
 <p class="lead">เรียนรู้การจัดการพอร์ต ผ่านคำถาม ตัวอย่าง และการทดลอง</p>
 

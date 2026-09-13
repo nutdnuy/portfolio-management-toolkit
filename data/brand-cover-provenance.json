@@ -1,0 +1,63 @@
+{
+  "date": "2026-09-13",
+  "route": "no-image-generator",
+  "design_system": "quantseras-design-system.md",
+  "background": "#000000",
+  "layout": "QuantCorner above Quantsera, centered by painted alpha bounds with equal visible widths. Authentic PNGs remain unmodified and proportionally scaled; complete image boxes fit inside the black panel.",
+  "assets": [
+    {
+      "brand": "quantcorner",
+      "asset": "assets/brand/quantcorner-horizontal-transparent-offwhite-1024.png",
+      "canonical_asset": "quantcorner-brand/png/quantcorner-horizontal-transparent-offwhite-1024.png",
+      "sha256": "fe4b53e4977136fb512d39263d69b08cf50b2b2a2f0cd7714821ec58e40d8c84",
+      "dimensions": [
+        1024,
+        228
+      ],
+      "adaptation": "Unmodified approved PNG, proportionally placed in a native HTML black cover.",
+      "painted_bounds_px": [
+        42,
+        51,
+        818,
+        179
+      ]
+    },
+    {
+      "brand": "quantsera",
+      "asset": "assets/brand/quantsera-horizontal-transparent-offwhite-1024.png",
+      "canonical_asset": "quantsera-brand/png/quantsera-horizontal-transparent-offwhite-1024.png",
+      "sha256": "3de306fe9e5aeedd0bc875e0b4117e33b296c2cb30c23f35032b30a7ca9ee0c8",
+      "dimensions": [
+        1024,
+        228
+      ],
+      "adaptation": "Unmodified approved PNG, proportionally placed in a native HTML black cover.",
+      "painted_bounds_px": [
+        188,
+        56,
+        834,
+        173
+      ]
+    }
+  ],
+  "layout_metrics": {
+    "visible_width_fraction": 0.62,
+    "painted_center_x_fraction": 0.5,
+    "painted_center_y_fractions": [
+      0.32,
+      0.68
+    ],
+    "bounds_method": "Read nonzero-alpha bounding boxes from the exact approved PNGs; do not edit or crop the images."
+  },
+  "quality_review": {
+    "layout_origin": "Adopted the approved, corrected cover layout from the owner’s Quantitative Finance Notes website. This toolkit uses the same immutable PNG assets and painted-bound alignment.",
+    "checks": [
+      "12 browser states: 320, 390, 768, 800, 834 and 1440 px, each in light and dark themes. Both image boxes remain within the black panel; source proportions, equal painted widths and centered alpha bounds passed.",
+      "All three page titles and the QuantCorner author attribution checked in the browser.",
+      "Offline local-file labs, global search and glossary filtering passed without runtime errors.",
+      "Approved asset SHA-256 checksums and Quantsera brand preflight passed."
+    ],
+    "evidence": "qa/output/cover-results.json and docs/verification.md"
+  },
+  "project": "Portfolio Management Toolkit Notes"
+}

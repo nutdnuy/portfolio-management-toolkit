@@ -1,4 +1,4 @@
-# Portfolio Management Toolkit
+# Portfolio Management Toolkit Notes
 
 หนังสือออนไลน์ภาษาไทยเรื่องการบริหารพอร์ต โดย QuantCorner เริ่มจากบท **Portfolio Insurance** อ้างอิงวิทยานิพนธ์ *Portfolio Insurance Strategies: Friend or Foe?* ของ Paulo José Martins Jorge da Silva (2018) ใช้รูปแบบเดียวกับ [บท Binomial Model](https://nutdnuy.github.io/quantitative-finance-notes/binomial-model.html): พื้นขาว สารบัญด้านซ้าย เนื้อหาต่อเนื่อง สมการ และเครื่องมือทดลองแทรกในบทเรียน
 
@@ -58,5 +58,7 @@ npm run check:site  # ต้องเปิด preview ที่พอร์ต 
 ต้นฉบับ PDF และไฟล์ตรวจหลักฐานใน `.research/` เก็บในเครื่อง ไม่รวมใน Git/ชุดเว็บ ข้อมูลอ้างอิงสาธารณะ: https://hdl.handle.net/10400.5/16515 รายการสิทธิ์ของ dependencies และ assets อยู่ใน `THIRD_PARTY_NOTICES.md`
 
 เมื่อแก้เนื้อหาหรือแบบจำลอง ให้สร้าง Notebook ใหม่ก่อน build ดูแนวทางใน `EDITING.md`
+
+ภาพปกใช้โลโก้ QuantCorner / Quantsera ต้นฉบับบนพื้นดำ ชื่อผู้เรียบเรียงบนเว็บคือ QuantCorner
 
 Visual route: `no-image-generator` ตาม QuantCorner / QuantSeras Material 2 ใช้ฟอนต์ Roboto / Noto Sans Thai / Roboto Mono ในเครื่อง พื้นขาวเป็นค่าเริ่มต้น มีธีมมืดให้เลือก ปุ่มและคำอธิบายเป็นภาษาไทยตามรูปแบบที่เจ้าของเลือก

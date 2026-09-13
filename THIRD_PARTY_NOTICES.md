@@ -71,11 +71,16 @@ is included in this work.
 
 The owner-selected book shell in `book.css` is reused from the owner's
 Quantitative Finance Notes project, following its Binomial Model chapter. The
-sidebar thumbnail is generated from the same illustrative CPPI/recovery
-calculation in `build.cjs`; it is not a research figure from the thesis.
+sidebar and mobile Welcome cover use the approved QuantCorner / Quantsera
+logos on a native black panel. The charts inside the lesson are calculated
+from explicitly hypothetical teaching examples.
 
 ## Educational source
 
 Paulo José Martins Jorge da Silva, *Portfolio Insurance Strategies: Friend or Foe?* (2018), doctoral thesis, Universidade de Lisboa / ISEG. Public repository: https://hdl.handle.net/10400.5/16515. The user-provided 169-page PDF was consulted locally. Original Thai teaching notes summarize its concepts and findings with printed/PDF page citations. Two selected scenarios from Table 5.2 Panel C (printed p. 90, PDF p. 117) are transcribed and labeled as CPT scores, not returns. No source PDF or original chart image is redistributed. Author and university rights remain with their owners.
 
 All toolkit market paths and worked examples are newly constructed teaching examples. The monthly CPPI simulation is not a replication of the thesis Monte Carlo study. See content/portfolio-insurance.md and docs/methodology.md for scope.
+
+## Book branding — 2026-09-13
+
+The book uses the approved QuantCorner and Quantsera horizontal transparent PNGs, copied unchanged from their canonical brand packages. Native HTML/CSS places the separate assets on black, centered by painted bounds, following quantseras-design-system.md and the no-image-generator route. Exact assets and hashes are recorded in data/brand-cover-provenance.json.

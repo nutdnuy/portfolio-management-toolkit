@@ -15,3 +15,19 @@ This record covers the owner-selected Thai book revision based on the Binomial M
 - Final diff review and `git diff --check` passed. The original quantitative-finance-notes working tree remains clean.
 
 The site is a local preview with no new hosted repository or live deployment. The source PDF is not redistributed. No real market backtest or full thesis Monte Carlo replication is claimed. Safari/Firefox and full screen-reader narration were not tested.
+
+## 2026-09-13 — Portfolio Management Toolkit Notes
+
+Continued the existing standalone project built from the same source thesis. Updated the book title, Welcome page, metadata, Notebook introduction and author attribution (QuantCorner). Reused the approved QuantCorner / Quantsera cover from the current Quantitative Finance Notes website and removed a duplicated scenario label in the CPPI selector.
+
+- `npm test`: 16 numerical checks passed.
+- `npm run notebook` and `npm run check:notebook`: 29 cells, 10 executed code cells, two SVG charts, full chapter capture and 16 Python/JavaScript path comparisons passed.
+- `npm run build:pages`: three book pages, six HTML files and 232 local references passed.
+- `npm run check:site`: all 32 browser checks and 18 accessibility scans passed, with no recorded failures.
+- Additional cover checks: 12 viewport/theme combinations at 320, 390, 768, 800, 834 and 1440 px; both image boxes fit, original proportions remain intact, and visible widths and painted centers match. All three page titles and author footers passed. Evidence: `qa/output/cover-results.json`.
+- Focused check after the final UI copy edit: all four scenario labels appear once and all four CPPI scenarios remain selectable.
+- Current offline verification: local-file CPPI scenario selection, global search and glossary filtering passed without runtime errors.
+- Visual inspection: Welcome on desktop/mobile and the inline CPPI experiment. Quantsera brand preflight and immutable asset checksums passed.
+- Source review: checked the supplied local thesis for protective strategies, CPPI/TIPP mechanics, simulation assumptions, EUT/CPT findings and the limitations of its robo-advisor sample. This was a targeted review of relevant sections, not a full independent replication of the thesis.
+
+Publication requires a new repository; the local preview is ready at `http://127.0.0.1:8764/`. The original Quantitative Finance Notes repository remains unchanged. The source PDF is not included. Safari/Firefox and full screen-reader narration have not been tested.

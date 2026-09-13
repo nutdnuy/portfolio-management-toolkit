@@ -2,6 +2,10 @@
 
 Edit `content/*.md`, never generated `_site/` files. The book uses the same light reading layout as Quantitative Finance Notes, but has its own content, configuration and build.
 
+## Book identity
+
+Set the book title, author and the two ordered logo paths in `site.config.json`. Keep the Welcome heading in `content/index.md` and Notebook introduction in `scripts/make_notebook.py` consistent with the title. The approved logos are immutable PNGs; `book.css` aligns their painted bounds without modifying the assets.
+
 ## Chapters
 
 Use an English kebab-case filename in `content/`. Add its name without `.md`, a title and description to `pages` in `site.config.json`. Markdown headings form the chapter contents list. Explicit section IDs remain stable for glossary links and bookmarks. Equations use inline `$...$` and display `$$...$$` LaTeX rendered by KaTeX.

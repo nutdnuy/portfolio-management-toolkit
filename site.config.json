@@ -1,7 +1,7 @@
 {
-  "title": "Portfolio Management Toolkit",
+  "title": "Portfolio Management Toolkit Notes",
   "brand": "QuantCorner",
-  "author": "Nuth",
+  "author": "QuantCorner",
   "language": "th",
   "visualRoute": "no-image-generator",
   "designSystem": "QuantCorner / QuantSeras Material 2",
@@ -9,8 +9,24 @@
   "reference": "https://nutdnuy.github.io/quantitative-finance-notes/binomial-model.html",
   "notebook": "notebooks/portfolio-insurance.ipynb",
   "pages": [
-    {"file": "index", "title": "Welcome", "description": "Portfolio Management Toolkit: บทเรียนภาษาไทยเรื่องการบริหารพอร์ต พร้อมสมการ ตัวอย่าง และ Python Notebook"},
-    {"file": "portfolio-insurance", "title": "Portfolio Insurance", "description": "Portfolio Insurance Strategies: Friend or Foe? เรียนรู้ Floor, CPPI, OBPI และต้นทุนการป้องกันพอร์ต ผ่านตัวอย่างและการทดลอง"},
-    {"file": "glossary", "title": "อภิธานศัพท์", "description": "คำศัพท์การบริหารพอร์ตและ Portfolio Insurance พร้อมลิงก์กลับบทเรียน"}
+    {
+      "file": "index",
+      "title": "Welcome",
+      "description": "Portfolio Management Toolkit Notes: บทเรียนภาษาไทยเรื่องการบริหารพอร์ต พร้อมสมการ ตัวอย่าง และ Python Notebook"
+    },
+    {
+      "file": "portfolio-insurance",
+      "title": "Portfolio Insurance",
+      "description": "Portfolio Insurance Strategies: Friend or Foe? เรียนรู้ Floor, CPPI, OBPI และต้นทุนการป้องกันพอร์ต ผ่านตัวอย่างและการทดลอง"
+    },
+    {
+      "file": "glossary",
+      "title": "อภิธานศัพท์",
+      "description": "คำศัพท์การบริหารพอร์ตและ Portfolio Insurance พร้อมลิงก์กลับบทเรียน"
+    }
+  ],
+  "logos": [
+    "assets/brand/quantcorner-horizontal-transparent-offwhite-1024.png",
+    "assets/brand/quantsera-horizontal-transparent-offwhite-1024.png"
   ]
 }

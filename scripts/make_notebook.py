@@ -383,7 +383,7 @@ def build_notebook():
         cells.append(dict(cell_type="code", metadata=metadata, source=text,
                           execution_count=count, outputs=outputs))
 
-    markdown("# Notebook: Portfolio Insurance\n\nคำอธิบายและสมการต่อไปนี้มาจากบทเรียนเดียวกับเว็บไซต์ **Portfolio Management Toolkit** ใช้ Python 3 และ standard library สำหรับคำนวณ เลือก **Run All** ได้โดยไม่ต้องดาวน์โหลดข้อมูลหรือติดตั้งแพ็กเกจคำนวณ กราฟ SVG ฝังอยู่ในไฟล์และใช้ IPython เพื่อแสดงผลเมื่อมีให้ใช้\n\nเซลล์ตั้งต้นเก็บฟังก์ชันร่วม ส่วนเซลล์ทดลองอยู่ถัดจากเนื้อหาที่เกี่ยวข้อง ปรับค่าตัวแปรแล้วรันตามลำดับ ตัวเลขทั้งหมดในห้องทดลองเป็นตัวอย่างสมมติ ไม่ใช่ข้อมูลตลาดหรือการทำซ้ำวิทยานิพนธ์\n\nลิงก์ไปหน้าอื่นใช้ไฟล์ในชุดเว็บไซต์ที่อยู่ระดับเหนือโฟลเดอร์ `notebooks/`; การคำนวณใน Notebook ทำงานได้แม้แยกไฟล์นี้ออกมา", source_role="introduction")
+    markdown("# Notebook: Portfolio Insurance\n\nคำอธิบายและสมการต่อไปนี้มาจากบทเรียนเดียวกับเว็บไซต์ **Portfolio Management Toolkit Notes** ใช้ Python 3 และ standard library สำหรับคำนวณ เลือก **Run All** ได้โดยไม่ต้องดาวน์โหลดข้อมูลหรือติดตั้งแพ็กเกจคำนวณ กราฟ SVG ฝังอยู่ในไฟล์และใช้ IPython เพื่อแสดงผลเมื่อมีให้ใช้\n\nเซลล์ตั้งต้นเก็บฟังก์ชันร่วม ส่วนเซลล์ทดลองอยู่ถัดจากเนื้อหาที่เกี่ยวข้อง ปรับค่าตัวแปรแล้วรันตามลำดับ ตัวเลขทั้งหมดในห้องทดลองเป็นตัวอย่างสมมติ ไม่ใช่ข้อมูลตลาดหรือการทำซ้ำวิทยานิพนธ์\n\nลิงก์ไปหน้าอื่นใช้ไฟล์ในชุดเว็บไซต์ที่อยู่ระดับเหนือโฟลเดอร์ `notebooks/`; การคำนวณใน Notebook ทำงานได้แม้แยกไฟล์นี้ออกมา", source_role="introduction")
     code(MODEL_CODE.replace("__SCENARIOS__", json.dumps(scenario_data(model_text), ensure_ascii=False, indent=4)), hidden=True)
     code(CHART_CODE, hidden=True)
 
