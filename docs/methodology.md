@@ -73,3 +73,13 @@ $S_0$ คือราคาหุ้นเริ่มต้น, $S_T$ คือ
 ## ทำซ้ำผลและขอบเขตของการตีความ
 
 ไฟล์ CSV เก็บพารามิเตอร์ ผลตอบแทนรายเดือน และมูลค่าทั้ง 13 จุดรวมเดือนเริ่มต้น ไฟล์ `src/math.mjs` เป็นสูตรที่เว็บไซต์ใช้จริงและมีการตรวจด้วย `qa/math-checks.mjs` เส้นทางเดียวไม่ได้บอกความน่าจะเป็นของเหตุการณ์หรือพิสูจน์ว่ากลยุทธ์ใดเหมาะกับผู้ลงทุนทุกคน
+
+## Expanded worked examples — 2026-09-13
+
+The chapter now develops the formulas and walks through matched-budget OBPI, self-financing CPPI across four early rebalancing periods, gap thresholds with positive interest and capped exposure, and a multi-period illustrative TIPP ratchet. These are new teaching examples. The original monthly JavaScript model and three interactive components remain unchanged.
+
+The continuous CPPI derivation assumes continuous prices and trading, no costs, constant parameters, unconstrained exposure, and borrowing/lending at the same rate. Its exponential cushion solution must not be substituted for the capped monthly simulator. The TIPP example uses zero interest and its own observed portfolio high-water mark; its drawdown statements refer to those observation times.
+
+EUT/CE and CPT examples show the difference between transforming wealth, averaging values, and using cumulative decision weights. The two-asset correlation example and five-outcome shortfall comparison are teaching constructions. No probabilities are attached to the four authored market paths in the interactive lab.
+
+The Notebook includes executable checks for all principal new numerical examples. It still captures the complete canonical chapter, and its original two charts and 16 Python/JavaScript scenario comparisons remain part of verification.

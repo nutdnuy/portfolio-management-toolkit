@@ -36,5 +36,25 @@
     "reference": "https://nutdnuy.github.io/quantitative-finance-notes/binomial-model.html",
     "notebook": "notebooks/portfolio-insurance.ipynb",
     "notebookGenerator": "scripts/make_notebook.py"
+  },
+  "teachingExpansion": {
+    "date": "2026-09-13",
+    "scope": "Expanded all 13 existing sections; retained anchors and the three original interactive models.",
+    "newExamples": [
+      "Discounted floor at positive interest",
+      "Payoff/profit and equal-budget OBPI",
+      "Four CPPI rebalancing periods and a round-trip path",
+      "Continuous unconstrained CPPI derivation, separate from the monthly model",
+      "Gap thresholds with interest and capped exposure",
+      "Multi-period TIPP ratchet",
+      "Constant mix versus passive holdings",
+      "EUT certainty equivalent and cumulative prospect weights",
+      "Two-asset correlation illustration",
+      "Shortfall frequency/severity and sampled drawdown"
+    ],
+    "reproducibility": "36 Notebook cells, including 17 executed code cells; prose and equations copied from canonical chapter; analytic assertions and 16 Python/JavaScript path comparisons.",
+    "sourceTreatment": "New examples and derivations are teaching additions, not thesis tables or a replication. Thesis findings retain printed/PDF page references; Table 5.2 Panel C was checked visually.",
+    "glossaryTerms": 34,
+    "workedReviewQuestions": 8
   }
 }

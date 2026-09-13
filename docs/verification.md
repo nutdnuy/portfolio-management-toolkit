@@ -31,3 +31,17 @@ Continued the existing standalone project built from the same source thesis. Upd
 - Source review: checked the supplied local thesis for protective strategies, CPPI/TIPP mechanics, simulation assumptions, EUT/CPT findings and the limitations of its robo-advisor sample. This was a targeted review of relevant sections, not a full independent replication of the thesis.
 
 Publication requires a new repository; the local preview is ready at `http://127.0.0.1:8764/`. The original Quantitative Finance Notes repository remains unchanged. The source PDF is not included. Safari/Firefox and full screen-reader narration have not been tested.
+
+## 2026-09-13 — Detailed lesson expansion
+
+Expanded the existing 13 sections from 15 to 57 explanatory subsections, retaining all 19 explicit chapter anchors/mounts. Added derivations, multi-period accounting tables, eight review questions with answers, and 11 linked glossary entries (34 total). The mathematical website model and interface behavior are unchanged.
+
+- Primary-source review covered strategy mechanics, the theoretical continuous CPPI claim, simulation assumptions, EUT/CPT definitions and Table 5.2, and the robo-advisor methodology. The six reproduced Panel C values were checked against the rendered PDF page 117. Independent review found no numerical errors; precision edits explicitly state independent GBM shocks, the weak Jensen inequality, and sampled versus continuous high-water marks.
+- `npm test`: all 16 model checks passed.
+- `npm run notebook` and `npm run check:notebook`: 36 cells, 17 executed code cells, two embedded SVG charts, complete canonical chapter capture, exact saved-output re-execution, and 16 Python/JavaScript path comparisons passed. Added assertions check the new budget, four-period CPPI, positive-rate gap, TIPP, utility/weighting and shortfall examples.
+- `npm run build:pages`: three primary pages, six HTML files, 111 search entries and 264 local references passed.
+- `npm run check:site`: 32 checks passed; all 18 page/theme/viewport accessibility scans had no recorded violations.
+- Focused checks: all 378 rendered math expressions have no KaTeX errors; eight answer panels; new glossary English/Thai search and term-return links; long-table keyboard scrolling at 390 and 320 px; offline expanded content and search. Evidence: `qa/output/depth-results.json`.
+- Visual inspection covered the multi-period CPPI table on desktop/mobile and the continuous cushion equation. Existing light/dark reading layout, branding, labs and downloads are preserved.
+
+This revision is local; repository publication remains undecided. Source PDF and temporary research/drafts are excluded from Git. Safari/Firefox and full screen-reader narration remain untested.

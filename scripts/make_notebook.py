@@ -286,6 +286,253 @@ for terminal_price in [80, 90, 120]:
     print(f"S_T={terminal_price}: full-parity wealth={same_quantity:.2f}; fixed-budget wealth={protected_budget:.2f}")''',
 }
 
+# This block is inserted before CHECK_CODE in the notebook generator.
+# Keep examples self-contained and distinct from the 12-month teaching model.
+SECTION_SNIPPETS["floor-and-cushion"] += r'''
+
+# Discount the same terminal target; do not confuse time decay with a ratchet.
+floor_target, annual_rate = 90, 0.05
+floor_today = floor_target * math.exp(-annual_rate)
+floor_half_year = floor_target * math.exp(-annual_rate * 0.5)
+close(floor_today, 85.61064820506427)
+close(floor_half_year, 87.77789208254994)
+close(floor_today * math.exp(annual_rate), floor_target)
+print(f"5% continuous rate: floor today={floor_today:.6f}, in six months={floor_half_year:.6f}, at maturity={floor_target:.6f}")
+print(f"Initial cushion={100-floor_today:.6f}; investing 90 today instead gives {90*math.exp(annual_rate):.6f} at maturity.")
+'''
+
+SECTION_SNIPPETS["option-budget"] += r'''
+
+# Match both the initial budget and the desired floor before comparing.
+scaled_units = 100 / 104
+expected_values = [
+    (80, 90, 86.53846153846153, 90),
+    (100, 100, 96.15384615384616, 97.14285714285714),
+    (120, 120, 115.38461538461539, 111.42857142857143),
+]
+print("Terminal stock | full stock+put (cost 104) | scaled (cost 100) | fixed-floor OBPI (cost 100)")
+for terminal_stock, full_expected, scaled_expected, obpi_expected in expected_values:
+    full = max(terminal_stock, 90)
+    scaled = scaled_units * full
+    fixed_floor = 90 + (10/14) * max(terminal_stock-90, 0)
+    close(full, full_expected); close(scaled, scaled_expected); close(fixed_floor, obpi_expected)
+    print(f"{terminal_stock:>14} {full:>27.6f} {scaled:>19.6f} {fixed_floor:>27.6f}")
+close(90 + (10/14)*(104-90), 100)
+new_call_premium = 20
+parity_put_premium = new_call_premium - 100 + 90
+close(parity_put_premium, 10)
+close(90 + (10/new_call_premium)*(120-90), 105)
+print("Call premium 20 implies Put premium 10 at the same spot/strike/rate, not the former Put premium 4.")
+'''
+
+SECTION_SNIPPETS["cppi-rule"] = r'''# Optional continuous, unconstrained CPPI: not the capped monthly simulator.
+def continuous_cushion(cushion0, rate, drift, sigma, multiplier, time, brownian_endpoint):
+    growth = (rate + multiplier*(drift-rate) - 0.5*multiplier**2*sigma**2)*time
+    return cushion0 * math.exp(growth + multiplier*sigma*brownian_endpoint)
+
+print("Illustrative Brownian endpoints at t=1 (not sampled scenarios or probabilities):")
+for endpoint in [-1, 0, 0.25, 1]:
+    cushion = continuous_cushion(10, 0.05, 0.08, 0.20, 3, 1, endpoint)
+    assert cushion > 0
+    print(f"W_1={endpoint:>5}: C_1={cushion:.6f}")
+close(continuous_cushion(10, 0.05, 0.08, 0.20, 3, 1, 0.25), 11.162780704588712)
+# When m=1, the cushion is simply the initial risky holding's value.
+close(continuous_cushion(10, 0.05, 0.08, 0.20, 1, 1, 0.25),
+      10*math.exp((0.08-0.5*0.2**2) + 0.2*0.25))
+print("This result assumes continuous trading/prices, no costs, and unconstrained exposure. It does not validate the discrete simulator's floor.")
+'''
+
+SECTION_SNIPPETS["cppi-example"] = r'''# Four rebalancing periods, all before maturity.
+returns = [-0.10, 0.20, -0.10, 0.10]
+value, floor, multiplier, turnover = 100, 90, 3, 0
+positions = allocate(value, floor, multiplier)
+expected = [
+    (27, 97, 7, 21, -6, 76),
+    (25.2, 101.2, 11.2, 33.6, 8.4, 67.6),
+    (30.24, 97.84, 7.84, 23.52, -6.72, 74.32),
+    (25.872, 100.192, 10.192, 30.576, 4.704, 69.616),
+]
+print("Period | held risky | wealth | cushion | new risky | trade | new safe")
+for step, (asset_return, answer) in enumerate(zip(returns, expected), 1):
+    held_risky = positions["exposure"]*(1+asset_return)
+    value = held_risky + positions["safe"]
+    positions = allocate(value, floor, multiplier)
+    trade = positions["exposure"]-held_risky
+    turnover += abs(trade)
+    values = (held_risky, value, positions["cushion"], positions["exposure"], trade, positions["safe"])
+    for actual, target in zip(values, answer):
+        close(actual, target)
+    close(positions["exposure"]+positions["safe"], value)
+    print(step, " | ".join(f"{number:.3f}" for number in values))
+close(turnover, 25.824)
+print(f"Turnover excluding initial allocation={turnover:.3f} monetary units, not fees.")
+# Cross-check the same four steps in the chapter's monthly simulator.
+same_steps = simulate(returns=returns+[0]*8)
+for row, answer in zip(same_steps["rows"][1:5], expected):
+    close(row["cppi"], answer[1]); close(row["exposure"], answer[3])
+flat_path = simulate(returns=[0]*12)
+round_trip = simulate(returns=[0.10, -1/11]+[0]*10)
+close(round_trip["rows"][2]["asset"], 100)
+close(round_trip["rows"][2]["cppi"], 99.45454545454545)
+close(flat_path["rows"][2]["cppi"], 100)
+print("Stock ends at 100 in both paths; flat CPPI=100, round-trip CPPI=99.454545.")
+'''
+
+SECTION_SNIPPETS["gap-risk"] = r'''# A one-period snapshot: F_now=90, not the preceding example's terminal floor.
+rate, dt, value_now, floor_now, multiplier = 0.06, 1/12, 100, 90, 3
+gross_safe = math.exp(rate*dt)
+safe_return = gross_safe - 1
+positions = allocate(value_now, floor_now, multiplier)
+threshold = -1/multiplier + (multiplier-1)/multiplier*safe_return
+close(threshold, -0.3299916527603993)
+next_value = positions["exposure"]*(1-0.33) + positions["safe"]*gross_safe
+next_floor = floor_now*gross_safe
+close(next_value, 90.45087646015807)
+close(next_floor, 90.45112687734608)
+assert next_value < next_floor
+print(f"Monthly gap threshold at 6% continuous annual rate: risky return < {threshold:.6%}")
+print(f"After -33%: wealth={next_value:.9f}, floor={next_floor:.9f}, cushion={next_value-next_floor:.9f}")
+# Use actual exposure when the cap binds.
+capped = allocate(100, 50, 3)
+close(capped["exposure"], 100)
+capped_threshold = -capped["cushion"]/capped["exposure"]
+close(capped_threshold, -0.5)
+close(capped["exposure"]*(1+capped_threshold)+capped["safe"], 50)
+print(f"With V=100/F=50/m=3/r=0, capped exposure=100 and floor-touch return={capped_threshold:.2%}.")
+# Cash lock can grow in money while staying locked relative to the growing floor.
+for initial_cushion in [0, -2]:
+    assert gross_safe*initial_cushion <= 0
+'''
+
+SECTION_SNIPPETS["tipp"] += r'''
+
+# Matched initial wealth/exposure, then each portfolio follows its own rule.
+cppi_value = tipp_value = high_water = 100
+cppi_floor = tipp_floor = 90
+cppi_pos = allocate(cppi_value, cppi_floor, 3)
+tipp_pos = allocate(tipp_value, tipp_floor, 3)
+expected = [(106, 106, 95.4, 48, 31.8), (101.2, 102.82, 95.4, 33.6, 22.26)]
+print("Return | CPPI wealth | TIPP wealth | TIPP floor | CPPI risky | TIPP risky")
+for asset_return, answers in zip([0.20, -0.10], expected):
+    cppi_value = cppi_pos["exposure"]*(1+asset_return)+cppi_pos["safe"]
+    tipp_value = tipp_pos["exposure"]*(1+asset_return)+tipp_pos["safe"]
+    high_water = max(high_water, tipp_value)
+    tipp_floor = max(tipp_floor, 0.90*high_water)
+    cppi_pos = allocate(cppi_value, cppi_floor, 3)
+    tipp_pos = allocate(tipp_value, tipp_floor, 3)
+    actual = (cppi_value, tipp_value, tipp_floor, cppi_pos["exposure"], tipp_pos["exposure"])
+    for result, target in zip(actual, answers):
+        close(result, target)
+    print(f"{asset_return:>6.0%} | " + " | ".join(f"{x:.3f}" for x in actual))
+close(tipp_pos["safe"], 80.56)
+cppi_recovery = cppi_value + cppi_pos["exposure"]*0.30
+tipp_recovery = tipp_value + tipp_pos["exposure"]*0.30
+close(cppi_recovery, 111.28); close(tipp_recovery, 109.498)
+print(f"Next +30%: CPPI={cppi_recovery:.3f}, TIPP={tipp_recovery:.3f}.")
+print("These are the chapter's illustrative ratchet rules; the website's 12-month lab remains CPPI only.")
+'''
+
+SECTION_SNIPPETS["strategies"] = r'''# Passive and constant mix start from the same 60/40 allocation.
+held_risky, safe = 60*1.1, 40
+total = held_risky + safe
+mix_target = 0.6*total
+trade = mix_target-held_risky
+close(total, 106); close(mix_target, 63.6); close(trade, -2.4)
+print(f"Passive risky weight={held_risky/total:.6%}; constant mix sells {-trade:.2f} units.")
+estimated_cost = 0.001*60
+close(estimated_cost, 0.06)
+print(f"60 units of turnover at a hypothetical 0.1% cost -> {estimated_cost:.2f} units of direct cost.")
+print("A full cost model must deduct costs when trading and recompute the cushion/exposure, not merely subtract this at maturity.")
+'''
+
+SECTION_SNIPPETS["study-design"] = r'''# One GBM time step at fixed illustrative shocks, not a Monte Carlo replication.
+mu, sigma, dt, spot = 0.15, 0.20, 1/252, 100
+daily_log_sd = sigma*math.sqrt(dt)
+close(daily_log_sd, 0.01259881576697424)
+print(f"Daily log-return standard deviation={daily_log_sd:.6%}")
+for z in [-1, 0, 1]:
+    next_spot = spot*math.exp((mu-0.5*sigma**2)*dt+sigma*math.sqrt(dt)*z)
+    assert next_spot > 0
+    print(f"Z={z:+}: next price={next_spot:.6f}")
+print(f"Under this constant-parameter GBM, expected one-year simple return=exp(mu)-1={math.expm1(mu):.6%}, not exactly mu.")
+'''
+
+SECTION_SNIPPETS["eut-cpt"] = r'''# New teaching examples, separate from the thesis tables.
+utility_a = math.log(100)
+utility_b = 0.5*math.log(50)+0.5*math.log(170)
+certainty_equivalent = math.exp(utility_b)
+close(utility_b, 4.523910721239204)
+close(certainty_equivalent, 92.19544457292888)
+assert (50+170)/2 > 100 and utility_b < utility_a
+print(f"EUT: sure 100 utility={utility_a:.6f}; risky 50/170 utility={utility_b:.6f}; CE={certainty_equivalent:.6f}")
+
+def prospect_value(change, alpha=0.88, beta=0.88, loss_aversion=2.25):
+    return change**alpha if change >= 0 else -loss_aversion*(-change)**beta
+
+def decision_weight(probability, eta):
+    assert 0 <= probability <= 1 and eta > 0
+    return probability**eta/(probability**eta+(1-probability)**eta)**(1/eta)
+
+gain_value, loss_value = prospect_value(10), prospect_value(-10)
+mean_value = (gain_value+loss_value)/2
+gain_weight, loss_weight = decision_weight(0.5, 0.61), decision_weight(0.5, 0.69)
+mixed_cpt = gain_weight*gain_value + loss_weight*loss_value
+close(gain_value, 7.5857757502918375)
+close(loss_value, -17.067995438156636)
+close(mean_value, -4.741109843932399)
+close(mixed_cpt, -4.557781610517452)
+print(f"v(+10)={gain_value:.6f}; v(-10)={loss_value:.6f}; mean value={mean_value:.6f}")
+print(f"Mixed CPT: gain weight={gain_weight:.6f}; loss weight={loss_weight:.6f}; score={mixed_cpt:.6f}")
+high_gain_weight = decision_weight(0.10, 0.61)
+low_gain_weight = decision_weight(1, 0.61)-high_gain_weight
+close(high_gain_weight, 0.18630256637717418)
+close(low_gain_weight, 0.8136974336228258)
+close(low_gain_weight+high_gain_weight, 1)
+print(f"Gains 10(p=.9)/100(p=.1): cumulative weights={low_gain_weight:.6f}/{high_gain_weight:.6f}.")
+print("Weights are decision weights, not recalibrated market probabilities. Mixed gain/loss weights need not add to one.")
+'''
+
+SECTION_SNIPPETS["robo-advisors"] = r'''# Two-asset teaching illustration, not the thesis risk decomposition.
+weight_a = weight_b = 0.5
+sigma_a = sigma_b = 0.20
+for correlation, expected_sigma in [(0, math.sqrt(0.02)), (1, 0.20)]:
+    variance = weight_a**2*sigma_a**2 + weight_b**2*sigma_b**2
+    variance += 2*weight_a*weight_b*sigma_a*sigma_b*correlation
+    sigma_portfolio = math.sqrt(variance)
+    close(sigma_portfolio, expected_sigma)
+    print(f"Correlation={correlation}: portfolio annual volatility={sigma_portfolio:.6%}")
+'''
+
+SECTION_SNIPPETS["how-to-compare"] += r'''
+
+# Equal-probability toy outcomes for measurement; not the four lab scenarios.
+terminal_sets = {"A": [70, 90, 100, 110, 130], "B": [80, 95, 100, 105, 120]}
+for name, terminal_values in terminal_sets.items():
+    losses = [max(90-v, 0) for v in terminal_values]
+    positive_losses = [loss for loss in losses if loss > 0]
+    probability = len(positive_losses)/len(losses)
+    expected_loss = sum(losses)/len(losses)
+    conditional_loss = sum(positive_losses)/len(positive_losses) if positive_losses else None
+    close(sum(terminal_values)/len(terminal_values), 100)
+    close(probability, 0.2)
+    close(expected_loss, 4 if name == "A" else 2)
+    close(conditional_loss, 20 if name == "A" else 10)
+    close(expected_loss, probability*conditional_loss)
+    print(f"{name}: mean=100, breach={probability:.0%}, mean shortfall={expected_loss:.2f}, conditional shortfall={conditional_loss:.2f}")
+
+def sampled_max_drawdown(values):
+    peak, max_loss = values[0], 0
+    for value in values:
+        peak = max(peak, value)
+        max_loss = max(max_loss, 1-value/peak)
+    return max_loss
+
+close(sampled_max_drawdown([100, 120, 108]), 0.1)
+close(sampled_max_drawdown([100, 105, 108]), 0)
+print("Both sample paths end at +8%; sampled MDD is 10% versus 0%. Terminal outcomes alone cannot supply MDD.")
+'''
+
+
 CHECK_CODE = r'''# Independent analytic checks. These do not depend on your editable controls above.
 flat = [0.0]*12
 close(simulate(returns=flat)["metrics"]["final"], 100)
