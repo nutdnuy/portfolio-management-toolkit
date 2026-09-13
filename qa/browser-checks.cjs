@@ -24,6 +24,12 @@ async function ready(page, name) {
     await page.locator('#cppi-lab select').waitFor();
     await page.locator('#put-lab [data-component="CountUp"]').first().waitFor();
     await page.locator('#allocation-guide [data-component="Stepper"]').waitFor();
+    // Lazy diagrams should load when a reader reaches them.
+    for (const image of await page.locator('.lesson-figure img').all()) {
+      await image.scrollIntoViewIfNeeded();
+      await image.evaluate(element => element.decode());
+    }
+    await page.evaluate(() => window.scrollTo(0, 0));
   }
 }
 async function metrics(container) { return container.locator('.metrics-row .rb-sr-only').allTextContents(); }

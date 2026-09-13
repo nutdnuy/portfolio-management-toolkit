@@ -5,6 +5,7 @@ to show deterministic SVG charts when a reader runs the notebook interactively.
 """
 import contextlib
 import hashlib
+import html
 import io
 import json
 import re
@@ -579,7 +580,54 @@ def scenario_data(model_text):
     return paths
 
 
+FIGURE_PATTERN = re.compile(r'<figure\b([^>]*)>(.*?)</figure>', flags=re.S)
+ATTRIBUTE_PATTERN = re.compile(r'''([\w:-]+)\s*=\s*(["'])(.*?)\2''', flags=re.S)
+DIAGRAM_NAME_PATTERN = re.compile(r'[a-z0-9][a-z0-9-]*\.svg')
+ATTACHMENT_PATTERN = re.compile(r'!\[(?:\\.|[^\]\\])*\]\(attachment:([^)]+)\)')
+
+
+def figure_markdown(match):
+    """Turn a canonical lesson figure into a portable image and its caption."""
+    attributes = {name: html.unescape(value) for name, _, value in ATTRIBUTE_PATTERN.findall(match[1])}
+    if "lesson-figure" not in attributes.get("class", "").split():
+        raise ValueError("A chapter figure must use the lesson-figure class.")
+    content = re.fullmatch(r'\s*<img\b([^>]*)>\s*<figcaption\b[^>]*>(.*?)</figcaption>\s*', match[2], flags=re.S)
+    if content is None:
+        raise ValueError("A lesson figure must contain one image followed by its plain-text caption.")
+    image_attributes = {name: html.unescape(value) for name, _, value in ATTRIBUTE_PATTERN.findall(content[1])}
+    asset = re.fullmatch(r'assets/diagrams/([a-z0-9][a-z0-9-]*\.svg)', image_attributes.get("src", ""))
+    if asset is None:
+        raise ValueError("Lesson figures must use local SVG files in assets/diagrams/.")
+    alt = " ".join(image_attributes.get("alt", "").split())
+    if not alt:
+        raise ValueError(f"Missing diagram alt text: {asset[1]}")
+    if re.search(r'<[^>]+>', content[2]):
+        raise ValueError(f"Diagram caption must be plain text: {asset[1]}")
+    caption = " ".join(html.unescape(content[2]).split())
+    if not caption:
+        raise ValueError(f"Missing diagram caption: {asset[1]}")
+    alt = alt.replace("\\", "\\\\").replace("[", "\\[").replace("]", "\\]")
+    anchor = ""
+    if "id" in attributes:
+        if not re.fullmatch(r'[a-z][a-z0-9-]*', attributes["id"]):
+            raise ValueError("A lesson figure ID must be an English kebab-case anchor.")
+        anchor = f'<a id="{attributes["id"]}"></a>\n\n'
+    return f'\n\n{anchor}![{alt}](attachment:{asset[1]})\n\n{caption}\n\n'
+
+
+def markdown_attachments(text):
+    """Embed each referenced SVG verbatim; readers need no separate asset files."""
+    attachments = {}
+    for filename in ATTACHMENT_PATTERN.findall(text):
+        if not DIAGRAM_NAME_PATTERN.fullmatch(filename):
+            raise ValueError(f"Invalid diagram attachment filename: {filename}")
+        svg = (ROOT / "assets/diagrams" / filename).read_bytes().decode("utf-8")
+        attachments[filename] = {"image/svg+xml": svg}
+    return attachments
+
+
 def clean_markdown(text):
+    text = FIGURE_PATTERN.sub(figure_markdown, text)
     text = re.sub(r'<noscript\b[^>]*>.*?</noscript>', '', text, flags=re.S)
     text = re.sub(r'<a\b[^>]*\bdownload\b[^>]*>.*?</a>', '', text, flags=re.S)
     text = re.sub(r'^.*\[.*?\]\([^)]*\.ipynb\).*$', '', text, flags=re.M)
@@ -607,7 +655,11 @@ def build_notebook():
     def markdown(text, source_role="chapter"):
         cleaned = clean_markdown(text)
         if cleaned:
-            cells.append(dict(cell_type="markdown", metadata={"toolkit_role": source_role}, source=cleaned))
+            cell = dict(cell_type="markdown", metadata={"toolkit_role": source_role}, source=cleaned)
+            attachments = markdown_attachments(cleaned)
+            if attachments:
+                cell["attachments"] = attachments
+            cells.append(cell)
 
     def code(text, hidden=False):
         count = 1+sum(cell["cell_type"] == "code" for cell in cells)
@@ -675,13 +727,14 @@ def build_notebook():
         "source": {"path": "content/portfolio-insurance.md", "sha256": hashlib.sha256(source.encode()).hexdigest(),
                    "model_path": "src/math.mjs", "model_sha256": hashlib.sha256(model_text.encode()).hexdigest()},
         "execution": {"method": "Python exec in a shared namespace; captured stdout and SVG outputs", "generator": "scripts/make_notebook.py"},
-        "visual_generation": {"route": "no-image-generator", "method": "Deterministic SVG from displayed numerical observations; QuantCorner light chart palette"},
+        "visual_generation": {"route": "no-image-generator", "method": "Deterministic SVG charts and self-contained SVG lesson diagram attachments; QuantCorner light chart palette"},
     })
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(notebook, ensure_ascii=False, indent=1)+"\n", encoding="utf-8")
     count = sum(cell["cell_type"] == "code" for cell in cells)
     charts = sum(output.get("output_type") == "display_data" for cell in cells for output in cell.get("outputs", []))
-    print(f"Wrote {OUTPUT.name}: {len(cells)} cells; {count} executed code cells; {charts} embedded SVG charts.")
+    diagrams = sum(len(cell.get("attachments", {})) for cell in cells)
+    print(f"Wrote {OUTPUT.name}: {len(cells)} cells; {count} executed code cells; {charts} embedded SVG charts; {diagrams} SVG diagram attachments.")
     return notebook
 
 

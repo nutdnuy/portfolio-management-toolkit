@@ -56,5 +56,58 @@
     "sourceTreatment": "New examples and derivations are teaching additions, not thesis tables or a replication. Thesis findings retain printed/PDF page references; Table 5.2 Panel C was checked visually.",
     "glossaryTerms": 34,
     "workedReviewQuestions": 8
+  },
+  "teachingFigures": {
+    "date": "2026-09-13",
+    "route": "no-image-generator",
+    "authoring": "Editable Excalidraw primitives; validated with excalidraw skill; no external upload",
+    "export": "scripts/export_diagrams.py reads the scenes and embeds the existing licensed project fonts in SVG",
+    "supplementarySource": {
+      "fileLabel": "Quant Winter s.pdf",
+      "coverTitle": "Dynamic Portfolio Management",
+      "brand": "QUANTSERAS",
+      "pdfPages": 88,
+      "mechanicsPages": [
+        56,
+        57,
+        59,
+        60
+      ],
+      "authorYear": "Not asserted from export metadata",
+      "treatment": "Conceptual reference only; not redistributed"
+    },
+    "figures": [
+      {
+        "id": "cppi-anatomy",
+        "scene": "assets/diagrams/cppi-anatomy.excalidraw",
+        "export": "assets/diagrams/cppi-anatomy.svg",
+        "width": 640,
+        "height": 760
+      },
+      {
+        "id": "cppi-rebalance",
+        "scene": "assets/diagrams/cppi-rebalance.excalidraw",
+        "export": "assets/diagrams/cppi-rebalance.svg",
+        "width": 640,
+        "height": 920
+      },
+      {
+        "id": "cppi-gap",
+        "scene": "assets/diagrams/cppi-gap.excalidraw",
+        "export": "assets/diagrams/cppi-gap.svg",
+        "width": 640,
+        "height": 940
+      },
+      {
+        "id": "tipp-ratchet",
+        "scene": "assets/diagrams/tipp-ratchet.excalidraw",
+        "export": "assets/diagrams/tipp-ratchet.svg",
+        "width": 640,
+        "height": 790
+      }
+    ],
+    "assumptions": "Hypothetical lesson examples, monetary units, initial value 100, floor 90, multiplier 3, zero interest/costs, fractional holdings, no leverage/shorts; TIPP protects 90% of observed own-portfolio high-water mark",
+    "limits": "No optimal multiplier claim or market-data claim. Gap risk can breach the target. TIPP observations are not a continuous guarantee.",
+    "notebook": "Four SVGs embedded verbatim as Markdown attachments; no companion images needed"
   }
 }

@@ -51,3 +51,14 @@ This revision is local; repository publication remains undecided. Source PDF and
 Adjusted five Welcome passages and 27 lesson passages to connected, natural Thai explanation. All 378 math expressions, 129 table rows, headings, numeric tokens, source/term links and 19 explicit chapter anchors remain unchanged. All 17 Notebook code cells and saved outputs match the preceding revision exactly.
 
 Regenerated the Notebook; complete chapter capture, re-execution and 16 Python/JavaScript comparisons passed. The build and 264 local-reference checks passed. A focused browser check confirmed the revised copy, no page overflow at 1440/390 px, and no KaTeX errors. Publication status remains local.
+
+## 2026-09-13 — Four explanatory teaching figures
+
+- Added editable Excalidraw anatomy, rebalance, gap-risk and TIPP scenes with self-contained SVG exports. The supplementary reference is the supplied QUANTSERAS slide deck, PDF pp. 56–60. Examples keep the chapter's existing hypothetical values.
+- All four scenes passed the Excalidraw validator and visual quality gate. Independent numeric review confirmed proportional geometry, portfolio totals, asset trades, floor levels and TIPP observations.
+- Inspected all four rendered figures and mobile website captures. Focused browser checks passed 24 figure/viewport/theme combinations (1440, 390, 320 pixels; light/dark), with no clipping, page overflow or runtime errors. All four images also loaded from the exported local HTML while offline.
+- `npm run check:site`: 32 passed, zero failures, including 18 accessibility scans. The harness now scrolls to lazy-loaded lesson diagrams and waits for decoding before asserting that images loaded.
+- `npm run notebook` and `npm run check:notebook`: 36 cells, 17 executed code cells, two calculated SVG charts and four SVG Markdown attachments. Each attachment matches its asset byte for byte; all 16 Python/JavaScript path comparisons passed. Original code cells and saved outputs are unchanged.
+- `npm run build:pages`: three book pages, six HTML files, 111 search entries and 268 local references passed. Original mathematical expressions are unchanged. `git diff --check` passed.
+- Evidence remains local in `qa/output/figure-layout-results.json`, `qa/output/browser-results.json`, figure screenshots and Excalidraw session state. The original quantitative-finance-notes working tree remains clean.
+- This remains the local preview; no source PDF or scene was uploaded externally. Safari/Firefox and full screen-reader narration were not tested.
