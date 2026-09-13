@@ -1,20 +1,29 @@
-# Publishing the independent toolkit
+# Publishing Portfolio Management Toolkit Notes
 
-This is a standalone site. Do not deploy it into the quantitative-finance-notes repository or replace that site's root.
+Repository: <https://github.com/nutdnuy/portfolio-management-toolkit>
 
-The local build exports `_site/`, with relative links, bundled fonts and JavaScript. No private PDF, `.research/`, source clone, credentials or local configuration belongs in the deployment artifact.
+Public book: <https://nutdnuy.github.io/portfolio-management-toolkit/>
 
-## GitHub Pages
+Portfolio Insurance chapter: <https://nutdnuy.github.io/portfolio-management-toolkit/portfolio-insurance.html>
 
-The included **Publish toolkit** workflow installs locked dependencies on Node.js 22, runs numerical and executed-Notebook consistency checks, builds three book pages, checks local assets and anchors, uploads `_site/` and deploys Pages. The downloadable Notebook is committed; regenerate it locally when its chapter or model changes.
+The owner authorized this public repository and GitHub Pages on 2026-09-13. This is a standalone site; deployment does not replace Quantitative Finance Notes. No custom domain or DNS change is required.
 
-After the owner chooses publication:
+## Automatic publication
 
-1. Create a separate repository named `portfolio-management-toolkit` under the chosen account; confirm intended visibility before creating a public repository.
-2. Push this project's `main` branch to that new repository.
-3. Set Settings → Pages → Source to GitHub Actions.
-4. Run or inspect **Publish toolkit**. Verify both deployment status and live page before reporting publication.
+The repository uses `main` and Settings → Pages → Source: **GitHub Actions**. The **Publish toolkit** workflow installs locked dependencies on Node.js 22, runs numerical and executed-Notebook consistency checks, builds the book, checks local assets and anchors, then uploads `_site/` and deploys Pages.
 
-No hosted repository or live URL has been configured at initial local delivery. No DNS changes are required for the account's standard GitHub Pages path.
+1. Edit the canonical Markdown, scripts or assets. Regenerate the Notebook when its chapter, calculations or diagrams change.
+2. Run the relevant checks described in `EDITING.md` and `git diff --check`.
+3. Commit and push to `main`.
+4. Inspect [Publish toolkit runs](https://github.com/nutdnuy/portfolio-management-toolkit/actions/workflows/publish.yml). Wait for the build and deployment jobs to succeed.
+5. Verify the live pages, images, relative asset paths and Notebook download before reporting an update as public.
 
-Documentation: https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
+Pull requests build and validate the site; only `main` publishes. The workflow also supports manual dispatch.
+
+## Publication contents
+
+The exported `_site/` uses relative links and bundles the fonts, JavaScript, diagrams, editable Excalidraw files, licenses, Markdown downloads and executed Notebook. Do not edit generated output directly.
+
+Private source PDFs, `.research/`, credentials, dependencies, local configurations and temporary QA files remain excluded from Git and the deployment artifact. The source documents are referenced in the lesson and provenance records; they are not redistributed.
+
+Documentation: <https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages>

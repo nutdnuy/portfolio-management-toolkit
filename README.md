@@ -1,5 +1,11 @@
 # Portfolio Management Toolkit Notes
 
+เว็บไซต์สาธารณะ: [Portfolio Management Toolkit Notes](https://nutdnuy.github.io/portfolio-management-toolkit/)
+
+Repository: [nutdnuy/portfolio-management-toolkit](https://github.com/nutdnuy/portfolio-management-toolkit)
+
+เมื่อ commit และ push ไปที่ `main` ระบบ **Publish toolkit** จะตรวจและเผยแพร่ GitHub Pages อัตโนมัติ
+
 หนังสือออนไลน์ภาษาไทยเรื่องการบริหารพอร์ต โดย QuantCorner เริ่มจากบท **Portfolio Insurance** อ้างอิงวิทยานิพนธ์ *Portfolio Insurance Strategies: Friend or Foe?* ของ Paulo José Martins Jorge da Silva (2018) ใช้รูปแบบเดียวกับ [บท Binomial Model](https://nutdnuy.github.io/quantitative-finance-notes/binomial-model.html): พื้นขาว สารบัญด้านซ้าย เนื้อหาต่อเนื่อง สมการ และเครื่องมือทดลองแทรกในบทเรียน
 
 โปรเจกต์นี้แยกจาก Quantitative Finance Notes ทั้งโฟลเดอร์ เนื้อหา การ build และพอร์ต preview เว็บไซต์เดิมไม่มีการแก้ไข
