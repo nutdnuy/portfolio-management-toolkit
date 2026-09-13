@@ -10,7 +10,7 @@ Set the book title, author and the two ordered logo paths in `site.config.json`.
 
 Use an English kebab-case filename in `content/`. Add its name without `.md`, a title and description to `pages` in `site.config.json`. Markdown headings form the chapter contents list. Explicit section IDs remain stable for glossary links and bookmarks. Equations use inline `$...$` and display `$$...$$` LaTeX rendered by KaTeX.
 
-Write a learning question, introduce unfamiliar terms, calculate a concrete example, and then explain the formula and its assumptions. Distinguish hypothetical teaching examples from thesis evidence. Keep printed and PDF page references traceable. Do not bundle the source PDF.
+Write a learning question, introduce unfamiliar terms, calculate a concrete example, and then explain the formula and its assumptions. Use natural, connected Thai prose that walks through the reasoning with the reader. Prefer concrete verbs and short explanations to report-like phrasing; use “เรา” when useful, without inserting the assistant’s name or conversational particles. Preserve the depth, assumptions and evidence when smoothing the prose. Distinguish hypothetical teaching examples from thesis evidence. Keep printed and PDF page references traceable. Do not bundle the source PDF.
 
 ## Interactive sections
 

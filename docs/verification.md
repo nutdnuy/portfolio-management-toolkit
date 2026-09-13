@@ -45,3 +45,9 @@ Expanded the existing 13 sections from 15 to 57 explanatory subsections, retaini
 - Visual inspection covered the multi-period CPPI table on desktop/mobile and the continuous cushion equation. Existing light/dark reading layout, branding, labs and downloads are preserved.
 
 This revision is local; repository publication remains undecided. Source PDF and temporary research/drafts are excluded from Git. Safari/Firefox and full screen-reader narration remain untested.
+
+## 2026-09-13 — Narrative voice pass
+
+Adjusted five Welcome passages and 27 lesson passages to connected, natural Thai explanation. All 378 math expressions, 129 table rows, headings, numeric tokens, source/term links and 19 explicit chapter anchors remain unchanged. All 17 Notebook code cells and saved outputs match the preceding revision exactly.
+
+Regenerated the Notebook; complete chapter capture, re-execution and 16 Python/JavaScript comparisons passed. The build and 264 local-reference checks passed. A focused browser check confirmed the revised copy, no page overflow at 1440/390 px, and no KaTeX errors. Publication status remains local.
