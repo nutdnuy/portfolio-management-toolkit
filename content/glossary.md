@@ -193,6 +193,16 @@ description: คำศัพท์และสัญลักษณ์เรื�
 
 </section>
 
+<section class="glossary-term" id="variable-multiplier">
+
+### Variable-Multiplier Portfolio Insurance · การป้องกันพอร์ตด้วยตัวคูณที่ปรับได้
+
+แนวทาง Proportional Portfolio Insurance ที่ให้ $m_t$ เปลี่ยนตามกฎและข้อมูลความเสี่ยงที่มี ณ เวลาจัดพอร์ต แทนการตรึง Multiplier เช่น ลดตัวคูณเมื่อความผันผวนที่ประเมินสูงขึ้น เงินเสี่ยงยังขึ้นกับ Cushion และเพดานที่กำหนด วิธีนี้ยังมีความเสี่ยงจากการประมาณค่า ราคากระโดด และต้นทุนซื้อขาย; ไม่ใช่การรับประกัน Floor
+
+[ดูสูตรและตัวอย่างเทียบ CPPI คงที่](portfolio-insurance.html#variable-multiplier) · [แหล่งวิจัยประกอบ](portfolio-insurance.html#variable-multiplier-source)
+
+</section>
+
 <section class="glossary-term" id="tipp">
 
 ### TIPP · Time Invariant Portfolio Protection

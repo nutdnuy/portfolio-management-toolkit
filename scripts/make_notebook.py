@@ -433,6 +433,52 @@ print(f"Next +30%: CPPI={cppi_recovery:.3f}, TIPP={tipp_recovery:.3f}.")
 print("These are the chapter's illustrative ratchet rules; the website's 12-month lab remains CPPI only.")
 '''
 
+
+SECTION_SNIPPETS["cppi-rule"] += r'''
+
+# Illustrative inverse-volatility multiplier; inputs are known before the next return.
+def variable_multiplier(sigma, base=3.0, reference=0.20, lower=1.0, upper=6.0):
+    if not all(math.isfinite(x) for x in (sigma, base, reference, lower, upper)):
+        raise ValueError("Inputs must be finite")
+    if sigma <= 0 or reference <= 0 or base <= 0 or not 0 <= lower <= upper:
+        raise ValueError("Positive volatility/base and ordered nonnegative bounds required")
+    return min(upper, max(lower, base * reference / sigma))
+
+print("Estimated annual volatility | Multiplier | Risky | Safe")
+for sigma, expected_m, expected_risky in [(0.10, 6, 60), (0.20, 3, 30), (0.40, 1.5, 15)]:
+    m_variable = variable_multiplier(sigma)
+    risky = min(100, max(0, m_variable * (100 - 90)))
+    close(m_variable, expected_m); close(risky, expected_risky)
+    print(f"{sigma:>27.0%} {m_variable:>12.2f} {risky:>7.2f} {100-risky:>7.2f}")
+
+# Change these two inputs for a one-period experiment. No volatility forecast is fitted.
+estimated_sigma_before_trade = 0.40
+next_risky_return = -0.10
+if not math.isfinite(next_risky_return) or next_risky_return < -1:
+    raise ValueError("Simple return must be finite and at least -100%")
+m_variable = variable_multiplier(estimated_sigma_before_trade)
+variable_exposure = min(100, max(0, m_variable * 10))
+variable_end = 100 + variable_exposure * next_risky_return
+fixed_end = 100 + 30 * next_risky_return
+print(f"One-period wealth: variable={variable_end:.2f}; fixed m=3={fixed_end:.2f}")
+
+# Independent analytic checks keep the published examples testable after input edits.
+close(variable_multiplier(0.01), 6); close(variable_multiplier(2), 1)
+close(100 + 15 * -0.10, 98.5); close(100 + 30 * -0.10, 97)
+close(100 + 15 * 0.10, 101.5); close(100 + 30 * 0.10, 103)
+close(1.5 * (98.5 - 90), 12.75)
+close(15 * 0.9 - 12.75, 0.75)
+close(100 + 15 * -0.70, 89.5)
+for invalid in [0, -0.2, float("nan"), float("inf")]:
+    try:
+        variable_multiplier(invalid)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("Invalid volatility must fail")
+print("Variable multiplier checks passed, including cap/floor, rebalance, and a floor-breaching gap.")
+'''
+
 SECTION_SNIPPETS["strategies"] = r'''# Passive and constant mix start from the same 60/40 allocation.
 held_risky, safe = 60*1.1, 40
 total = held_risky + safe

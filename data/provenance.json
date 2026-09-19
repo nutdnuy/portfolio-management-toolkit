@@ -109,5 +109,12 @@
     "assumptions": "Hypothetical lesson examples, monetary units, initial value 100, floor 90, multiplier 3, zero interest/costs, fractional holdings, no leverage/shorts; TIPP protects 90% of observed own-portfolio high-water mark",
     "limits": "No optimal multiplier claim or market-data claim. Gap risk can breach the target. TIPP observations are not a continuous guarantee.",
     "notebook": "Four SVGs embedded verbatim as Markdown attachments; no companion images needed"
+  },
+  "variableMultiplierExtension": {
+    "added": "2026-09-19",
+    "source": "Antje Mahayni (2013), joint work with D. Zieling and S. Balder, Performance evaluation of optimized portfolio insurance strategies, slides 3 and 9–12",
+    "url": "https://www.insurance.uni-hannover.de/fileadmin/house-of-insurance/Research_and_Events/Events/2013/LUH_Colloquium/2013.05.16/Mahayni_LUH_Kolloquium.pdf",
+    "example": "Original teaching rule: clamp(3 * 0.20 / positive estimated annual volatility, 1, 6); initial wealth 100, floor 90, zero rate/costs, no borrowing/shorts",
+    "scope": "Worked prose and executable Notebook; existing browser lab remains fixed-m CPPI; no empirical performance or optimality claim"
   }
 }

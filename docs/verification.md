@@ -62,3 +62,9 @@ Regenerated the Notebook; complete chapter capture, re-execution and 16 Python/J
 - `npm run build:pages`: three book pages, six HTML files, 111 search entries and 268 local references passed. Original mathematical expressions are unchanged. `git diff --check` passed.
 - Evidence remains local in `qa/output/figure-layout-results.json`, `qa/output/browser-results.json`, figure screenshots and Excalidraw session state. The original quantitative-finance-notes working tree remains clean.
 - This remains the local preview; no source PDF or scene was uploaded externally. Safari/Firefox and full screen-reader narration were not tested.
+
+## Variable-Multiplier extension — 2026-09-19
+
+Added a CPPI subsection, one glossary entry, source attribution and an executable Notebook example. The inverse-volatility rule and parameters are explicitly authored teaching assumptions, separate from the cited Mahayni/Zieling/Balder research and the fixed-m browser simulator.
+
+Verification: regenerated 36-cell Notebook with 17 executed code cells; complete chapter/model consistency and 16 Python/JavaScript comparisons passed. New analytic checks cover the three volatility snapshots, multiplier bounds, one-period gains/losses, the 0.75-unit rebalance sale, a floor-breaching gap and invalid volatility inputs. Build/link checks passed 274 local references. Browser suite passed 32 checks; targeted checks also confirmed the new anchor at 1440/390/320px without document overflow, the new glossary filter/return link and global search. `git diff --check` passed.
