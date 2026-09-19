@@ -56,17 +56,17 @@ function ReturnsLab() {
       <input id={`returns-year-${i+1}`} type="range" min="-95" max="200" step="5" value={rate} aria-valuetext={`${rate} เปอร์เซ็นต์`} onChange={e=>setRate(i,Number(e.target.value))}/>
       <div className="rv-bounds" aria-hidden="true"><span>−95%</span><span>+200%</span></div>
     </div>)}</div>
-    <div className="rv-toolbar"><button type="button" onClick={()=>setRates(([a,b])=>[b,a])}>สลับลำดับปี</button><p>สลับแล้วลองดูว่าเงินระหว่างทางกับเงินปลายทางเปลี่ยนเหมือนกันไหม</p></div>
+    <div className="rv-toolbar"><button type="button" onClick={()=>setRates(([a,b])=>[b,a])}>สลับลำดับปี</button><p>เปรียบเทียบเงินระหว่างทางและเงินปลายทางเมื่อสลับปี</p></div>
     <div className="rv-answer" role="status" aria-live="polite" aria-atomic="true">
       <div><span>เงินเมื่อสิ้นปีที่ 2</span><strong data-testid="terminal-wealth">{number(model.wealth[2])} <small>บาท</small></strong></div>
       <p>ผลตอบแทนสะสม <b data-testid="cumulative-return">{signed(model.cumulative*100,2)}%</b><br/>จากเงินเริ่มต้น 1,000,000 บาท</p>
     </div>
     <div className="rv-charts">
-      <figure><figcaption><strong>1. เงินโตด้วยการคูณ</strong><span>มูลค่า ณ สิ้นปี · ล้านบาท</span></figcaption><WealthChart model={model}/></figure>
+      <figure><figcaption><strong>1. มูลค่าเงินจากการทบต้น</strong><span>มูลค่าเงินลงทุน · ล้านบาท</span></figcaption><WealthChart model={model}/></figure>
       <figure><figcaption><strong>2. Log return รวมด้วยการบวก</strong><span>Log return · ทศนิยม ไม่ใช่เปอร์เซ็นต์กำไร</span></figcaption><LogChart model={model}/></figure>
     </div>
     <div className="rv-equations">
-      <div><span>คูณตัวคูณเงินแต่ละปี</span><p data-testid="gross-equation">{number(model.gross[0],2)} × {number(model.gross[1],2)} = <b>{number(model.wealth[2]/model.initial,4)} เท่า</b></p><small>หักเงินต้น 1 เท่า → ผลตอบแทน {signed(model.cumulative*100,2)}%</small></div>
+      <div><span>นำตัวคูณของแต่ละปีมาคูณกัน</span><p data-testid="gross-equation">{number(model.gross[0],2)} × {number(model.gross[1],2)} = <b>{number(model.wealth[2]/model.initial,4)} เท่า</b></p><small>หักเงินต้น 1 เท่า → ผลตอบแทน {signed(model.cumulative*100,2)}%</small></div>
       <div><span>บวก Log return แต่ละปี</span><p data-testid="log-equation">{signed(model.logs[0],4)} {model.logs[1]<0?'−':'+'} {number(Math.abs(model.logs[1]),4)} = <b>{signed(model.logSum,4)}</b></p><small>แปลงกลับด้วย e<sup>{number(model.logSum,4)}</sup> − 1 → {signed(model.fromLog*100,2)}%</small></div>
     </div>
     <p className="rv-pitfall"><strong>ถ้าบวกเปอร์เซ็นต์ตรง ๆ:</strong> {signed(rates[0])}% {rates[1]<0?'−':'+'} {number(Math.abs(rates[1]))}% = <span data-testid="naive-return">{signed(model.naiveSum*100,2)}%</span> {same?'กรณีนี้ได้เท่ากันเพราะมีปีหนึ่งให้ผลตอบแทนศูนย์ ลองปรับให้ทั้งสองปีไม่เป็นศูนย์':'ซึ่งต่างจากผลตอบแทนสะสม เพราะแต่ละปีคิดจากฐานเงินต่างกัน'}</p>
