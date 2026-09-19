@@ -48,6 +48,10 @@ const base=process.env.PMT_PREVIEW_URL||'http://127.0.0.1:8764';
   await page.locator('#risk-shock').focus();await page.keyboard.press('End');assert.equal(await value('ewma-next'),'2.8284%');
   await page.locator('#risk-lambda').focus();await page.keyboard.press('End');assert.equal(await value('ewma-new-weight'),'1%');
   const clippedExtreme=await page.locator('#risk-ewma-lab svg text').evaluateAll(nodes=>nodes.filter(t=>{const b=t.getBBox();return b.x<0||b.y<0||b.x+b.width>500||b.y+b.height>265}).map(t=>t.textContent));assert.deepEqual(clippedExtreme,[]);
+  // Changing orientation before an in-page jump must use the new text layout.
+  await page.setViewportSize({width:390,height:1000});
+  await page.goto(base+'/risk.html#expected-shortfall');
+  await page.waitForFunction(()=>{const t=document.getElementById('expected-shortfall').parentElement.nextElementSibling.getBoundingClientRect().top;return t>=66&&t<180});
   await page.setViewportSize({width:1440,height:1000});
   await page.locator('#search-button').click();await page.locator('#search-input').fill('Bernoulli');
   await page.waitForFunction(()=>document.querySelector('#search-results').textContent.includes('Bernoulli'));

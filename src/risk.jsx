@@ -132,11 +132,16 @@ flushSync(() => {
     if(node)createRoot(node).render(<Component/>);
   }
 });
-const initialHash=window.location.hash;
-if(initialHash)document.fonts.ready.then(() => {
-  if(window.location.hash!==initialHash)return;
-  let id;
-  try{id=decodeURIComponent(initialHash.slice(1));}catch{return;}
-  const target=document.getElementById(id);
-  if(target?.closest('main'))target.scrollIntoView({behavior:'instant',block:'start'});
-});
+function alignSection() {
+  const hash=window.location.hash;
+  if(!hash)return;
+  document.fonts.ready.then(() => requestAnimationFrame(() => {
+    if(window.location.hash!==hash)return;
+    let id;
+    try{id=decodeURIComponent(hash.slice(1));}catch{return;}
+    const target=document.getElementById(id);
+    if(target?.closest('main'))target.scrollIntoView({behavior:'instant',block:'start'});
+  }));
+}
+window.addEventListener('hashchange',alignSection);
+alignSection();
