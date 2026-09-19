@@ -43,5 +43,24 @@
     "cumulative_log_return": 0,
     "external_cash_flows": false,
     "format": "Worked lesson and self-check questions; no Python or Notebook"
+  },
+  "visuals": {
+    "route": "no-image-generator",
+    "design_system": "QuantCorner / QuantSeras Material 2",
+    "image_generator_used": false,
+    "generator": "node scripts/make_returns_figures.mjs",
+    "assets": [
+      "assets/charts/returns-wealth.svg",
+      "assets/charts/returns-log-additivity.svg"
+    ],
+    "data": "Hypothetical observations at t=0, 1, 2 years; THB 1,000,000 initial wealth and simple returns +100%, -50%. Zero-baseline wealth bars; log bars use a symmetric scale about zero.",
+    "interactive": "src/returns.jsx",
+    "calculation": "src/returns-math.mjs",
+    "range_percent": [
+      -95,
+      200
+    ],
+    "rounding": "Unrounded calculations; display logs to four decimals in the lab and six in the table.",
+    "fonts": "Existing locally bundled Roboto and Noto Sans Thai, embedded unchanged in SVGs."
   }
 }

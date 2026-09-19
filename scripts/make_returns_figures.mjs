@@ -1,0 +1,25 @@
+/** Reproducible quantitative charts for the introductory return lesson. */
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {calculateReturns} from '../src/returns-math.mjs';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const out=path.join(root,'assets/charts');
+fs.mkdirSync(out,{recursive:true});
+const m=calculateReturns(1e6,[1,-.5]);
+const font=(name,file)=>`@font-face{font-family:'${name}';src:url(data:font/woff2;base64,${fs.readFileSync(path.join(root,'assets/fonts',file)).toString('base64')}) format('woff2');font-weight:400}`;
+const style=`${font('Roboto','roboto-latin-400-normal.woff2')}${font('Noto Sans Thai','noto-sans-thai-thai-400-normal.woff2')}text{font-family:Roboto,'Noto Sans Thai',sans-serif;fill:#212121}.muted{fill:#616161}.grid{stroke:#e1e1e1;stroke-width:1}.axis{font-size:18px;fill:#616161}.value{font-size:25px}.label{font-size:22px}`;
+const wrap=(title,desc,content)=>`<svg xmlns="http://www.w3.org/2000/svg" width="720" height="500" viewBox="0 0 720 500" role="img" aria-labelledby="title desc"><title id="title">${title}</title><desc id="desc">${desc}</desc><metadata>Hypothetical two-year example. No deposits, withdrawals, dividends, fees or taxes. QuantCorner / QuantSeras Material 2. Deterministic SVG generated from src/returns-math.mjs.</metadata><style>${style}</style><rect width="720" height="500" fill="#fff"/>${content}</svg>\n`;
+const wealthY=v=>372-v/1e6*112;
+let wealth=`<text x="32" y="48" font-size="25">กำไร 100% แล้วขาดทุน 50% กลับมาเท่าทุน</text><text x="32" y="82" font-size="18" class="muted">มูลค่าเงินลงทุน · ล้านบาท · ตัวอย่างสมมติ 2 ปี</text>`;
+for(const v of [0,1,2])wealth+=`<line class="grid" x1="86" x2="682" y1="${wealthY(v*1e6)}" y2="${wealthY(v*1e6)}"/><text class="axis" x="68" y="${wealthY(v*1e6)+6}" text-anchor="end">${v}</text>`;
+m.wealth.forEach((v,i)=>{const x=165+i*205;wealth+=`<rect x="${x-53}" y="${wealthY(v)}" width="106" height="${372-wealthY(v)}" fill="${['#757575','#6200ee','#00796e'][i]}"/><text class="value" x="${x}" y="${wealthY(v)-14}" text-anchor="middle">${(v/1e6).toFixed(0)} ล้านบาท</text><text class="label" x="${x}" y="411" text-anchor="middle">${['เริ่มต้น','สิ้นปี 1','สิ้นปี 2'][i]}</text>`;});
+wealth+='<text x="370" y="105" font-size="20" text-anchor="middle" fill="#3700b3">+100%</text><text x="575" y="217" font-size="20" text-anchor="middle" fill="#00796e">−50%</text><text x="32" y="459" font-size="22">ได้ 1 ล้านบาท แล้วเสีย 1 ล้านบาท → ผลตอบแทนรวม 0%</text>';
+fs.writeFileSync(path.join(out,'returns-wealth.svg'),wrap('เงินหนึ่งล้านเพิ่มเป็นสองล้านแล้วกลับมาหนึ่งล้าน','ปีแรกกำไรร้อยเปอร์เซ็นต์ ปีที่สองขาดทุนห้าสิบเปอร์เซ็นต์ กำไรและขาดทุนคิดจากเงินต้นช่วงต่างกัน ผลตอบแทนสะสมศูนย์เปอร์เซ็นต์',wealth));
+const logY=v=>258-v*145;
+let log='<text x="32" y="48" font-size="25">Log return: ส่วนเพิ่มกับส่วนลดบวกกันได้</text><text x="32" y="82" font-size="18" class="muted">หน่วยทศนิยม · ไม่ใช่เปอร์เซ็นต์กำไร · ตัวอย่างสมมติ</text>';
+for(const v of [-1,0,1])log+=`<line class="grid" x1="90" x2="682" y1="${logY(v)}" y2="${logY(v)}"/><text class="axis" x="74" y="${logY(v)+6}" text-anchor="end">${v}</text>`;
+[...m.logs,m.logSum].forEach((v,i)=>{const x=175+i*200;log+=Math.abs(v)<1e-12?`<line x1="${x-48}" x2="${x+48}" y1="258" y2="258" stroke="#212121" stroke-width="4"/>`:`<rect x="${x-48}" y="${Math.min(logY(v),258)}" width="96" height="${Math.abs(logY(v)-258)}" fill="${['#6200ee','#00796e'][i]}"/>`;log+=`<text class="value" x="${x}" y="${logY(v)+(v<0?30:-16)}" text-anchor="middle">${v>0?'+':v<0?'−':''}${Math.abs(v).toFixed(6)}</text><text class="label" x="${x}" y="429" text-anchor="middle">${['ปี 1','ปี 2','รวม 2 ปี'][i]}</text>`;});
+log+='<text x="360" y="477" font-size="24" text-anchor="middle">ln 2 + ln 0.5 = ln 1 = 0</text>';
+fs.writeFileSync(path.join(out,'returns-log-additivity.svg'),wrap('ลอการิทึมของสองกับลอการิทึมของครึ่งบวกกันเป็นศูนย์','แท่งปีแรกบวก 0.693147 และปีที่สองลบ 0.693147 ผลรวมศูนย์ แปลงกลับเป็นผลตอบแทนสะสมศูนย์เปอร์เซ็นต์',log));
+console.log('Generated two self-contained SVG charts from verified hypothetical returns.');

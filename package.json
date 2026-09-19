@@ -7,7 +7,7 @@
     "dev": "node serve.cjs",
     "build": "node build.cjs",
     "build:pages": "npm run build && node qa/link-checks.mjs",
-    "test": "node qa/math-checks.mjs",
+    "test": "node qa/math-checks.mjs && node qa/returns-checks.mjs",
     "check:site": "node qa/browser-checks.cjs",
     "notebook": "python3 scripts/make_notebook.py",
     "check:notebook": "python3 qa/notebook-checks.py",

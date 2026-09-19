@@ -29,3 +29,5 @@ Run `npm run dev` to preview and rebuild on source changes, then refresh the bro
 ## Return chapter
 
 Edit `content/returns.md`. The title is **How to Calculate return**. This introductory lesson uses prose, equations and worked examples without Python or a Notebook. The central case starts at THB 1,000,000, gains 100% in year one, then loses 50% in year two. Keep the lesson independent of Portfolio Insurance. Per-page `notebook: false` in `site.config.json` hides the sidebar download; an omitted value retains the site default. Source notes are in `data/returns-provenance.json`.
+
+Return illustrations are deterministic SVGs in `assets/charts/`, generated with `node scripts/make_returns_figures.mjs`. The interactive lesson uses `src/returns.jsx`, `src/returns.css` and `src/returns-math.mjs`, bundled only on `returns.html`. Sliders use simple returns from -95% to +200%; logs remain decimals and calculations use unrounded values. Verify with `node qa/returns-checks.mjs`, `npm run build:pages` and `node qa/returns-browser-checks.cjs` while the preview runs on port 8764. No Python or Notebook is part of the Return lesson.
