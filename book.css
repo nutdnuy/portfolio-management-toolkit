@@ -26,3 +26,8 @@
 .book-main .lesson-figure img{display:block;width:100%;height:auto;background:#fff;border:1px solid var(--grid);box-sizing:border-box}
 .book-main .lesson-figure figcaption{margin-top:16px;font-size:16px;line-height:1.85;color:var(--muted)}
 @media print{.book-main .lesson-figure{break-inside:avoid;max-width:520px}.book-main .lesson-figure figcaption{font-size:10pt}}
+
+/* Historical line charts keep readable mobile exports and a common wealth scale. */
+.book-main .sp500-figure{max-width:800px}
+.book-main .sp500-figure picture{display:block}
+@media print{.book-main .sp500-figure{max-width:700px}}

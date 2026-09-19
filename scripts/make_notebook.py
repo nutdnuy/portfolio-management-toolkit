@@ -640,13 +640,15 @@ def figure_markdown(match):
     attributes = {name: html.unescape(value) for name, _, value in ATTRIBUTE_PATTERN.findall(match[1])}
     if "lesson-figure" not in attributes.get("class", "").split():
         raise ValueError("A chapter figure must use the lesson-figure class.")
-    content = re.fullmatch(r'\s*<img\b([^>]*)>\s*<figcaption\b[^>]*>(.*?)</figcaption>\s*', match[2], flags=re.S)
+    # Responsive chart sources share the same data; embed the full-size SVG.
+    figure_body = re.sub(r'<picture>\s*<source\b[^>]*>\s*(<img\b[^>]*>)\s*</picture>', r'\1', match[2])
+    content = re.fullmatch(r'\s*<img\b([^>]*)>\s*<figcaption\b[^>]*>(.*?)</figcaption>\s*', figure_body, flags=re.S)
     if content is None:
         raise ValueError("A lesson figure must contain one image followed by its plain-text caption.")
     image_attributes = {name: html.unescape(value) for name, _, value in ATTRIBUTE_PATTERN.findall(content[1])}
-    asset = re.fullmatch(r'assets/diagrams/([a-z0-9][a-z0-9-]*\.svg)', image_attributes.get("src", ""))
+    asset = re.fullmatch(r'assets/(?:diagrams|charts)/([a-z0-9][a-z0-9-]*\.svg)', image_attributes.get("src", ""))
     if asset is None:
-        raise ValueError("Lesson figures must use local SVG files in assets/diagrams/.")
+        raise ValueError("Lesson figures must use local SVG files in assets/diagrams/ or assets/charts/.")
     alt = " ".join(image_attributes.get("alt", "").split())
     if not alt:
         raise ValueError(f"Missing diagram alt text: {asset[1]}")
@@ -670,7 +672,11 @@ def markdown_attachments(text):
     for filename in ATTACHMENT_PATTERN.findall(text):
         if not DIAGRAM_NAME_PATTERN.fullmatch(filename):
             raise ValueError(f"Invalid diagram attachment filename: {filename}")
-        svg = (ROOT / "assets/diagrams" / filename).read_bytes().decode("utf-8")
+        candidates = [ROOT / "assets" / folder / filename for folder in ("diagrams", "charts")]
+        candidates = [path for path in candidates if path.is_file()]
+        if len(candidates) != 1:
+            raise ValueError(f"Missing or ambiguous figure attachment: {filename}")
+        svg = candidates[0].read_bytes().decode("utf-8")
         attachments[filename] = {"image/svg+xml": svg}
     return attachments
 

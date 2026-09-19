@@ -33,6 +33,9 @@ for (const name of htmlFiles) {
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
   if (ids.length !== new Set(ids).size) failures.push(`${name}: duplicate id`);
   for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) localReference(owner, match[1]);
+  for (const match of html.matchAll(/srcset="([^"]+)"/g)) {
+    for (const candidate of match[1].split(",")) localReference(owner, candidate.trim().split(/\s+/)[0]);
+  }
 }
 for (const name of ['style.css', 'book.css', 'app.css', 'assets/katex/katex.min.css']) {
   const owner = path.join(root, name);

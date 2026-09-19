@@ -33,8 +33,8 @@ assert normalize("\n\n".join(chapter_cells)) == normalize(canonical), "Some cano
 assert not re.search(r'<(?:section|div|figure|figcaption|img)\b', "\n".join(chapter_cells)), "HTML wrappers or external image tags remain"
 
 # Markdown diagrams are attachments, independently of the two computed charts.
-expected_diagrams = {"cppi-anatomy.svg", "cppi-rebalance.svg", "cppi-gap.svg", "tipp-ratchet.svg"}
-canonical_diagrams = set(re.findall(r'''<img\b[^>]*\bsrc=["']assets/diagrams/([^"']+)["']''', source))
+expected_diagrams = {"cppi-anatomy.svg", "cppi-rebalance.svg", "cppi-gap.svg", "tipp-ratchet.svg", "sp500-slpi.svg", "sp500-cppi.svg", "sp500-tipp.svg", "sp500-variable-m.svg"}
+canonical_diagrams = set(re.findall(r'''<img\b[^>]*\bsrc=["']assets/(?:diagrams|charts)/([^"']+)["']''', source))
 assert canonical_diagrams == expected_diagrams, "Canonical lesson diagrams are missing or unexpected"
 image_pattern = re.compile(r'!\[(?:\\.|[^\]\\])*\]\(([^)]+)\)')
 diagrams_seen = set()
@@ -52,7 +52,7 @@ for cell in notebook["cells"]:
         assert set(bundle) == {"image/svg+xml"}, f"Unexpected attachment format: {filename}"
         svg = bundle["image/svg+xml"]
         assert isinstance(svg, str), f"SVG attachment must be a string: {filename}"
-        assert svg.encode("utf-8") == (ROOT / "assets/diagrams" / filename).read_bytes(), f"Stale or modified diagram: {filename}"
+        assert svg.encode("utf-8") == (ROOT / "assets" / ("charts" if filename.startswith("sp500-") else "diagrams") / filename).read_bytes(), f"Stale or modified diagram: {filename}"
         document = ET.fromstring(svg)
         assert document.tag == "{http://www.w3.org/2000/svg}svg", f"Invalid SVG: {filename}"
         for element in document.iter():

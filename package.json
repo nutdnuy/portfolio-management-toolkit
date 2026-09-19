@@ -11,7 +11,7 @@
     "check:site": "node qa/browser-checks.cjs",
     "notebook": "python3 scripts/make_notebook.py",
     "check:notebook": "python3 qa/notebook-checks.py",
-    "check:sp500": "python3 qa/sp500-checks.py"
+    "check:sp500": "python3 qa/sp500-checks.py && python3 qa/sp500-chart-checks.py"
   },
   "engines": {"node": ">=22"},
   "dependencies": {"motion": "12.43.0", "react": "19.2.6", "react-dom": "19.2.6", "katex": "0.16.22"},

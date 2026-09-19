@@ -1,0 +1,229 @@
+{
+  "source": {
+    "provider": "S&P Dow Jones Indices via FRED, SP500",
+    "url": "https://fred.stlouisfed.org/series/SP500",
+    "retrieved": "2026-09-19",
+    "sha256": "dc701c49ac9deecbec444fd6e63a9bb9b77c3e4a49e48cf5eb9292a20d48ceee",
+    "first": "2016-10-03",
+    "last": "2025-12-31",
+    "observations": 2325,
+    "measure": "Daily close price index, no dividends; input kept local"
+  },
+  "engine_sha256": "88f39d0eab2fb88d2c916a2a45a50f8c69d17931301ec32e2f833f8920e33d4d",
+  "generator": "scripts/make_sp500_charts.py",
+  "period": [
+    "2017-12-29",
+    "2025-12-31"
+  ],
+  "observations": 2012,
+  "methods": [
+    "SLPI",
+    "CPPI",
+    "TIPP",
+    "Variable m"
+  ],
+  "benchmark": "Buy & Hold",
+  "rule": "Compound the annual experiments. Reset floor to 90% of entering wealth each year; SLPI re-enters at each year start; TIPP high-water mark resets each year. No deposits or withdrawals.",
+  "assumptions": "Same daily-close execution and lagged volatility as annual tables. Zero interest/costs; no dividends; no OBPI.",
+  "metrics": {
+    "Buy & Hold": {
+      "final": 256.0395869255435,
+      "return_pct": 156.03958692554352,
+      "max_drawdown_pct": 33.92495902426057
+    },
+    "SLPI": {
+      "final": 143.23885938531723,
+      "return_pct": 43.23885938531723,
+      "max_drawdown_pct": 21.66499459484085
+    },
+    "CPPI": {
+      "final": 136.32716999227904,
+      "return_pct": 36.32716999227904,
+      "max_drawdown_pct": 8.663796123536471
+    },
+    "TIPP": {
+      "final": 125.54009486013962,
+      "return_pct": 25.540094860139618,
+      "max_drawdown_pct": 7.673677788693977
+    },
+    "Variable m": {
+      "final": 155.22299062556468,
+      "return_pct": 55.22299062556468,
+      "max_drawdown_pct": 9.075321450367092
+    }
+  },
+  "year_end": {
+    "Buy & Hold": {
+      "2018": 93.76274026503486,
+      "2019": 120.8396138554239,
+      "2020": 140.48683241011224,
+      "2021": 178.26758577354246,
+      "2022": 143.60733240824246,
+      "2023": 178.40410531079772,
+      "2024": 219.9883303847615,
+      "2025": 256.0395869255435
+    },
+    "SLPI": {
+      "2018": 87.93728329861118,
+      "2019": 113.33187711091094,
+      "2020": 96.3460218268479,
+      "2021": 122.25610340347397,
+      "2022": 108.38725455844705,
+      "2023": 134.65002693332934,
+      "2024": 166.03561089428294,
+      "2025": 143.23885938531723
+    },
+    "CPPI": {
+      "2018": 97.5476061992414,
+      "2019": 107.70479058270011,
+      "2020": 108.52540077043471,
+      "2021": 118.72208859032948,
+      "2022": 112.05504630007323,
+      "2023": 121.26273189500169,
+      "2024": 130.7924944737967,
+      "2025": 136.32716999227904
+    },
+    "TIPP": {
+      "2018": 98.25335423297818,
+      "2019": 105.57974650290821,
+      "2020": 106.3871753394977,
+      "2021": 113.74074547288652,
+      "2022": 107.46497496158905,
+      "2023": 114.18838610803795,
+      "2024": 121.14003633172855,
+      "2025": 125.54009486013962
+    },
+    "Variable m": {
+      "2018": 96.67259419632649,
+      "2019": 107.69190420659315,
+      "2020": 112.22178664324032,
+      "2021": 126.74971877225323,
+      "2022": 119.46485351927122,
+      "2023": 132.53075936600052,
+      "2024": 149.73003636363734,
+      "2025": 155.22299062556468
+    }
+  },
+  "files": {
+    "sp500-slpi.svg": {
+      "sha256": "b5a9e7a889be435e53e4e82d9fde48b71aa76c6205a4698716bfd8533ce79aaf",
+      "method": "SLPI",
+      "mobile": false,
+      "layout": {
+        "width": 800,
+        "height": 460,
+        "left": 60,
+        "right": 774,
+        "top": 152,
+        "bottom": 388,
+        "ymin": 0,
+        "ymax": 300
+      }
+    },
+    "sp500-slpi-mobile.svg": {
+      "sha256": "f61eb4f7bce7f07a7e50f4a31b61c2300f1d6facdeddea69ac657b987e36c648",
+      "method": "SLPI",
+      "mobile": true,
+      "layout": {
+        "width": 320,
+        "height": 410,
+        "left": 40,
+        "right": 304,
+        "top": 158,
+        "bottom": 344,
+        "ymin": 0,
+        "ymax": 300
+      }
+    },
+    "sp500-cppi.svg": {
+      "sha256": "380a79aa034049e5ce24cdcb8ae33e4e0a34d936437312d481254ac0679f13c3",
+      "method": "CPPI",
+      "mobile": false,
+      "layout": {
+        "width": 800,
+        "height": 460,
+        "left": 60,
+        "right": 774,
+        "top": 152,
+        "bottom": 388,
+        "ymin": 0,
+        "ymax": 300
+      }
+    },
+    "sp500-cppi-mobile.svg": {
+      "sha256": "e9e8c4dfb3daf6ba3bd68eca556bfb0dc88c39d95b3172e1efd455c2e1ebd54b",
+      "method": "CPPI",
+      "mobile": true,
+      "layout": {
+        "width": 320,
+        "height": 410,
+        "left": 40,
+        "right": 304,
+        "top": 158,
+        "bottom": 344,
+        "ymin": 0,
+        "ymax": 300
+      }
+    },
+    "sp500-tipp.svg": {
+      "sha256": "0edd1827321940e7f833a591909036480e362947feec3fd2bdf82febc04a3bdb",
+      "method": "TIPP",
+      "mobile": false,
+      "layout": {
+        "width": 800,
+        "height": 460,
+        "left": 60,
+        "right": 774,
+        "top": 152,
+        "bottom": 388,
+        "ymin": 0,
+        "ymax": 300
+      }
+    },
+    "sp500-tipp-mobile.svg": {
+      "sha256": "c0531a226d53efe445fc50b2c08574e94e716a52a8e1b58e4d98df0560ee9072",
+      "method": "TIPP",
+      "mobile": true,
+      "layout": {
+        "width": 320,
+        "height": 410,
+        "left": 40,
+        "right": 304,
+        "top": 158,
+        "bottom": 344,
+        "ymin": 0,
+        "ymax": 300
+      }
+    },
+    "sp500-variable-m.svg": {
+      "sha256": "d982645a2dbb81b99f172a4affb0c4eb55291d6c29d24f353f1e213b7d4e24ba",
+      "method": "Variable m",
+      "mobile": false,
+      "layout": {
+        "width": 800,
+        "height": 460,
+        "left": 60,
+        "right": 774,
+        "top": 152,
+        "bottom": 388,
+        "ymin": 0,
+        "ymax": 300
+      }
+    },
+    "sp500-variable-m-mobile.svg": {
+      "sha256": "22d44fbd1e33049453dde33f7bb107e7939448bf7dd520d33533601ef6cb809f",
+      "method": "Variable m",
+      "mobile": true,
+      "layout": {
+        "width": 320,
+        "height": 410,
+        "left": 40,
+        "right": 304,
+        "top": 158,
+        "bottom": 344,
+        "ymin": 0,
+        "ymax": 300
+      }
+    }
+  }
+}

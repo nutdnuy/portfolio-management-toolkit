@@ -72,14 +72,13 @@ is included in this work.
 The owner-selected book shell in `book.css` is reused from the owner's
 Quantitative Finance Notes project, following its Binomial Model chapter. The
 sidebar and mobile Welcome cover use the approved QuantCorner / Quantsera
-logos on a native black panel. The charts inside the lesson are calculated
-from explicitly hypothetical teaching examples.
+logos on a native black panel. The worked-example charts are hypothetical; the S&P 500 comparison charts use historical index observations under explicit simulated trading rules.
 
 ## Educational source
 
 Paulo José Martins Jorge da Silva, *Portfolio Insurance Strategies: Friend or Foe?* (2018), doctoral thesis, Universidade de Lisboa / ISEG. Public repository: https://hdl.handle.net/10400.5/16515. The user-provided 169-page PDF was consulted locally. Original Thai teaching notes summarize its concepts and findings with printed/PDF page citations. Two selected scenarios from Table 5.2 Panel C (printed p. 90, PDF p. 117) are transcribed and labeled as CPT scores, not returns. No source PDF or original chart image is redistributed. Author and university rights remain with their owners.
 
-All toolkit market paths and worked examples are newly constructed teaching examples. The monthly CPPI simulation is not a replication of the thesis Monte Carlo study. See content/portfolio-insurance.md and docs/methodology.md for scope.
+The authored monthly market paths and worked examples are teaching examples; the separately labeled S&P 500 test uses historical observations. The monthly CPPI simulation is not a replication of the thesis Monte Carlo study. See content/portfolio-insurance.md and docs/methodology.md for scope.
 
 ## Book branding — 2026-09-13
 
@@ -88,3 +87,5 @@ The book uses the approved QuantCorner and Quantsera horizontal transparent PNGs
 ## S&P 500 educational test
 
 Source: S&P Dow Jones Indices LLC via FRED, series SP500 (https://fred.stlouisfed.org/series/SP500), daily closing price index without dividends; retrieved 2026-09-19. Original index observations are held locally and are not redistributed. Public CSV/JSON contain independently computed annual strategy statistics, assumptions and a checksum of the local input, not the source price series. Source-provider rights remain with their owners. The Python implementation and interpretations are newly authored; option premiums and valuations are hypothetical Black–Scholes prices.
+
+The four S&P 500 line charts are newly computed portfolio-wealth graphics, with separate desktop/mobile layouts. They compound the annual experiments and reset protection each year. SVG graphics and aggregate chart metadata are published; original index quotes are not bundled. The existing locally licensed Roboto and Noto Sans Thai fonts are embedded in the SVG exports.

@@ -154,6 +154,11 @@
     },
     "script": "scripts/sp500_backtest.py",
     "results": "data/sp500-results.json",
-    "scope": "Derived annual statistics for five insurance rules plus Buy & Hold; raw index observations remain local; OBPI is a theoretical-price illustration, not a traded-options backtest"
+    "scope": "Derived annual statistics for five insurance rules plus Buy & Hold; raw index observations remain local; OBPI is a theoretical-price illustration, not a traded-options backtest",
+    "charts": {
+      "metadata": "data/sp500-charts.json",
+      "generator": "scripts/make_sp500_charts.py",
+      "scope": "Four strategy versus Buy & Hold daily wealth charts, excluding options; annual experiments compounded, annual floor/allocation renewal; 2012 points including inception. Desktop/mobile SVG exports; full-size charts embedded in Notebook."
+    }
   }
 }
