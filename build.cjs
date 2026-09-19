@@ -44,7 +44,7 @@ async function build() {
     body = body.replace(/<table>/g, '<div class="table-scroll" tabindex="0" role="region" aria-label="ตารางข้อมูล เลื่อนแนวนอนได้"><table>').replace(/<\/table>/g, '</table></div>').replace(/href="([a-z-]+)\.md/g, 'href="$1.html').replace(/<a href="glossary\.html#[^"]+"/g, link => link + ' class="glossary-link"');
     return {...page, body, headings};
   });
-  const search = [];
+  const search = [], renderedPages = new Map();
   for (const page of pages) {
     const chunks = page.body.split(/(?=<h[23]\b)/);
     search.push({title:page.title, section:page.title, url:`${page.file}.html`, text:plain(page.body).slice(0, 600)});
@@ -57,27 +57,31 @@ async function build() {
     const home = page.file === 'index';
     const notebook = page.notebook === false ? null : (page.notebook || config.notebook);
     const notebookLink = notebook ? `<a href="${escape(notebook)}" download>ดาวน์โหลด Notebook</a>` : '';
-    const html = `<!doctype html><html lang="th" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escape(page.description)}"><title>${escape(page.title)} · ${escape(config.title)}</title><link rel="icon" href="assets/brand/favicon-32.png"><link rel="stylesheet" href="assets/katex/katex.min.css"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="app.css"><link rel="stylesheet" href="book.css">${page.file === 'returns' ? '<link rel="stylesheet" href="returns.css">' : ''}<script>try{document.documentElement.dataset.theme=localStorage.getItem('pmt-book-theme')==='dark'?'dark':'light'}catch(e){}</script></head><body class="book ${home ? 'welcome-page' : 'lesson-page'}" data-page="${page.file}">
+    const html = `<!doctype html><html lang="th" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escape(page.description)}"><title>${escape(page.title)} · ${escape(config.title)}</title><link rel="icon" href="assets/brand/favicon-32.png"><link rel="stylesheet" href="assets/katex/katex.min.css"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="app.css"><link rel="stylesheet" href="book.css">${['returns','risk'].includes(page.file) ? `<link rel="stylesheet" href="${page.file}.css">` : ''}<script>try{document.documentElement.dataset.theme=localStorage.getItem('pmt-book-theme')==='dark'?'dark':'light'}catch(e){}</script></head><body class="book ${home ? 'welcome-page' : 'lesson-page'}" data-page="${page.file}">
 <a class="skip-link" href="#content">ข้ามไปเนื้อหา</a>
 <header class="book-mobile-header"><a href="index.html">${escape(config.title)}</a><button id="menu-button" aria-expanded="false" aria-controls="book-sidebar">สารบัญ</button></header>
 <div class="book-layout"><aside id="book-sidebar" class="book-sidebar"><a href="index.html" class="cover-link" aria-label="กลับหน้า Welcome">${cover('book-cover')}</a><a class="book-name" href="index.html">${escape(config.title)}</a><button class="search-trigger" id="search-button">${icon}<span>Search</span><kbd>⌘ K</kbd></button><nav class="book-nav" aria-label="สารบัญ">${nav}</nav>${contents}<div class="book-sidebar-footer">${notebookLink}<a href="${page.file}.md" download>ไฟล์ Markdown หน้านี้</a><button id="theme-button">พื้นหลังมืด</button></div></aside>
 <main class="book-main ${home ? 'welcome-main' : 'chapter'}" id="content"><div class="page-topline"><span>${escape(config.title)}</span><button id="print-button">พิมพ์หน้านี้</button></div>${home ? cover('mobile-cover') : ''}${page.body}<footer class="book-footer"><span>${escape(config.title)}</span><span>โดย ${escape(config.author)} · <a href="licenses/index.html">สิทธิ์การใช้งาน</a></span></footer></main></div>
-<dialog id="search-dialog" aria-labelledby="search-title"><div class="search-dialog-heading"><h2 id="search-title">ค้นหาในหนังสือ</h2><button id="close-search" aria-label="ปิดการค้นหา">ปิด</button></div><label for="search-input" class="sr-only">คำค้นหา</label><input id="search-input" type="search" autocomplete="off" placeholder="ค้นหา CPPI, Cushion หรือ การป้องกัน"><p id="search-status" role="status"></p><div id="search-results"></div></dialog><script src="search-index.js" defer></script><script src="site.js" defer></script>${page.file === 'portfolio-insurance' ? '<script src="app.js" defer></script>' : page.file === 'returns' ? '<script src="returns.js" defer></script>' : ''}</body></html>`;
-    fs.writeFileSync(path.join(out, page.file + '.html'), html);
+<dialog id="search-dialog" aria-labelledby="search-title"><div class="search-dialog-heading"><h2 id="search-title">ค้นหาในหนังสือ</h2><button id="close-search" aria-label="ปิดการค้นหา">ปิด</button></div><label for="search-input" class="sr-only">คำค้นหา</label><input id="search-input" type="search" autocomplete="off" placeholder="ค้นหา CPPI, Cushion หรือ การป้องกัน"><p id="search-status" role="status"></p><div id="search-results"></div></dialog><script src="search-index.js" defer></script><script src="site.js" defer></script>${page.file === 'portfolio-insurance' ? '<script src="app.js" defer></script>' : ['returns','risk'].includes(page.file) ? `<script src="${page.file}.js" defer></script>` : ''}</body></html>`;
+    renderedPages.set(page.file, html);
   }
   for (const [old, anchor] of [['lab','cppi-lab'], ['research','references']]) fs.writeFileSync(path.join(out, old + '.html'), `<!doctype html><html lang="th"><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=portfolio-insurance.html#${anchor}"><title>Portfolio Insurance</title><a href="portfolio-insurance.html#${anchor}">อ่านบท Portfolio Insurance</a></html>`);
   fs.writeFileSync(path.join(out, 'search-index.js'), 'window.PMTSearch=' + JSON.stringify(search).replaceAll('<', '\\u003c') + ';');
   fs.copyFileSync(path.join(root, 'src/site.js'), path.join(out, 'site.js'));
   await esbuild.build({entryPoints:[path.join(root, 'src/app.jsx')], outfile:path.join(out, 'app.js'), bundle:true, format:'iife', jsx:'automatic', minify:true, target:'es2022', define:{'process.env.NODE_ENV':'"production"'}, legalComments:'linked'});
   await esbuild.build({entryPoints:[path.join(root, 'src/returns.jsx')], outfile:path.join(out, 'returns.js'), bundle:true, format:'iife', jsx:'automatic', minify:true, target:'es2022', define:{'process.env.NODE_ENV':'"production"'}, legalComments:'linked'});
+  await esbuild.build({entryPoints:[path.join(root, 'src/risk.jsx')], outfile:path.join(out, 'risk.js'), bundle:true, format:'iife', jsx:'automatic', minify:true, target:'es2022', define:{'process.env.NODE_ENV':'"production"'}, legalComments:'linked'});
   for (const page of pages) {
     const file = path.join(out, page.file + '.html');
-    let html = fs.readFileSync(file, 'utf8');
-    for (const asset of ['style.css','book.css','app.css','app.js','returns.css','returns.js','site.js','search-index.js']) {
+    let html = renderedPages.get(page.file);
+    for (const asset of ['style.css','book.css','app.css','app.js','returns.css','returns.js','risk.css','risk.js','site.js','search-index.js']) {
       const hash = createHash('sha256').update(fs.readFileSync(path.join(out, asset))).digest('hex').slice(0, 10);
       html = html.replaceAll(`"${asset}"`, `"${asset}?v=${hash}"`);
     }
-    fs.writeFileSync(file, html);
+    // Readers and concurrent preview builds only see complete HTML documents.
+    const temporary = `${file}.${process.pid}.tmp`;
+    fs.writeFileSync(temporary, html);
+    fs.renameSync(temporary, file);
   }
   fs.writeFileSync(path.join(out, 'build-manifest.json'), JSON.stringify({title:config.title, visualRoute:config.visualRoute, format:'book', pages:pages.map(p => p.file + '.html'), searchEntries:search.length}, null, 2));
   console.log(`Built ${pages.length} book pages, ${search.length} search entries in _site/.`);

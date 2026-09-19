@@ -21,6 +21,12 @@
       "notebook": false
     },
     {
+      "file": "risk",
+      "title": "ความเสี่ยงในการลงทุน",
+      "description": "จากที่มาของแนวคิดความเสี่ยงและทฤษฎีพอร์ต สู่ Volatility, Drawdown, VaR, ES และ EWMA พร้อมตัวอย่างและตัวทดลอง",
+      "notebook": false
+    },
+    {
       "file": "portfolio-insurance",
       "title": "Portfolio Insurance",
       "description": "Portfolio Insurance Strategies: Friend or Foe? เรียนรู้ Floor, CPPI, OBPI และต้นทุนการป้องกันพอร์ต ผ่านตัวอย่างและการทดลอง"
@@ -28,7 +34,7 @@
     {
       "file": "glossary",
       "title": "อภิธานศัพท์",
-      "description": "คำศัพท์การบริหารพอร์ตและ Portfolio Insurance พร้อมลิงก์กลับบทเรียน"
+      "description": "คำศัพท์การบริหารพอร์ต ความเสี่ยง และ Portfolio Insurance พร้อมลิงก์กลับบทเรียน"
     }
   ],
   "logos": [

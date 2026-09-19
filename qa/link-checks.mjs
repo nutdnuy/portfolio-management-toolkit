@@ -7,7 +7,7 @@ const manifest = JSON.parse(fs.readFileSync(path.join(root, 'build-manifest.json
 const failures = [];
 let checked = 0;
 assert.equal(manifest.format, 'book');
-assert.deepEqual(manifest.pages, ['index.html', 'returns.html', 'portfolio-insurance.html', 'glossary.html']);
+assert.deepEqual(manifest.pages, ['index.html', 'returns.html', 'risk.html', 'portfolio-insurance.html', 'glossary.html']);
 
 function localReference(owner, reference) {
   if (/^(?:https?:|mailto:|data:|tel:)/i.test(reference)) return;
@@ -37,12 +37,12 @@ for (const name of htmlFiles) {
     for (const candidate of match[1].split(",")) localReference(owner, candidate.trim().split(/\s+/)[0]);
   }
 }
-for (const name of ['style.css', 'book.css', 'app.css', 'assets/katex/katex.min.css']) {
+for (const name of ['style.css', 'book.css', 'app.css', 'returns.css', 'risk.css', 'assets/katex/katex.min.css']) {
   const owner = path.join(root, name);
   if (!fs.existsSync(owner)) { failures.push(`Missing stylesheet ${name}`); continue; }
   for (const match of fs.readFileSync(owner, 'utf8').matchAll(/url\(["']?([^"')]+)["']?\)/g)) localReference(owner, match[1]);
 }
-for (const name of ['index.md', 'returns.md', 'portfolio-insurance.md', 'glossary.md']) {
+for (const name of ['index.md', 'returns.md', 'risk.md', 'portfolio-insurance.md', 'glossary.md']) {
   const artifact = path.join(root, name);
   if (!fs.existsSync(artifact) || fs.statSync(artifact).size === 0) failures.push(`Missing Markdown download ${name}`);
 }

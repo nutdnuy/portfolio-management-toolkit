@@ -1,0 +1,125 @@
+{
+  "lesson": "content/risk.md",
+  "data_kind": "Original hypothetical teaching examples; no market observations.",
+  "sources": [
+    {
+      "title": "Bernoulli: งานปี 1738 ในฉบับแปลอังกฤษปี 1954",
+      "url": "https://theparticle.com/cs/bc/dsci/Bernoulli_1738.pdf",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Bachelier, 1900",
+      "url": "https://numdam.org/articles/10.24033/asens.476/",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Knight: Risk, Uncertainty, and Profit, 1921, Part III Chapter VIII",
+      "url": "https://www.econlib.org/library/Knight/knRUP.html?chapter_num=10",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Markowitz, Portfolio Selection, 1952",
+      "url": "https://doi.org/10.1111/j.1540-6261.1952.tb01525.x",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "คำบรรยาย Nobel ของ Markowitz",
+      "url": "https://www.nobelprize.org/uploads/2018/06/markowitz-lecture.pdf",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Roy, 1952",
+      "url": "https://doi.org/10.2307/1907413",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Sharpe, 1964",
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1111/j.1540-6261.1964.tb02865.x",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Lintner, 1965",
+      "url": "https://www.jstor.org/stable/1924119",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Engle, 1982",
+      "url": "https://web.pdx.edu/~crkl/ec572/readings/Engle82.pdf",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Bollerslev, 1986",
+      "url": "https://doi.org/10.1016/0304-4076%2886%2990063-1",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "ต้นฉบับผู้เขียน",
+      "url": "https://people.math.ethz.ch/~delbaen/ftp/preprints/CoherentMF.pdf",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "ข้อมูลตีพิมพ์ปี 1999",
+      "url": "https://doi.org/10.1111/1467-9965.00068",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "อ่านกรอบการจัดการความเสี่ยงของ CFA Institute",
+      "url": "https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/introduction-risk-management",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "NIST: Standard deviation",
+      "url": "https://itl.nist.gov/div898/handbook/prc/section2/prc23.htm",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "CFA Institute: Portfolio Mathematics",
+      "url": "https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/portfolio-mathematics",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "CFA Institute: Measuring and Managing Market Risk",
+      "url": "https://www.cfainstitute.org/insights/professional-learning/refresher-readings/2026/measuring-managing-market-risk",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "Acerbi, Nordio และ Sirtori: Expected Shortfall as a Tool for Financial Risk Management",
+      "url": "https://arxiv.org/abs/cond-mat/0102304",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "RiskMetrics, §5.2 และ Table 5.9, หน้าเอกสาร 81–85 และ 100",
+      "url": "https://www.msci.com/documents/10199/5915b101-4206-4ba0-aee2-3449d5c7e95a#page=112",
+      "accessed": "2026-09-19"
+    },
+    {
+      "title": "J.P. Morgan/Reuters, RiskMetrics Technical Document, Fourth Edition, December 1996",
+      "url": "https://www.msci.com/documents/10199/5915b101-4206-4ba0-aee2-3449d5c7e95a",
+      "accessed": "2026-09-19"
+    }
+  ],
+  "conventions": {
+    "path": "Monthly simple returns; initial THB 1,000,000; no flows, taxes or fees; inception included in high-water mark.",
+    "volatility": "Sample standard deviation, ddof=1; no annualization in the lab.",
+    "downside": "Zero monthly threshold; divide sum of squared shortfalls by all observations.",
+    "drawdown": "Signed wealth/own peak - 1; report MDD as positive magnitude, without annualization.",
+    "tail": "100 equiprobable daily loss scenarios: 94 zeros, five THB 20,000 losses, one variable extreme loss. VaR inverse empirical CDF; ES exact worst 5% mass, fractionally weighting the boundary if needed.",
+    "ewma": "Zero mean; old daily sigma 1%; current innovation observed before next-period forecast. Decay illustration imposes subsequent zero innovations."
+  },
+  "historical_notes": [
+    "No single first universal definition of investment risk.",
+    "Bernoulli 1738 (English translation 1954), Bachelier 1900, Knight 1921, Markowitz and Roy 1952, Sharpe 1964, Lintner 1965, Engle 1982, Bollerslev 1986, Artzner et al. 1999.",
+    "RiskMetrics fourth edition December 1996; printed page p corresponds to PDF viewer p+12. Table 5.9 p100 gives historical production lambdas; daily observations are used for both horizon productions."
+  ],
+  "visuals": {
+    "route": "no-image-generator",
+    "generator": "src/risk.jsx",
+    "calculations": "src/risk-math.mjs",
+    "assumptions": "No source charts or market performance are reproduced."
+  },
+  "validation": [
+    "qa/risk-checks.mjs",
+    "qa/risk-browser-checks.cjs"
+  ],
+  "private_source_documents_published": false
+}
