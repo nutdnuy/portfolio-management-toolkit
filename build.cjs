@@ -5,7 +5,7 @@ const esbuild = require('esbuild');
 const katex = require('katex');
 const root = __dirname, out = path.join(root, '_site');
 const escape = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const plain = s => s.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+const plain = s => s.replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
 const slug = s => plain(s).toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '');
 async function build() {
   const {marked} = await import('marked');
@@ -15,6 +15,8 @@ async function build() {
   fs.cpSync(path.join(root, 'node_modules/katex/dist'), path.join(out, 'assets/katex'), {recursive:true});
   for (const name of ['style.css', 'book.css', 'THIRD_PARTY_NOTICES.md']) fs.copyFileSync(path.join(root, name), path.join(out, name));
   if (fs.existsSync(path.join(root, 'notebooks'))) fs.cpSync(path.join(root, 'notebooks'), path.join(out, 'notebooks'), {recursive:true});
+  fs.mkdirSync(path.join(out, 'downloads'), {recursive:true});
+  for (const [source, target] of [['data/sp500-results.json','sp500-results.json'], ['data/sp500-results.csv','sp500-results.csv'], ['scripts/sp500_backtest.py','sp500-backtest.py']]) fs.copyFileSync(path.join(root, source), path.join(out, 'downloads', target));
   fs.mkdirSync(path.join(out, 'licenses'), {recursive:true});
   for (const name of fs.readdirSync(path.join(root, 'vendor')).filter(n => n.endsWith('-LICENSE.txt'))) fs.copyFileSync(path.join(root, 'vendor', name), path.join(out, 'licenses', name));
   fs.writeFileSync(path.join(out, 'licenses/index.html'), '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Third-party licenses</title><h1>Third-party licenses</h1><p><a href="../index.html">Return to the book</a></p><ul>' + fs.readdirSync(path.join(out, 'licenses')).filter(n => n.endsWith('.txt')).map(n => '<li><a href="' + n + '">' + n + '</a></li>').join('') + '</ul></html>');

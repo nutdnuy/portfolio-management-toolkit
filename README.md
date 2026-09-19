@@ -25,7 +25,7 @@ npm run dev
 
 - Welcome: แนะนำหนังสือและวิธีอ่าน
 - How to Calculate return: Simple/Log return และคุณสมบัติการบวกข้ามเวลา ผ่านเงิน 1 ล้านบาทที่ได้ +100% แล้ว −50% พร้อมค่าเฉลี่ย CAGR ผลตอบแทนพอร์ต และคำถามพร้อมเฉลย
-- Portfolio Insurance: บทเรียน 13 หัวข้อแบบละเอียด ไล่จาก Put และงบ OBPI สู่ CPPI หลายรอบ, Variable-Multiplier Portfolio Insurance พร้อมตัวอย่างใน Notebook, TIPP แบบ Ratchet, Gap risk พร้อมดอกเบี้ย, EUT/CPT พร้อมคำนวณคะแนน และการประเมิน Shortfall/Drawdown มีโจทย์พร้อมเฉลย 8 ข้อและเครื่องมือทดลองในบท
+- Portfolio Insurance: บทเรียน 13 หัวข้อหลักแบบละเอียด ไล่จาก Put และงบ OBPI สู่ CPPI หลายรอบ, Variable-Multiplier Portfolio Insurance พร้อมตัวอย่างใน Notebook, TIPP แบบ Ratchet, Gap risk พร้อมดอกเบี้ย, EUT/CPT พร้อมคำนวณคะแนน และการประเมิน Shortfall/Drawdown มีผลทดสอบ S&P 500 ปี 2018–2025 พร้อมข้อดีข้อเสียของแต่ละวิธี และโจทย์พร้อมเฉลย 8 ข้อและเครื่องมือทดลองในบท
 - อภิธานศัพท์: 35 คำพร้อมนิยามภาษาไทย ค้นหาคำ และลิงก์กลับไปยังตัวอย่าง
 - Notebook: คำอธิบายและสมการครบจากบทเรียน พร้อมโค้ด Python และกราฟที่คำนวณซ้ำได้
 
@@ -56,6 +56,7 @@ Lab ใช้ 4 เส้นทางสมมติ 12 เดือน เป�
 npm test
 npm run notebook       # Python 3.9+; ใช้ standard library
 npm run check:notebook
+npm run check:sp500
 npm run build:pages
 npm run check:site  # ต้องเปิด preview ที่พอร์ต 8764
 ```

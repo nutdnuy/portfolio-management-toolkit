@@ -8,7 +8,8 @@ const axeSource = require('axe-core').source;
 
 const base = process.env.PMT_PREVIEW_URL || 'http://127.0.0.1:8764';
 const output = path.join(__dirname, 'output');
-const pages = ['index', 'portfolio-insurance', 'glossary'];
+const bookConfig = JSON.parse(fs.readFileSync(path.join(__dirname, '../site.config.json'), 'utf8'));
+const pages = bookConfig.pages.map(page => page.file);
 const failures = [], passed = [], accessibility = [];
 fs.mkdirSync(output, { recursive: true });
 const format = (n, digits = 2) => Number(n).toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits });
@@ -113,7 +114,7 @@ async function range(page, selector, value) {
     await check('Book sidebar, full chapter contents and chapter section navigation', async () => {
       await ready(page, 'index');
       assert.equal(await page.locator('html').getAttribute('data-theme'), 'light', 'A fresh session defaults to the light book');
-      assert.deepEqual(await page.getByRole('navigation', { name: 'สารบัญ', exact: true }).locator('a').allTextContents(), ['Welcome', 'Portfolio Insurance', 'อภิธานศัพท์']);
+      assert.deepEqual(await page.getByRole('navigation', { name: 'สารบัญ', exact: true }).locator('a').allTextContents(), bookConfig.pages.map(page => page.title));
       await Promise.all([
         page.waitForURL('**/portfolio-insurance.html'),
         page.getByRole('navigation', { name: 'สารบัญ', exact: true }).getByRole('link', { name: 'Portfolio Insurance', exact: true }).click()

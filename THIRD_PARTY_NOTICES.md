@@ -84,3 +84,7 @@ All toolkit market paths and worked examples are newly constructed teaching exam
 ## Book branding — 2026-09-13
 
 The book uses the approved QuantCorner and Quantsera horizontal transparent PNGs, copied unchanged from their canonical brand packages. Native HTML/CSS places the separate assets on black, centered by painted bounds, following quantseras-design-system.md and the no-image-generator route. Exact assets and hashes are recorded in data/brand-cover-provenance.json.
+
+## S&P 500 educational test
+
+Source: S&P Dow Jones Indices LLC via FRED, series SP500 (https://fred.stlouisfed.org/series/SP500), daily closing price index without dividends; retrieved 2026-09-19. Original index observations are held locally and are not redistributed. Public CSV/JSON contain independently computed annual strategy statistics, assumptions and a checksum of the local input, not the source price series. Source-provider rights remain with their owners. The Python implementation and interpretations are newly authored; option premiums and valuations are hypothetical Black–Scholes prices.

@@ -116,5 +116,44 @@
     "url": "https://www.insurance.uni-hannover.de/fileadmin/house-of-insurance/Research_and_Events/Events/2013/LUH_Colloquium/2013.05.16/Mahayni_LUH_Kolloquium.pdf",
     "example": "Original teaching rule: clamp(3 * 0.20 / positive estimated annual volatility, 1, 6); initial wealth 100, floor 90, zero rate/costs, no borrowing/shorts",
     "scope": "Worked prose and executable Notebook; existing browser lab remains fixed-m CPPI; no empirical performance or optimality claim"
+  },
+  "sp500HistoricalTest": {
+    "source": {
+      "provider": "S&P Dow Jones Indices via FRED, SP500",
+      "url": "https://fred.stlouisfed.org/series/SP500",
+      "retrieved": "2026-09-19",
+      "sha256": "dc701c49ac9deecbec444fd6e63a9bb9b77c3e4a49e48cf5eb9292a20d48ceee",
+      "first": "2016-10-03",
+      "last": "2025-12-31",
+      "observations": 2325,
+      "measure": "Daily close price index, no dividends; input kept local"
+    },
+    "assumptions": {
+      "years": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "initial": 100,
+      "floor": 90,
+      "reset": "Each calendar year independently; previous year final trading close to current year final close",
+      "safe_rate": 0,
+      "costs": 0,
+      "dividends": false,
+      "constant_m": 3,
+      "variable_vol_window": 20,
+      "signal_lag": "All volatility estimates end one trading close before execution",
+      "variable_rule": "clamp(3*0.20/annualized_sample_log_return_volatility,1,6)",
+      "execution": "Idealized observed closing prices; no intraday stop fills; fractional holdings",
+      "obpi": "Reserve 90 + European ATM calls, r=q=0; start trailing 252-return volatility fixed through expiry; theoretical premiums and marks, not traded option history"
+    },
+    "script": "scripts/sp500_backtest.py",
+    "results": "data/sp500-results.json",
+    "scope": "Derived annual statistics for five insurance rules plus Buy & Hold; raw index observations remain local; OBPI is a theoretical-price illustration, not a traded-options backtest"
   }
 }

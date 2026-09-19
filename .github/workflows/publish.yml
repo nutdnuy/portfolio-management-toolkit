@@ -23,6 +23,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - run: npm run check:sp500
       - run: npm run check:notebook
       - run: npm run build:pages
       - uses: actions/upload-pages-artifact@v3
