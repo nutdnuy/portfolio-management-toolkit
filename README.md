@@ -24,7 +24,7 @@ npm run dev
 ## เนื้อหาและเครื่องมือ
 
 - Welcome: แนะนำหนังสือและวิธีอ่าน
-- How to Calculate return: Simple/Log return การทบต้น ค่าเฉลี่ย CAGR และผลตอบแทนพอร์ต พร้อม Notebook
+- How to Calculate return: Simple/Log return และคุณสมบัติการบวกข้ามเวลา ผ่านเงิน 1 ล้านบาทที่ได้ +100% แล้ว −50% พร้อมค่าเฉลี่ย CAGR ผลตอบแทนพอร์ต และคำถามพร้อมเฉลย
 - Portfolio Insurance: บทเรียน 13 หัวข้อแบบละเอียด ไล่จาก Put และงบ OBPI สู่ CPPI หลายรอบ, Variable-Multiplier Portfolio Insurance พร้อมตัวอย่างใน Notebook, TIPP แบบ Ratchet, Gap risk พร้อมดอกเบี้ย, EUT/CPT พร้อมคำนวณคะแนน และการประเมิน Shortfall/Drawdown มีโจทย์พร้อมเฉลย 8 ข้อและเครื่องมือทดลองในบท
 - อภิธานศัพท์: 35 คำพร้อมนิยามภาษาไทย ค้นหาคำ และลิงก์กลับไปยังตัวอย่าง
 - Notebook: คำอธิบายและสมการครบจากบทเรียน พร้อมโค้ด Python และกราฟที่คำนวณซ้ำได้

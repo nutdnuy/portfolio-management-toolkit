@@ -28,4 +28,4 @@ Run `npm run dev` to preview and rebuild on source changes, then refresh the bro
 
 ## Return chapter
 
-Edit `content/returns.md` and run `python3 scripts/make_returns_notebook.py` to regenerate and execute `notebooks/returns.ipynb`. The title is **How to Calculate return**. Keep this introductory lesson independent of Portfolio Insurance. Per-page `notebook` in `site.config.json` overrides the sidebar download; other pages retain the site default. Source notes are in `data/returns-provenance.json`.
+Edit `content/returns.md`. The title is **How to Calculate return**. This introductory lesson uses prose, equations and worked examples without Python or a Notebook. The central case starts at THB 1,000,000, gains 100% in year one, then loses 50% in year two. Keep the lesson independent of Portfolio Insurance. Per-page `notebook: false` in `site.config.json` hides the sidebar download; an omitted value retains the site default. Source notes are in `data/returns-provenance.json`.

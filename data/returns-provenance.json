@@ -31,7 +31,17 @@
     "The Simon Leung 100 to 120 example has exactly 20% cumulative return.",
     "KS tests with fitted parameters require appropriate calibration."
   ],
-  "notebook": "notebooks/returns.ipynb",
-  "generator": "python3 scripts/make_returns_notebook.py",
-  "private_pdf_published": false
+  "private_pdf_published": false,
+  "central_example": {
+    "initial_wealth_thb": 1000000,
+    "annual_simple_returns": [
+      1,
+      -0.5
+    ],
+    "terminal_wealth_thb": 1000000,
+    "cumulative_simple_return": 0,
+    "cumulative_log_return": 0,
+    "external_cash_flows": false,
+    "format": "Worked lesson and self-check questions; no Python or Notebook"
+  }
 }

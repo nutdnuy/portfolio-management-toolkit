@@ -43,7 +43,7 @@ for (const name of ['index.md', 'returns.md', 'portfolio-insurance.md', 'glossar
   const artifact = path.join(root, name);
   if (!fs.existsSync(artifact) || fs.statSync(artifact).size === 0) failures.push(`Missing Markdown download ${name}`);
 }
-for (const notebookName of ['portfolio-insurance', 'returns']) {
+for (const notebookName of ['portfolio-insurance']) {
   const notebookFile = path.join(root, `notebooks/${notebookName}.ipynb`);
   if (!fs.existsSync(notebookFile)) failures.push(`Missing Notebook download notebooks/${notebookName}.ipynb`);
   else {
@@ -52,5 +52,7 @@ for (const notebookName of ['portfolio-insurance', 'returns']) {
     if (notebook.cells?.some(cell => cell.outputs?.some(output => output.output_type === 'error'))) failures.push('Notebook contains an execution error');
   }
 }
+const returnPage = fs.readFileSync(path.join(root, 'returns.html'), 'utf8');
+assert.doesNotMatch(returnPage, /\.ipynb|language-python|ทดลองคำนวณและตรวจคำตอบด้วย Python/);
 assert.deepEqual(failures, [], failures.join('\n'));
 console.log(`Verified ${manifest.pages.length} book pages, ${htmlFiles.length} HTML files and ${checked} local references, including anchors, book.css, fonts, Markdown and Notebook downloads.`);

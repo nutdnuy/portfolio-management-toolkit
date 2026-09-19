@@ -17,8 +17,8 @@
     {
       "file": "returns",
       "title": "How to Calculate return",
-      "description": "Simple return, Log return, การทบต้น ค่าเฉลี่ย CAGR และผลตอบแทนพอร์ต",
-      "notebook": "notebooks/returns.ipynb"
+      "description": "เรียนรู้ Simple return และการบวก Log return ข้ามเวลา ผ่านเงิน 1 ล้านบาทที่ปีแรกกำไร 100% ปีที่สองขาดทุน 50%",
+      "notebook": false
     },
     {
       "file": "portfolio-insurance",
