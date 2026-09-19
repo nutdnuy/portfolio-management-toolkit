@@ -104,11 +104,13 @@
       "2025": 155.22299062556468
     }
   },
+  "drawdown": "Signed percent below own running peak, including inception; no annual reset, not annualized. Common -40% to 0% axis.",
   "files": {
     "sp500-slpi.svg": {
       "sha256": "b5a9e7a889be435e53e4e82d9fde48b71aa76c6205a4698716bfd8533ce79aaf",
       "method": "SLPI",
       "mobile": false,
+      "kind": "wealth",
       "layout": {
         "width": 800,
         "height": 460,
@@ -124,6 +126,7 @@
       "sha256": "f61eb4f7bce7f07a7e50f4a31b61c2300f1d6facdeddea69ac657b987e36c648",
       "method": "SLPI",
       "mobile": true,
+      "kind": "wealth",
       "layout": {
         "width": 320,
         "height": 410,
@@ -135,10 +138,43 @@
         "ymax": 300
       }
     },
+    "sp500-slpi-drawdown.svg": {
+      "sha256": "a0c3a2728d00ffe32922bf2532a2d6bcdc64cdd3e60dc4b96e85db09493170c4",
+      "method": "SLPI",
+      "mobile": false,
+      "kind": "drawdown",
+      "layout": {
+        "width": 800,
+        "height": 460,
+        "left": 60,
+        "right": 774,
+        "top": 152,
+        "bottom": 388,
+        "ymin": -40,
+        "ymax": 0
+      }
+    },
+    "sp500-slpi-drawdown-mobile.svg": {
+      "sha256": "f1dfe03e60769febb77ae2ae27ff2842b52e4c21b0a2bf8c407193a3127b7931",
+      "method": "SLPI",
+      "mobile": true,
+      "kind": "drawdown",
+      "layout": {
+        "width": 320,
+        "height": 410,
+        "left": 40,
+        "right": 304,
+        "top": 158,
+        "bottom": 344,
+        "ymin": -40,
+        "ymax": 0
+      }
+    },
     "sp500-cppi.svg": {
       "sha256": "380a79aa034049e5ce24cdcb8ae33e4e0a34d936437312d481254ac0679f13c3",
       "method": "CPPI",
       "mobile": false,
+      "kind": "wealth",
       "layout": {
         "width": 800,
         "height": 460,
@@ -154,6 +190,7 @@
       "sha256": "e9e8c4dfb3daf6ba3bd68eca556bfb0dc88c39d95b3172e1efd455c2e1ebd54b",
       "method": "CPPI",
       "mobile": true,
+      "kind": "wealth",
       "layout": {
         "width": 320,
         "height": 410,
@@ -165,10 +202,43 @@
         "ymax": 300
       }
     },
+    "sp500-cppi-drawdown.svg": {
+      "sha256": "ecf6003c918388600f2243b0af6634419f06274568cf47a616c1f0ba93bf9b61",
+      "method": "CPPI",
+      "mobile": false,
+      "kind": "drawdown",
+      "layout": {
+        "width": 800,
+        "height": 460,
+        "left": 60,
+        "right": 774,
+        "top": 152,
+        "bottom": 388,
+        "ymin": -40,
+        "ymax": 0
+      }
+    },
+    "sp500-cppi-drawdown-mobile.svg": {
+      "sha256": "d73eb51fb8780530ea6df8c96cea8cc53e34aa193697c6d80c5bb84b008f15ae",
+      "method": "CPPI",
+      "mobile": true,
+      "kind": "drawdown",
+      "layout": {
+        "width": 320,
+        "height": 410,
+        "left": 40,
+        "right": 304,
+        "top": 158,
+        "bottom": 344,
+        "ymin": -40,
+        "ymax": 0
+      }
+    },
     "sp500-tipp.svg": {
       "sha256": "0edd1827321940e7f833a591909036480e362947feec3fd2bdf82febc04a3bdb",
       "method": "TIPP",
       "mobile": false,
+      "kind": "wealth",
       "layout": {
         "width": 800,
         "height": 460,
@@ -184,6 +254,7 @@
       "sha256": "c0531a226d53efe445fc50b2c08574e94e716a52a8e1b58e4d98df0560ee9072",
       "method": "TIPP",
       "mobile": true,
+      "kind": "wealth",
       "layout": {
         "width": 320,
         "height": 410,
@@ -195,10 +266,43 @@
         "ymax": 300
       }
     },
+    "sp500-tipp-drawdown.svg": {
+      "sha256": "43a3b0020047835d41731c81456c698e405cf9b98b23f4893d9eb122a4124ed6",
+      "method": "TIPP",
+      "mobile": false,
+      "kind": "drawdown",
+      "layout": {
+        "width": 800,
+        "height": 460,
+        "left": 60,
+        "right": 774,
+        "top": 152,
+        "bottom": 388,
+        "ymin": -40,
+        "ymax": 0
+      }
+    },
+    "sp500-tipp-drawdown-mobile.svg": {
+      "sha256": "59570e79f3fab578e6967071e78807bccd0f11303cecb6beb45117661b37a472",
+      "method": "TIPP",
+      "mobile": true,
+      "kind": "drawdown",
+      "layout": {
+        "width": 320,
+        "height": 410,
+        "left": 40,
+        "right": 304,
+        "top": 158,
+        "bottom": 344,
+        "ymin": -40,
+        "ymax": 0
+      }
+    },
     "sp500-variable-m.svg": {
       "sha256": "d982645a2dbb81b99f172a4affb0c4eb55291d6c29d24f353f1e213b7d4e24ba",
       "method": "Variable m",
       "mobile": false,
+      "kind": "wealth",
       "layout": {
         "width": 800,
         "height": 460,
@@ -214,6 +318,7 @@
       "sha256": "22d44fbd1e33049453dde33f7bb107e7939448bf7dd520d33533601ef6cb809f",
       "method": "Variable m",
       "mobile": true,
+      "kind": "wealth",
       "layout": {
         "width": 320,
         "height": 410,
@@ -223,6 +328,38 @@
         "bottom": 344,
         "ymin": 0,
         "ymax": 300
+      }
+    },
+    "sp500-variable-m-drawdown.svg": {
+      "sha256": "df6d1456bacdc270394bc21d20f81cb93ce58998315bf2a92c3897fc60fbe90e",
+      "method": "Variable m",
+      "mobile": false,
+      "kind": "drawdown",
+      "layout": {
+        "width": 800,
+        "height": 460,
+        "left": 60,
+        "right": 774,
+        "top": 152,
+        "bottom": 388,
+        "ymin": -40,
+        "ymax": 0
+      }
+    },
+    "sp500-variable-m-drawdown-mobile.svg": {
+      "sha256": "e3c73cf6bc979b2546f1b232536040cb54cfdaad0f7c214a83ae0af2bd8d52ec",
+      "method": "Variable m",
+      "mobile": true,
+      "kind": "drawdown",
+      "layout": {
+        "width": 320,
+        "height": 410,
+        "left": 40,
+        "right": 304,
+        "top": 158,
+        "bottom": 344,
+        "ymin": -40,
+        "ymax": 0
       }
     }
   }

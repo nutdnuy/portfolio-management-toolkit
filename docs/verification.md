@@ -88,3 +88,11 @@ Added the five insurance methods plus Buy & Hold on eight independently reset ca
 - `npm test`, `npm run check:sp500`, `npm run check:notebook` and `npm run build:pages` passed. The Notebook embeds four new full-size SVGs alongside the four existing diagrams; all 18 code cells re-executed successfully.
 - Browser suite: 38 checks passed, including light/dark accessibility and 1440/390/320px layouts. Dedicated checks verified four chart positions, mobile source selection, intrinsic aspect ratios and no horizontal overflow. Inspected desktop and mobile screenshots locally, including the 320px version. Link checks now include responsive `srcset` references.
 - Design System: QuantCorner / QuantSeras Material 2 (`quantseras-design-system.md`), route `no-image-generator`; native deterministic SVG, embedded licensed fonts. Existing `assets/brand/quantsera-horizontal-transparent-offwhite-1024.png` retained unchanged. Canonical Quantsera logo preflight passed.
+
+## S&P 500 drawdown companions — 2026-09-19
+
+- Added one Drawdown figure immediately after each of the four wealth figures, with Buy & Hold as the dashed comparison. All use the same 2018–2025 paths and a common −40% to 0% scale. Own running peaks include inception and never reset annually; Maximum drawdown is reported as a positive magnitude and is not annualized.
+- Analytic checks cover decline, recovery, a new high and a cross-year drawdown. All 2,012 plotted drawdown points per series were independently checked against the companion wealth SVG; all 16 SVG exports matched exact regeneration from the pinned local input. Existing wealth SVGs remained byte-identical.
+- `npm test`, `npm run check:sp500`, `npm run check:notebook`, `npm run build:pages` and all 38 browser checks passed. The build verified 342 local references. Notebook now embeds 12 self-contained SVG attachments, including four new drawdown figures; all 18 code cells re-executed.
+- Dedicated browser checks confirmed placement, mobile source selection and no overflow at 1440/390/320px. Desktop and mobile screenshots were inspected for readable labels, clipping, comparison colors and negative-axis direction.
+- Retained QuantCorner / QuantSeras Material 2 and the no-image-generator route, plus unchanged approved `assets/brand/quantsera-horizontal-transparent-offwhite-1024.png`. Canonical Quantsera logo preflight passed.

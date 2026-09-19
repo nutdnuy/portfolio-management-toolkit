@@ -158,7 +158,8 @@
     "charts": {
       "metadata": "data/sp500-charts.json",
       "generator": "scripts/make_sp500_charts.py",
-      "scope": "Four strategy versus Buy & Hold daily wealth charts, excluding options; annual experiments compounded, annual floor/allocation renewal; 2012 points including inception. Desktop/mobile SVG exports; full-size charts embedded in Notebook."
+      "scope": "Four strategy versus Buy & Hold daily wealth charts, excluding options; annual experiments compounded, annual floor/allocation renewal; 2012 points including inception. Desktop/mobile SVG exports; full-size charts embedded in Notebook.",
+      "drawdown": "Four additional daily drawdown comparisons derived from the chained wealth paths; own running peaks include inception and do not reset annually; common -40% to 0% axis. Desktop/mobile exports and Notebook attachments."
     }
   }
 }

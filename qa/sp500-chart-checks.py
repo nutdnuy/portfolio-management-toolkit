@@ -26,8 +26,14 @@ annual=json.loads((ROOT/'data/sp500-results.json').read_text())
 assert metadata['source']==annual['source']
 assert metadata['engine_sha256']==annual['engine_sha256']
 assert metadata['methods']==list(charts.METHODS.values())
-assert metadata['observations']==2012 and len(metadata['files'])==8
+assert metadata['observations']==2012 and len(metadata['files'])==16
 start,end=map(dt.date.fromisoformat,metadata['period'])
+# Recovery returns to zero; crossing a year boundary must retain the old peak.
+probe=[('2018-01-01',100),('2018-12-31',120),('2019-01-02',90),('2019-12-31',120),('2020-01-02',150)]
+assert [v for _,v in charts.drawdown_path(probe)]==[0,0,-25,0,0]
+for path in charts.chain_years(example).values():
+    assert math.isclose(charts.drawdown_path(path)[3][1],-10)
+
 ns={'s':'http://www.w3.org/2000/svg'}
 for filename,info in metadata['files'].items():
     svg=(ROOT/'assets/charts'/filename).read_bytes()
@@ -45,6 +51,24 @@ for filename,info in metadata['files'].items():
         xx=[p[0] for p in points];assert all(a<b for a,b in zip(xx,xx[1:]))
         if xdates is not None: assert xx==xdates
         xdates=xx
+        if info['kind']=='drawdown':
+            assert box['ymin']==-40 and box['ymax']==0
+            values=[-40*(yy-box['top'])/(box['bottom']-box['top']) for _,yy in points]
+            assert all(-40<=v<=0 for v in values) and values[0]==0
+            assert abs(-min(values)-metadata['metrics'][method]['max_drawdown_pct'])<.001
+            # Independently recover wealth from the published companion SVG, then
+            # derive its running peak; this checks all dates, not just the trough.
+            wealth_file=filename.replace('-drawdown','')
+            wealth_root=ET.fromstring((ROOT/'assets/charts'/wealth_file).read_bytes())
+            companion=next(el for el in wealth_root.findall('s:polyline',ns) if el.attrib['data-series']==method)
+            wealth_points=[tuple(map(float,p.split(','))) for p in companion.attrib['points'].split()]
+            assert xx==[x for x,_ in wealth_points]
+            wealth=[300*(box['bottom']-y)/(box['bottom']-box['top']) for _,y in wealth_points]
+            peak=wealth[0]
+            for v,d in zip(wealth,values):
+                peak=max(peak,v)
+                assert abs(d-100*(v/peak-1))<.004
+            continue
         values=[300*(box['bottom']-yy)/(box['bottom']-box['top']) for _,yy in points]
         assert all(math.isfinite(v) and 0<=v<=300 for v in values)
         assert abs(values[0]-100)<.002
@@ -68,6 +92,6 @@ if len(sys.argv)>1:
     results=[r for year in range(2018,2026) for r in charts.simulate_year(prices,year,keep_paths=True)]
     paths=charts.chain_years(results)
     for filename,info in metadata['files'].items():
-        assert charts.render(paths,info['method'],info['mobile'])==(ROOT/'assets/charts'/filename).read_text()
-    print('All eight SVGs match exact regeneration from the pinned local quotes.')
-print('Charts passed: annual compounding, all 2012 points per line, eight year-end values, full-period drawdown, scales and series labels.')
+        assert charts.render(paths,info['method'],info['mobile'],info['kind'])==(ROOT/'assets/charts'/filename).read_text()
+    print('All 16 SVGs match exact regeneration from the pinned local quotes.')
+print('Charts passed: annual compounding, all 2012 points per line, eight year-end values, full-period drawdown, every drawdown point against wealth, scales and series labels.')

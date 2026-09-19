@@ -34,6 +34,7 @@ assert not re.search(r'<(?:section|div|figure|figcaption|img)\b', "\n".join(chap
 
 # Markdown diagrams are attachments, independently of the two computed charts.
 expected_diagrams = {"cppi-anatomy.svg", "cppi-rebalance.svg", "cppi-gap.svg", "tipp-ratchet.svg", "sp500-slpi.svg", "sp500-cppi.svg", "sp500-tipp.svg", "sp500-variable-m.svg"}
+expected_diagrams.update(f"sp500-{slug}-drawdown.svg" for slug in ("slpi", "cppi", "tipp", "variable-m"))
 canonical_diagrams = set(re.findall(r'''<img\b[^>]*\bsrc=["']assets/(?:diagrams|charts)/([^"']+)["']''', source))
 assert canonical_diagrams == expected_diagrams, "Canonical lesson diagrams are missing or unexpected"
 image_pattern = re.compile(r'!\[(?:\\.|[^\]\\])*\]\(([^)]+)\)')
