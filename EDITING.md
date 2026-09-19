@@ -25,3 +25,7 @@ Run `npm run notebook` after changing the chapter or numerical source. The gener
 Run `npm test`, `npm run check:notebook` and `npm run build:pages`. Layout or interaction changes also need `npm run check:site` with the preview on port 8764. Check desktop, mobile, light/dark themes, keyboard controls, Thai/English search, glossary anchors and local-file opening. Review `git diff --check` before committing.
 
 Run `npm run dev` to preview and rebuild on source changes, then refresh the browser. The generated `_site/` folder includes fonts, equations, JavaScript, Markdown downloads and the Notebook for offline use.
+
+## Return chapter
+
+Edit `content/returns.md` and run `python3 scripts/make_returns_notebook.py` to regenerate and execute `notebooks/returns.ipynb`. The title is **How to Calculate return**. Keep this introductory lesson independent of Portfolio Insurance. Per-page `notebook` in `site.config.json` overrides the sidebar download; other pages retain the site default. Source notes are in `data/returns-provenance.json`.

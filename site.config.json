@@ -15,6 +15,12 @@
       "description": "Portfolio Management Toolkit Notes: บทเรียนภาษาไทยเรื่องการบริหารพอร์ต พร้อมสมการ ตัวอย่าง และ Python Notebook"
     },
     {
+      "file": "returns",
+      "title": "How to Calculate return",
+      "description": "Simple return, Log return, การทบต้น ค่าเฉลี่ย CAGR และผลตอบแทนพอร์ต",
+      "notebook": "notebooks/returns.ipynb"
+    },
+    {
       "file": "portfolio-insurance",
       "title": "Portfolio Insurance",
       "description": "Portfolio Insurance Strategies: Friend or Foe? เรียนรู้ Floor, CPPI, OBPI และต้นทุนการป้องกันพอร์ต ผ่านตัวอย่างและการทดลอง"

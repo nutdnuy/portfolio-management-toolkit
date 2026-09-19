@@ -7,7 +7,7 @@ const manifest = JSON.parse(fs.readFileSync(path.join(root, 'build-manifest.json
 const failures = [];
 let checked = 0;
 assert.equal(manifest.format, 'book');
-assert.deepEqual(manifest.pages, ['index.html', 'portfolio-insurance.html', 'glossary.html']);
+assert.deepEqual(manifest.pages, ['index.html', 'returns.html', 'portfolio-insurance.html', 'glossary.html']);
 
 function localReference(owner, reference) {
   if (/^(?:https?:|mailto:|data:|tel:)/i.test(reference)) return;
@@ -39,16 +39,18 @@ for (const name of ['style.css', 'book.css', 'app.css', 'assets/katex/katex.min.
   if (!fs.existsSync(owner)) { failures.push(`Missing stylesheet ${name}`); continue; }
   for (const match of fs.readFileSync(owner, 'utf8').matchAll(/url\(["']?([^"')]+)["']?\)/g)) localReference(owner, match[1]);
 }
-for (const name of ['index.md', 'portfolio-insurance.md', 'glossary.md']) {
+for (const name of ['index.md', 'returns.md', 'portfolio-insurance.md', 'glossary.md']) {
   const artifact = path.join(root, name);
   if (!fs.existsSync(artifact) || fs.statSync(artifact).size === 0) failures.push(`Missing Markdown download ${name}`);
 }
-const notebookFile = path.join(root, 'notebooks/portfolio-insurance.ipynb');
-if (!fs.existsSync(notebookFile)) failures.push('Missing Notebook download notebooks/portfolio-insurance.ipynb');
-else {
-  const notebook = JSON.parse(fs.readFileSync(notebookFile, 'utf8'));
-  if (notebook.nbformat !== 4 || !notebook.cells?.length) failures.push('Notebook is not a populated nbformat 4 document');
-  if (notebook.cells?.some(cell => cell.outputs?.some(output => output.output_type === 'error'))) failures.push('Notebook contains an execution error');
+for (const notebookName of ['portfolio-insurance', 'returns']) {
+  const notebookFile = path.join(root, `notebooks/${notebookName}.ipynb`);
+  if (!fs.existsSync(notebookFile)) failures.push(`Missing Notebook download notebooks/${notebookName}.ipynb`);
+  else {
+    const notebook = JSON.parse(fs.readFileSync(notebookFile, 'utf8'));
+    if (notebook.nbformat !== 4 || !notebook.cells?.length) failures.push('Notebook is not a populated nbformat 4 document');
+    if (notebook.cells?.some(cell => cell.outputs?.some(output => output.output_type === 'error'))) failures.push('Notebook contains an execution error');
+  }
 }
 assert.deepEqual(failures, [], failures.join('\n'));
 console.log(`Verified ${manifest.pages.length} book pages, ${htmlFiles.length} HTML files and ${checked} local references, including anchors, book.css, fonts, Markdown and Notebook downloads.`);

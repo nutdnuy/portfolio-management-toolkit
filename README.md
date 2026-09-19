@@ -6,7 +6,7 @@ Repository: [nutdnuy/portfolio-management-toolkit](https://github.com/nutdnuy/po
 
 เมื่อ commit และ push ไปที่ `main` ระบบ **Publish toolkit** จะตรวจและเผยแพร่ GitHub Pages อัตโนมัติ
 
-หนังสือออนไลน์ภาษาไทยเรื่องการบริหารพอร์ต โดย QuantCorner เริ่มจากบท **Portfolio Insurance** อ้างอิงวิทยานิพนธ์ *Portfolio Insurance Strategies: Friend or Foe?* ของ Paulo José Martins Jorge da Silva (2018) ใช้รูปแบบเดียวกับ [บท Binomial Model](https://nutdnuy.github.io/quantitative-finance-notes/binomial-model.html): พื้นขาว สารบัญด้านซ้าย เนื้อหาต่อเนื่อง สมการ และเครื่องมือทดลองแทรกในบทเรียน
+หนังสือออนไลน์ภาษาไทยเรื่องการบริหารพอร์ต โดย QuantCorner เริ่มจากบท **How to Calculate return** ว่าด้วยผลตอบแทนและการทบต้น พร้อมบท **Portfolio Insurance** อ้างอิงวิทยานิพนธ์ *Portfolio Insurance Strategies: Friend or Foe?* ของ Paulo José Martins Jorge da Silva (2018) ใช้รูปแบบเดียวกับ [บท Binomial Model](https://nutdnuy.github.io/quantitative-finance-notes/binomial-model.html): พื้นขาว สารบัญด้านซ้าย เนื้อหาต่อเนื่อง สมการ และเครื่องมือทดลองแทรกในบทเรียน
 
 โปรเจกต์นี้แยกจาก Quantitative Finance Notes ทั้งโฟลเดอร์ เนื้อหา การ build และพอร์ต preview เว็บไซต์เดิมไม่มีการแก้ไข
 
@@ -24,6 +24,7 @@ npm run dev
 ## เนื้อหาและเครื่องมือ
 
 - Welcome: แนะนำหนังสือและวิธีอ่าน
+- How to Calculate return: Simple/Log return การทบต้น ค่าเฉลี่ย CAGR และผลตอบแทนพอร์ต พร้อม Notebook
 - Portfolio Insurance: บทเรียน 13 หัวข้อแบบละเอียด ไล่จาก Put และงบ OBPI สู่ CPPI หลายรอบ, Variable-Multiplier Portfolio Insurance พร้อมตัวอย่างใน Notebook, TIPP แบบ Ratchet, Gap risk พร้อมดอกเบี้ย, EUT/CPT พร้อมคำนวณคะแนน และการประเมิน Shortfall/Drawdown มีโจทย์พร้อมเฉลย 8 ข้อและเครื่องมือทดลองในบท
 - อภิธานศัพท์: 35 คำพร้อมนิยามภาษาไทย ค้นหาคำ และลิงก์กลับไปยังตัวอย่าง
 - Notebook: คำอธิบายและสมการครบจากบทเรียน พร้อมโค้ด Python และกราฟที่คำนวณซ้ำได้
