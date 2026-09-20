@@ -96,6 +96,12 @@
       "title": "J.P. Morgan/Reuters, RiskMetrics Technical Document, Fourth Edition, December 1996",
       "url": "https://www.msci.com/documents/10199/5915b101-4206-4ba0-aee2-3449d5c7e95a",
       "accessed": "2026-09-19"
+    },
+    {
+      "title": "Kahneman and Tversky (1979), Prospect Theory: An Analysis of Decision under Risk",
+      "url": "https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Behavioral_Decision_Theory/Kahneman_Tversky_1979_Prospect_theory.pdf",
+      "accessed": "2026-09-20",
+      "used_for": "Closing discussion: risk aversion, decision weights, lottery and insurance choices; pp. 264, 281, 285-286."
     }
   ],
   "conventions": {
@@ -104,7 +110,8 @@
     "downside": "Zero monthly threshold; divide sum of squared shortfalls by all observations.",
     "drawdown": "Signed wealth/own peak - 1; report MDD as positive magnitude, without annualization.",
     "tail": "100 equiprobable daily loss scenarios: 94 zeros, five THB 20,000 losses, one variable extreme loss. VaR inverse empirical CDF; ES exact worst 5% mass, fractionally weighting the boundary if needed.",
-    "ewma": "Zero mean; old daily sigma 1%; current innovation observed before next-period forecast. Decay illustration imposes subsequent zero innovations."
+    "ewma": "Zero mean; old daily sigma 1%; current innovation observed before next-period forecast. Decay illustration imposes subsequent zero innovations.",
+    "lottery": "Hypothetical single ticket: cost THB 100; probability .001 of gross prize THB 50,000, otherwise zero. Net outcomes THB 49,900/-100; expected net profit THB -50. Not an actual lottery."
   },
   "historical_notes": [
     "No single first universal definition of investment risk.",
