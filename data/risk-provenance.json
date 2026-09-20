@@ -115,11 +115,34 @@
     "route": "no-image-generator",
     "generator": "src/risk.jsx",
     "calculations": "src/risk-math.mjs",
-    "assumptions": "No source charts or market performance are reproduced."
+    "assumptions": "No source charts or market performance are reproduced.",
+    "generated_illustration": {
+      "asset": "assets/illustrations/risk-uncertain-futures.png",
+      "tool": "built-in image_gen",
+      "date": "2026-09-20",
+      "prompt": "data/risk-uncertain-futures.prompt.txt",
+      "route": "image-generator-only",
+      "authorization": "Owner explicitly requested generated images in the lesson; scoped exception to the website no-image-generator default. Charts and interface remain deterministic.",
+      "meaning": "Conceptual illustration only; no data, axes, numbers, logos or forecast.",
+      "sha256": "7ee486da4dfc4d4711675335530d675480b321cd9cdcd9b8bd794d2f41bfb3b3"
+    },
+    "static_charts": {
+      "generator": "scripts/make_risk_figures.mjs",
+      "route": "no-image-generator",
+      "assets": [
+        "assets/charts/risk-outcomes.svg",
+        "assets/charts/risk-outcomes-mobile.svg",
+        "assets/charts/risk-correlation.svg",
+        "assets/charts/risk-correlation-mobile.svg"
+      ],
+      "data": "P: 5%/15%, Q: -20%/40%, probability .5 each. Portfolio weights .5/.5, component volatility .2, rho from -1 to 1. Explicitly hypothetical; probability-weighted population SD for P/Q."
+    }
   },
   "validation": [
     "qa/risk-checks.mjs",
-    "qa/risk-browser-checks.cjs"
+    "qa/risk-browser-checks.cjs",
+    "scripts/make_risk_figures.mjs (numerical assertions)",
+    "qa/risk-figures-checks.cjs"
   ],
   "private_source_documents_published": false
 }

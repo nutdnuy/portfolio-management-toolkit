@@ -72,3 +72,5 @@ npm run check:site  # ต้องเปิด preview ที่พอร์ต 
 ภาพปกใช้โลโก้ QuantCorner / Quantsera ต้นฉบับบนพื้นดำ ชื่อผู้เรียบเรียงบนเว็บคือ QuantCorner
 
 Visual route: `no-image-generator` ตาม QuantCorner / QuantSeras Material 2 ใช้ฟอนต์ Roboto / Noto Sans Thai / Roboto Mono ในเครื่อง พื้นขาวเป็นค่าเริ่มต้น มีธีมมืดให้เลือก ปุ่มและคำอธิบายเป็นภาษาไทยตามรูปแบบที่เจ้าของเลือก
+
+บทความเสี่ยงมีภาพประกอบแนวคิดที่สร้างด้วย AI ตามคำขอเจ้าของ พร้อมกราฟ P/Q และ Correlation ที่คำนวณจากตัวอย่างสมมติ ภาพประกอบแยกจากกราฟข้อมูลอย่างชัดเจน; ดู provenance ใน `data/risk-provenance.json`

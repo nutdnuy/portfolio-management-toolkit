@@ -12,3 +12,6 @@
 
 .book[data-page="risk"] .chapter>p>span[id]{display:block;scroll-margin-top:32px}
 @media(max-width:800px){.book[data-page="risk"] .chapter>p>span[id]{scroll-margin-top:96px}}
+
+.risk-editorial-image,.risk-static-figure{margin:32px 0 40px}.risk-editorial-image img,.risk-static-figure img{display:block;width:100%;height:auto;border-radius:6px}.risk-static-figure picture{display:block;background:#fff;border:1px solid var(--subtle-border);border-radius:6px;overflow:hidden}.risk-editorial-image figcaption,.risk-static-figure figcaption{font-size:13px;line-height:1.8;color:var(--muted);margin-top:12px}.risk-static-figure img{aspect-ratio:auto}
+@media print{.risk-editorial-image,.risk-static-figure{break-inside:avoid}}
