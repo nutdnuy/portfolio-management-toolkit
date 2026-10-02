@@ -554,7 +554,7 @@ def check_empirical_aggregates():
 
 def main():
     pages = exporter.course_pages('advanced')
-    module_counts = {1: 4, 2: 3, 3: 3}
+    module_counts = {1: 4, 2: 3, 3: 3, 4: 4}
     assert set(page['module'] for page in pages) == set(module_counts)
     for module, count in module_counts.items():
         assert sorted(page['lesson'] for page in pages if page['module'] == module) == list(range(1, count + 1))
@@ -570,8 +570,10 @@ def main():
 
     module2 = load_module('advanced_module2_checks', ROOT / 'qa/advanced-module2-checks.py')
     module3 = load_module('advanced_module3_checks', ROOT / 'qa/advanced-module3-checks.py')
+    module4 = load_module('advanced_module4_checks', ROOT / 'qa/advanced-module4-checks.py')
     independent_checks = [*check_lessons(spaces), *check_charts(spaces), *check_empirical_aggregates(),
-                          *module2.check_lessons(spaces), *module3.check_lessons(spaces)]
+                          *module2.check_lessons(spaces), *module3.check_lessons(spaces),
+                          *module4.check_lessons(spaces)]
     report_data = {
         'course': 'advanced', 'modules': sorted(module_counts), 'pages': report,
         'total_executed_examples': sum(page['executed_examples'] for page in report),

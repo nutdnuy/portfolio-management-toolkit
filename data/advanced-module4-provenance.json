@@ -1,0 +1,200 @@
+{
+  "course": "Advanced Portfolio Construction and Analysis with Python",
+  "module": 4,
+  "module_title": "Portfolio Optimization in Practice",
+  "review_date": "2026-10-03",
+  "source_access": [
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/U3iJ0/naive-diversification",
+      "access": "Full authenticated transcript read",
+      "used_in": "diversification-methods"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/VJpdS/scientific-diversification",
+      "access": "Full authenticated transcript read",
+      "used_in": "diversification-methods"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/rZNZ8/measuring-risk-contributions",
+      "access": "Full authenticated transcript read",
+      "used_in": "risk-contributions"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/QHzyJ/simplified-risk-parity-portfolios",
+      "access": "Full authenticated transcript read",
+      "used_in": "risk-parity"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/OnWYS/risk-parity-portfolios",
+      "access": "Full authenticated transcript read",
+      "used_in": "risk-parity"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/lulgY/comparing-diversification-options",
+      "access": "Full authenticated transcript read",
+      "used_in": "diversification-backtest"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/u0D4G/module-4-lab-session-risk-contribution-and-risk-parity",
+      "access": "Full authenticated transcript read",
+      "used_in": "risk-contributions, risk-parity and diversification-backtest"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/supplement/bFCI2/module-4-key-points",
+      "access": "Full reading viewed",
+      "used_in": "module organization"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/supplement/TG6Fa/survey-alternative-equity-beta-investing",
+      "access": "Reading page viewed; linked legacy survey PDF unavailable. Current EDHEC publication abstract read, not the full gated survey",
+      "used_in": "source context only; no survey statistics reproduced"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/supplement/p7QjI/dive-into-heuristic-diversification",
+      "access": "Reading page and attachment link viewed; attachment content not obtained",
+      "used_in": "source context only; no claim of reading the attachment"
+    }
+  ],
+  "code_inspection": {
+    "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/ungradedLab/RqxtJ/labs-and-code",
+    "files": [
+      "lab_24.ipynb",
+      "edhec_risk_kit_206.py"
+    ],
+    "scope": "Notebook read through all cells: In[1]-In[7], final unexecuted ERC backtest cell and final blank cell. Toolkit inspected specifically risk_contribution, target_risk_contributions, equal_risk_contributions and weight_erc. No source cells run or source files redistributed.",
+    "findings": [
+      "Risk contribution helper returns w*(Sigma*w)/(w*Sigma*w), a fractional allocation. Raw volatility Euler contributions use a different denominator.",
+      "The course fits squared differences from target risk shares by SLSQP; this fractional objective is nonlinear, not a quadratic program. Our positive-budget examples use a convex log-barrier construction and check residuals.",
+      "Lab compares rolling 36-month EW/CW and introduces ERC; its final ERC backtest cell is unexecuted in the inspected notebook. Our rolling comparison is original and simulated."
+    ]
+  },
+  "primary_references": [
+    {
+      "url": "https://www.tobam.fr/wp-content/uploads/2014/12/TOBAM-JoPM-Maximum-Div-2008.pdf",
+      "scope": "Choueifaty and Coignard 2008: printed pages 40-43 (PDF pages 1-4), definitions and mathematical conditions; no performance claims reused"
+    },
+    {
+      "url": "https://www.spglobal.com/spdji/en/research-insights/index-literacy/methodology-matters/",
+      "scope": "Index methodology, capitalization, float adjustment and equal weighting"
+    },
+    {
+      "url": "https://doi.org/10.1093/rfs/hhm075",
+      "scope": "DeMiguel, Garlappi and Uppal, publisher abstract indexed; full paper not accessed"
+    },
+    {
+      "url": "https://climateinstitute.edhec.edu/publications/alternative-equity-beta-investing-survey",
+      "scope": "Institutional publication abstract and March 2015 bibliographic information; full download gated"
+    },
+    {
+      "url": "https://arxiv.org/pdf/0708.2542",
+      "scope": "Tasche 2008: sections 2.2, 3.1 and Appendix A for Euler allocation and volatility contributions"
+    },
+    {
+      "url": "https://arxiv.org/pdf/1902.05710",
+      "scope": "Richard and Roncalli 2019: sections 2-3 for positive budgets, log-barrier formulation and constraints"
+    },
+    {
+      "url": "https://docs.scipy.org/doc/scipy/reference/optimize.minimize-slsqp.html",
+      "scope": "SLSQP constraints, stopping tolerances and optimizer result fields"
+    },
+    {
+      "url": "https://docs.scipy.org/doc/scipy/reference/optimize.minimize-lbfgsb.html",
+      "scope": "L-BFGS-B bounds, gradient and stopping tolerances"
+    },
+    {
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.brentq.html",
+      "scope": "Bracketed scalar root finding for self-financing transaction costs"
+    },
+    {
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.linalg.solve.html",
+      "scope": "Solving linear systems without explicitly constructing an inverse"
+    },
+    {
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.linalg.matrix_rank.html",
+      "scope": "Numerical rank and singular-value tolerance"
+    },
+    {
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.linalg.eigvalsh.html",
+      "scope": "Eigenvalues of a real symmetric covariance matrix"
+    },
+    {
+      "url": "https://numpy.org/doc/stable/reference/generated/numpy.linalg.cholesky.html",
+      "scope": "Cholesky factorization and positive-definite requirement"
+    },
+    {
+      "url": "https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.uniform.html",
+      "scope": "Uniform random samples used in the bounded original simulation"
+    }
+  ],
+  "examples": {
+    "status": "Original hypothetical examples and one bounded IID simulation; no market performance claim",
+    "shared_fixture": {
+      "assets": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "annual_standard_deviation": [
+        0.2,
+        0.15,
+        0.1,
+        0.25
+      ],
+      "correlation": [
+        [
+          1,
+          0.5,
+          0.2,
+          0.65
+        ],
+        [
+          0.5,
+          1,
+          0.1,
+          0.4
+        ],
+        [
+          0.2,
+          0.1,
+          1,
+          0.15
+        ],
+        [
+          0.65,
+          0.4,
+          0.15,
+          1
+        ]
+      ],
+      "units": "Annual decimal-return covariance; capital weights and risk-budget fractions separately named"
+    },
+    "backtest": {
+      "seed": 20261004,
+      "months": 96,
+      "training_window": 36,
+      "held_out_months": 60,
+      "population_monthly_mean": 0.005,
+      "generation": "Independent zero-mean unit-variance Uniform(-sqrt(3),sqrt(3)) innovations transformed by the Cholesky factor of annual covariance/12; this bounded teaching model ensures simple returns exceed -1",
+      "costs": "Proportional cost per purchased and sold notional; exact self-financing scalar equation; charge initial investment from cash; do not force terminal liquidation",
+      "notebooks": "Standalone NumPy/pandas/SciPy examples; no raw course archive required"
+    }
+  },
+  "conventions": [
+    "ENC describes long-only capital concentration; asset labels need not represent independent risk sources.",
+    "Volatility Euler components sum to volatility; variance allocations sum to variance; the weight times raw variance derivative instead sums to twice variance.",
+    "Negative risk contributions are signed hedging effects; risk shares are undefined at zero portfolio variance.",
+    "Inverse volatility equals ERC only under stated covariance conditions; arbitrary correlations require solving the budget problem.",
+    "Minimum ENC is a capital-concentration constraint; maximum decorrelation and maximum diversification ratio use distinct objectives.",
+    "Risk budgets and forecast volatility rely on estimated covariance; equality in the model does not ensure equal realized risk.",
+    "Backtest weights use only preceding observations; gross/net comparisons share weights, horizons and starting capital."
+  ],
+  "verification": {
+    "python_examples": 48,
+    "notebooks": 4,
+    "independent_check_groups": 29,
+    "review": "Complete Thai prose and code reviewed, with an independent peer pass on risk-budgeting and backtest timing/costs; no-ai-slop pass",
+    "figures": "Two computed illustrations in desktop/mobile SVG; capital/risk values and every wealth coordinate checked independently; both mobile renders viewed",
+    "backtest_accounting": "All 900 method-month-cost ledger rows checked against an independent piecewise-linear self-financing solution; all 300 rolling target weights checked against independent face enumeration or coordinate descent"
+  }
+}

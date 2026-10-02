@@ -73,9 +73,9 @@ description: คำศัพท์และสัญลักษณ์เรื�
 
 ### Turnover · ขนาดรวมของการซื้อขายเพื่อปรับพอร์ต
 
-ในห้องทดลองนี้นับผลรวมจำนวนเงินฝั่งสินทรัพย์เสี่ยงที่ซื้อหรือขายหลังเดือนที่ 1–11 ไม่รวมการจัดพอร์ตครั้งแรกและไม่มีการซื้อขาย ณ วันครบกำหนด เป็นหน่วยเงิน ไม่ใช่ค่าธรรมเนียมและไม่ใช่เปอร์เซ็นต์ ความหมายของ Turnover อาจต่างกันระหว่างรายงาน จึงต้องตรวจวิธีนับก่อนเทียบ
+ในห้องทดลอง Portfolio Insurance นับผลรวมจำนวนเงินฝั่งสินทรัพย์เสี่ยงที่ซื้อหรือขายหลังเดือนที่ 1–11 ไม่รวมการจัดพอร์ตครั้งแรกและไม่มีการซื้อขาย ณ วันครบกำหนด เป็นหน่วยเงิน ไม่ใช่ค่าธรรมเนียมและไม่ใช่เปอร์เซ็นต์ ความหมายของ Turnover อาจต่างกันระหว่างรายงาน จึงต้องตรวจวิธีนับก่อนเทียบ
 
-[ดูตัวอย่างรายการซื้อขายและต้นทุน](portfolio-insurance.html#strategies)
+[ดูตัวอย่างรายการซื้อขายและต้นทุน](portfolio-insurance.html#strategies) ส่วน[บททดสอบ Diversification](diversification-backtest.html) แสดงมูลค่าซื้อรวมขายเทียบกับทุนก่อนซื้อขาย และระบุการคิดต้นทุนทั้งสองฝั่ง
 
 </section>
 
@@ -934,6 +934,112 @@ Covariance matrix Ω ของความคลาดเคลื่อนใ�
 กรอบประมาณ expected returns ที่ผสมค่าตั้งต้นกับมุมมองเพิ่มเติมตามความไม่แน่นอนที่ระบุ ผลลัพธ์ขึ้นกับ prior, covariance, views และความเชื่อมั่น การเปลี่ยนข้อมูลเข้าหรือข้อจำกัดพอร์ตยังเปลี่ยนคำตอบได้
 
 [คำนวณและตรวจพอร์ต Black–Litterman](black-litterman.html)
+
+</section>
+
+</section>
+
+<section class="glossary-group" id="group-risk-budgeting">
+
+## การกระจายพอร์ตและส่วนแบ่งความเสี่ยง
+
+<section class="glossary-term" id="effective-number-assets">
+
+### Effective Number of Constituents · ENC
+
+ค่ากลับของผลรวมน้ำหนักยกกำลังสอง 1/Σw² สำหรับพอร์ต long-only ที่น้ำหนักรวมหนึ่ง มีค่าตั้งแต่ 1 ถึงจำนวนสินทรัพย์ ใช้อ่านการกระจุกตัวของเงิน จำนวนชื่อที่มากขึ้นไม่ได้รับรองว่ามีแหล่งความเสี่ยงอิสระมากขึ้น
+
+[คำนวณ ENC และเพิ่มข้อจำกัดการกระจายเงิน](diversification-methods.html)
+
+</section>
+
+<section class="glossary-term" id="diversification-ratio">
+
+### Diversification ratio · DR
+
+อัตราส่วนระหว่างผลรวมถ่วงน้ำหนักของ SD รายสินทรัพย์กับ SD ของพอร์ตรวม เป็นเกณฑ์ด้านการกระจายความผันผวนภายใต้ covariance ที่เลือก และไม่ใช่ผลตอบแทนที่พอร์ตจะได้รับ
+
+[เทียบ Maximum DR กับ GMV](diversification-methods.html)
+
+</section>
+
+<section class="glossary-term" id="maximum-decorrelation">
+
+### Maximum decorrelation · ลดความสัมพันธ์ตามเกณฑ์ที่กำหนด
+
+ในบทนี้หมายถึงการลด wᵀCorr w ภายใต้ long-only และน้ำหนักรวมหนึ่ง โดยใช้ correlation matrix แทน covariance ถ้า SD ต่างกัน น้ำหนักที่ได้ต่างจาก GMV และ Maximum DR ได้
+
+[ตรวจผลของการเปลี่ยนเมทริกซ์ใน objective](diversification-methods.html)
+
+</section>
+
+<section class="glossary-term" id="risk-contribution">
+
+### Risk contribution · ส่วนของความเสี่ยงที่จัดสรรให้สินทรัพย์
+
+การแยกค่าความเสี่ยงของพอร์ตออกเป็นส่วนของแต่ละสินทรัพย์ตามกฎที่ระบุ ต้องบอกว่าใช้ variance, volatility หรือสัดส่วนของค่ารวมนั้น เพราะหน่วยและตัวเลขไม่เหมือนกัน
+
+[เริ่มจากความเสี่ยงรวมแล้วแยกทีละสินทรัพย์](risk-contributions.html)
+
+</section>
+
+<section class="glossary-term" id="marginal-risk">
+
+### Marginal risk · ความเสี่ยงที่เปลี่ยนต่อการเพิ่ม exposure
+
+อนุพันธ์ของความเสี่ยงพอร์ตตาม exposure ของสินทรัพย์หนึ่งตัวโดยตรึงตัวอื่น สำหรับ volatility เป็น (Σw)ᵢ/σₚ หากย้ายเงินจากสินทรัพย์หนึ่งไปอีกตัว ต้องหาผลต่างของ marginal risks ของสองตัวนั้น
+
+[ตรวจอนุพันธ์ด้วยการขยับน้ำหนักเล็กน้อย](risk-contributions.html)
+
+</section>
+
+<section class="glossary-term" id="component-risk">
+
+### Component risk · ส่วนจัดสรรตาม Euler
+
+สำหรับ volatility คำนวณ wᵢ(Σw)ᵢ/σₚ ผลรวมทุกสินทรัพย์เท่ากับ σₚ เมื่อ σₚ มากกว่าศูนย์ ส่วนจัดสรรอาจติดลบจากผลการหักล้างความเสี่ยง ไม่ใช่ค่าความน่าจะเป็น
+
+[แยก Component จาก Marginal และ Relative risk](risk-contributions.html)
+
+</section>
+
+<section class="glossary-term" id="risk-budget">
+
+### Risk budget · สัดส่วนความเสี่ยงเป้าหมาย
+
+กำหนดส่วนแบ่งของความเสี่ยงรวมที่ต้องการให้แต่ละสินทรัพย์รับ เช่น 40/30/20/10 แล้วแก้หาน้ำหนักเงินที่ให้ส่วนแบ่งตามนั้นภายใต้ covariance และข้อจำกัดที่ระบุ งบความเสี่ยงไม่ใช่น้ำหนักเงิน
+
+[ทดลองงบความเสี่ยงที่ไม่เท่ากัน](risk-parity.html)
+
+</section>
+
+<section class="glossary-term" id="risk-parity">
+
+### Risk parity · การทำส่วนแบ่งความเสี่ยงให้เท่ากัน
+
+ในบทนี้หมายถึง Equal Risk Contribution ของสินทรัพย์ตาม volatility covariance ที่เลือก ทุกตัวมี relative contribution เท่ากับ 1/N การแบ่งเงินเท่ากันหรือถือ inverse-volatility ไม่ได้ให้เงื่อนไขนี้ใน covariance ทั่วไป
+
+[จากสูตรสองสินทรัพย์สู่ตัวแก้ Risk budgets](risk-parity.html)
+
+</section>
+
+<section class="glossary-term" id="inverse-volatility">
+
+### Inverse volatility · น้ำหนักผกผันกับ SD
+
+ให้น้ำหนักตาม 1/σᵢ แล้วหารให้รวมหนึ่ง ใช้เฉพาะ SD รายตัวและไม่ใช้ correlation ในการเลือกน้ำหนัก ให้ ERC ได้ภายใต้เงื่อนไขบางกรณี เช่นสองสินทรัพย์ที่ไม่มีการหักล้างจนความเสี่ยงพอร์ตเป็นศูนย์
+
+[ตรวจกรณีที่ Inverse volatility ตรงหรือไม่ตรง ERC](risk-parity.html)
+
+</section>
+
+<section class="glossary-term" id="effective-number-bets">
+
+### Effective number of risk contributions · การกระจุกตัวของส่วนแบ่งความเสี่ยง
+
+ถ้า relative risk contributions pᵢ ไม่ติดลบและรวมหนึ่ง ค่ากลับ 1/Σpᵢ² ใช้อ่านว่าความเสี่ยงกระจุกอยู่กี่ส่วนโดยเทียบกับกรณีส่วนเท่ากัน ต้องระบุฐานสินทรัพย์หรือ factors ที่ใช้ และไม่ถือว่าเท่ากับจำนวนปัจจัยอิสระโดยอัตโนมัติ
+
+[อ่านส่วนแบ่งความเสี่ยงและกรณีค่าติดลบ](risk-contributions.html)
 
 </section>
 

@@ -119,3 +119,11 @@ Three lessons cover expected-return estimation, reverse optimization and views, 
 Use `python3 scripts/make_course_notebooks.py --course advanced --module 3` to export these notebooks. The same `npm run check:advanced`, build/link and browser checks cover this module. Source access and conventions are recorded in `data/advanced-module3-provenance.json`.
 
 Module 3 figures are recomputed with `python3 scripts/make_expected_return_figures.py`; the chart values and both SVG sizes are checked independently in `qa/advanced-module3-checks.py`.
+
+## Advanced course · Module 4
+
+Four lessons cover diversification methods, Euler risk contributions, risk budgets and a common rolling comparison. All methods use original teaching data and stated constraints. The comparison separates the forecast covariance from realized performance, uses data strictly before each decision, and accounts for proportional transaction costs through a self-financing cash ledger.
+
+Export with `python3 scripts/make_course_notebooks.py --course advanced --module 4`. Run `npm run check:advanced`, build/link checks and the browser checks after changes. Record source scope in `data/advanced-module4-provenance.json`; do not publish original course notebooks or infer universal strategy rankings from either the course tables or our simulation.
+
+Module 4 figures are recomputed with `python3 scripts/make_risk_budget_figures.py`. Refresh them before exporting Notebooks; `qa/advanced-module4-checks.py` verifies their numerical data and both SVG sizes.

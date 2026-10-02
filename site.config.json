@@ -232,6 +232,46 @@
       "notebook": "notebooks/black-litterman.ipynb"
     },
     {
+      "file": "diversification-methods",
+      "title": "Diversification: กระจายเงินด้วยวิธีใด",
+      "description": "เทียบ Equal Weight, Market Cap, GMV, ENC และ Maximum Diversification โดยใช้ข้อมูลและข้อจำกัดเดียวกัน",
+      "course": "advanced",
+      "module": 4,
+      "lesson": 1,
+      "group": "Advanced · Module 4 · Portfolio Optimization in Practice",
+      "notebook": "notebooks/diversification-methods.ipynb"
+    },
+    {
+      "file": "risk-contributions",
+      "title": "Risk Contribution: ใครสร้างความเสี่ยงให้พอร์ต",
+      "description": "แยกน้ำหนักเงิน ส่วนเพิ่มความเสี่ยง และส่วนแบ่งความเสี่ยง พร้อมตรวจผลรวมและกรณีส่วนแบ่งติดลบ",
+      "course": "advanced",
+      "module": 4,
+      "lesson": 2,
+      "group": "Advanced · Module 4 · Portfolio Optimization in Practice",
+      "notebook": "notebooks/risk-contributions.ipynb"
+    },
+    {
+      "file": "risk-parity",
+      "title": "Risk Parity: แบ่งงบความเสี่ยงก่อนแบ่งเงิน",
+      "description": "จาก Inverse Volatility สู่ Equal Risk Contribution และ Risk Budgets พร้อมเงื่อนไขของสูตรและตัวแก้สมการ",
+      "course": "advanced",
+      "module": 4,
+      "lesson": 3,
+      "group": "Advanced · Module 4 · Portfolio Optimization in Practice",
+      "notebook": "notebooks/risk-parity.ipynb"
+    },
+    {
+      "file": "diversification-backtest",
+      "title": "ทดสอบ Diversification: ข้อมูล เวลา และต้นทุน",
+      "description": "เปรียบเทียบวิธีจัดพอร์ตด้วยข้อมูลจำลองชุดเดียว ใช้ข้อมูลย้อนหลังและคิดต้นทุนให้สมดุลกับเงินลงทุนจริง",
+      "course": "advanced",
+      "module": 4,
+      "lesson": 4,
+      "group": "Advanced · Module 4 · Portfolio Optimization in Practice",
+      "notebook": "notebooks/diversification-backtest.ipynb"
+    },
+    {
       "file": "risk",
       "title": "ความเสี่ยงในการลงทุน",
       "description": "จากที่มาของแนวคิดความเสี่ยงและทฤษฎีพอร์ต สู่ Volatility, Drawdown, VaR, ES และ EWMA พร้อมตัวอย่างและตัวทดลอง",
