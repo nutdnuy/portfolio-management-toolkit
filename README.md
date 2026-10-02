@@ -103,3 +103,11 @@ npm run build:pages
 ```
 
 Sources and conventions: `data/advanced-module1-provenance.json`. The public optional loader is `examples/advanced/analyze_course_factors.py`; it reads an explicit local ZIP argument and never downloads data or exports raw observations.
+
+## Advanced course · Module 2
+
+Three lessons cover sample/factor covariance, constant-correlation shrinkage and time-varying risk. Each begins with small worked examples before introducing matrix calculations or rolling experiments. The examples use original hypothetical data and fixed seeds. Fixed shrinkage intensities and GARCH parameters are teaching choices, not estimated market recommendations.
+
+Export these notebooks with `python3 scripts/make_course_notebooks.py --course advanced --module 2`. Run `npm run check:advanced`, `npm run build:pages` and the browser checks after changes. Sources, data conventions and the scope of course-code inspection are recorded in `data/advanced-module2-provenance.json`.
+
+The rolling-window and fixed-origin forecast charts are computed with `python3 scripts/make_covariance_figures.py`; their numeric series are saved in `data/advanced-covariance-figures.json`. Refresh figures before exporting the notebooks that embed them.

@@ -1,4 +1,4 @@
-"""Execute Advanced Module 1 and verify notebooks and independent finance identities."""
+"""Execute Advanced lessons and verify notebooks and independent finance identities."""
 import difflib
 import hashlib
 import importlib.util
@@ -552,9 +552,10 @@ def check_empirical_aggregates():
 
 def main():
     pages = exporter.course_pages('advanced')
-    assert len(pages) == 4, 'Advanced Module 1 currently has four chapters'
-    assert all(page['module'] == 1 for page in pages)
-    assert sorted(page['lesson'] for page in pages) == [1, 2, 3, 4]
+    module_counts = {1: 4, 2: 3}
+    assert set(page['module'] for page in pages) == set(module_counts)
+    for module, count in module_counts.items():
+        assert sorted(page['lesson'] for page in pages if page['module'] == module) == list(range(1, count + 1))
     spaces, report = {}, []
     for page in pages:
         fresh, namespace, outputs = exporter.execute_chapter(page)
@@ -565,9 +566,11 @@ def main():
                        'notebook_consistent': True})
         print(f'PASS {page["file"]}: {code_count} examples and complete notebook')
 
-    independent_checks = [*check_lessons(spaces), *check_charts(spaces), *check_empirical_aggregates()]
+    module2 = load_module('advanced_module2_checks', ROOT / 'qa/advanced-module2-checks.py')
+    independent_checks = [*check_lessons(spaces), *check_charts(spaces), *check_empirical_aggregates(),
+                          *module2.check_lessons(spaces)]
     report_data = {
-        'course': 'advanced', 'module': 1, 'pages': report,
+        'course': 'advanced', 'modules': sorted(module_counts), 'pages': report,
         'total_executed_examples': sum(page['executed_examples'] for page in report),
         'independent_checks': independent_checks,
         'empirical_validation': 'Saved aggregates checked against the prior local audit; raw CSVs are not required or reprocessed by CI',

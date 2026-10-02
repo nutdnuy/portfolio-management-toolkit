@@ -766,3 +766,79 @@ Intercept ที่เหลือหลังใช้ปัจจัยที�
 </section>
 
 </section>
+
+<section class="glossary-group" id="group-covariance-estimation">
+
+## การประมาณความเสี่ยง
+
+<section class="glossary-term" id="sample-covariance">
+
+### Sample covariance · Covariance จากตัวอย่าง
+
+ค่าที่คำนวณจากผลคูณของผลตอบแทนที่ลบค่าเฉลี่ยแล้ว บทเรียนใช้ข้อมูลครบทุกสินทรัพย์ในงวดเดียวกันและหารด้วยจำนวนงวดลบหนึ่ง ค่านี้ยังมีความคลาดเคลื่อนจากข้อมูลที่นำมาประมาณ
+
+[คำนวณจากตารางผลตอบแทน](covariance-estimation.html)
+
+</section>
+
+<section class="glossary-term" id="matrix-rank">
+
+### Rank · จำนวนทิศทางอิสระของ Matrix
+
+จำนวนคอลัมน์อิสระที่ matrix มีอยู่จริง สำหรับผลตอบแทน N สินทรัพย์ที่มี T งวด หลังลบค่าเฉลี่ย sample covariance มี rank ไม่เกิน min(N, T−1) ถ้า rank ต่ำกว่า N จะหา inverse ตามปกติไม่ได้
+
+[ตรวจข้อมูลซ้ำและ covariance ที่ singular](covariance-estimation.html)
+
+</section>
+
+<section class="glossary-term" id="positive-semidefinite">
+
+### Positive semidefinite · PSD
+
+คุณสมบัติที่ทำให้ผลคูณ wᵀΣw ไม่ติดลบสำหรับเวกเตอร์ w ทุกค่า ซึ่งจำเป็นสำหรับ matrix ที่ใช้เป็น covariance ถ้าเป็นบวกเสมอสำหรับ w ที่ไม่ใช่ศูนย์ เรียก positive definite หรือ PD และมี inverse
+
+[ตรวจ covariance ก่อนหาน้ำหนักพอร์ต](covariance-shrinkage.html)
+
+</section>
+
+<section class="glossary-term" id="covariance-shrinkage">
+
+### Covariance shrinkage · การดึงค่าประมาณเข้าหา Target
+
+การผสม sample covariance S กับ matrix เป้าหมาย F เช่น δF + (1−δ)S เมื่อ δ อยู่ระหว่างศูนย์กับหนึ่ง ลดการพึ่งค่าจากตัวอย่างเพียงชุดเดียว แต่ต้องยอมรับความคลาดเคลื่อนที่โครงสร้าง target อาจสร้างขึ้น
+
+[ลองเปลี่ยน δ และตรวจผลต่อพอร์ต](covariance-shrinkage.html)
+
+</section>
+
+<section class="glossary-term" id="constant-correlation">
+
+### Constant-correlation target · Target ที่ใช้ Correlation ร่วมค่าเดียว
+
+Covariance matrix ที่คง variance ของแต่ละสินทรัพย์ไว้ แต่แทน correlation ระหว่างสินทรัพย์ต่างคู่ด้วยค่าเฉลี่ยร่วมค่าเดียว คำว่า constant ในที่นี้หมายถึงเหมือนกันทุกคู่ภายใน matrix นั้น; ค่าเฉลี่ยยังเปลี่ยนได้เมื่อเลื่อนช่วงข้อมูล
+
+[สร้าง target จาก SD และ correlation](covariance-shrinkage.html)
+
+</section>
+
+<section class="glossary-term" id="volatility-clustering">
+
+### Volatility clustering · ความผันผวนที่รวมตัวเป็นช่วง
+
+ลักษณะที่ช่วงผลตอบแทนแกว่งมากมักตามด้วยช่วงที่แกว่งมาก และช่วงสงบมักตามด้วยช่วงสงบ เป็นเรื่องขนาดการเปลี่ยนแปลง ไม่ได้บอกเครื่องหมายผลตอบแทนงวดหน้า
+
+[แยกการคาดการณ์ความเสี่ยงจากผลตอบแทน](time-varying-risk.html)
+
+</section>
+
+<section class="glossary-term" id="garch">
+
+### GARCH · Generalized Autoregressive Conditional Heteroskedasticity
+
+แบบจำลอง variance ที่มีเงื่อนไขจากข้อมูลที่ผ่านมา ใน GARCH(1,1) ค่าของงวดหน้าขึ้นกับค่าคงที่ shock ล่าสุดยกกำลังสอง และ variance ปัจจุบัน ต้องแยกพารามิเตอร์ที่ตั้งเพื่อสาธิตออกจากพารามิเตอร์ที่ประมาณจากข้อมูลจริง
+
+[คำนวณ GARCH ทีละงวด](time-varying-risk.html)
+
+</section>
+
+</section>

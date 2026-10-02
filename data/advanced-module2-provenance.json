@@ -1,0 +1,82 @@
+{
+  "course": "Advanced Portfolio Construction and Analysis with Python",
+  "module": 2,
+  "module_title": "Robust estimates for the covariance matrix",
+  "review_date": "2026-10-03",
+  "source_access": [
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/ZMjFG/the-curse-of-dimensionality",
+      "access": "Full authenticated transcript read",
+      "used_in": "covariance-estimation"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/CC9Qx/estimating-the-covariance-matrix-with-a-factor-model",
+      "access": "Full authenticated transcript read",
+      "used_in": "covariance-estimation"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/szNVo/honey-i-shrunk-the-covariance-matrix",
+      "access": "Full authenticated transcript read",
+      "used_in": "covariance-shrinkage"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/DLb5f/module-2-lab-session-covariance-estimation",
+      "access": "Full authenticated transcript read",
+      "used_in": "covariance-shrinkage"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/D2MAC/portfolio-construction-with-time-varying-risk-parameters",
+      "access": "Full authenticated transcript read",
+      "used_in": "time-varying-risk"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/c4t09/exponentially-weighted-average",
+      "access": "Full authenticated transcript read",
+      "used_in": "time-varying-risk"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/HZZPC/arch-and-garch-models",
+      "access": "Full authenticated transcript read",
+      "used_in": "time-varying-risk"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/supplement/FXuTe/module-2-key-points",
+      "access": "Full reading viewed; sample risk and stationarity risk used to organize chapters",
+      "used_in": "module organization"
+    }
+  ],
+  "code_inspection": {
+    "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/ungradedLab/RqxtJ/labs-and-code",
+    "file": "edhec_risk_kit_205.py",
+    "scope": "Read backtest_ws, sample_cov, weight_gmv, cc_cov and shrinkage_cov in the lab editor, lines 609-657; not a full toolkit audit",
+    "finding": "Rolling windows exclude the held return. CC uses mean off-diagonal correlation and sample standard deviations. The lab shrinkage default is a fixed delta of 0.5 toward the CC target, not an estimated Ledoit-Wolf intensity."
+  },
+  "examples": {
+    "status": "Original hypothetical examples and reproducible simulations",
+    "notebooks": "Self-contained chapter namespaces using NumPy, pandas and SciPy; no raw course ZIP needed",
+    "market_data": "No new empirical market result is claimed in this module",
+    "source_prose": "Original Thai explanations, worked examples and exercises; transcripts and course toolkit are not redistributed",
+    "figures": "Computed from the time-varying-risk lesson namespace with scripts/make_covariance_figures.py; series saved in data/advanced-covariance-figures.json"
+  },
+  "primary_references": [
+    "https://numpy.org/doc/stable/reference/generated/numpy.cov.html",
+    "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.cov.html",
+    "https://ledoit.net/honey_abstract.htm",
+    "https://scikit-learn.org/stable/modules/generated/sklearn.covariance.LedoitWolf.html",
+    "https://docs.scipy.org/doc/scipy/reference/optimize.minimize-slsqp.html",
+    "https://econ.duke.edu/~boller/Published_Papers/joe_86.pdf",
+    "https://www.msci.com/documents/10199/5915b101-4206-4ba0-aee2-3449d5c7e95a",
+    "https://arch.readthedocs.io/en/stable/univariate/generated/arch.univariate.EWMAVariance.html",
+    "https://arch.readthedocs.io/en/stable/univariate/forecasting.html"
+  ],
+  "reference_scope": "Ledoit-Wolf author abstract and implementation documentation read, not the full Honey paper. Bollerslev 1986 opening sections and GARCH(1,1) results, RiskMetrics EWMA sections and Table 5.9 read directly.",
+  "editorial": "Full original drafts reviewed with no-ai-slop; formulas, examples, units and limitations preserved. Separate numerical and editorial review completed.",
+  "conventions": [
+    "Complete-case sample covariance uses ddof=1; matrix rank depends on N and T-1, not merely the parameter count.",
+    "Factor covariance with diagonal residual variance imposes zero residual cross-covariance; OLS alone does not impose it.",
+    "Shrinkage delta is the weight on the target. Fixed teaching values are not data-estimated Ledoit-Wolf intensities.",
+    "Rolling portfolio weights use only returns before the held period.",
+    "EWMA initialization, forecast timing and finite-weight normalization are explicit.",
+    "Fixed ARCH/GARCH parameters are demonstrations, not fitted forecasts or investment recommendations."
+  ]
+}

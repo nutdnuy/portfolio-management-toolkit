@@ -172,6 +172,36 @@
       "notebook": "notebooks/smart-beta.ipynb"
     },
     {
+      "file": "covariance-estimation",
+      "title": "ประมาณ Covariance เมื่อข้อมูลมีจำกัด",
+      "description": "สร้าง covariance matrix จากตารางผลตอบแทน ตรวจจำนวนพารามิเตอร์และ rank แล้วใช้ factor model ลดสิ่งที่ต้องประมาณ",
+      "course": "advanced",
+      "module": 2,
+      "lesson": 1,
+      "group": "Advanced · Module 2 · Covariance Estimation",
+      "notebook": "notebooks/covariance-estimation.ipynb"
+    },
+    {
+      "file": "covariance-shrinkage",
+      "title": "ลดความคลาดเคลื่อนของ Covariance ด้วย Shrinkage",
+      "description": "สร้าง constant-correlation target เข้าใจ bias กับ variance และทดสอบ GMV แบบ rolling โดยใช้เฉพาะข้อมูลก่อนลงทุน",
+      "course": "advanced",
+      "module": 2,
+      "lesson": 2,
+      "group": "Advanced · Module 2 · Covariance Estimation",
+      "notebook": "notebooks/covariance-shrinkage.ipynb"
+    },
+    {
+      "file": "time-varying-risk",
+      "title": "ความเสี่ยงที่เปลี่ยนตามเวลา: EWMA และ GARCH",
+      "description": "แยกความเสี่ยงมีเงื่อนไขจากค่าเฉลี่ยระยะยาว คำนวณ rolling window, EWMA, ARCH และ GARCH ทีละงวด",
+      "course": "advanced",
+      "module": 2,
+      "lesson": 3,
+      "group": "Advanced · Module 2 · Covariance Estimation",
+      "notebook": "notebooks/time-varying-risk.ipynb"
+    },
+    {
       "file": "risk",
       "title": "ความเสี่ยงในการลงทุน",
       "description": "จากที่มาของแนวคิดความเสี่ยงและทฤษฎีพอร์ต สู่ Volatility, Drawdown, VaR, ES และ EWMA พร้อมตัวอย่างและตัวทดลอง",

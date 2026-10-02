@@ -103,7 +103,10 @@ async function loadImages(page) {
 
     const charts = await browser.newContext({viewport:{width:800,height:650}});
     const chartPage = await charts.newPage();
-    for(const name of ['course-diversification','course-frontier','course-cppi','course-duration','advanced-factor-fit','advanced-style-drift']){
+    const advancedCharts = fs.readdirSync(path.join(root,'assets/charts'))
+      .filter(name=>name.startsWith('advanced-') && name.endsWith('.svg') && !name.endsWith('-mobile.svg'))
+      .map(name=>name.slice(0,-4));
+    for(const name of ['course-diversification','course-frontier','course-cppi','course-duration',...advancedCharts]){
       for(const suffix of ['', '-mobile']){
         await chartPage.goto(`${base}/assets/charts/${name}${suffix}.svg`);
         await chartPage.evaluate(()=>document.fonts.ready);
