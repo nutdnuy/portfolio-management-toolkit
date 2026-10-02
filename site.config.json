@@ -19,14 +19,16 @@
       "title": "How to Calculate return",
       "description": "เริ่มจากเปอร์เซ็นต์และเงินทบต้น สู่ Python เบื้องต้น ความผันผวน Sharpe ratio, Drawdown และ VaR พร้อมตัวอย่างและเฉลยตามหัวข้อ Module 1",
       "notebook": false,
-      "group": "Module 1 · ผลตอบแทนและความเสี่ยง"
+      "group": "Module 1 · ผลตอบแทนและความเสี่ยง",
+      "course": "introduction"
     },
     {
       "file": "extreme-risk",
       "title": "เมื่อผลตอบแทนไม่เป็น Normal",
       "description": "บทต่อจาก Returns: รูปร่างการแจกแจง Skewness, Kurtosis, Normality, Python modules และการวัดความเสี่ยงปลายหางด้วย VaR/CVaR",
       "notebook": false,
-      "group": "Module 1 · ผลตอบแทนและความเสี่ยง"
+      "group": "Module 1 · ผลตอบแทนและความเสี่ยง",
+      "course": "introduction"
     },
     {
       "file": "portfolio-basics",
@@ -35,7 +37,8 @@
       "module": 2,
       "lesson": 1,
       "group": "Module 2 · การสร้างพอร์ต",
-      "notebook": "notebooks/portfolio-basics.ipynb"
+      "notebook": "notebooks/portfolio-basics.ipynb",
+      "course": "introduction"
     },
     {
       "file": "efficient-frontier",
@@ -44,7 +47,8 @@
       "module": 2,
       "lesson": 2,
       "group": "Module 2 · การสร้างพอร์ต",
-      "notebook": "notebooks/efficient-frontier.ipynb"
+      "notebook": "notebooks/efficient-frontier.ipynb",
+      "course": "introduction"
     },
     {
       "file": "portfolio-estimation",
@@ -53,7 +57,8 @@
       "module": 2,
       "lesson": 3,
       "group": "Module 2 · การสร้างพอร์ต",
-      "notebook": "notebooks/portfolio-estimation.ipynb"
+      "notebook": "notebooks/portfolio-estimation.ipynb",
+      "course": "introduction"
     },
     {
       "file": "diversification-limits",
@@ -62,7 +67,8 @@
       "module": 3,
       "lesson": 1,
       "group": "Module 3 · Beyond Diversification",
-      "notebook": "notebooks/diversification-limits.ipynb"
+      "notebook": "notebooks/diversification-limits.ipynb",
+      "course": "introduction"
     },
     {
       "file": "cppi-dynamic-allocation",
@@ -71,7 +77,8 @@
       "module": 3,
       "lesson": 2,
       "group": "Module 3 · Beyond Diversification",
-      "notebook": "notebooks/cppi-dynamic-allocation.ipynb"
+      "notebook": "notebooks/cppi-dynamic-allocation.ipynb",
+      "course": "introduction"
     },
     {
       "file": "monte-carlo",
@@ -80,7 +87,8 @@
       "module": 3,
       "lesson": 3,
       "group": "Module 3 · Beyond Diversification",
-      "notebook": "notebooks/monte-carlo.ipynb"
+      "notebook": "notebooks/monte-carlo.ipynb",
+      "course": "introduction"
     },
     {
       "file": "asset-liability",
@@ -89,7 +97,8 @@
       "module": 4,
       "lesson": 1,
       "group": "Module 4 · Asset-Liability Management",
-      "notebook": "notebooks/asset-liability.ipynb"
+      "notebook": "notebooks/asset-liability.ipynb",
+      "course": "introduction"
     },
     {
       "file": "bonds-duration",
@@ -98,7 +107,8 @@
       "module": 4,
       "lesson": 2,
       "group": "Module 4 · Asset-Liability Management",
-      "notebook": "notebooks/bonds-duration.ipynb"
+      "notebook": "notebooks/bonds-duration.ipynb",
+      "course": "introduction"
     },
     {
       "file": "interest-rate-models",
@@ -107,7 +117,8 @@
       "module": 4,
       "lesson": 3,
       "group": "Module 4 · Asset-Liability Management",
-      "notebook": "notebooks/interest-rate-models.ipynb"
+      "notebook": "notebooks/interest-rate-models.ipynb",
+      "course": "introduction"
     },
     {
       "file": "goal-based-allocation",
@@ -116,7 +127,49 @@
       "module": 4,
       "lesson": 4,
       "group": "Module 4 · Asset-Liability Management",
-      "notebook": "notebooks/goal-based-allocation.ipynb"
+      "notebook": "notebooks/goal-based-allocation.ipynb",
+      "course": "introduction"
+    },
+    {
+      "file": "factor-investing",
+      "title": "Factor Investing และ CAPM จากพื้นฐาน",
+      "description": "แยกผลตอบแทนส่วนเกิน Beta และ Alpha เรียนสมการ CAPM กับการประมาณ OLS ทีละขั้นด้วยข้อมูลสมมติ",
+      "course": "advanced",
+      "module": 1,
+      "lesson": 1,
+      "group": "Advanced · Module 1 · Style & Factors",
+      "notebook": "notebooks/factor-investing.ipynb"
+    },
+    {
+      "file": "multifactor-models",
+      "title": "หลาย Factor และ Fama–French",
+      "description": "อ่าน SMB/HML ประมาณแบบจำลองหลายปัจจัย และตรวจว่า Alpha เปลี่ยนอย่างไรเมื่อเพิ่มตัวแปรอธิบาย",
+      "course": "advanced",
+      "module": 1,
+      "lesson": 2,
+      "group": "Advanced · Module 1 · Style & Factors",
+      "notebook": "notebooks/multifactor-models.ipynb",
+      "dataStatus": "Original hypothetical examples; separately labelled aggregate analysis of the supplied 2018 course data snapshot"
+    },
+    {
+      "file": "style-analysis",
+      "title": "Style Analysis: อ่านลักษณะพอร์ตจากผลตอบแทน",
+      "description": "สร้าง Benchmark ที่น้ำหนักรวมหนึ่ง แยก Tracking Error ออกจาก RMSE และตรวจ Style Drift ด้วยข้อมูลนอกตัวอย่าง",
+      "course": "advanced",
+      "module": 1,
+      "lesson": 3,
+      "group": "Advanced · Module 1 · Style & Factors",
+      "notebook": "notebooks/style-analysis.ipynb"
+    },
+    {
+      "file": "smart-beta",
+      "title": "จาก Cap Weight สู่ Smart Beta",
+      "description": "คำนวณน้ำหนักตามมูลค่าตลาด Equal Weight การกระจุกตัว และต้นทุนปรับพอร์ต ก่อนออกแบบ Backtest ที่ใช้ข้อมูลตามเวลา",
+      "course": "advanced",
+      "module": 1,
+      "lesson": 4,
+      "group": "Advanced · Module 1 · Style & Factors",
+      "notebook": "notebooks/smart-beta.ipynb"
     },
     {
       "file": "risk",

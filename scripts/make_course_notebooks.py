@@ -1,9 +1,10 @@
-"""Execute the original Module 2–4 examples and export complete lesson notebooks.
+"""Execute configured course examples and export complete lesson notebooks.
 
 Each chapter gets a fresh namespace. Only explicitly configured course pages
 are exported; existing insurance notebooks and personal experiments are untouched.
 """
 from contextlib import redirect_stdout
+import argparse
 import hashlib
 import io
 import json
@@ -15,15 +16,25 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "https://nutdnuy.github.io/portfolio-management-toolkit/"
 
 
-def course_pages():
+def page_course(page):
+    """Keep the original Introduction pages selectable before metadata migration."""
+    return page.get("course", "introduction" if page.get("module") in (2, 3, 4) else None)
+
+
+def course_pages(course=None, module=None):
     config = json.loads((ROOT / "site.config.json").read_text())
-    return [p for p in config["pages"] if p.get("module") in (2, 3, 4)]
+    return [p for p in config["pages"]
+            if page_course(p) in ("introduction", "advanced")
+            and isinstance(p.get("notebook"), str) and p["notebook"]
+            and p.get("module")
+            and (course is None or page_course(p) == course)
+            and (module is None or p["module"] == module)]
 
 
 def markdown_cell(text, index):
     # Keep published local links useful in a separately downloaded notebook.
     text = re.sub(r'(?<=href=")(?!(?:https?:|#))([^\"]+)', lambda m: BASE + m[1], text)
-    text = re.sub(r'\]\((?!https?:|#|attachment:)([^)]+\.(?:html|ipynb)(?:#[^)]*)?)\)', lambda m: "](" + BASE + m[1] + ")", text)
+    text = re.sub(r'\]\((?!https?:|#|attachment:)([^)]+\.(?:html|ipynb|py|json)(?:#[^)]*)?)\)', lambda m: "](" + BASE + m[1] + ")", text)
     text = re.sub(r'<nav class="chapter-navigation"[\s\S]*?</nav>', '', text)
     attachments = {}
 
@@ -71,13 +82,23 @@ def execute_chapter(page):
                 "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
                              "language_info": {"name": "python", "version": sys.version.split()[0]},
                              "lesson": {"source": f'content/{page["file"]}.md', "sha256": hashlib.sha256(source.encode()).hexdigest(),
-                                        "data_status": "Original hypothetical examples and seeded simulations"}}}
+                                        "data_status": page.get("dataStatus", "Original hypothetical examples and seeded simulations")}}}
     return notebook, ns, outputs
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--course", choices=("introduction", "advanced"),
+                        help="Export one course; by default export all configured course notebooks.")
+    parser.add_argument("--module", type=int, help="Export one module number within the selected course(s).")
+    args = parser.parse_args()
+    if args.module is not None and args.module < 1:
+        parser.error("--module must be a positive integer")
+    pages = course_pages(args.course, args.module)
+    if not pages:
+        parser.error("No configured course notebooks match the selected course and module")
     report = []
-    for page in course_pages():
+    for page in pages:
         notebook, _, outputs = execute_chapter(page)
         target = ROOT / page["notebook"]
         target.parent.mkdir(exist_ok=True, parents=True)

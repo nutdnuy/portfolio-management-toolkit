@@ -40,6 +40,17 @@ description: บทเรียนภาษาไทยเรื่องกา�
 
 ทั้งสิบหน้ามี Notebook แยกบท พร้อมตัวอย่างที่สร้างขึ้นใหม่ รันได้จากต้นหน้าโดยไม่ต้องเปิดโค้ดของบทอื่น ตัวเลขใหม่ในชุดนี้เป็นข้อมูลสมมติหรือการจำลองที่ระบุพารามิเตอร์และ seed ไม่ใช่ผลจากตลาดจริง
 
+## Advanced · Module 1 · Style & Factors
+
+คอร์สต่อเนื่อง [Advanced Portfolio Construction and Analysis with Python](https://www.coursera.org/learn/advanced-portfolio-construction-python) เริ่มจากการอธิบายผลตอบแทนด้วยปัจจัยร่วม แล้วพาไปสู่การสร้าง benchmark และทดสอบกฎให้น้ำหนัก แบ่ง Module 1 เป็นสี่บทเพื่อให้มีเวลาฝึกสูตรและ Python ทีละขั้น
+
+1. [Factor Investing และ CAPM จากพื้นฐาน](factor-investing.html) คำนวณ excess return, beta, alpha และ OLS ก่อนแยกค่าประมาณจากข้อสมมติของ CAPM
+2. [หลาย Factor และ Fama–French](multifactor-models.html) อ่าน SMB/HML ฝึกแบบจำลองหลายปัจจัย และดูกรณีศึกษา Berkshire จากข้อมูลคอร์สปี 1990–2018
+3. [Style Analysis](style-analysis.html) หาส่วนผสม benchmark แยก TE กับ RMSE และติดตามสไตล์ด้วยหน้าต่างย้อนหลัง
+4. [จาก Cap Weight สู่ Smart Beta](smart-beta.html) แยกการเลือกหุ้นจากน้ำหนัก ตรวจความกระจุกตัว การซื้อขาย และ backtest ที่ใช้ข้อมูลตามเวลา
+
+ทั้งสี่บทมี Notebook ที่รันได้แยกกัน ตัวอย่างหลักเป็นข้อมูลสมมติ ส่วนกรณีศึกษา Berkshire ระบุไฟล์ ช่วงข้อมูล หน่วย และวิธีคำนวณแยกไว้ พร้อมสคริปต์สำหรับผู้ที่มี ZIP ของคอร์ส
+
 ## บทอ่านประกอบ
 
 อ่าน **[ความเสี่ยงในการลงทุน](risk.html)** เพื่อทำความเข้าใจว่าความเสี่ยงหมายถึงอะไร แนวคิดนี้พัฒนามาอย่างไร และแต่ละทฤษฎีตอบคำถามใด ก่อนเปรียบเทียบ Volatility, Downside, Drawdown, VaR และ Expected Shortfall พร้อมทดลองเปลี่ยนลำดับผลตอบแทน ความเสียหายปลายหาง และน้ำหนักข้อมูลใน EWMA
@@ -52,7 +63,7 @@ description: บทเรียนภาษาไทยเรื่องกา�
 
 เปิดบทเรียนจากแถบด้านข้างแล้วอ่านต่อได้ตามลำดับ ถ้าเจอคำที่ยังไม่คุ้น แวะดู[หน้าคำศัพท์](glossary.html) แล้วกดกลับมายังตัวอย่างได้ ระหว่างอ่านจะมีเครื่องมือให้ลองปรับค่า แนะนำให้เปลี่ยนทีละตัว แล้วดูว่าผลที่ออกมาตรงกับเหตุผลที่เราคิดไว้หรือไม่
 
-สำหรับ Module 2–4 กด “ดาวน์โหลด Notebook” จากสารบัญของหน้าที่กำลังอ่าน เปิดไฟล์ `.ipynb` ใน Jupyter Notebook หรือ JupyterLab แล้วรันจากช่องแรกลงมา หากอยากเริ่มใหม่ให้ Restart Kernel แล้ว Run All เพื่อไม่ให้ค่าจากการทดลองก่อนหน้าค้างอยู่ Python ของชุดนี้ใช้ NumPy, pandas และ SciPy; หากยังไม่มีแพ็กเกจ ให้รัน `%pip install numpy pandas scipy` ในช่องของ Jupyter ก่อนแล้วเริ่ม kernel ใหม่ คำสั่งที่ขึ้นต้นด้วย `%` ใช้ใน Jupyter ไม่ใช่ไฟล์ Python ปกติ
+สำหรับ Introduction Module 2–4 และ Advanced Module 1 กด “ดาวน์โหลด Notebook” จากสารบัญของหน้าที่กำลังอ่าน เปิดไฟล์ `.ipynb` ใน Jupyter Notebook หรือ JupyterLab แล้วรันจากช่องแรกลงมา หากอยากเริ่มใหม่ให้ Restart Kernel แล้ว Run All เพื่อไม่ให้ค่าจากการทดลองก่อนหน้าค้างอยู่ Python ของชุดนี้ใช้ NumPy, pandas และ SciPy; หากยังไม่มีแพ็กเกจ ให้รัน `%pip install numpy pandas scipy` ในช่องของ Jupyter ก่อนแล้วเริ่ม kernel ใหม่ คำสั่งที่ขึ้นต้นด้วย `%` ใช้ใน Jupyter ไม่ใช่ไฟล์ Python ปกติ
 
 Notebook มีผลรันบันทึกไว้ให้เทียบ แต่ผู้อ่านควรรันใหม่และลองเปลี่ยนค่าทีละตัวด้วย บท [Portfolio Insurance มี Notebook ของตัวเอง](notebooks/portfolio-insurance.ipynb) แยกจากชุด Module 2–4
 

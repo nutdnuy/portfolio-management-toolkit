@@ -16,7 +16,7 @@ async function build() {
   for (const name of ['style.css', 'book.css', 'THIRD_PARTY_NOTICES.md']) fs.copyFileSync(path.join(root, name), path.join(out, name));
   if (fs.existsSync(path.join(root, 'notebooks'))) fs.cpSync(path.join(root, 'notebooks'), path.join(out, 'notebooks'), {recursive:true});
   fs.mkdirSync(path.join(out, 'downloads'), {recursive:true});
-  for (const [source, target] of [['data/sp500-results.json','sp500-results.json'], ['data/sp500-results.csv','sp500-results.csv'], ['scripts/sp500_backtest.py','sp500-backtest.py'], ['examples/extreme-risk/finance_tools.py','finance_tools.py']]) fs.copyFileSync(path.join(root, source), path.join(out, 'downloads', target));
+  for (const [source, target] of [['data/sp500-results.json','sp500-results.json'], ['data/sp500-results.csv','sp500-results.csv'], ['scripts/sp500_backtest.py','sp500-backtest.py'], ['examples/extreme-risk/finance_tools.py','finance_tools.py'], ['examples/advanced/analyze_course_factors.py','analyze-course-factors.py'], ['data/advanced-factor-results.json','advanced-factor-results.json']]) fs.copyFileSync(path.join(root, source), path.join(out, 'downloads', target));
   fs.mkdirSync(path.join(out, 'licenses'), {recursive:true});
   for (const name of fs.readdirSync(path.join(root, 'vendor')).filter(n => n.endsWith('-LICENSE.txt'))) fs.copyFileSync(path.join(root, 'vendor', name), path.join(out, 'licenses', name));
   fs.writeFileSync(path.join(out, 'licenses/index.html'), '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Third-party licenses</title><h1>Third-party licenses</h1><p><a href="../index.html">Return to the book</a></p><ul>' + fs.readdirSync(path.join(out, 'licenses')).filter(n => n.endsWith('.txt')).map(n => '<li><a href="' + n + '">' + n + '</a></li>').join('') + '</ul></html>');
@@ -48,11 +48,13 @@ async function build() {
   });
   const search = [], renderedPages = new Map();
   for (const page of pages) {
+    const coursePrefix = page.course === 'advanced' ? 'Advanced · ' : '';
+    const searchSection = coursePrefix + page.title;
     const chunks = page.body.split(/(?=<h[23]\b)/);
-    search.push({title:page.title, section:page.title, url:`${page.file}.html`, text:plain(page.body).slice(0, 600)});
+    search.push({title:page.title, section:searchSection, url:`${page.file}.html`, text:coursePrefix + plain(page.body).slice(0, 600)});
     for (const chunk of chunks) {
       const h = chunk.match(/^<h[23] id="([^"]+)">([\s\S]*?)<\/h[23]>/);
-      if (h) search.push({title:plain(h[2]), section:page.title, url:`${page.file}.html#${h[1]}`, text:plain(chunk).slice(0, 3500)});
+      if (h) search.push({title:plain(h[2]), section:searchSection, url:`${page.file}.html#${h[1]}`, text:coursePrefix + plain(chunk).slice(0, 3500)});
     }
     let previousGroup;
     const nav = pages.map(p => {
@@ -66,7 +68,7 @@ async function build() {
     const notebookLink = notebook ? `<a href="${escape(notebook)}" download>ดาวน์โหลด Notebook</a>` : '';
     if (page.module) {
       const position = pages.indexOf(page), previous = pages[position - 1], next = pages[position + 1];
-      page.body = `<p class="chapter-kicker">Module ${page.module} · บทย่อย ${page.lesson}</p>` + page.body;
+      page.body = `<p class="chapter-kicker">${coursePrefix}Module ${page.module} · บทย่อย ${page.lesson}</p>` + page.body;
       page.body += `<nav class="chapter-navigation" aria-label="บทเรียนก่อนหน้าและถัดไป">${previous ? `<a href="${previous.file}.html" rel="prev">บทก่อนหน้า: ${escape(previous.title)}</a>` : ''}${next ? `<a href="${next.file}.html" rel="next">อ่านต่อ: ${escape(next.title)}</a>` : ''}</nav>`;
     }
     const html = `<!doctype html><html lang="th" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escape(page.description)}"><title>${escape(page.title)} · ${escape(config.title)}</title><link rel="icon" href="assets/brand/favicon-32.png"><link rel="stylesheet" href="assets/katex/katex.min.css"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="app.css"><link rel="stylesheet" href="book.css">${['returns','risk','extreme-risk'].includes(page.file) ? `<link rel="stylesheet" href="${page.file}.css">` : ''}<script>try{document.documentElement.dataset.theme=localStorage.getItem('pmt-book-theme')==='dark'?'dark':'light'}catch(e){}</script></head><body class="book ${home ? 'welcome-page' : 'lesson-page'}" data-page="${page.file}">

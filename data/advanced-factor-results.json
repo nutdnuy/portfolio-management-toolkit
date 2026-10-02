@@ -1,0 +1,32 @@
+{
+  "archive_sha256": "8f11b5617ce180f82120d18e29276e9f13341734bacb529359db5efece908e8f",
+  "files_sha256": {
+    "brka_d_ret.csv": "047410a705aa38c708a8f24b87cf4dae699da8def3795cff2a86b8bf10a3f488",
+    "F-F_Research_Data_Factors_m.csv": "d79d118bf62fce739f5730293b6bdef23342e521bdb29937db3dde48e5954950"
+  },
+  "sample": {
+    "start": "1990-01",
+    "end": "2018-12",
+    "months": 348
+  },
+  "units": "Monthly simple returns in decimals; alpha per month; beta dimensionless",
+  "method": "In-sample OLS with intercept; asset minus RF; factors already in excess/spread form",
+  "models": {
+    "CAPM": {
+      "coefficients": {
+        "alpha": 0.0060694257903239875,
+        "Mkt-RF": 0.5779457613060572
+      },
+      "r_squared": 0.18143358720233438
+    },
+    "FF3": {
+      "coefficients": {
+        "alpha": 0.00516539717929987,
+        "Mkt-RF": 0.7096050666739301,
+        "SMB": -0.48293687928081463,
+        "HML": 0.40528319044807626
+      },
+      "r_squared": 0.31729316429420207
+    }
+  }
+}

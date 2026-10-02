@@ -1,0 +1,68 @@
+{
+  "course": "Advanced Portfolio Construction and Analysis with Python",
+  "module": 1,
+  "module_title": "Style & Factors",
+  "review_date": "2026-10-02",
+  "source_access": [
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/wnoSN/introduction-to-factor-investing",
+      "access": "Full authenticated transcript read; original Thai teaching prose and examples authored separately",
+      "used_in": "factor-investing"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/19WkH/factor-models-and-the-capm",
+      "access": "Full authenticated transcript read; original Thai teaching prose and examples authored separately",
+      "used_in": "factor-investing"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/iVahP/multi-factor-models-and-fama-french",
+      "access": "Full authenticated transcript read; original Thai teaching prose and examples authored separately",
+      "used_in": "multifactor-models"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/nPLWC/factor-benchmarks-and-style-analysis",
+      "access": "Full authenticated transcript read; original Thai teaching prose and examples authored separately",
+      "used_in": "style-analysis"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/Pc4Np/shortcomings-of-cap-weighted-indices",
+      "access": "Full authenticated transcript read; original Thai teaching prose and examples authored separately",
+      "used_in": "smart-beta"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/2uJdC/from-cap-weighted-benchmarks-to-smart-weighted-benchmarks",
+      "access": "Full authenticated transcript read; original Thai teaching prose and examples authored separately",
+      "used_in": "smart-beta"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/ZdgGw/module-1-lab-session-foundations",
+      "access": "Full authenticated transcript read; original Thai teaching prose and examples authored separately",
+      "used_in": "all four chapters"
+    }
+  ],
+  "code_inspection": {
+    "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/ungradedLab/RqxtJ/labs-and-code",
+    "file": "edhec_risk_kit_202.py",
+    "scope": "Read get_fff_returns and regress/style_analysis/tracking_error functions in lab editor; not a full toolkit audit",
+    "finding": "Lab tracking_error is root sum squared active returns with no demeaning. Our primary style example minimizes residual variance with intercept and separately demonstrates raw MSE."
+  },
+  "examples": {
+    "status": "Original hypothetical data and seeded simulations; not course data unless explicitly labelled",
+    "notebooks": "Self-contained fresh chapter namespaces; no raw market data or private ZIP needed for Run All",
+    "figures": "Deterministic SVGs, desktop and mobile; scripts/make_advanced_figures.py and data/advanced-figures.json"
+  },
+  "empirical_case": {
+    "source": "User-supplied Coursera course data archive; 201812 snapshot",
+    "archive_sha256": "8f11b5617ce180f82120d18e29276e9f13341734bacb529359db5efece908e8f",
+    "archive_contents": "16 CSV files; no Python scripts or notebooks",
+    "period": "1990-01 through 2018-12",
+    "observations": 348,
+    "asset_source": "data/brka_d_ret.csv; decimal daily returns compounded within each month",
+    "factor_source": "data/F-F_Research_Data_Factors_m.csv; percent monthly returns divided by 100",
+    "validation": "Monthly compounding agrees with month-end adjusted price ratios. NumPy OLS coefficients independently cross-checked with SciPy QR and statsmodels; maximum absolute difference below 3e-16.",
+    "reproduction": "examples/advanced/analyze_course_factors.py; optional local input ZIP; aggregate output only",
+    "public_results": "data/advanced-factor-results.json",
+    "limits": "In-sample attribution; no skill claim, no forecast, no recommendation. Current provider data may be revised. Raw supplied data is not redistributed."
+  },
+  "editorial": "Full drafts reviewed under no-ai-slop; equations, units, code and empirical boundaries retained."
+}

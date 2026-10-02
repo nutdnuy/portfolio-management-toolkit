@@ -680,3 +680,89 @@ Macaulay duration คือเวลาเฉลี่ยของ cash flow ถ
 </section>
 
 </section>
+
+<section class="glossary-group" id="group-factors">
+
+## ปัจจัย สไตล์ และ Benchmark
+
+<section class="glossary-term" id="capm">
+
+### CAPM · Capital Asset Pricing Model
+
+แบบจำลองดุลยภาพที่เชื่อมผลตอบแทนคาดหวังส่วนเกินกับ market beta ภายใต้ข้อสมมติ ค่า alpha/beta จากการ fit ข้อมูลย้อนหลังเป็นค่าประมาณที่ต้องแยกจากข้ออ้างเรื่องผลตอบแทนคาดหวัง
+
+[อ่านข้อสมมติและคำนวณ expected return](factor-investing.html#capm-pricing)
+
+</section>
+
+<section class="glossary-term" id="beta">
+
+### Beta / Factor loading · ความไวต่อปัจจัย
+
+สัมประสิทธิ์ของผลตอบแทนปัจจัยในแบบจำลอง เช่น market beta 1.2 หมายถึงเส้นที่ fit มีความชัน 1.2 ค่านี้ไม่ใช่น้ำหนักเงินจริงโดยอัตโนมัติ และ beta ศูนย์ยังอยู่ร่วมกับความเสี่ยงเฉพาะตัวได้
+
+[คำนวณ beta จาก covariance](factor-investing.html#ols-from-scratch)
+
+</section>
+
+<section class="glossary-term" id="alpha">
+
+### Alpha · ค่าคงที่ของแบบจำลองผลตอบแทน
+
+Intercept ที่เหลือหลังใช้ปัจจัยที่เลือกอธิบายผลตอบแทนส่วนเกิน หน่วยตรงกับความถี่ข้อมูล ค่า alpha เปลี่ยนได้เมื่อเปลี่ยนแบบจำลอง ช่วงเวลา หรือข้อมูล และค่าบวกยังไม่ยืนยันฝีมือผู้จัดการ
+
+[แยก alpha กับ residual ของแต่ละเดือน](factor-investing.html#fitted-residuals)
+
+</section>
+
+<section class="glossary-term" id="smb">
+
+### SMB · Small Minus Big
+
+ผลตอบแทนพอร์ตหุ้นเล็กลบพอร์ตหุ้นใหญ่ตามกฎสร้างปัจจัยของ Fama–French เป็น factor spread ค่า loading บวกสื่อความไวต่อ size factor ในแบบจำลอง ไม่ใช่สัดส่วนหุ้นเล็กโดยตรง
+
+[อ่านการสร้างและตีความ SMB](multifactor-models.html)
+
+</section>
+
+<section class="glossary-term" id="hml">
+
+### HML · High Minus Low
+
+ผลตอบแทนพอร์ตที่ book-to-market สูงลบพอร์ตที่อัตราส่วนต่ำตามกฎ Fama–French ใช้แทน value factor; high/low ในชื่อนี้ไม่ได้หมายถึงราคาหุ้นต่อหน่วยสูงหรือต่ำ
+
+[แยก book-to-market ออกจากราคาหุ้น](multifactor-models.html)
+
+</section>
+
+<section class="glossary-term" id="style-analysis">
+
+### Returns-based style analysis · การประมาณสไตล์จากผลตอบแทน
+
+หาส่วนผสมดัชนีที่อธิบายผลตอบแทนกองทุนภายใต้ข้อจำกัดน้ำหนัก เช่น long-only และรวมหนึ่ง ต้องระบุ objective และการใส่ intercept ผล fit เป็น benchmark ทางสถิติ ไม่ใช่รายชื่อ holdings ที่ตรวจพบจริง
+
+[สร้างสมการและตรวจน้ำหนัก](style-analysis.html#style-objective)
+
+</section>
+
+<section class="glossary-term" id="tracking-error">
+
+### Tracking Error · ความผันผวนของผลต่างจาก Benchmark
+
+โดย convention ที่บทเรียนระบุ คือ SD ของ active return ในความถี่เดียวกัน บางโค้ดใช้ชื่อนี้กับรากผลรวม residual ยกกำลังสอง จึงต้องตรวจสูตรและหน่วยก่อนเทียบผล
+
+[เทียบ TE, RMSE และค่าเฉลี่ยส่วนต่าง](style-analysis.html#tracking-error-conventions)
+
+</section>
+
+<section class="glossary-term" id="smart-beta">
+
+### Smart beta · กฎเลือกหุ้นและให้น้ำหนักที่ปรับจาก Cap Weight
+
+กลุ่มแนวทางสร้างพอร์ตตามกฎเพื่อให้ได้ exposure หรือการกระจายน้ำหนักที่ต้องการ ไม่มีสูตรเดียวที่ใช้กับทุกดัชนี ต้องตรวจการเลือกหุ้น น้ำหนัก เวลาใช้ข้อมูล และต้นทุนของแต่ละกฎ
+
+[เลือกหุ้นก่อนกำหนดน้ำหนัก](smart-beta.html#selection-and-weighting)
+
+</section>
+
+</section>

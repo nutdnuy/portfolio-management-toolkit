@@ -1,4 +1,4 @@
-/* Focused checks for the Module 2–4 reading path and executable downloads. */
+/* Focused checks for the Introduction and Advanced lessons and executable downloads. */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -6,7 +6,7 @@ const {pathToFileURL} = require('node:url');
 const {chromium} = require('playwright');
 const root = path.resolve(__dirname, '..');
 const config = JSON.parse(fs.readFileSync(path.join(root, 'site.config.json'), 'utf8'));
-const pages = config.pages.filter(p => p.module);
+const pages = config.pages.filter(p => p.module && typeof p.notebook === 'string');
 const base = process.env.PMT_PREVIEW_URL || 'http://127.0.0.1:8764';
 const out = path.join(__dirname, 'output');
 fs.mkdirSync(out, {recursive: true});
@@ -36,9 +36,13 @@ async function loadImages(page) {
       assert.equal(await page.locator('main pre[tabindex="0"]').count(),await page.locator('main pre').count());
       assert.ok(await page.locator('main .katex').count()>0);
       const index = config.pages.findIndex(p=>p.file===item.file);
-      assert.equal(await page.locator('main a[rel="prev"]').getAttribute('href'),config.pages[index-1].file+'.html');
-      assert.equal(await page.locator('main a[rel="next"]').getAttribute('href'),config.pages[index+1].file+'.html');
-      assert.equal(await page.locator('.chapter-kicker').textContent(),`Module ${item.module} · บทย่อย ${item.lesson}`);
+      for (const [relation, neighbor] of [['prev', config.pages[index-1]], ['next', config.pages[index+1]]]) {
+        const link = page.locator(`main a[rel="${relation}"]`);
+        if (neighbor) assert.equal(await link.getAttribute('href'),neighbor.file+'.html');
+        else assert.equal(await link.count(),0,`${item.file} has no ${relation} chapter`);
+      }
+      const prefix = item.course === 'advanced' ? 'Advanced · ' : '';
+      assert.equal(await page.locator('.chapter-kicker').textContent(),`${prefix}Module ${item.module} · บทย่อย ${item.lesson}`);
       const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>document.documentElement.clientWidth+1);
       assert.equal(overflow,false,`${item.file} tablet overflow`);
       const details=page.locator('main details').first();
@@ -51,14 +55,15 @@ async function loadImages(page) {
       }
       // Each download is the executed notebook belonging to this exact chapter.
       await page.locator('#menu-button').click();
-      const downloadPromise=page.waitForEvent('download');
-      await page.getByRole('link',{name:'ดาวน์โหลด Notebook',exact:true}).click();
-      const download=await downloadPromise;
+      const [download]=await Promise.all([
+        page.waitForEvent('download'),
+        page.locator('.book-sidebar-footer').getByRole('link',{name:'ดาวน์โหลด Notebook',exact:true}).click()
+      ]);
       const file=path.join(out,`download-${item.file}.ipynb`);
       await download.saveAs(file);
       assert.deepEqual(fs.readFileSync(file),fs.readFileSync(path.join(root,item.notebook)));
       report.downloads.push(item.notebook);
-      report.pages.push({page:item.file,pythonBlocks:python.length,tablet:true,navigation:true,keyboard:true});
+      report.pages.push({page:item.file,course:item.course || 'introduction',module:item.module,pythonBlocks:python.length,tablet:true,navigation:true,keyboard:true});
     }
     // Search crosses module boundaries and preserves the zero-result state.
     await page.goto(`${base}/index.html`,{waitUntil:'networkidle'});
@@ -68,6 +73,14 @@ async function loadImages(page) {
       await page.locator('#search-input').fill(query);
       await page.waitForFunction(prefix=>[...document.querySelectorAll('#search-results a')].some(a=>a.getAttribute('href').startsWith(prefix)),target+'.html');
       report.search.push(query);
+    }
+    const advanced = pages.find(item => item.course === 'advanced');
+    if (advanced) {
+      await page.locator('#search-input').fill('Advanced');
+      await page.waitForFunction(prefix=>[...document.querySelectorAll('#search-results a')].some(a=>a.getAttribute('href').startsWith(prefix)),advanced.file+'.html');
+      const result = page.locator(`#search-results a[href="${advanced.file}.html"]`);
+      assert.match(await result.locator('small').textContent(),/^Advanced · /);
+      report.search.push('Advanced');
     }
     await page.locator('#search-input').fill('course-no-result-874639');
     await page.waitForFunction(()=>document.querySelectorAll('#search-results a').length===0);
@@ -90,7 +103,7 @@ async function loadImages(page) {
 
     const charts = await browser.newContext({viewport:{width:800,height:650}});
     const chartPage = await charts.newPage();
-    for(const name of ['course-diversification','course-frontier','course-cppi','course-duration']){
+    for(const name of ['course-diversification','course-frontier','course-cppi','course-duration','advanced-factor-fit','advanced-style-drift']){
       for(const suffix of ['', '-mobile']){
         await chartPage.goto(`${base}/assets/charts/${name}${suffix}.svg`);
         await chartPage.evaluate(()=>document.fonts.ready);

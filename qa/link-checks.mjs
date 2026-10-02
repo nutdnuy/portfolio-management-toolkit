@@ -9,6 +9,24 @@ let checked = 0;
 assert.equal(manifest.format, 'book');
 const config = JSON.parse(fs.readFileSync(path.resolve(root, '../site.config.json'), 'utf8'));
 assert.deepEqual(manifest.pages, config.pages.map(page => `${page.file}.html`));
+assert.equal(new Set(config.pages.map(page => page.file)).size, config.pages.length, 'Page filenames must be unique across courses');
+const lessonIds = new Set(), lessonNotebooks = new Set();
+for (const page of config.pages) {
+  if (page.course !== undefined) assert.ok(['introduction', 'advanced'].includes(page.course), `${page.file}: unknown course`);
+  if (page.dataStatus !== undefined) assert.ok(typeof page.dataStatus === 'string' && page.dataStatus.trim(), `${page.file}: dataStatus must be nonempty text`);
+  if (page.notebook !== undefined) assert.ok(page.notebook === false || (typeof page.notebook === 'string' && page.notebook.endsWith('.ipynb')), `${page.file}: notebook must be false or an ipynb path`);
+  if (page.module === undefined) continue;
+  assert.ok(Number.isInteger(page.module) && page.module > 0, `${page.file}: invalid module number`);
+  assert.ok(Number.isInteger(page.lesson) && page.lesson > 0, `${page.file}: invalid lesson number`);
+  const course = page.course ?? 'introduction';
+  const id = `${course}:${page.module}:${page.lesson}`;
+  assert.ok(!lessonIds.has(id), `Duplicate course/module/lesson: ${id}`);
+  lessonIds.add(id);
+  if (typeof page.notebook === 'string') {
+    assert.ok(!lessonNotebooks.has(page.notebook), `Course lessons must not overwrite the same Notebook: ${page.notebook}`);
+    lessonNotebooks.add(page.notebook);
+  }
+}
 
 function localReference(owner, reference) {
   if (/^(?:https?:|mailto:|data:|tel:)/i.test(reference)) return;
@@ -47,9 +65,14 @@ for (const name of config.pages.map(page => `${page.file}.md`)) {
   const artifact = path.join(root, name);
   if (!fs.existsSync(artifact) || fs.statSync(artifact).size === 0) failures.push(`Missing Markdown download ${name}`);
 }
-for (const notebookName of ['portfolio-insurance', ...config.pages.filter(page => page.module).map(page => page.file)]) {
-  const notebookFile = path.join(root, `notebooks/${notebookName}.ipynb`);
-  if (!fs.existsSync(notebookFile)) failures.push(`Missing Notebook download notebooks/${notebookName}.ipynb`);
+const notebookPaths = new Set([config.notebook, ...config.pages.map(page => page.notebook)].filter(value => typeof value === 'string'));
+for (const notebookPath of notebookPaths) {
+  const notebookFile = path.resolve(root, notebookPath);
+  if (!notebookFile.startsWith(root + path.sep)) {
+    failures.push(`Nonportable Notebook path ${notebookPath}`);
+    continue;
+  }
+  if (!fs.existsSync(notebookFile)) failures.push(`Missing Notebook download ${notebookPath}`);
   else {
     const notebook = JSON.parse(fs.readFileSync(notebookFile, 'utf8'));
     if (notebook.nbformat !== 4 || !notebook.cells?.length) failures.push('Notebook is not a populated nbformat 4 document');

@@ -143,7 +143,7 @@ def check_module3(spaces):
 
 
 def main():
-    pages = exporter.course_pages()
+    pages = exporter.course_pages("introduction")
     assert len(pages) == 10, 'Three Module 2, three Module 3, four Module 4 chapters'
     assert [sum(p['module'] == n for p in pages) for n in (2,3,4)] == [3,3,4]
     report=[]

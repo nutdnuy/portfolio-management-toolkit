@@ -26,6 +26,7 @@ jobs:
       - run: python -m pip install -r qa/extreme-risk-requirements.txt
       - run: npm run check:extreme
       - run: npm run check:course
+      - run: npm run check:advanced
       - run: npm run check:sp500
       - run: npm run check:notebook
       - run: npm run build:pages
