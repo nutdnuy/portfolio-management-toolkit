@@ -57,7 +57,7 @@ const base=process.env.PMT_PREVIEW_URL||'http://127.0.0.1:8764';
   await page.waitForFunction(()=>document.querySelector('#search-results').textContent.includes('Bernoulli'));
   assert.ok(await page.locator('#search-results a[href^="risk.html"]').count()>0);await page.locator('#close-search').click();
   await page.goto(base+'/glossary.html#expected-shortfall');
-  assert.equal(await page.locator('.glossary-term').count(),47);
+  assert.equal(await page.locator('.glossary-term').count(), (fs.readFileSync(path.join(root,'content/glossary.md'),'utf8').match(/class="glossary-term"/g)||[]).length);
   const query=page.locator('#glossary-query');
   for(const term of ['ความผันผวน','Expected Shortfall','EWMA']){await query.fill(term);assert.ok(await page.locator('.glossary-term:not([hidden])').count()>0)}
   await query.fill('no-risk-term-1234');assert.equal(await page.locator('.glossary-term:not([hidden])').count(),0);

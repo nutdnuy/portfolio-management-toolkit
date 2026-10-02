@@ -508,3 +508,175 @@ Covariance ที่หารด้วยผลคูณ Standard deviation ข�
 </section>
 
 </section>
+
+<section class="glossary-group" id="group-portfolio-construction">
+
+## การสร้างพอร์ตและค่าประมาณ
+
+<section class="glossary-term" id="portfolio-weight">
+
+### Portfolio weight · น้ำหนักพอร์ต
+
+มูลค่าเงินที่ลงทุนในสินทรัพย์หนึ่งหารด้วยมูลค่าพอร์ตรวม ณ เวลาเดียวกัน ใช้น้ำหนักต้นงวดคูณผลตอบแทนของงวดนั้นเมื่อไม่มีซื้อขายหรือฝากถอนระหว่างงวด น้ำหนักอาจเปลี่ยนเองเมื่อราคาสินทรัพย์เปลี่ยน
+
+[คำนวณจากเงิน 10,000 บาท](portfolio-basics.html#portfolio-weights)
+
+</section>
+
+<section class="glossary-term" id="efficient-frontier">
+
+### Efficient frontier · ขอบพอร์ตที่มีประสิทธิภาพ
+
+พอร์ตที่ไม่มีพอร์ตอื่นในชุดทางเลือกให้ผลตอบแทนคาดหมายสูงขึ้นโดยไม่เพิ่ม variance หรือให้ variance ต่ำลงโดยไม่ลดผลตอบแทนคาดหมาย ขอบนี้ขึ้นกับพารามิเตอร์และข้อจำกัดที่ใส่ในแบบจำลอง ส่วนล่างของเส้น minimum-variance locus ไม่ใช่ efficient frontier
+
+[สร้างขอบพอร์ตจากสินทรัพย์สามตัว](efficient-frontier.html#gmv-efficient-branch)
+
+</section>
+
+<section class="glossary-term" id="gmv">
+
+### GMV · Global Minimum Variance
+
+พอร์ตที่มี variance ต่ำสุดภายใต้ข้อจำกัดที่กำหนด โดยไม่ตั้งเป้าผลตอบแทน น้ำหนักจึงไม่ต้องใช้ค่าประมาณ expected return แต่ยังขึ้นกับ covariance matrix ที่อาจประมาณผิดได้
+
+[เปรียบเทียบ GMV, MSR และ Equal Weight](portfolio-estimation.html#gmv-equal-weight)
+
+</section>
+
+<section class="glossary-term" id="msr">
+
+### MSR · Maximum Sharpe Ratio
+
+พอร์ตที่ทำให้ผลตอบแทนคาดหมายส่วนเกินจากอัตราปลอดความเสี่ยงต่อหน่วย SD สูงสุดในชุดพอร์ตที่อนุญาต ต้องใช้ mean, covariance และ risk-free rate บนหน่วยเวลาที่สอดคล้องกัน ค่าที่เหมาะที่สุดตามข้อมูลเข้าอาจไม่ให้ Sharpe สูงสุดในอนาคต
+
+[คำนวณพอร์ต MSR](portfolio-estimation.html#maximum-sharpe)
+
+</section>
+
+<section class="glossary-term" id="capital-allocation-line">
+
+### Capital Allocation Line · เส้นการผสมกับสินทรัพย์ปลอดความเสี่ยง
+
+เส้นแสดง expected return และ SD เมื่อผสมพอร์ตเสี่ยงหนึ่งชุดกับสินทรัพย์ปลอดความเสี่ยงในสัดส่วนต่าง ๆ ความชันเท่ากับ Sharpe ratio ของพอร์ตเสี่ยง ภายใต้เงื่อนไขการลงทุนและอัตราดอกเบี้ยที่ใช้ เส้นที่อ้างถึงพอร์ตตลาดในกรอบดุลยภาพ CAPM เรียกว่า Capital Market Line
+
+[อ่าน CAL และ CML พร้อมสมมติฐาน](portfolio-estimation.html#cal-cml)
+
+</section>
+
+<section class="glossary-term" id="estimation-error">
+
+### Estimation error · ความคลาดเคลื่อนของค่าประมาณ
+
+ความต่างระหว่างพารามิเตอร์ที่ประมาณจากข้อมูลกับค่าที่ต้องการรู้ เช่น expected return และ covariance การแก้ optimization ได้แม่นตามตัวเลขเข้าไม่ได้ทำให้ค่าประมาณเหล่านั้นถูกต้องขึ้น
+
+[ทดลองเปลี่ยนค่าประมาณแล้วดูน้ำหนักพอร์ต](portfolio-estimation.html#estimation-error)
+
+</section>
+
+<section class="glossary-term" id="look-ahead-bias">
+
+### Look-ahead bias · การใช้ข้อมูลอนาคตในการทดสอบย้อนหลัง
+
+ความเอนเอียงที่เกิดเมื่อการตัดสินใจ ณ เวลาหนึ่งใช้ข้อมูลซึ่งยังไม่ทราบในเวลานั้น เช่น นำน้ำหนักจากมูลค่าตลาดปลายเดือนมาคูณผลตอบแทนของเดือนเดียวกัน ต้องตรวจวันประกาศและเวลาที่ข้อมูลใช้งานได้ รวมถึงเวลาตัดสินใจและซื้อขาย
+
+[เปรียบเทียบน้ำหนักต้นงวดกับปลายงวด](diversification-limits.html#weight-timing)
+
+</section>
+
+<section class="glossary-term" id="monte-carlo">
+
+### Monte Carlo · การคำนวณด้วยการสุ่มซ้ำ
+
+สร้างผลลัพธ์จำนวนมากจากแบบจำลองและสมมติฐานที่กำหนด แล้วประมาณค่าเฉลี่ย ความถี่ หรือการแจกแจง การเพิ่มจำนวนตัวอย่างช่วยลดความคลาดเคลื่อนจากการสุ่ม แต่ไม่ได้ยืนยันว่าแบบจำลองอธิบายตลาดจริงได้
+
+[จำลอง GBM และประเมิน CPPI](monte-carlo.html#gbm-python)
+
+</section>
+
+</section>
+
+<section class="glossary-group" id="group-asset-liability">
+
+## เงินที่ต้องใช้และพอร์ตที่รองรับ
+
+<section class="glossary-term" id="present-value">
+
+### Present value · มูลค่าปัจจุบัน
+
+มูลค่าวันนี้ของเงินที่จะได้รับหรือจ่ายในอนาคต โดยใช้ตัวคูณคิดลดที่ตรงกับกำหนดเวลา สกุลเงิน และประเภทกระแสเงิน การประเมินภาระ nominal คงที่ไม่ควรใช้อัตราผลตอบแทนหุ้นที่คาดหวังแทนอัตราคิดลดโดยไม่มีเหตุผลรองรับ
+
+[คิดลดเงินที่ต้องจ่ายสามวัน](asset-liability.html#present-value)
+
+</section>
+
+<section class="glossary-term" id="funding-ratio">
+
+### Funding ratio · อัตราส่วนสินทรัพย์ต่อมูลค่าภาระ
+
+มูลค่าสินทรัพย์หารด้วยมูลค่าปัจจุบันของภาระ ณ วันเดียวกัน ค่า 1 หมายถึงมีมูลค่าเท่ากันตามวิธีประเมินที่ใช้ อัตราส่วนยังเปลี่ยนได้จากราคาสินทรัพย์ อัตราคิดลด และการปรับภาระ จึงต้องระบุทั้งวันที่และสมมติฐาน
+
+[คำนวณและเปลี่ยนอัตราคิดลด](asset-liability.html#funding-ratio)
+
+</section>
+
+<section class="glossary-term" id="zero-coupon-bond">
+
+### Zero-coupon bond · พันธบัตรไม่มีคูปองระหว่างทาง
+
+ตราสารที่จ่ายเงินก้อนเดียวเมื่อครบกำหนด จับคู่กับภาระจำนวนเงินคงที่ในวันเดียวกันได้ในแบบจำลองที่ไม่มีการผิดนัด หากขายก่อนวันครบกำหนด ราคายังอาจขึ้นลงตามอัตราดอกเบี้ย
+
+[สร้างพอร์ตที่จ่ายเงินตรงกับเป้าหมาย](asset-liability.html#goal-hedging-portfolio)
+
+</section>
+
+<section class="glossary-term" id="duration">
+
+### Duration · เวลาเฉลี่ยถ่วงน้ำหนักและความไวต่อ Yield
+
+Macaulay duration คือเวลาเฉลี่ยของ cash flow ถ่วงน้ำหนักด้วยสัดส่วนมูลค่าปัจจุบัน ส่วน modified duration ใช้ประมาณการเปลี่ยนแปลงราคาต่อการเปลี่ยน yield ขนาดเล็ก ต้องจับคู่ทั้งมูลค่าและความไวหากต้องการให้สินทรัพย์รองรับภาระภายใต้การเลื่อนเส้น yield ที่สมมติ
+
+[คำนวณ duration และจับคู่ภาระห้าปี](bonds-duration.html#duration-matching)
+
+</section>
+
+<section class="glossary-term" id="cir">
+
+### CIR · แบบจำลองอัตราดอกเบี้ย Cox–Ingersoll–Ross
+
+แบบจำลอง short rate ที่มีแรงดึงเข้าหาระดับระยะยาวและขนาดความผันผวนแปรตามรากที่สองของอัตราดอกเบี้ย ต้องแยกพารามิเตอร์สำหรับจำลองสถานการณ์จริงกับพารามิเตอร์สำหรับคิดราคา และตรวจวิธีคำนวณเป็นช่วงเวลาซึ่งอาจมีข้อจำกัดต่างจากสมการต่อเนื่อง
+
+[อ่าน short rate และการคิดราคา ZCB](interest-rate-models.html#cir-zero-coupon-price)
+
+</section>
+
+<section class="glossary-term" id="psp">
+
+### PSP · Performance-Seeking Portfolio
+
+ส่วนพอร์ตที่รับความเสี่ยงเพื่อหาโอกาสเติบโต เช่น พอร์ตหุ้นที่กระจายการลงทุน การกำหนดบทบาทว่า PSP ไม่ได้ระบุว่าต้องเป็นหุ้นทั้งหมด และไม่ได้รับรองผลตอบแทนที่จะเกิดขึ้น
+
+[แยกหน้าที่ PSP และ GHP](asset-liability.html#psp-ghp)
+
+</section>
+
+<section class="glossary-term" id="ghp">
+
+### GHP · Goal-Hedging Portfolio
+
+พอร์ตที่ออกแบบให้มูลค่าหรือกระแสเงินเคลื่อนไหวสอดคล้องกับเป้าหมายที่ต้องรองรับ การเลือกสินทรัพย์ขึ้นกับจำนวนเงิน วันจ่าย เงินเฟ้อ และสกุลเงินของเป้าหมาย เงินสดอาจไม่ใช่สินทรัพย์ที่ลดความเสี่ยงต่อเป้าหมายได้ดีที่สุด
+
+[เริ่มจาก cash flow ของเป้าหมาย](asset-liability.html#goal-hedging-portfolio)
+
+</section>
+
+<section class="glossary-term" id="glidepath">
+
+### Glidepath · แผนเปลี่ยนสัดส่วนตามเวลา
+
+กฎกำหนดน้ำหนักพอร์ตตามเวลาที่เหลือ เช่น ลดสัดส่วนหุ้นเมื่อใกล้วันใช้เงิน กฎที่ขึ้นกับเวลาเพียงอย่างเดียวไม่ได้ตอบสนองต่อ funding ratio หรือความเปลี่ยนแปลงของเป้าหมาย จึงยังเกิดเงินขาดได้
+
+[เปรียบเทียบ Fixed Mix, Glidepath และ Dynamic Allocation](goal-based-allocation.html#glide-path)
+
+</section>
+
+</section>

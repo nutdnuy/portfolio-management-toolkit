@@ -1,0 +1,230 @@
+{
+  "course": "Introduction to Portfolio Construction and Analysis with Python",
+  "provider": "EDHEC Business School / Coursera",
+  "date": "2026-10-02",
+  "scope": "Original Thai beginner chapters following Modules 2–4, without graded-quiz content or redistribution of course transcripts/toolkit/data",
+  "modules": {
+    "2": {
+      "title": "An Introduction to Portfolio Optimization",
+      "pages": [
+        "portfolio-basics",
+        "efficient-frontier",
+        "portfolio-estimation"
+      ],
+      "conceptual_transcripts": [
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/aZJj3/the-only-free-lunch-in-finance",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/197i9/markowitz-optimization-and-the-efficient-frontier",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/tnbqp/applying-quadprog-to-draw-the-efficient-frontier",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/WdW5d/fund-separation-theorem-and-the-capital-market-line",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/BXI2Q/lack-of-robustness-of-markowitz-analysis",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        }
+      ],
+      "local_notebooks": [
+        {
+          "file": "lab_107.ipynb",
+          "sha256": "32b854e970a41f6a8e115a2d78bce5fac6a00dd30fc93bdc7b71f5112af4f734"
+        },
+        {
+          "file": "lab_108.ipynb",
+          "sha256": "ea2a0ae4f4de5dfc2c68b43519afb496dc9add981642c38a31503b2993f92490"
+        },
+        {
+          "file": "lab_109.ipynb",
+          "sha256": "1a3ac99c191ab8f6de1be30095cfea61557c90a73701a4b4493cfe0d81e3c847"
+        },
+        {
+          "file": "lab_110.ipynb",
+          "sha256": "174861d610e07673f5f6b852f7051a70d35d8f3104981c36858ad934da898a03"
+        },
+        {
+          "file": "lab_111.ipynb",
+          "sha256": "00fc238494aaf3fafa4d507b4675dc8f9a2a5fbf545320e1ee9848a5412b1553"
+        }
+      ]
+    },
+    "3": {
+      "title": "Beyond Diversification",
+      "pages": [
+        "diversification-limits",
+        "cppi-dynamic-allocation",
+        "monte-carlo"
+      ],
+      "conceptual_transcripts": [
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/nwiWd/limits-of-diversification",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/TYWck/an-introduction-to-cppi-part-1",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/MNaTt/an-introduction-to-cppi-part-2",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/7sy60/simulating-asset-returns-with-random-walks",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/9Yj1e/monte-carlo-simulation",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/1rfqp/analyzing-cppi-strategies",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/I3kmk/designing-and-calibrating-cppi-strategies",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        }
+      ],
+      "local_notebooks": [
+        {
+          "file": "lab_118.ipynb",
+          "sha256": "afa03d1761d3df067afc6b6fe876f7e2f9d840eef3e48646511dc9715e4638b2"
+        },
+        {
+          "file": "lab_119.ipynb",
+          "sha256": "478f37a96bb80fc7e0740ab74efec742ed478daae3ae59c5184acba0a11dbfb1"
+        },
+        {
+          "file": "lab_121.ipynb",
+          "sha256": "0efe403a2aee4afd45ba1a57f921faa3dc5836efdcd7c09581e35c7f25ae0406"
+        },
+        {
+          "file": "lab_122.ipynb",
+          "sha256": "d6dce2ee0ecb6fb9fd0576c3fa37a33491bb169d81da1125072b59c24787ffbb"
+        },
+        {
+          "file": "lab_123.ipynb",
+          "sha256": "34fc977bfd3517fbe48a8922ffa978c5fb68e0912d15f4e4f1ff500b546410db"
+        }
+      ]
+    },
+    "4": {
+      "title": "Introduction to Asset-Liability Management",
+      "pages": [
+        "asset-liability",
+        "bonds-duration",
+        "interest-rate-models",
+        "goal-based-allocation"
+      ],
+      "conceptual_transcripts": [
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/x66ru/from-asset-management-to-asset-liability-management",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/JT5zQ/liability-hedging-portfolios",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/n0bF9/liability-driven-investing-ldi",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/IQo8M/choosing-the-policy-portfolio",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/9OIfJ/beyond-ldi",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        },
+        {
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/8hNda/liability-friendly-equity-portfolios",
+          "accessed": "2026-10-02",
+          "method": "Read full authenticated browser transcript; no source text redistributed"
+        }
+      ],
+      "local_notebooks": [
+        {
+          "file": "lab_124.ipynb",
+          "sha256": "97eed753cf5a169b09201c9734c190cd3f9cff6f23ed22105286c35ee325fa90"
+        },
+        {
+          "file": "lab_125.ipynb",
+          "sha256": "8222b8df307af5a268311af443460e14e6352e989dfb84d9d6d229387256fd45"
+        },
+        {
+          "file": "lab_126.ipynb",
+          "sha256": "763777a552f41eeadb40fac7032929d3ae331221e757967f0dd8e9daa79e77ae"
+        },
+        {
+          "file": "lab_127.ipynb",
+          "sha256": "1e9279bb790b6da5e3191072b8a64391e15409a7ffae7d7eba45dbdd75c961f5"
+        },
+        {
+          "file": "lab_128.ipynb",
+          "sha256": "db77d9a28606f50576130ee1020a7ce7792e66f7e99c5a45346568e1b9866311"
+        },
+        {
+          "file": "lab_129.ipynb",
+          "sha256": "82856ddc24a0240f56375b6aab52aeec979d676dbc665ac40b65556ba0cf0da5"
+        }
+      ]
+    }
+  },
+  "examples": {
+    "status": "All new numeric examples are authored hypothetical inputs or explicitly seeded simulations; no new empirical market return claims",
+    "notebooks": "One complete executed standalone notebook per new page, generated from canonical Markdown",
+    "dependencies": "qa/extreme-risk-requirements.txt"
+  },
+  "conventions": [
+    "Beginning-of-period weights; no look-ahead use of returns or bond prices",
+    "Arithmetic expected return for mean-variance inputs, with consistent horizon for covariance and risk-free rate",
+    "Efficient frontier is the upper nondominated branch; distinguish CAL and equilibrium CML",
+    "SLSQP convergence and constraints checked; optimization cannot remove parameter uncertainty",
+    "Historical rolling correlation is descriptive and pairwise self-correlation is excluded",
+    "CPPI clips risky weights to [0,1]; fixed floor and drawdown floor are separate; discrete gaps can breach both",
+    "Exact exponential GBM is distinguished from Normal-gross-return approximations",
+    "Monte Carlo sampling uncertainty is separate from model error; zero observed breaches is not a guarantee",
+    "Annual-effective yield is separate from continuously compounded short rates",
+    "PV and duration matching is local, depends on curve moves and does not insure against default or basis risk",
+    "CIR scenario probabilities and risk-neutral pricing use explicitly distinguished measures",
+    "Coupon and redemption cash flows are counted once in total returns",
+    "Goal-based floors use beginning-of-period discount-bond prices; conditional and unconditional deficits are reported separately"
+  ],
+  "visuals": {
+    "route": "no-image-generator",
+    "brand": "QuantCorner / QuantSeras",
+    "generator": "scripts/make_course_figures.py",
+    "data": "data/course-figures.json",
+    "assets": "8 locally bundled responsive SVGs, original calculated charts"
+  },
+  "editorial": {
+    "skill": "no-ai-slop",
+    "method": "Read complete drafts, remove generic emphasis and filler, preserve worked calculations, assumptions, code explanations and source attribution; independent review before publication"
+  }
+}

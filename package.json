@@ -8,13 +8,27 @@
     "build": "node build.cjs",
     "build:pages": "npm run build && node qa/link-checks.mjs",
     "test": "node qa/math-checks.mjs && node qa/returns-checks.mjs && node qa/risk-checks.mjs",
-    "check:site": "node qa/browser-checks.cjs && node qa/returns-browser-checks.cjs && node qa/risk-browser-checks.cjs && node qa/risk-figures-checks.cjs && node qa/extreme-risk-browser-checks.cjs",
+    "check:site": "node qa/browser-checks.cjs && node qa/returns-browser-checks.cjs && node qa/risk-browser-checks.cjs && node qa/risk-figures-checks.cjs && node qa/extreme-risk-browser-checks.cjs && node qa/course-browser-checks.cjs",
     "notebook": "python3 scripts/make_notebook.py",
     "check:notebook": "python3 qa/notebook-checks.py",
     "check:sp500": "python3 qa/sp500-checks.py && python3 qa/sp500-chart-checks.py",
-    "check:extreme": "python3 qa/extreme-risk-checks.py"
+    "check:extreme": "python3 qa/extreme-risk-checks.py",
+    "notebook:course": "python3 scripts/make_course_notebooks.py",
+    "check:course": "python3 qa/course-checks.py"
   },
-  "engines": {"node": ">=22"},
-  "dependencies": {"motion": "12.43.0", "react": "19.2.6", "react-dom": "19.2.6", "katex": "0.16.22"},
-  "devDependencies": {"axe-core": "4.11.4", "esbuild": "0.27.0", "marked": "17.0.0", "playwright": "1.62.1"}
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "motion": "12.43.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "katex": "0.16.22"
+  },
+  "devDependencies": {
+    "axe-core": "4.11.4",
+    "esbuild": "0.27.0",
+    "marked": "17.0.0",
+    "playwright": "1.62.1"
+  }
 }

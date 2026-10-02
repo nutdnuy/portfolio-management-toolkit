@@ -860,5 +860,5 @@ print(f"Cornish-Fisher one-day VaR (95%): {tail_cf_var:.3%}")
 
 <nav class="chapter-navigation" aria-label="บทเรียนก่อนหน้าและถัดไป">
 <a href="returns.html" rel="prev">บทก่อนหน้า: How to Calculate return</a>
-<a href="risk.html" rel="next">อ่านต่อ: ความเสี่ยงในการลงทุน</a>
+<a href="portfolio-basics.html" rel="next">อ่านต่อ: เริ่มจัดพอร์ตจากสินทรัพย์สองตัว</a>
 </nav>

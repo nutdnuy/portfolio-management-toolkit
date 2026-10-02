@@ -34,7 +34,7 @@ async function build() {
     };
     source = source.replace(/\$\$([\s\S]*?)\$\$/g, (_, tex) => math(tex, true)).replace(/\$([^$\n]+)\$/g, (_, tex) => math(tex, false));
     let body = marked.parse(source).replace(/PMTMATH(\d+)END/g, (_, i) => equations[+i]);
-    if (['returns', 'extreme-risk'].includes(page.file)) body = body.replace(/<pre>/g, '<pre tabindex="0" role="region" aria-label="ตัวอย่างโค้ดหรือผลลัพธ์ เลื่อนแนวนอนได้">');
+    if (page.module || ['returns', 'extreme-risk'].includes(page.file)) body = body.replace(/<pre>/g, '<pre tabindex="0" role="region" aria-label="ตัวอย่างโค้ดหรือผลลัพธ์ เลื่อนแนวนอนได้">');
     const headings = [], ids = new Map([...body.matchAll(/\bid="([^"]+)"/g)].map(match => [match[1], 1]));
     body = body.replace(/<h([1-3])>([\s\S]*?)<\/h\1>/g, (_, level, text) => {
       const base = slug(text), n = (ids.get(base) || 0) + 1;
@@ -54,11 +54,21 @@ async function build() {
       const h = chunk.match(/^<h[23] id="([^"]+)">([\s\S]*?)<\/h[23]>/);
       if (h) search.push({title:plain(h[2]), section:page.title, url:`${page.file}.html#${h[1]}`, text:plain(chunk).slice(0, 3500)});
     }
-    const nav = pages.map(p => `<a href="${p.file}.html" class="book-link${p.file === page.file ? ' current' : ''}" ${p.file === page.file ? 'aria-current="page"' : ''}>${escape(p.title)}</a>`).join('');
+    let previousGroup;
+    const nav = pages.map(p => {
+      const heading = p.group && p.group !== previousGroup ? `<p class="book-nav-group">${escape(p.group)}</p>` : '';
+      previousGroup = p.group;
+      return heading + `<a href="${p.file}.html" class="book-link${p.file === page.file ? ' current' : ''}" ${p.file === page.file ? 'aria-current="page"' : ''}>${escape(p.title)}</a>`;
+    }).join('');
     const contents = page.file === 'index' ? '' : `<details class="page-contents" open><summary>ในหน้านี้</summary><nav aria-label="หัวข้อในหน้านี้">${page.headings.map(h => `<a href="#${escape(h.id)}">${escape(h.title)}</a>`).join('')}</nav></details>`;
     const home = page.file === 'index';
     const notebook = page.notebook === false ? null : (page.notebook || config.notebook);
     const notebookLink = notebook ? `<a href="${escape(notebook)}" download>ดาวน์โหลด Notebook</a>` : '';
+    if (page.module) {
+      const position = pages.indexOf(page), previous = pages[position - 1], next = pages[position + 1];
+      page.body = `<p class="chapter-kicker">Module ${page.module} · บทย่อย ${page.lesson}</p>` + page.body;
+      page.body += `<nav class="chapter-navigation" aria-label="บทเรียนก่อนหน้าและถัดไป">${previous ? `<a href="${previous.file}.html" rel="prev">บทก่อนหน้า: ${escape(previous.title)}</a>` : ''}${next ? `<a href="${next.file}.html" rel="next">อ่านต่อ: ${escape(next.title)}</a>` : ''}</nav>`;
+    }
     const html = `<!doctype html><html lang="th" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escape(page.description)}"><title>${escape(page.title)} · ${escape(config.title)}</title><link rel="icon" href="assets/brand/favicon-32.png"><link rel="stylesheet" href="assets/katex/katex.min.css"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="app.css"><link rel="stylesheet" href="book.css">${['returns','risk','extreme-risk'].includes(page.file) ? `<link rel="stylesheet" href="${page.file}.css">` : ''}<script>try{document.documentElement.dataset.theme=localStorage.getItem('pmt-book-theme')==='dark'?'dark':'light'}catch(e){}</script></head><body class="book ${home ? 'welcome-page' : 'lesson-page'}" data-page="${page.file}">
 <a class="skip-link" href="#content">ข้ามไปเนื้อหา</a>
 <header class="book-mobile-header"><a href="index.html">${escape(config.title)}</a><button id="menu-button" aria-expanded="false" aria-controls="book-sidebar">สารบัญ</button></header>

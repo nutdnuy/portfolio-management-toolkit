@@ -1,4 +1,13 @@
 /* Book shell. Article and experimental figure styles remain in style.css. */
+.book-nav-group{font-size:12px;line-height:1.7;color:var(--muted);margin:24px 14px 8px;font-weight:500}
+.chapter-kicker{font-size:14px;color:var(--muted);margin:0 0 16px}
+.book pre[tabindex]{max-width:100%;font-size:15px;line-height:1.75;padding:20px}
+.book pre[tabindex] code{font-size:inherit}
+.book pre[tabindex]:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+.course-figure{margin:36px 0}.course-figure picture{display:block;background:#fff;border:1px solid var(--grid)}
+.course-figure img{display:block;width:100%;height:auto}.course-figure figcaption{font-size:15px;color:var(--muted);line-height:1.85;margin-top:14px}
+.chapter-navigation{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;margin-top:48px;padding-top:24px;border-top:1px solid var(--grid)}
+@media print{.course-figure{break-inside:avoid}.chapter-navigation{display:none}}
 /* Glossary: native text and controls, reusing the book's Material 2 tokens. */
 .book-main a.glossary-link{text-decoration-style:dotted;text-underline-offset:.22em}
 .book-main a.glossary-link:hover{text-decoration-style:solid}

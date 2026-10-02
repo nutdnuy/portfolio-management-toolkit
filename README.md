@@ -28,7 +28,7 @@ npm run dev
 - เมื่อผลตอบแทนไม่เป็น Normal: บทต่อ Section 2 ของ Module 1 สอนรูปร่างผลตอบแทน Moments, Normality, Python module, Semi-deviation และ Historical/Gaussian/Cornish–Fisher VaR พร้อม CVaR แบบถ่วงน้ำหนักปลายหาง กราฟสมมติ และแบบฝึกหัด
 - ความเสี่ยงในการลงทุน: นิยาม ประวัติ และทฤษฎีของความเสี่ยง ก่อนคำนวณ Volatility, Downside, Drawdown, Diversification, VaR, ES, EWMA และ Stress test พร้อมตัวทดลอง 3 ชุดและแหล่งอ้างอิงต้นฉบับ
 - Portfolio Insurance: บทเรียน 13 หัวข้อหลักแบบละเอียด ไล่จาก Put และงบ OBPI สู่ CPPI หลายรอบ, Variable-Multiplier Portfolio Insurance พร้อมตัวอย่างใน Notebook, TIPP แบบ Ratchet, Gap risk พร้อมดอกเบี้ย, EUT/CPT พร้อมคำนวณคะแนน และการประเมิน Shortfall/Drawdown มีผลทดสอบ S&P 500 ปี 2018–2025 พร้อมกราฟมูลค่าและ Drawdown รายวันเทียบ Buy & Hold แทรกใน SLPI, CPPI, TIPP และ Variable Multiplier พร้อมข้อดีข้อเสียของแต่ละวิธี และโจทย์พร้อมเฉลย 8 ข้อและเครื่องมือทดลองในบท
-- อภิธานศัพท์: 47 คำพร้อมนิยามภาษาไทย ค้นหาคำ และลิงก์กลับไปยังตัวอย่าง
+- อภิธานศัพท์: 63 คำพร้อมนิยามภาษาไทย ค้นหาคำ และลิงก์กลับไปยังตัวอย่าง
 - Notebook: คำอธิบายและสมการครบจากบทเรียน พร้อมโค้ด Python และกราฟที่คำนวณซ้ำได้
 
 Lab ใช้ 4 เส้นทางสมมติ 12 เดือน เปรียบเทียบ CPPI กับ Buy & Hold และ Constant Mix 60/40 ไม่ใช่ backtest หรือการทำซ้ำวิทยานิพนธ์ คำนวณใน browser ไม่มีการเรียกข้อมูลตลาด ไม่มี analytics และไม่ส่งพารามิเตอร์ไป server ดาวน์โหลดผลรายเดือนพร้อมพารามิเตอร์เป็น CSV ได้
@@ -60,6 +60,7 @@ npm test
 npm run notebook       # Python 3.9+; ใช้ standard library
 npm run check:notebook
 npm run check:sp500
+npm run check:course  # รันโค้ด Module 2–4 และตรวจ Notebook ให้ตรงต้นฉบับ
 npm run check:extreme # ต้องมี NumPy/pandas/SciPy ตาม qa/extreme-risk-requirements.txt
 npm run build:pages
 npm run check:site  # ต้องเปิด preview ที่พอร์ต 8764
@@ -76,3 +77,16 @@ npm run check:site  # ต้องเปิด preview ที่พอร์ต 
 Visual route: `no-image-generator` ตาม QuantCorner / QuantSeras Material 2 ใช้ฟอนต์ Roboto / Noto Sans Thai / Roboto Mono ในเครื่อง พื้นขาวเป็นค่าเริ่มต้น มีธีมมืดให้เลือก ปุ่มและคำอธิบายเป็นภาษาไทยตามรูปแบบที่เจ้าของเลือก
 
 บทความเสี่ยงมีภาพประกอบแนวคิดที่สร้างด้วย AI ตามคำขอเจ้าของ พร้อมกราฟ P/Q และ Correlation ที่คำนวณจากตัวอย่างสมมติ ภาพประกอบแยกจากกราฟข้อมูลอย่างชัดเจน; ดู provenance ใน `data/risk-provenance.json`
+
+
+## Module 2–4
+
+บทเรียนต่อเนื่องแยกเป็นสิบหน้า โดยจัดสารบัญตามโมดูล:
+
+- Module 2: เริ่มจัดพอร์ตจากสินทรัพย์สองตัว, Efficient frontier, และ MSR/GMV/ความคลาดเคลื่อนของค่าประมาณ
+- Module 3: ข้อจำกัดของ Diversification, CPPI จากศูนย์, และ Monte Carlo
+- Module 4: Asset-Liability Management, พันธบัตรและ Duration, CIR/อัตราดอกเบี้ย, และการจัดพอร์ตตามเป้าหมาย
+
+ทุกหน้ามี Python ที่รันจาก namespace ว่างได้และ Notebook ของบทนั้นพร้อมผลรัน ตัวอย่างใหม่ทั้งหมดเป็นข้อมูลสมมติหรือการจำลองที่กำหนด seed; ไม่มีการแจก CSV, toolkit หรือ Transcript ของคอร์ส ขอบเขตและแหล่งที่มาอยู่ใน `data/course-provenance.json`.
+
+หลังแก้บทเหล่านี้ ใช้ `npm run notebook:course` เพื่อสร้าง Notebook ใหม่ แล้ว `npm run check:course`, `npm run build:pages` และ `npm run check:site` กราฟคำนวณด้วย `python3 scripts/make_course_figures.py` และเก็บค่าที่พล็อตใน `data/course-figures.json`.

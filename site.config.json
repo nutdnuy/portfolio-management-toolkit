@@ -18,29 +18,124 @@
       "file": "returns",
       "title": "How to Calculate return",
       "description": "เริ่มจากเปอร์เซ็นต์และเงินทบต้น สู่ Python เบื้องต้น ความผันผวน Sharpe ratio, Drawdown และ VaR พร้อมตัวอย่างและเฉลยตามหัวข้อ Module 1",
-      "notebook": false
+      "notebook": false,
+      "group": "Module 1 · ผลตอบแทนและความเสี่ยง"
     },
     {
       "file": "extreme-risk",
       "title": "เมื่อผลตอบแทนไม่เป็น Normal",
       "description": "บทต่อจาก Returns: รูปร่างการแจกแจง Skewness, Kurtosis, Normality, Python modules และการวัดความเสี่ยงปลายหางด้วย VaR/CVaR",
-      "notebook": false
+      "notebook": false,
+      "group": "Module 1 · ผลตอบแทนและความเสี่ยง"
+    },
+    {
+      "file": "portfolio-basics",
+      "title": "เริ่มจัดพอร์ตจากสินทรัพย์สองตัว",
+      "description": "อ่านน้ำหนักพอร์ต คำนวณผลตอบแทน Covariance และ Correlation แล้วสำรวจพอร์ตสองสินทรัพย์ด้วย Python ตั้งแต่พื้นฐาน",
+      "module": 2,
+      "lesson": 1,
+      "group": "Module 2 · การสร้างพอร์ต",
+      "notebook": "notebooks/portfolio-basics.ipynb"
+    },
+    {
+      "file": "efficient-frontier",
+      "title": "หลายสินทรัพย์และ Efficient Frontier",
+      "description": "เรียน matrix จากน้ำหนักพอร์ต แยกพอร์ตที่สร้างได้จากพอร์ตที่มีประสิทธิภาพ และใช้ SciPy หาน้ำหนักภายใต้ข้อจำกัดพร้อมตรวจคำตอบ",
+      "module": 2,
+      "lesson": 2,
+      "group": "Module 2 · การสร้างพอร์ต",
+      "notebook": "notebooks/efficient-frontier.ipynb"
+    },
+    {
+      "file": "portfolio-estimation",
+      "title": "เลือกพอร์ตเมื่อค่าประมาณคลาดเคลื่อน",
+      "description": "ผสมสินทรัพย์ปลอดความเสี่ยง หา Max Sharpe Ratio และ GMV เปรียบเทียบ Equal Weight แล้วแยกการประมาณค่าจากการทดสอบนอกตัวอย่าง",
+      "module": 2,
+      "lesson": 3,
+      "group": "Module 2 · การสร้างพอร์ต",
+      "notebook": "notebooks/portfolio-estimation.ipynb"
+    },
+    {
+      "file": "diversification-limits",
+      "title": "ข้อจำกัดของ Diversification",
+      "description": "เรียนรู้ความเสี่ยงร่วม น้ำหนักตามมูลค่าตลาด การใช้ข้อมูลที่รู้จริงก่อนลงทุน และ Rolling Correlation ด้วย Python สำหรับผู้เริ่มต้น",
+      "module": 3,
+      "lesson": 1,
+      "group": "Module 3 · Beyond Diversification",
+      "notebook": "notebooks/diversification-limits.ipynb"
+    },
+    {
+      "file": "cppi-dynamic-allocation",
+      "title": "CPPI จากศูนย์",
+      "description": "คำนวณ CPPI ด้วยมือก่อนเขียน Python เรียนรู้เวลาปรับพอร์ต Gap Risk และ Floor ที่ขยับตามมูลค่าสูงสุดของพอร์ต",
+      "module": 3,
+      "lesson": 2,
+      "group": "Module 3 · Beyond Diversification",
+      "notebook": "notebooks/cppi-dynamic-allocation.ipynb"
+    },
+    {
+      "file": "monte-carlo",
+      "title": "Monte Carlo: สร้างหลายเส้นทางแล้ววัดผล",
+      "description": "เรียน Brownian increments, Exact GBM, Seed และแกนของ Array ก่อนจำลอง CPPI หลายเส้นทาง แยกโอกาสทะลุ Floor, Shortfall และความผิดพลาดของแบบจำลอง",
+      "module": 3,
+      "lesson": 3,
+      "group": "Module 3 · Beyond Diversification",
+      "notebook": "notebooks/monte-carlo.ipynb"
+    },
+    {
+      "file": "asset-liability",
+      "title": "เงินลงทุนกับเป้าหมายที่ต้องจ่าย",
+      "description": "เริ่ม Asset-Liability Management จากกระแสเงินสด มูลค่าปัจจุบัน Funding ratio และพอร์ตที่ช่วยรองรับเป้าหมาย",
+      "module": 4,
+      "lesson": 1,
+      "group": "Module 4 · Asset-Liability Management",
+      "notebook": "notebooks/asset-liability.ipynb"
+    },
+    {
+      "file": "bonds-duration",
+      "title": "พันธบัตร กระแสเงินสด และ Duration",
+      "description": "คำนวณราคาพันธบัตรจากเงินรับแต่ละงวด แยกคูปองออกจาก Yield และใช้ Duration จับคู่ความเสี่ยงของสินทรัพย์กับภาระ",
+      "module": 4,
+      "lesson": 2,
+      "group": "Module 4 · Asset-Liability Management",
+      "notebook": "notebooks/bonds-duration.ipynb"
+    },
+    {
+      "file": "interest-rate-models",
+      "title": "จำลองอัตราดอกเบี้ยและราคา Zero-Coupon Bond",
+      "description": "เรียนหน่วย Short rate แบบจำลอง CIR ข้อจำกัด Euler การคิดราคา ZCB และการเทียบเงินสดกับพอร์ตที่รองรับภาระ",
+      "module": 4,
+      "lesson": 3,
+      "group": "Module 4 · Asset-Liability Management",
+      "notebook": "notebooks/interest-rate-models.ipynb"
+    },
+    {
+      "file": "goal-based-allocation",
+      "title": "จัดพอร์ตให้สอดคล้องกับเป้าหมาย",
+      "description": "เปรียบเทียบ Fixed mix, Glide path และ Dynamic floor จากราคาเป้าหมายต้นงวด พร้อมวัดโอกาสและขนาดเงินขาดจากทุกเส้นทาง",
+      "module": 4,
+      "lesson": 4,
+      "group": "Module 4 · Asset-Liability Management",
+      "notebook": "notebooks/goal-based-allocation.ipynb"
     },
     {
       "file": "risk",
       "title": "ความเสี่ยงในการลงทุน",
       "description": "จากที่มาของแนวคิดความเสี่ยงและทฤษฎีพอร์ต สู่ Volatility, Drawdown, VaR, ES และ EWMA พร้อมตัวอย่างและตัวทดลอง",
-      "notebook": false
+      "notebook": false,
+      "group": "บทอ่านประกอบ"
     },
     {
       "file": "portfolio-insurance",
       "title": "Portfolio Insurance",
-      "description": "Portfolio Insurance Strategies: Friend or Foe? เรียนรู้ Floor, CPPI, OBPI และต้นทุนการป้องกันพอร์ต ผ่านตัวอย่างและการทดลอง"
+      "description": "Portfolio Insurance Strategies: Friend or Foe? เรียนรู้ Floor, CPPI, OBPI และต้นทุนการป้องกันพอร์ต ผ่านตัวอย่างและการทดลอง",
+      "group": "บทอ่านประกอบ"
     },
     {
       "file": "glossary",
       "title": "อภิธานศัพท์",
-      "description": "คำศัพท์การบริหารพอร์ต ความเสี่ยง และ Portfolio Insurance พร้อมลิงก์กลับบทเรียน"
+      "description": "คำศัพท์การบริหารพอร์ต ความเสี่ยง และ Portfolio Insurance พร้อมลิงก์กลับบทเรียน",
+      "group": "คำศัพท์"
     }
   ],
   "logos": [

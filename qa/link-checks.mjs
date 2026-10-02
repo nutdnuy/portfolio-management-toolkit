@@ -7,7 +7,8 @@ const manifest = JSON.parse(fs.readFileSync(path.join(root, 'build-manifest.json
 const failures = [];
 let checked = 0;
 assert.equal(manifest.format, 'book');
-assert.deepEqual(manifest.pages, ['index.html', 'returns.html', 'extreme-risk.html', 'risk.html', 'portfolio-insurance.html', 'glossary.html']);
+const config = JSON.parse(fs.readFileSync(path.resolve(root, '../site.config.json'), 'utf8'));
+assert.deepEqual(manifest.pages, config.pages.map(page => `${page.file}.html`));
 
 function localReference(owner, reference) {
   if (/^(?:https?:|mailto:|data:|tel:)/i.test(reference)) return;
@@ -42,11 +43,11 @@ for (const name of ['style.css', 'book.css', 'app.css', 'returns.css', 'risk.css
   if (!fs.existsSync(owner)) { failures.push(`Missing stylesheet ${name}`); continue; }
   for (const match of fs.readFileSync(owner, 'utf8').matchAll(/url\(["']?([^"')]+)["']?\)/g)) localReference(owner, match[1]);
 }
-for (const name of ['index.md', 'returns.md', 'extreme-risk.md', 'risk.md', 'portfolio-insurance.md', 'glossary.md']) {
+for (const name of config.pages.map(page => `${page.file}.md`)) {
   const artifact = path.join(root, name);
   if (!fs.existsSync(artifact) || fs.statSync(artifact).size === 0) failures.push(`Missing Markdown download ${name}`);
 }
-for (const notebookName of ['portfolio-insurance']) {
+for (const notebookName of ['portfolio-insurance', ...config.pages.filter(page => page.module).map(page => page.file)]) {
   const notebookFile = path.join(root, `notebooks/${notebookName}.ipynb`);
   if (!fs.existsSync(notebookFile)) failures.push(`Missing Notebook download notebooks/${notebookName}.ipynb`);
   else {
