@@ -1,0 +1,177 @@
+{
+  "title": "Beyond the Gaussian case: Extreme risk estimates — beginner continuation",
+  "updated": "2026-10-02",
+  "provider": "EDHEC Business School / Coursera",
+  "source_access": "Authorized course browser transcript/reading views in this conversation and owner-supplied local lab_104–lab_106 notebooks and toolkit files.",
+  "course_sources": [
+    {
+      "title": "Deviations from Normality",
+      "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/fpkEu/deviations-from-normality"
+    },
+    {
+      "title": "Correction to Deviations from Normality",
+      "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/supplement/yrJGY/incorrect-statement-in-deviation-from-normality-video"
+    },
+    {
+      "title": "Lab Session-Building your own modules",
+      "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/VDaOA/lab-session-building-your-own-modules"
+    },
+    {
+      "title": "Downside risk measures",
+      "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/Xeixz/downside-risk-measures"
+    },
+    {
+      "title": "Lab Session-Deviations from Normality",
+      "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/c8aLc/lab-session-deviations-from-normality"
+    },
+    {
+      "title": "Estimating VaR",
+      "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/Tlpi8/estimating-var"
+    },
+    {
+      "title": "Lab Session-Semi Deviation, VaR and CVaR",
+      "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/BmEcs/lab-session-semi-deviation-var-and-cvar"
+    },
+    {
+      "title": "Semi Deviation",
+      "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/supplement/SzIC4/semi-deviation"
+    }
+  ],
+  "local_references": [
+    "lab_104.ipynb",
+    "lab_105.ipynb",
+    "lab_106.ipynb",
+    "edhec_risk_kit_104.py",
+    "edhec_risk_kit_105.py",
+    "edhec_risk_kit_106.py"
+  ],
+  "reuse": "Original Thai teaching text, authored numerical examples and Python code. No videos, transcripts, course notebooks, graded quizzes or course market datasets redistributed.",
+  "data": {
+    "status": "Entirely hypothetical or seeded simulations",
+    "shapes": {
+      "observations": 10,
+      "frequency": "monthly",
+      "unit": "decimal return",
+      "regular_standardized": [
+        -3,
+        -2,
+        -1,
+        -1,
+        0,
+        0,
+        1,
+        1,
+        2,
+        3
+      ],
+      "regular_divisor": "sqrt(3)",
+      "left_tail_standardized": [
+        -3,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "mean": 0.01,
+      "population_sd": 0.02
+    },
+    "normality": {
+      "seed": 20261002,
+      "n_per_distribution": 5000,
+      "models": [
+        "Normal",
+        "Student-t, df=5; scale sqrt(3/5)"
+      ],
+      "purpose": "Demonstrate test behavior under known simulated models, not empirical market evidence"
+    },
+    "downside": [
+      -0.02,
+      0,
+      0.02,
+      0.04
+    ],
+    "tail": {
+      "observations": 20,
+      "frequency": "daily",
+      "unit": "decimal return",
+      "returns": [
+        -0.12,
+        -0.06,
+        -0.04,
+        -0.03,
+        -0.025,
+        -0.02,
+        -0.015,
+        -0.01,
+        -0.005,
+        0,
+        0.002,
+        0.004,
+        0.006,
+        0.008,
+        0.01,
+        0.012,
+        0.015,
+        0.02,
+        0.03,
+        0.04
+      ]
+    }
+  },
+  "conventions": [
+    "Moment skewness and Pearson kurtosis use population central moments, without bias correction.",
+    "Median is a sample midpoint, not the mode; the skewness sign is not a below-mean count.",
+    "High JB p-value does not prove Normality or independence. Large-sample approximation limits are explicit.",
+    "Course mean-centered conditional semideviation, original lab negative-subset SD, and target downside across all periods are distinguished.",
+    "Historical VaR is the inverse empirical CDF of losses. ES uses exactly the worst-tail probability, including fractional observations and ties.",
+    "Gaussian/CF estimates use population moments; CF is an approximation and not guaranteed conservative.",
+    "Sample frequency is kept consistent; no automatic square-root-of-time VaR annualization."
+  ],
+  "visuals": {
+    "route": "no-image-generator",
+    "script": "scripts/make_extreme_risk_figure.mjs",
+    "exports": [
+      "assets/charts/extreme-risk-shapes.svg",
+      "assets/charts/extreme-risk-shapes-mobile.svg"
+    ],
+    "bins_percent": [
+      -6,
+      -4,
+      -2,
+      0,
+      2,
+      4,
+      6
+    ],
+    "counts": {
+      "Regular": [
+        0,
+        1,
+        3,
+        2,
+        3,
+        1
+      ],
+      "LeftTail": [
+        1,
+        0,
+        0,
+        9,
+        0,
+        0
+      ]
+    },
+    "fonts": "Existing approved local Roboto / Noto Sans Thai, embedded unchanged.",
+    "runtime": "Static SVG, no external chart libraries or requests."
+  },
+  "module": "examples/extreme-risk/finance_tools.py",
+  "verification": [
+    "qa/extreme-risk-checks.py",
+    "qa/extreme-risk-browser-checks.cjs"
+  ]
+}

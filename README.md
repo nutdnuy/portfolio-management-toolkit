@@ -25,6 +25,7 @@ npm run dev
 
 - Welcome: แนะนำหนังสือและวิธีอ่าน
 - How to Calculate return: บทเริ่มต้นจากเปอร์เซ็นต์ เงินทบต้น ค่าเฉลี่ย และ Python/pandas แบบทีละขั้น ตามหัวข้อ Module 1 ของคอร์ส EDHEC ต่อด้วย Volatility, Sharpe ratio, Drawdown, Skewness, Semi-deviation และ VaR/ES ใช้ข้อมูลสมมติและโค้ดสั้นพร้อมผลลัพธ์ มี Log return เป็นบทอ่านต่อ พร้อมภาพคำนวณ 2 ภาพ ตัวทดลองเดิม และคำถามพร้อมเฉลย
+- เมื่อผลตอบแทนไม่เป็น Normal: บทต่อ Section 2 ของ Module 1 สอนรูปร่างผลตอบแทน Moments, Normality, Python module, Semi-deviation และ Historical/Gaussian/Cornish–Fisher VaR พร้อม CVaR แบบถ่วงน้ำหนักปลายหาง กราฟสมมติ และแบบฝึกหัด
 - ความเสี่ยงในการลงทุน: นิยาม ประวัติ และทฤษฎีของความเสี่ยง ก่อนคำนวณ Volatility, Downside, Drawdown, Diversification, VaR, ES, EWMA และ Stress test พร้อมตัวทดลอง 3 ชุดและแหล่งอ้างอิงต้นฉบับ
 - Portfolio Insurance: บทเรียน 13 หัวข้อหลักแบบละเอียด ไล่จาก Put และงบ OBPI สู่ CPPI หลายรอบ, Variable-Multiplier Portfolio Insurance พร้อมตัวอย่างใน Notebook, TIPP แบบ Ratchet, Gap risk พร้อมดอกเบี้ย, EUT/CPT พร้อมคำนวณคะแนน และการประเมิน Shortfall/Drawdown มีผลทดสอบ S&P 500 ปี 2018–2025 พร้อมกราฟมูลค่าและ Drawdown รายวันเทียบ Buy & Hold แทรกใน SLPI, CPPI, TIPP และ Variable Multiplier พร้อมข้อดีข้อเสียของแต่ละวิธี และโจทย์พร้อมเฉลย 8 ข้อและเครื่องมือทดลองในบท
 - อภิธานศัพท์: 47 คำพร้อมนิยามภาษาไทย ค้นหาคำ และลิงก์กลับไปยังตัวอย่าง
@@ -59,6 +60,7 @@ npm test
 npm run notebook       # Python 3.9+; ใช้ standard library
 npm run check:notebook
 npm run check:sp500
+npm run check:extreme # ต้องมี NumPy/pandas/SciPy ตาม qa/extreme-risk-requirements.txt
 npm run build:pages
 npm run check:site  # ต้องเปิด preview ที่พอร์ต 8764
 ```

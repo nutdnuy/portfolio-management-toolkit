@@ -16,10 +16,11 @@ async function build() {
   for (const name of ['style.css', 'book.css', 'THIRD_PARTY_NOTICES.md']) fs.copyFileSync(path.join(root, name), path.join(out, name));
   if (fs.existsSync(path.join(root, 'notebooks'))) fs.cpSync(path.join(root, 'notebooks'), path.join(out, 'notebooks'), {recursive:true});
   fs.mkdirSync(path.join(out, 'downloads'), {recursive:true});
-  for (const [source, target] of [['data/sp500-results.json','sp500-results.json'], ['data/sp500-results.csv','sp500-results.csv'], ['scripts/sp500_backtest.py','sp500-backtest.py']]) fs.copyFileSync(path.join(root, source), path.join(out, 'downloads', target));
+  for (const [source, target] of [['data/sp500-results.json','sp500-results.json'], ['data/sp500-results.csv','sp500-results.csv'], ['scripts/sp500_backtest.py','sp500-backtest.py'], ['examples/extreme-risk/finance_tools.py','finance_tools.py']]) fs.copyFileSync(path.join(root, source), path.join(out, 'downloads', target));
   fs.mkdirSync(path.join(out, 'licenses'), {recursive:true});
   for (const name of fs.readdirSync(path.join(root, 'vendor')).filter(n => n.endsWith('-LICENSE.txt'))) fs.copyFileSync(path.join(root, 'vendor', name), path.join(out, 'licenses', name));
   fs.writeFileSync(path.join(out, 'licenses/index.html'), '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Third-party licenses</title><h1>Third-party licenses</h1><p><a href="../index.html">Return to the book</a></p><ul>' + fs.readdirSync(path.join(out, 'licenses')).filter(n => n.endsWith('.txt')).map(n => '<li><a href="' + n + '">' + n + '</a></li>').join('') + '</ul></html>');
+  fs.copyFileSync(path.join(root, 'src/extreme-risk.css'), path.join(out, 'extreme-risk.css'));
   const cover = className => `<div class="brand-cover ${className}" role="img" aria-label="QuantCorner / Quantsera บนพื้นหลังสีดำ">${config.logos.map(src => `<img src="${escape(src)}" alt="" width="1024" height="228">`).join('')}</div>`;
   const icon = fs.readFileSync(path.join(root, 'assets/icons/search.svg'), 'utf8').replace('<svg', '<svg aria-hidden="true" focusable="false"');
   const pages = config.pages.map(page => {
@@ -33,7 +34,7 @@ async function build() {
     };
     source = source.replace(/\$\$([\s\S]*?)\$\$/g, (_, tex) => math(tex, true)).replace(/\$([^$\n]+)\$/g, (_, tex) => math(tex, false));
     let body = marked.parse(source).replace(/PMTMATH(\d+)END/g, (_, i) => equations[+i]);
-    if (page.file === 'returns') body = body.replace(/<pre>/g, '<pre tabindex="0" role="region" aria-label="ตัวอย่างโค้ดหรือผลลัพธ์ เลื่อนแนวนอนได้">');
+    if (['returns', 'extreme-risk'].includes(page.file)) body = body.replace(/<pre>/g, '<pre tabindex="0" role="region" aria-label="ตัวอย่างโค้ดหรือผลลัพธ์ เลื่อนแนวนอนได้">');
     const headings = [], ids = new Map([...body.matchAll(/\bid="([^"]+)"/g)].map(match => [match[1], 1]));
     body = body.replace(/<h([1-3])>([\s\S]*?)<\/h\1>/g, (_, level, text) => {
       const base = slug(text), n = (ids.get(base) || 0) + 1;
@@ -58,7 +59,7 @@ async function build() {
     const home = page.file === 'index';
     const notebook = page.notebook === false ? null : (page.notebook || config.notebook);
     const notebookLink = notebook ? `<a href="${escape(notebook)}" download>ดาวน์โหลด Notebook</a>` : '';
-    const html = `<!doctype html><html lang="th" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escape(page.description)}"><title>${escape(page.title)} · ${escape(config.title)}</title><link rel="icon" href="assets/brand/favicon-32.png"><link rel="stylesheet" href="assets/katex/katex.min.css"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="app.css"><link rel="stylesheet" href="book.css">${['returns','risk'].includes(page.file) ? `<link rel="stylesheet" href="${page.file}.css">` : ''}<script>try{document.documentElement.dataset.theme=localStorage.getItem('pmt-book-theme')==='dark'?'dark':'light'}catch(e){}</script></head><body class="book ${home ? 'welcome-page' : 'lesson-page'}" data-page="${page.file}">
+    const html = `<!doctype html><html lang="th" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escape(page.description)}"><title>${escape(page.title)} · ${escape(config.title)}</title><link rel="icon" href="assets/brand/favicon-32.png"><link rel="stylesheet" href="assets/katex/katex.min.css"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="app.css"><link rel="stylesheet" href="book.css">${['returns','risk','extreme-risk'].includes(page.file) ? `<link rel="stylesheet" href="${page.file}.css">` : ''}<script>try{document.documentElement.dataset.theme=localStorage.getItem('pmt-book-theme')==='dark'?'dark':'light'}catch(e){}</script></head><body class="book ${home ? 'welcome-page' : 'lesson-page'}" data-page="${page.file}">
 <a class="skip-link" href="#content">ข้ามไปเนื้อหา</a>
 <header class="book-mobile-header"><a href="index.html">${escape(config.title)}</a><button id="menu-button" aria-expanded="false" aria-controls="book-sidebar">สารบัญ</button></header>
 <div class="book-layout"><aside id="book-sidebar" class="book-sidebar"><a href="index.html" class="cover-link" aria-label="กลับหน้า Welcome">${cover('book-cover')}</a><a class="book-name" href="index.html">${escape(config.title)}</a><button class="search-trigger" id="search-button">${icon}<span>Search</span><kbd>⌘ K</kbd></button><nav class="book-nav" aria-label="สารบัญ">${nav}</nav>${contents}<div class="book-sidebar-footer">${notebookLink}<a href="${page.file}.md" download>ไฟล์ Markdown หน้านี้</a><button id="theme-button">พื้นหลังมืด</button></div></aside>
@@ -75,7 +76,7 @@ async function build() {
   for (const page of pages) {
     const file = path.join(out, page.file + '.html');
     let html = renderedPages.get(page.file);
-    for (const asset of ['style.css','book.css','app.css','app.js','returns.css','returns.js','risk.css','risk.js','site.js','search-index.js']) {
+    for (const asset of ['style.css','book.css','app.css','app.js','returns.css','returns.js','risk.css','risk.js','extreme-risk.css','site.js','search-index.js']) {
       const hash = createHash('sha256').update(fs.readFileSync(path.join(out, asset))).digest('hex').slice(0, 10);
       html = html.replaceAll(`"${asset}"`, `"${asset}?v=${hash}"`);
     }

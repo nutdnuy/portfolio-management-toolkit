@@ -49,3 +49,10 @@ The three labs use `src/risk.jsx`, `src/risk.css` and `src/risk-math.mjs`. Chart
 
 
 Risk visual additions (2026-09-20): the owner explicitly requested generated imagery. `assets/illustrations/risk-uncertain-futures.png` is a conceptual AI illustration, with prompt and provenance in `data/`; this is a scoped exception to the website's default visual route. Never treat the illustration as data. The P/Q and correlation figures remain deterministic: regenerate desktop/mobile SVGs with `node scripts/make_risk_figures.mjs`. Keep scenario probabilities, SD convention, axes and explanatory captions aligned with the lesson.
+
+
+## Extreme Risk continuation
+
+Edit `content/extreme-risk.md`, placed after Returns. This is a beginner expansion of Module 1 Section 2, with original hypothetical examples; keep the Returns overview and legacy anchors intact. Provenance is in `data/extreme-risk-provenance.json`. Use population moments (`ddof=0`) for skewness/kurtosis and distinguish these from sample volatility. Normality test outputs do not prove Normality or independence. Keep the three semideviation conventions distinct. Historical VaR is the loss inverse-ECDF; ES allocates exactly the worst-tail mass, including fractional boundary weights.
+
+`examples/extreme-risk/finance_tools.py` is the original downloadable module. Its complete displayed Python block must match the file; do not copy the private course toolkit. `scripts/make_extreme_risk_figure.mjs` generates both responsive hypothetical histogram SVGs. Run `npm run check:extreme` (dependencies pinned in `qa/extreme-risk-requirements.txt`), `npm run build:pages` and `npm run check:site`. The Python check runs all fenced examples in source order and verifies independent analytical values; browser checks cover the new page and figures. The insurance Notebook is independent and does not need regeneration for edits to this chapter.

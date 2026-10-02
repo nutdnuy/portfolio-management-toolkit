@@ -21,6 +21,12 @@
       "notebook": false
     },
     {
+      "file": "extreme-risk",
+      "title": "เมื่อผลตอบแทนไม่เป็น Normal",
+      "description": "บทต่อจาก Returns: รูปร่างการแจกแจง Skewness, Kurtosis, Normality, Python modules และการวัดความเสี่ยงปลายหางด้วย VaR/CVaR",
+      "notebook": false
+    },
+    {
       "file": "risk",
       "title": "ความเสี่ยงในการลงทุน",
       "description": "จากที่มาของแนวคิดความเสี่ยงและทฤษฎีพอร์ต สู่ Volatility, Drawdown, VaR, ES และ EWMA พร้อมตัวอย่างและตัวทดลอง",

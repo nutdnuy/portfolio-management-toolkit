@@ -1,0 +1,6 @@
+.book[data-page="extreme-risk"] pre{font-size:15px;line-height:1.75;padding:20px;max-width:100%}
+.book[data-page="extreme-risk"] pre code{font-size:inherit}
+.book[data-page="extreme-risk"] pre:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+.extreme-figure{margin:36px 0}.extreme-figure picture{display:block;background:#fff;border:1px solid var(--subtle-border);border-radius:4px;overflow:hidden}.extreme-figure img{display:block;width:100%;height:auto}.extreme-figure figcaption{font-size:14px;color:var(--muted);line-height:1.8;margin-top:12px}
+.chapter-navigation{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;margin-top:48px;padding-top:24px;border-top:1px solid var(--subtle-border)}
+@media print{.extreme-figure{break-inside:avoid}.chapter-navigation{display:none}}
