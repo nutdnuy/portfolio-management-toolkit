@@ -24,7 +24,7 @@ npm run dev
 ## เนื้อหาและเครื่องมือ
 
 - Welcome: แนะนำหนังสือและวิธีอ่าน
-- How to Calculate return: Simple/Log return และคุณสมบัติการบวกข้ามเวลา ผ่านเงิน 1 ล้านบาทที่ได้ +100% แล้ว −50% พร้อมภาพคำนวณ 2 ภาพ ตัวทดลองปรับผลตอบแทนรายปี ค่าเฉลี่ย CAGR ผลตอบแทนพอร์ต และคำถามพร้อมเฉลย
+- How to Calculate return: บทเริ่มต้นจากเปอร์เซ็นต์ เงินทบต้น ค่าเฉลี่ย และ Python/pandas แบบทีละขั้น ตามหัวข้อ Module 1 ของคอร์ส EDHEC ต่อด้วย Volatility, Sharpe ratio, Drawdown, Skewness, Semi-deviation และ VaR/ES ใช้ข้อมูลสมมติและโค้ดสั้นพร้อมผลลัพธ์ มี Log return เป็นบทอ่านต่อ พร้อมภาพคำนวณ 2 ภาพ ตัวทดลองเดิม และคำถามพร้อมเฉลย
 - ความเสี่ยงในการลงทุน: นิยาม ประวัติ และทฤษฎีของความเสี่ยง ก่อนคำนวณ Volatility, Downside, Drawdown, Diversification, VaR, ES, EWMA และ Stress test พร้อมตัวทดลอง 3 ชุดและแหล่งอ้างอิงต้นฉบับ
 - Portfolio Insurance: บทเรียน 13 หัวข้อหลักแบบละเอียด ไล่จาก Put และงบ OBPI สู่ CPPI หลายรอบ, Variable-Multiplier Portfolio Insurance พร้อมตัวอย่างใน Notebook, TIPP แบบ Ratchet, Gap risk พร้อมดอกเบี้ย, EUT/CPT พร้อมคำนวณคะแนน และการประเมิน Shortfall/Drawdown มีผลทดสอบ S&P 500 ปี 2018–2025 พร้อมกราฟมูลค่าและ Drawdown รายวันเทียบ Buy & Hold แทรกใน SLPI, CPPI, TIPP และ Variable Multiplier พร้อมข้อดีข้อเสียของแต่ละวิธี และโจทย์พร้อมเฉลย 8 ข้อและเครื่องมือทดลองในบท
 - อภิธานศัพท์: 47 คำพร้อมนิยามภาษาไทย ค้นหาคำ และลิงก์กลับไปยังตัวอย่าง

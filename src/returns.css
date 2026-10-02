@@ -9,3 +9,6 @@
 .return-figure{margin:36px 0}.return-figure .return-figure-scroll{overflow-x:auto;background:white;border:1px solid var(--subtle-border);border-radius:4px}.return-figure img{width:100%;height:auto;display:block;min-width:520px}.return-figure figcaption{font-size:14px;line-height:1.8;color:var(--muted);margin:12px 0}.return-figure figcaption a{white-space:nowrap}
 @media(max-width:650px){.returns-viz{padding:20px 16px}.rv-controls,.rv-charts,.rv-equations{grid-template-columns:1fr;gap:24px}.rv-toolbar,.rv-answer{align-items:flex-start;flex-direction:column;gap:12px}.rv-answer strong{font-size:34px}.rv-answer{padding:20px 0}.rv-presets button{flex:1 1 150px}.book-main .returns-viz h3{font-size:21px}.rv-charts svg{max-width:480px;margin:0 auto}.return-figure figcaption{font-size:13px}}
 @media print{.rv-controls,.rv-presets,.rv-toolbar{display:none}.returns-viz{break-inside:avoid;box-shadow:none}.return-figure{break-inside:avoid}.return-figure img{min-width:0}.rv-charts{grid-template-columns:1fr 1fr}}
+.book[data-page="returns"] pre{font-size:15px;line-height:1.75;padding:20px;max-width:100%}
+.book[data-page="returns"] pre code{font-size:inherit}
+.book[data-page="returns"] pre:focus-visible{outline:3px solid var(--primary);outline-offset:3px}

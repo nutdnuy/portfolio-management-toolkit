@@ -33,6 +33,7 @@ async function build() {
     };
     source = source.replace(/\$\$([\s\S]*?)\$\$/g, (_, tex) => math(tex, true)).replace(/\$([^$\n]+)\$/g, (_, tex) => math(tex, false));
     let body = marked.parse(source).replace(/PMTMATH(\d+)END/g, (_, i) => equations[+i]);
+    if (page.file === 'returns') body = body.replace(/<pre>/g, '<pre tabindex="0" role="region" aria-label="ตัวอย่างโค้ดหรือผลลัพธ์ เลื่อนแนวนอนได้">');
     const headings = [], ids = new Map([...body.matchAll(/\bid="([^"]+)"/g)].map(match => [match[1], 1]));
     body = body.replace(/<h([1-3])>([\s\S]*?)<\/h\1>/g, (_, level, text) => {
       const base = slug(text), n = (ids.get(base) || 0) + 1;

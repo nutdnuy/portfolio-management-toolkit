@@ -21,6 +21,70 @@
       "author": "AlgoAddict Diary",
       "url": "https://medium.com/@info.algoaddict/simple-return-vs-log-return-c075d65f1739",
       "accessed": "2026-09-19"
+    },
+    {
+      "title": "Introduction to Portfolio Construction and Analysis with Python — Module 1: Analysing returns",
+      "provider": "EDHEC Business School / Coursera",
+      "instructors": [
+        "Vijay Vaidyanathan",
+        "Lionel Martellini"
+      ],
+      "accessed": "2026-10-02",
+      "access_method": "English transcripts read in the authorized Coursera browser session; supplied lab_101–lab_106 notebooks inspected locally.",
+      "lectures": [
+        {
+          "title": "Fundamentals of Returns",
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/UL04V/fundamentals-of-returns"
+        },
+        {
+          "title": "Lab Session-Basics of returns",
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/lLS6N/lab-session-basics-of-returns"
+        },
+        {
+          "title": "Measures of Risk and Reward",
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/QYHx1/measures-of-risk-and-reward"
+        },
+        {
+          "title": "Measuring Max Drawdown",
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/0viQF/measuring-max-drawdown"
+        },
+        {
+          "title": "Deviations from Normality",
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/fpkEu/deviations-from-normality"
+        },
+        {
+          "title": "Downside risk measures",
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/Xeixz/downside-risk-measures"
+        },
+        {
+          "title": "Estimating VaR",
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/Tlpi8/estimating-var"
+        }
+      ],
+      "supplements": [
+        {
+          "title": "Module 1- Key points",
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/supplement/swiE0/module-1-key-points"
+        },
+        {
+          "title": "Correction to Deviations from Normality",
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/supplement/yrJGY/incorrect-statement-in-deviation-from-normality-video"
+        },
+        {
+          "title": "Semi Deviation — alternative definition",
+          "url": "https://www.coursera.org/learn/introduction-portfolio-construction-python/supplement/SzIC4/semi-deviation"
+        }
+      ],
+      "local_reference_files": [
+        "lab_101.ipynb",
+        "lab_102.ipynb",
+        "lab_103.ipynb",
+        "lab_104.ipynb",
+        "lab_105.ipynb",
+        "lab_106.ipynb",
+        "edhec_risk_kit_105.py"
+      ],
+      "reuse": "Original Thai teaching explanations and new hypothetical worked examples; transcripts, videos, source notebooks and course market data are not redistributed."
     }
   ],
   "examples": "Original hypothetical examples; no market data. Prices in THB, returns in decimal unless labelled percent. No external cash flows, fees or taxes unless explicitly discussed.",
@@ -42,7 +106,7 @@
     "cumulative_simple_return": 0,
     "cumulative_log_return": 0,
     "external_cash_flows": false,
-    "format": "Worked lesson and self-check questions; no Python or Notebook"
+    "format": "Worked lesson, optional inline Python examples and self-check questions; no separate Returns Notebook"
   },
   "visuals": {
     "route": "no-image-generator",
@@ -62,5 +126,20 @@
     ],
     "rounding": "Unrounded calculations; display logs to four decimals in the lab and six in the table.",
     "fonts": "Existing locally bundled Roboto and Noto Sans Thai, embedded unchanged in SVGs."
+  },
+  "module1_extension": {
+    "audience": "Beginners in finance and Python",
+    "hypothetical_data_only": true,
+    "python_examples": "Inline executable examples, using pandas; no external market files required.",
+    "conventions": [
+      "Sample volatility uses ddof=1, with annual scaling described as conditional on its assumptions.",
+      "Conventional Sharpe uses arithmetic excess returns; the course geometric-return convention is labelled separately.",
+      "Drawdown includes initial capital and is not annualized.",
+      "Negative skewness does not determine the proportion of observations below the mean.",
+      "High Jarque–Bera p-value does not prove Normality or independence.",
+      "Original-lab negative-subset SD, course correction mean-centered semideviation, and target downside deviation have distinct definitions.",
+      "Historical VaR uses the inverse empirical CDF of losses; ES uses exactly the stated worst-tail probability mass.",
+      "Historical methods still assume the sample is informative about the risk being estimated; Cornish–Fisher is an approximation."
+    ]
   }
 }

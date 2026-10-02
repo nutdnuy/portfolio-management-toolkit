@@ -56,6 +56,7 @@ for (const notebookName of ['portfolio-insurance']) {
   }
 }
 const returnPage = fs.readFileSync(path.join(root, 'returns.html'), 'utf8');
-assert.doesNotMatch(returnPage, /\.ipynb|language-python|ทดลองคำนวณและตรวจคำตอบด้วย Python/);
+assert.match(returnPage, /<code class="language-python">\s*\S/, 'The Return lesson includes readable Python examples.');
+assert.doesNotMatch(returnPage, /href="[^"]*\.ipynb(?:[?#][^"]*)?"/, 'The Return lesson does not link to an unrelated Notebook.');
 assert.deepEqual(failures, [], failures.join('\n'));
 console.log(`Verified ${manifest.pages.length} book pages, ${htmlFiles.length} HTML files and ${checked} local references, including anchors, book.css, fonts, Markdown and Notebook downloads.`);

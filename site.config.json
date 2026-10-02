@@ -17,7 +17,7 @@
     {
       "file": "returns",
       "title": "How to Calculate return",
-      "description": "เรียนรู้ Simple return และการบวก Log return ข้ามเวลา ผ่านเงิน 1 ล้านบาทที่ปีแรกกำไร 100% ปีที่สองขาดทุน 50%",
+      "description": "เริ่มจากเปอร์เซ็นต์และเงินทบต้น สู่ Python เบื้องต้น ความผันผวน Sharpe ratio, Drawdown และ VaR พร้อมตัวอย่างและเฉลยตามหัวข้อ Module 1",
       "notebook": false
     },
     {
