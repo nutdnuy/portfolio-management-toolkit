@@ -202,6 +202,36 @@
       "notebook": "notebooks/time-varying-risk.ipynb"
     },
     {
+      "file": "expected-return-estimation",
+      "title": "Expected Return: ค่าเฉลี่ยที่เรายังไม่รู้",
+      "description": "แยกผลตอบแทนย้อนหลังจากค่าเฉลี่ยที่ต้องการประมาณ อ่าน Standard Error และทดลอง Mean Shrinkage กับสมมติฐานของ Factor Models",
+      "course": "advanced",
+      "module": 3,
+      "lesson": 1,
+      "group": "Advanced · Module 3 · Expected Returns",
+      "notebook": "notebooks/expected-return-estimation.ipynb"
+    },
+    {
+      "file": "implied-returns-views",
+      "title": "Implied Returns: เริ่มจากพอร์ตแล้วระบุ Views",
+      "description": "ย้อนจากน้ำหนักพอร์ตสู่ผลตอบแทนที่สอดคล้องกับแบบจำลอง แล้วเขียนมุมมองและความไม่แน่นอนด้วย P, Q และ Omega",
+      "course": "advanced",
+      "module": 3,
+      "lesson": 2,
+      "group": "Advanced · Module 3 · Expected Returns",
+      "notebook": "notebooks/implied-returns-views.ipynb"
+    },
+    {
+      "file": "black-litterman",
+      "title": "Black–Litterman: รวมค่าตั้งต้นกับ Views",
+      "description": "เริ่ม Bayes จากตัวเลขหนึ่งตัว ก่อนคำนวณ posterior mean, ความไม่แน่นอนของค่าเฉลี่ย และ predictive covariance พร้อมตรวจน้ำหนักพอร์ต",
+      "course": "advanced",
+      "module": 3,
+      "lesson": 3,
+      "group": "Advanced · Module 3 · Expected Returns",
+      "notebook": "notebooks/black-litterman.ipynb"
+    },
+    {
       "file": "risk",
       "title": "ความเสี่ยงในการลงทุน",
       "description": "จากที่มาของแนวคิดความเสี่ยงและทฤษฎีพอร์ต สู่ Volatility, Drawdown, VaR, ES และ EWMA พร้อมตัวอย่างและตัวทดลอง",

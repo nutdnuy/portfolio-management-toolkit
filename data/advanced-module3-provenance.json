@@ -1,0 +1,95 @@
+{
+  "course": "Advanced Portfolio Construction and Analysis with Python",
+  "module": 3,
+  "module_title": "Robust estimates for expected returns",
+  "review_date": "2026-10-03",
+  "source_access": [
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/1U7Zh/lack-of-robustness-of-expected-return-estimates",
+      "access": "Full authenticated transcript read",
+      "used_in": "expected-return-estimation"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/TbidX/agnostic-priors-on-expected-return-estimates",
+      "access": "Full authenticated transcript read",
+      "used_in": "expected-return-estimation"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/c6E51/using-factor-models-to-estimate-expected-returns",
+      "access": "Full authenticated transcript read",
+      "used_in": "expected-return-estimation"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/nyHIO/extracting-implied-expected-returns",
+      "access": "Full authenticated transcript read",
+      "used_in": "implied-returns-views"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/oCQ00/introducing-active-views",
+      "access": "Full authenticated transcript read",
+      "used_in": "implied-returns-views"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/Vgyoc/black-litterman-analysis",
+      "access": "Full authenticated transcript read",
+      "used_in": "black-litterman"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/RWEZL/module-3-lab-session-black-litterman",
+      "access": "Full authenticated transcript read",
+      "used_in": "black-litterman"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/supplement/An3y4/module-3-key-points",
+      "access": "Full reading viewed",
+      "used_in": "module organization"
+    },
+    {
+      "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/supplement/cVBb3/the-intuition-behind-black-litterman-model-portfolios",
+      "access": "Reading viewed; its linked paper was read via the primary authored 1999 PDF in the references below",
+      "used_in": "implied-returns-views and black-litterman"
+    }
+  ],
+  "code_inspection": {
+    "url": "https://www.coursera.org/learn/advanced-portfolio-construction-python/ungradedLab/RqxtJ/labs-and-code",
+    "file": "lab_23.ipynb",
+    "scope": "Read notebook through cell In[37] in the authenticated lab UI without running cells",
+    "finding": "implied_returns uses delta*Sigma*w; the default Omega is the diagonal of P*tau*Sigma*P-transpose. The bl function returns predictive covariance Sigma+M, which differs from posterior uncertainty M of the mean. Normalized tangency weights and unconstrained utility allocations are distinguished in our new examples."
+  },
+  "primary_references": [
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm",
+    "https://www.itl.nist.gov/div898/handbook/prc/section1/prc14.htm",
+    "https://web.stanford.edu/~wfsharpe/mia/fac/mia_fac3.htm",
+    "https://people.duke.edu/~charvey/Teaching/BA453_2002/GS_The_intuition_behind.pdf",
+    "https://people.duke.edu/~charvey/Teaching/BA453_2004/GS_The_intuition_behind.pdf",
+    "https://www.cis.upenn.edu/~mkearns/finread/idzorek.pdf",
+    "https://pyportfolioopt.readthedocs.io/en/stable/BlackLitterman.html",
+    "https://web.stanford.edu/class/archive/stats/stats200/stats200.1172/Lecture21.pdf",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.t.html",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html"
+  ],
+  "reference_scope": "He-Litterman PDF is dated December 1999; this is distinct from the 2002 SSRN listing mentioned in the course supplement. Idzorek July 2004 authored paper read via an academic mirror. No source PDF is redistributed.",
+  "examples": {
+    "status": "Original hypothetical examples and seeded simulations; no empirical forecast or recommendation",
+    "shared_fixture": "Three hypothetical risky assets, annual decimal excess-return means and annual covariance; benchmark weights 0.5/0.3/0.2 and risk-aversion calibration 2.5",
+    "notebooks": "Self-contained chapter namespaces with NumPy, pandas and SciPy; no private archive or network needed",
+    "views": "Authored assumptions for teaching, not views on real securities"
+  },
+  "conventions": [
+    "Sample mean, expected arithmetic return and CAGR are distinct; standard error assumptions and confidence-interval interpretation are explicit.",
+    "Equal positive excess means connect maximum Sharpe to GMV; the sign condition cannot be omitted.",
+    "Factor loadings alone do not determine expected returns; factor premia and intercept assumptions remain inputs.",
+    "Pi=delta*Sigma*w requires a stated optimization convention; a fully invested risky-only budget introduces a common Lagrange multiplier.",
+    "P is K by N; Q is a K-vector; Omega is a K by K covariance of view errors, not the asset-return covariance or a probability.",
+    "The posterior mean uncertainty M is distinct from predictive return covariance Sigma+M.",
+    "Scaling Omega with tau cancels tau from the posterior mean, not from all covariance quantities.",
+    "Unconstrained risky allocations leave residual cash or borrowing; normalizing them is not the same as solving a fixed-risk-aversion budget-constrained problem."
+  ],
+  "verification": {
+    "python_examples": 36,
+    "notebooks": 3,
+    "independent_check_groups": 24,
+    "review": "Complete Thai prose reviewed; formulas, constraints and source scope checked separately from transcript; no-ai-slop pass",
+    "figures": "Two computed illustrations in desktop/mobile SVG; numerical arrays and coordinates checked by independent scalar oracles; mobile render viewed"
+  }
+}

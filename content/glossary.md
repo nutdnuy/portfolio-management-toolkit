@@ -842,3 +842,99 @@ Covariance matrix ที่คง variance ของแต่ละสินท�
 </section>
 
 </section>
+
+<section class="glossary-group" id="group-expected-returns">
+
+## ค่าคาดหวังและมุมมองผลตอบแทน
+
+<section class="glossary-term" id="expected-return">
+
+### Expected return · ผลตอบแทนคาดหวัง
+
+ค่าเฉลี่ยของผลตอบแทนภายใต้การแจกแจงและข้อมูลที่กำหนด ต้องระบุช่วงเวลาและว่าเป็น total หรือ excess return ค่าเฉลี่ยจากอดีตเป็นตัวประมาณหนึ่งซึ่งอาจห่างจากค่าเฉลี่ยในอนาคต
+
+[เริ่มจาก sample mean และความไม่แน่นอน](expected-return-estimation.html)
+
+</section>
+
+<section class="glossary-term" id="standard-error">
+
+### Standard Error · ความผันผวนของตัวประมาณ
+
+SD ของตัวประมาณเมื่อสุ่มข้อมูลซ้ำ เช่น Standard Error ของ sample mean ประมาณด้วย s/√T ภายใต้ข้อมูลอิสระจากการแจกแจงเดียวกัน เป็นความไม่แน่นอนของค่าเฉลี่ยที่ประมาณ ไม่ใช่ SD ของผลตอบแทนเดือนหน้า
+
+[คำนวณและอ่านช่วงความเชื่อมั่น](expected-return-estimation.html)
+
+</section>
+
+<section class="glossary-term" id="mean-shrinkage">
+
+### Mean shrinkage · การดึงค่าเฉลี่ยเข้าหา Target
+
+การผสมค่าเฉลี่ยจากตัวอย่างกับค่าตั้งต้นที่กำหนด เช่น ค่าเฉลี่ยรวมของสินทรัพย์ เพื่อลดการพึ่งตัวเลขที่ประมาณแยกจากข้อมูลสั้น ๆ ต้องระบุ target และกฎให้น้ำหนัก เพราะโครงสร้างที่เลือกยังอาจสร้าง bias ได้
+
+[ทดลองผสมค่าประมาณผลตอบแทน](expected-return-estimation.html)
+
+</section>
+
+<section class="glossary-term" id="prior">
+
+### Prior · การแจกแจงก่อนรวมข้อมูลหรือ Views ชุดใหม่
+
+การระบุสิ่งที่แบบจำลองเชื่อเกี่ยวกับพารามิเตอร์ก่อนรับข้อมูลเพิ่มเติม ใน Black–Litterman ระบุทั้งค่ากลางของ expected returns และ covariance ของความไม่แน่นอนรอบค่ากลางนั้น
+
+[แยก prior mean ออกจากความเสี่ยงของผลตอบแทน](black-litterman.html)
+
+</section>
+
+<section class="glossary-term" id="posterior">
+
+### Posterior · การแจกแจงหลังรวมข้อมูลหรือ Views
+
+ผลการปรับ prior ด้วยข้อมูลเพิ่มเติมและแบบจำลองความคลาดเคลื่อนของข้อมูลนั้น Posterior mean เป็นค่ากลางใหม่ ส่วน posterior covariance ของค่าเฉลี่ยยังต่างจาก covariance ที่ใช้พยากรณ์ผลตอบแทน
+
+[คำนวณ posterior ด้วยตัวอย่างหนึ่งมิติ](black-litterman.html)
+
+</section>
+
+<section class="glossary-term" id="implied-returns">
+
+### Implied returns · ผลตอบแทนที่ย้อนหาได้จากพอร์ตและแบบจำลอง
+
+Expected returns ที่ทำให้น้ำหนักอ้างอิงสอดคล้องกับเงื่อนไขความเหมาะสมในโจทย์ที่กำหนด สูตร Π = δΣw ต้องระบุ covariance, risk aversion และข้อจำกัดพอร์ต น้ำหนักเพียงอย่างเดียวไม่ได้ระบุ expected returns ได้เป็นชุดเดียว
+
+[ย้อนจากน้ำหนักสู่ผลตอบแทน](implied-returns-views.html)
+
+</section>
+
+<section class="glossary-term" id="active-views">
+
+### Active views · มุมมองเพิ่มเติมต่อผลตอบแทน
+
+ข้อสมมติเรื่อง expected returns ที่ต้องการรวมเข้ากับ prior เช่น ค่าคาดหวังของสินทรัพย์หนึ่งตัว หรือผลต่างของพอร์ตสองชุด เมทริกซ์ P ระบุส่วนผสมสินทรัพย์ และ Q ระบุค่าของมุมมองในหน่วยเวลาที่ตรงกัน
+
+[เขียนมุมมอง Absolute และ Relative](implied-returns-views.html)
+
+</section>
+
+<section class="glossary-term" id="view-uncertainty">
+
+### View uncertainty · ความไม่แน่นอนของมุมมอง
+
+Covariance matrix Ω ของความคลาดเคลื่อนใน views แนวทแยงเป็น variance และช่องนอกแนวทแยงบอกความสัมพันธ์ของความคลาดเคลื่อน ไม่ใช่โอกาสที่ราคาจะขึ้น และไม่จำเป็นต้องเท่ากับความเสี่ยงของพอร์ตที่ปรากฏใน view
+
+[แยกความเสี่ยงของพอร์ต View จากความคลาดเคลื่อนของ View](implied-returns-views.html)
+
+</section>
+
+<section class="glossary-term" id="black-litterman">
+
+### Black–Litterman · การรวม Prior กับ Views ของผลตอบแทน
+
+กรอบประมาณ expected returns ที่ผสมค่าตั้งต้นกับมุมมองเพิ่มเติมตามความไม่แน่นอนที่ระบุ ผลลัพธ์ขึ้นกับ prior, covariance, views และความเชื่อมั่น การเปลี่ยนข้อมูลเข้าหรือข้อจำกัดพอร์ตยังเปลี่ยนคำตอบได้
+
+[คำนวณและตรวจพอร์ต Black–Litterman](black-litterman.html)
+
+</section>
+
+</section>

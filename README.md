@@ -111,3 +111,11 @@ Three lessons cover sample/factor covariance, constant-correlation shrinkage and
 Export these notebooks with `python3 scripts/make_course_notebooks.py --course advanced --module 2`. Run `npm run check:advanced`, `npm run build:pages` and the browser checks after changes. Sources, data conventions and the scope of course-code inspection are recorded in `data/advanced-module2-provenance.json`.
 
 The rolling-window and fixed-origin forecast charts are computed with `python3 scripts/make_covariance_figures.py`; their numeric series are saved in `data/advanced-covariance-figures.json`. Refresh figures before exporting the notebooks that embed them.
+
+## Advanced course · Module 3
+
+Three lessons cover expected-return estimation, reverse optimization and views, then Black–Litterman. Small original examples distinguish sampling uncertainty from return volatility, the covariance of the posterior mean from predictive return covariance, and unconstrained allocations with cash from fully invested constrained portfolios. The views are hypothetical teaching assumptions.
+
+Use `python3 scripts/make_course_notebooks.py --course advanced --module 3` to export these notebooks. The same `npm run check:advanced`, build/link and browser checks cover this module. Source access and conventions are recorded in `data/advanced-module3-provenance.json`.
+
+Module 3 figures are recomputed with `python3 scripts/make_expected_return_figures.py`; the chart values and both SVG sizes are checked independently in `qa/advanced-module3-checks.py`.
