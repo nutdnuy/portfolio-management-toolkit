@@ -1,9 +1,11 @@
 """Execute Advanced Module 1 and verify notebooks and independent finance identities."""
+import difflib
 import hashlib
 import importlib.util
 import itertools
 import json
 from pathlib import Path
+import re
 import xml.etree.ElementTree as ET
 
 import numpy as np
@@ -20,7 +22,18 @@ def load_module(name, path):
 
 exporter = load_module('advanced_course_notebooks', ROOT / 'scripts/make_course_notebooks.py')
 intro_checks = load_module('introduction_course_checks', ROOT / 'qa/course-checks.py')
-compare_stdout = intro_checks.compare_stdout
+
+
+def normalize_stdout_alignment(text):
+    """Ignore horizontal table padding, preserving every line and token."""
+    return '\n'.join(re.sub(r'[ \t]+', ' ', line).strip(' \t') for line in text.split('\n'))
+
+
+def compare_stdout(actual, expected):
+    # A rounded -0.0 versus +0.0 can shift pandas column padding across BLAS
+    # builds. Keep the shared numeric count/tolerances and label checks intact.
+    intro_checks.compare_stdout(normalize_stdout_alignment(actual),
+                                normalize_stdout_alignment(expected))
 
 
 def check_notebook(page, fresh):
@@ -50,7 +63,12 @@ def check_notebook(page, fresh):
             try:
                 compare_stdout(actual_stdout, expected_stdout)
             except AssertionError as error:
-                raise AssertionError(f'{label}: stale stdout') from error
+                difference = difflib.unified_diff(
+                    normalize_stdout_alignment(actual_stdout).splitlines(),
+                    normalize_stdout_alignment(expected_stdout).splitlines(),
+                    fromfile='saved stdout', tofile='fresh stdout', n=1, lineterm='')
+                excerpt = '\n'.join(itertools.islice(difference, 10))[:1000]
+                raise AssertionError(f'{label}: stale stdout\n{excerpt}') from error
     return code_count
 
 
