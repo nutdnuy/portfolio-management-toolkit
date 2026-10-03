@@ -35,6 +35,9 @@ $$\rho_{ij\mid\text{others}}=-\frac{K_{ij}}{\sqrt{K_{ii}K_{jj}}},\qquad i\ne j.$
 ```python
 import numpy as np
 import pandas as pd
+
+# รูปแบบตัวเลขที่แสดงผล ไม่ลดความละเอียดของค่าที่คำนวณ
+np.set_printoptions(precision=6, suppress=True)
 import warnings
 from sklearn.covariance import GraphicalLasso
 from sklearn.cluster import AffinityPropagation
@@ -275,6 +278,10 @@ gram = -.5 * centering @ (graph_distance ** 2) @ centering
 mds_values, mds_vectors = np.linalg.eigh(gram)
 mds_order = np.argsort(mds_values)[::-1]
 mds_values, mds_vectors = mds_values[mds_order], mds_vectors[:, mds_order]
+for axis in range(2):
+    pivot = np.argmax(np.abs(mds_vectors[:, axis]))
+    if mds_vectors[pivot, axis] < 0:
+        mds_vectors[:, axis] *= -1
 network_coordinates = mds_vectors[:, :2] * np.sqrt(np.maximum(mds_values[:2], 0))
 embedded_distance = squareform(pdist(network_coordinates))
 upper = np.triu_indices(6, 1)
@@ -283,6 +290,8 @@ relative_distance_error = np.sqrt(np.sum((embedded_distance[upper] - graph_dista
 print('2D relative distance error:', relative_distance_error)
 print(pd.DataFrame(network_coordinates, index=assets, columns=['Display x', 'Display y']).round(4))
 ```
+
+เราเลือกเครื่องหมายของแต่ละแกนให้สมาชิกที่มีขนาด loading สูงสุดเป็นบวก เพื่อให้ตารางแสดงทิศทางซ้ำได้ การกลับเครื่องหมายทั้งแกนเป็นเพียงการสะท้อนภาพ ไม่เปลี่ยนระยะระหว่างจุด และไม่ได้เพิ่มความหมายทางเศรษฐกิจให้แกน
 
 `network_coordinates` มีหกแถวกับสองคอลัมน์ การหมุนหรือสะท้อนภาพทั้งภาพไม่เปลี่ยนระยะจึงไม่เปลี่ยนความหมาย แกน x/y ไม่มีหน่วยเป็นผลตอบแทนหรือความเสี่ยง และไม่มีความหมายว่าอยู่ขวาแล้วน่าลงทุนกว่า
 

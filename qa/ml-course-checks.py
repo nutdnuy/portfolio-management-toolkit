@@ -154,6 +154,7 @@ def check_diversification(spaces):
     np.testing.assert_allclose(c['medoid_cost'], best)
     np.testing.assert_array_equal(c['medoids'], [0,2,4])
     np.testing.assert_array_equal(c['medoid_labels'], [0,0,1,1,2,2])
+    np.testing.assert_array_equal(sorted(c['kmeans_representatives']), [0,2,4])
     np.testing.assert_allclose(c['full_distances'], d)
     for bad in [0,7,True,1.5]:
         try: c['exact_medoids'](d,bad)
@@ -172,6 +173,9 @@ def check_diversification(spaces):
     assert np.all(np.abs(delta[upper][~active]) <= n['chosen_alpha']+1e-5)
     np.testing.assert_allclose(n['precision'] @ n['graph_model'].covariance_, np.eye(6), atol=1e-5)
     assert .29 < n['relative_distance_error'] < .32
+    for axis in range(2):
+        vector=n['mds_vectors'][:,axis]
+        assert vector[np.argmax(np.abs(vector))]>0
     np.testing.assert_allclose(n['precision'], n['repeat_model'].precision_)
     for namespace in (c,n):
         # Sequential wealth oracle and initial observation for drawdown.

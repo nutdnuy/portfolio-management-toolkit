@@ -22,6 +22,9 @@ Clustering เป็นการแบ่งวัตถุเป็นกลุ
 ```python
 import numpy as np
 import pandas as pd
+
+# รูปแบบตัวเลขที่แสดงผล ไม่ลดความละเอียดของค่าที่คำนวณ
+np.set_printoptions(precision=6, suppress=True)
 import warnings
 from itertools import combinations
 from scipy.spatial.distance import squareform, pdist
@@ -141,13 +144,16 @@ kmeans_representatives = []
 for group in range(3):
     members = np.flatnonzero(kmeans.labels_ == group)
     errors = np.sum((asset_features[members] - kmeans.cluster_centers_[group]) ** 2, axis=1)
-    kmeans_representatives.append(int(members[np.argmin(errors)]))
+    tied_nearest = np.flatnonzero(errors <= errors.min() + 1e-12)
+    kmeans_representatives.append(int(members[tied_nearest[0]]))
 print('K-means labels:', kmeans.labels_)
 print('Nearest actual assets:', assets[kmeans_representatives])
 print('Squared-distance objective:', kmeans.inertia_)
 ```
 
 `n_clusters=3` กำหนดจำนวนกลุ่มล่วงหน้า `n_init=20` ให้ลองจุดเริ่มต้นหลายครั้ง และ `random_state=7` ทำให้สุ่มซ้ำได้ ชุดนี้แยกเป็น AB/CD/EF เหมือนตัวอย่าง medoids แต่ objective `inertia_` ประมาณ 0.37250073 เป็นผลรวม squared distances จึงนำไปเทียบตรง ๆ กับผลรวมระยะ 1.49320953 ของ medoids ไม่ได้
+
+ในกลุ่มที่มีสองสมาชิก ทั้งคู่ห่างจาก centroid เท่ากันทางคณิตศาสตร์ เราจึงถือว่าระยะกำลังสองที่ต่างกันไม่เกิน $10^{-12}$ เสมอกัน แล้วเลือกสมาชิกที่มีดัชนีน้อยที่สุด เช่น A ก่อน B กฎนี้ป้องกันไม่ให้ทศนิยมท้ายที่ต่างกันระหว่างเครื่องเปลี่ยนชื่อที่เลือก และกำหนดก่อนดูผลทดสอบ
 
 การเริ่มหลายครั้งลดโอกาสค้างที่คำตอบไม่ดี แต่ไม่ได้พิสูจน์ว่า k-means พบ global optimum เสมอไป และแม้ได้กลุ่มเดียวกัน วิธีเลือกตัวแทนภายในกลุ่มอาจให้คนละชื่อเมื่อระยะเกือบเท่ากัน สำหรับงานจริงยังต้องตรวจค่าซื้อขาย สภาพคล่อง และข้อจำกัดของสินทรัพย์ที่เลือก
 

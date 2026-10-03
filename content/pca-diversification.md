@@ -33,6 +33,9 @@ $$N_{\text{capital}}=\frac{1}{\sum_iw_i^2}=\frac{1}{0.5^2+0.5^2}=2.$$
 ```python
 import numpy as np
 import pandas as pd
+
+# รูปแบบตัวเลขที่แสดงผล ไม่ลดความละเอียดของค่าที่คำนวณ
+np.set_printoptions(precision=6, suppress=True)
 from sklearn.decomposition import PCA
 
 small_cov = np.array([[0.04, 0.032], [0.032, 0.04]])
