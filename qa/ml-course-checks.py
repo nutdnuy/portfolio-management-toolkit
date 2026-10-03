@@ -327,8 +327,13 @@ def check_figures(spaces):
     specs=[]
     for method,key,xlim in [('ridge','ridge_path',(0,9)),('lasso','lasso_path',(0,.03))]:
         data=regularized[key]
-        for col in ['F1','F2','F3']:
-            np.testing.assert_allclose(metadata['factor_paths'][method.title()][col],data[col])
+        for col,ols in zip(['F1','F2','F3'],[.02,.007,0.]):
+            # Orthogonal fixture: compare every point to its analytical solution.
+            # The exact-zero loading can differ by ~1e-18 across BLAS builds;
+            # 1e-14 absolute tolerance is far below the plotted coefficient scale.
+            expected=ols/(1+data['lambda']) if method=='ridge' else np.maximum(ols-data['lambda'],0)
+            np.testing.assert_allclose(data[col],expected,atol=1e-14,rtol=1e-7)
+            np.testing.assert_allclose(metadata['factor_paths'][method.title()][col],data[col],atol=1e-14,rtol=1e-7)
             specs.append(('ml-factor-'+method,col,data['lambda'],100*data[col],xlim,(-.08,2.1)))
     f=spaces['recession-models']['forecast']
     specs += [('ml-event-probabilities',name,f.origin,f[col],(180,238),(-.04,1.04))
