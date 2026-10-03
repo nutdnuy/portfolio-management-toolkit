@@ -24,7 +24,7 @@ def page_course(page):
 def course_pages(course=None, module=None):
     config = json.loads((ROOT / "site.config.json").read_text())
     return [p for p in config["pages"]
-            if page_course(p) in ("introduction", "advanced")
+            if page_course(p) in ("introduction", "advanced", "machine-learning")
             and isinstance(p.get("notebook"), str) and p["notebook"]
             and p.get("module")
             and (course is None or page_course(p) == course)
@@ -88,7 +88,7 @@ def execute_chapter(page):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--course", choices=("introduction", "advanced"),
+    parser.add_argument("--course", choices=("introduction", "advanced", "machine-learning"),
                         help="Export one course; by default export all configured course notebooks.")
     parser.add_argument("--module", type=int, help="Export one module number within the selected course(s).")
     args = parser.parse_args()

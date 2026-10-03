@@ -28,7 +28,7 @@ npm run dev
 - เมื่อผลตอบแทนไม่เป็น Normal: บทต่อ Section 2 ของ Module 1 สอนรูปร่างผลตอบแทน Moments, Normality, Python module, Semi-deviation และ Historical/Gaussian/Cornish–Fisher VaR พร้อม CVaR แบบถ่วงน้ำหนักปลายหาง กราฟสมมติ และแบบฝึกหัด
 - ความเสี่ยงในการลงทุน: นิยาม ประวัติ และทฤษฎีของความเสี่ยง ก่อนคำนวณ Volatility, Downside, Drawdown, Diversification, VaR, ES, EWMA และ Stress test พร้อมตัวทดลอง 3 ชุดและแหล่งอ้างอิงต้นฉบับ
 - Portfolio Insurance: บทเรียน 13 หัวข้อหลักแบบละเอียด ไล่จาก Put และงบ OBPI สู่ CPPI หลายรอบ, Variable-Multiplier Portfolio Insurance พร้อมตัวอย่างใน Notebook, TIPP แบบ Ratchet, Gap risk พร้อมดอกเบี้ย, EUT/CPT พร้อมคำนวณคะแนน และการประเมิน Shortfall/Drawdown มีผลทดสอบ S&P 500 ปี 2018–2025 พร้อมกราฟมูลค่าและ Drawdown รายวันเทียบ Buy & Hold แทรกใน SLPI, CPPI, TIPP และ Variable Multiplier พร้อมข้อดีข้อเสียของแต่ละวิธี และโจทย์พร้อมเฉลย 8 ข้อและเครื่องมือทดลองในบท
-- อภิธานศัพท์: 71 คำพร้อมนิยามภาษาไทย ค้นหาคำ และลิงก์กลับไปยังตัวอย่าง
+- อภิธานศัพท์: นิยามภาษาไทย ค้นหาคำ และลิงก์กลับไปยังตัวอย่าง
 - Notebook: คำอธิบายและสมการครบจากบทเรียน พร้อมโค้ด Python และกราฟที่คำนวณซ้ำได้
 
 Lab ใช้ 4 เส้นทางสมมติ 12 เดือน เปรียบเทียบ CPPI กับ Buy & Hold และ Constant Mix 60/40 ไม่ใช่ backtest หรือการทำซ้ำวิทยานิพนธ์ คำนวณใน browser ไม่มีการเรียกข้อมูลตลาด ไม่มี analytics และไม่ส่งพารามิเตอร์ไป server ดาวน์โหลดผลรายเดือนพร้อมพารามิเตอร์เป็น CSV ได้
@@ -60,7 +60,9 @@ npm test
 npm run notebook       # Python 3.9+; ใช้ standard library
 npm run check:notebook
 npm run check:sp500
-npm run check:course  # รันโค้ด Module 2–4 และตรวจ Notebook ให้ตรงต้นฉบับ
+npm run check:course  # รันโค้ดชุด Introduction และตรวจ Notebook ให้ตรงต้นฉบับ
+npm run check:advanced
+npm run check:ml       # ต้องมี dependencies ตาม qa/ml-requirements.txt
 npm run check:extreme # ต้องมี NumPy/pandas/SciPy ตาม qa/extreme-risk-requirements.txt
 npm run build:pages
 npm run check:site  # ต้องเปิด preview ที่พอร์ต 8764
@@ -127,3 +129,19 @@ Four lessons cover diversification methods, Euler risk contributions, risk budge
 Export with `python3 scripts/make_course_notebooks.py --course advanced --module 4`. Run `npm run check:advanced`, build/link checks and the browser checks after changes. Record source scope in `data/advanced-module4-provenance.json`; do not publish original course notebooks or infer universal strategy rankings from either the course tables or our simulation.
 
 Module 4 figures are recomputed with `python3 scripts/make_risk_budget_figures.py`. Refresh them before exporting Notebooks; `qa/advanced-module4-checks.py` verifies their numerical data and both SVG sizes.
+
+## Machine Learning for Asset Management
+
+Sixteen beginner Thai chapters extend the book through data/targets and supervised learning (4), robust factor estimation (3), PCA/clustering/networks (3), market regimes/scenarios/endowments (3), and event probabilities/forecasting/feature selection (3). Every chapter has an independently executable Notebook with full prose, equations and saved outputs. New examples are original hypothetical data or seeded simulations. Source coverage and corrections are documented in `data/ml-*-sources.json`; private Coursera transcripts and instructor assets are not redistributed.
+
+```sh
+python3 -m pip install -r qa/ml-requirements.txt
+python3 scripts/make_ml_figures.py
+python3 scripts/make_ml_diversification_figures.py
+python3 scripts/make_course_notebooks.py --course machine-learning
+npm run check:ml
+npm run build:pages
+npm run check:site
+```
+
+Internal `module` and `lesson` metadata preserve course order and allow optional `--module` export/check filters. Public navigation uses topic names without numbered Module labels. Calculated chart arrays are saved in `data/ml-figures.json` and `data/ml-diversification-figures.json`. The numerical checks independently verify analytical results, timing boundaries, preprocessing, future-data invariance and source/Notebook consistency; browser checks cover all course pages and responsive figures.

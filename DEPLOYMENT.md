@@ -10,7 +10,7 @@ The owner authorized this public repository and GitHub Pages on 2026-09-13. This
 
 ## Automatic publication
 
-The repository uses `main` and Settings → Pages → Source: **GitHub Actions**. The **Publish toolkit** workflow installs locked dependencies on Node.js 22, runs numerical and executed-Notebook consistency checks, builds the book, checks local assets and anchors, then uploads `_site/` and deploys Pages.
+The repository uses `main` and Settings → Pages → Source: **GitHub Actions**. The **Publish toolkit** workflow installs locked dependencies on Node.js 22, installs the scientific dependencies in `qa/ml-requirements.txt`, runs numerical and executed-Notebook consistency checks for Introduction, Advanced and Machine Learning, builds the book, checks local assets and anchors, then uploads `_site/` and deploys Pages.
 
 1. Edit the canonical Markdown, scripts or assets. Regenerate the Notebook when its chapter, calculations or diagrams change.
 2. Run the relevant checks described in `EDITING.md` and `git diff --check`.

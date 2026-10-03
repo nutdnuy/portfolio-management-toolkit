@@ -1044,3 +1044,339 @@ Covariance matrix Ω ของความคลาดเคลื่อนใ�
 </section>
 
 </section>
+
+<section class="glossary-group" id="group-machine-learning">
+
+## Machine Learning และภาวะตลาด
+
+<section class="glossary-term" id="feature">
+
+### Feature · ตัวแปรที่ใช้เป็นข้อมูลเข้า
+
+ข้อมูลที่โมเดลใช้สร้างคำพยากรณ์ เช่น ผลตอบแทนล่าสุดหรือความผันผวนย้อนหลัง ต้องมีอยู่จริง ณ เวลาตัดสินใจ หน่วยและเวลาพร้อมใช้เป็นส่วนหนึ่งของนิยาม ไม่ใช่เพียงชื่อคอลัมน์
+
+[อ่านคำอธิบายและตัวอย่าง](ml-foundations.html)
+
+</section>
+
+<section class="glossary-term" id="target-label">
+
+### Target / Label · คำตอบที่ต้องการเรียนรู้
+
+ค่าที่ให้โมเดลเรียนรู้หรือใช้ตรวจคำพยากรณ์ อาจเป็นตัวเลขหรือหมวดหมู่ ต้องระบุช่วงเวลาที่คำตอบอธิบายและวันที่รู้คำตอบ เช่น ผลตอบแทนเดือนหน้าไม่พร้อมใช้ในวันนี้
+
+[อ่านคำอธิบายและตัวอย่าง](ml-foundations.html)
+
+</section>
+
+<section class="glossary-term" id="supervised-learning">
+
+### Supervised learning · เรียนจากตัวอย่างที่มีคำตอบ
+
+การเรียนความสัมพันธ์จากข้อมูลเข้าคู่กับคำตอบ ตัวอย่างที่ใช้ฝึกต้องมีคำตอบพร้อมใช้แล้ว ส่วนคำตอบของชุดทดสอบใช้ประเมินหลังออกคำพยากรณ์
+
+[อ่านคำอธิบายและตัวอย่าง](ml-foundations.html)
+
+</section>
+
+<section class="glossary-term" id="unsupervised-learning">
+
+### Unsupervised learning · เรียนโครงสร้างของข้อมูล
+
+วิธีค้นรูปแบบโดยไม่มี target ที่กำหนดให้ เช่น PCA หรือ clustering การไม่มี target ไม่ได้แปลว่าใช้ข้อมูลอนาคตฝึกก่อนการตัดสินใจได้
+
+[อ่านคำอธิบายและตัวอย่าง](ml-foundations.html)
+
+</section>
+
+<section class="glossary-term" id="regression">
+
+### Regression · พยากรณ์ตัวเลข
+
+โจทย์ supervised learning ที่คำตอบเป็นค่าตัวเลข เช่น ผลตอบแทนเดือนหน้า ต้องเลือก loss และ baseline ที่สอดคล้องกับหน่วยและวัตถุประสงค์
+
+[อ่านคำอธิบายและตัวอย่าง](supervised-learning.html)
+
+</section>
+
+<section class="glossary-term" id="classification">
+
+### Classification · จำแนกประเภท
+
+โจทย์พยากรณ์หมวดหมู่ เช่น เกิดเหตุการณ์หรือไม่เกิด หลายโมเดลให้ probability ก่อนนำไปเทียบ threshold การเลือก threshold จึงเป็นขั้นตอนแยกจากการประมาณ probability
+
+[อ่านคำอธิบายและตัวอย่าง](supervised-learning.html)
+
+</section>
+
+<section class="glossary-term" id="training-set">
+
+### Training set · ชุดฝึก
+
+ข้อมูลที่อนุญาตให้ใช้ประมาณพารามิเตอร์ของโมเดล รวมถึง preprocessing เช่นค่าเฉลี่ยที่ใช้ปรับสเกล สำหรับการพยากรณ์ตามเวลา คำตอบของแต่ละแถวต้องประกาศแล้ว ณ วันฝึก
+
+[อ่านคำอธิบายและตัวอย่าง](model-validation.html)
+
+</section>
+
+<section class="glossary-term" id="validation-set">
+
+### Validation set · ชุดเลือกแบบจำลอง
+
+ข้อมูลที่ใช้เปรียบเทียบโมเดล ค่า hyperparameters หรือกฎตัดสินใจ แยกจากชุดฝึกและ final test เพราะคะแนนที่ใช้เลือกย่อมมีผลต่อวิธีที่เลือก
+
+[อ่านคำอธิบายและตัวอย่าง](model-validation.html)
+
+</section>
+
+<section class="glossary-term" id="test-set">
+
+### Test set · ชุดประเมินที่กันไว้
+
+ข้อมูลที่ใช้ประเมินกระบวนการหลังตรึงวิธีเลือกโมเดลแล้ว หากนำผลไปปรับวิธีซ้ำ ชุดนั้นจะกลายเป็นส่วนหนึ่งของการเลือก ควรมีข้อมูลใหม่สำหรับประเมินครั้งถัดไป
+
+[อ่านคำอธิบายและตัวอย่าง](model-validation.html)
+
+</section>
+
+<section class="glossary-term" id="overfitting">
+
+### Overfitting · เรียนรายละเอียดเฉพาะชุดฝึกมากเกินไป
+
+สถานการณ์ที่โมเดลจับ noise หรือรายละเอียดของตัวอย่างจนผลบนข้อมูลฝึกดูดี แต่ไม่คงคุณภาพบนข้อมูลใหม่ การเพิ่มความซับซ้อนไม่ได้รับรองการพยากรณ์ที่ดีขึ้น
+
+[อ่านคำอธิบายและตัวอย่าง](model-validation.html)
+
+</section>
+
+<section class="glossary-term" id="data-leakage">
+
+### Data leakage · ข้อมูลที่ไม่ควรรู้รั่วเข้าสู่กระบวนการ
+
+การใช้ข้อมูลที่ยังไม่พร้อมหรือไม่ควรใช้ในขั้นฝึกและเลือกโมเดล เช่น fit scaler จากทั้งไฟล์ ใช้ label ที่ประกาศภายหลัง หรือคัด features จากคะแนน final test
+
+[อ่านคำอธิบายและตัวอย่าง](model-validation.html)
+
+</section>
+
+<section class="glossary-term" id="cross-validation">
+
+### Cross-validation · ตรวจหลายส่วนของข้อมูล
+
+การแบ่งข้อมูลเพื่อฝึกและประเมินหลายรอบตามกฎที่กำหนด อนุกรมเวลาควรคงลำดับอดีตก่อนอนาคต และเว้นข้อมูลที่ target ยังไม่ครบหรือยังไม่ประกาศ
+
+[อ่านคำอธิบายและตัวอย่าง](model-validation.html)
+
+</section>
+
+<section class="glossary-term" id="log-loss">
+
+### Log loss · ค่าความผิดพลาดของ Probability แบบลอการิทึม
+
+สำหรับ binary event คือค่าเฉลี่ยของ −[y log(p)+(1−y) log(1−p)] ให้ค่าปรับสูงเมื่อมั่นใจผิด คะแนนต่ำดีกว่าภายใต้เกณฑ์นี้ และต้องแยกจาก accuracy ที่ใช้ threshold
+
+[อ่านคำอธิบายและตัวอย่าง](event-probabilities.html)
+
+</section>
+
+<section class="glossary-term" id="confusion-matrix">
+
+### Confusion matrix · ตารางคำตอบจริงกับคำตอบที่ทาย
+
+นับกรณีทายถูกและผิดแยกตามประเภท ช่วยอ่าน false positive และ false negative ต้องระบุลำดับแถว คอลัมน์ และ class ที่ถือเป็นเหตุการณ์เสมอ
+
+[อ่านคำอธิบายและตัวอย่าง](event-probabilities.html)
+
+</section>
+
+<section class="glossary-term" id="knn">
+
+### K-nearest neighbors · เรียนจากเพื่อนบ้านใกล้ที่สุด
+
+ใช้คำตอบของข้อมูลฝึกที่อยู่ใกล้จุดใหม่ที่สุด K จุดมาประมาณคำตอบ ความหมายของระยะทาง สเกล feature และค่า K มีผลต่อผลลัพธ์
+
+[อ่านคำอธิบายและตัวอย่าง](supervised-learning.html)
+
+</section>
+
+<section class="glossary-term" id="standardization">
+
+### Standardization · ปรับด้วยค่าเฉลี่ยและ SD
+
+แปลง feature ด้วย (x−mean)/SD เพื่อเปลี่ยนสเกล ค่าที่ใช้แปลงต้องเรียนจากชุดฝึกของรอบนั้นแล้วนำไปใช้กับชุดถัดไป การปรับสเกลไม่ได้ทำให้ตัวแปรเป็น Normal หรือเป็นอิสระ
+
+[อ่านคำอธิบายและตัวอย่าง](regularized-factor-models.html)
+
+</section>
+
+<section class="glossary-term" id="ensemble-learning">
+
+### Ensemble learning · รวมหลายแบบจำลอง
+
+รวมคำพยากรณ์จากตัวเรียนรู้หลายตัว เช่น เฉลี่ย probability หรือใช้ Forest/Boosting ซึ่งมีกระบวนการสร้างต่างกัน ผลที่รวมไม่จำเป็นต้องดีกว่าสมาชิกทุกตัว
+
+[อ่านคำอธิบายและตัวอย่าง](recession-models.html)
+
+</section>
+
+<section class="glossary-term" id="regularization">
+
+### Regularization · จำกัดความซับซ้อนระหว่างฝึก
+
+เพิ่ม penalty หรือข้อจำกัดเพื่อลดความไวของค่าประมาณ โดยยอมแลกกับ bias ที่อาจเพิ่มขึ้น ผลต่อข้อมูลใหม่ต้องประเมินแยก
+
+[อ่านคำอธิบายและตัวอย่าง](regularized-factor-models.html)
+
+</section>
+
+<section class="glossary-term" id="ridge-regression">
+
+### Ridge regression · ลงโทษผลรวม Coefficient ยกกำลังสอง
+
+ใช้ squared L2 penalty หด coefficients โดยทั่วไปไม่ทำให้เป็นศูนย์พอดี ค่าความแรงขึ้นกับ convention ของ loss และ penalty จึงต้องตรวจสูตรเมื่อเปลี่ยนเครื่องมือ
+
+[อ่านคำอธิบายและตัวอย่าง](regularized-factor-models.html)
+
+</section>
+
+<section class="glossary-term" id="lasso">
+
+### Lasso · ลงโทษผลรวมค่าสัมบูรณ์
+
+ใช้ L1 penalty และอาจทำให้ coefficients บางตัวเป็นศูนย์ ไม่ใช่การนับจำนวนตัวแปรโดยตรง การเลือกในกลุ่ม feature ที่สัมพันธ์กันอาจไม่เสถียร
+
+[อ่านคำอธิบายและตัวอย่าง](regularized-factor-models.html)
+
+</section>
+
+<section class="glossary-term" id="elastic-net">
+
+### Elastic Net · ผสม L1 และ Squared L2
+
+ใช้ทั้ง penalty แบบ Lasso และ Ridge โดยมีค่าควบคุมความแรงรวมและสัดส่วนผสม ช่วยจัดรูปแบบการหด coefficients แต่ไม่ได้รับประกันว่าเหนือกว่าวิธีอื่นในข้อมูลใหม่
+
+[อ่านคำอธิบายและตัวอย่าง](regularized-factor-models.html)
+
+</section>
+
+<section class="glossary-term" id="multicollinearity">
+
+### Multicollinearity · ตัวแปรอธิบายซ้ำกันเชิงเส้น
+
+บางคอลัมน์อธิบายได้ด้วยชุดผสมเชิงเส้นของคอลัมน์อื่นหรือใกล้เคียงมาก ทำให้แยก coefficients รายตัวได้ยาก ความสัมพันธ์สูงทั้งบวกและลบก่อปัญหาได้
+
+[อ่านคำอธิบายและตัวอย่าง](factor-model-estimation.html)
+
+</section>
+
+<section class="glossary-term" id="hyperparameter">
+
+### Hyperparameter · ค่าที่กำหนดวิธีฝึก
+
+ค่าที่ตั้งก่อนประมาณพารามิเตอร์ เช่น K ของ KNN หรือ penalty ของ Ridge ควรเลือกด้วย validation ที่เหมาะสม ไม่ใช้ final test เป็นตัวเลือก
+
+[อ่านคำอธิบายและตัวอย่าง](model-validation.html)
+
+</section>
+
+<section class="glossary-term" id="pipeline">
+
+### Pipeline · ลำดับการแปลงข้อมูลและฝึกโมเดล
+
+รวม preprocessing กับ estimator ให้ fit บนข้อมูลฝึกชุดเดียวกันภายในแต่ละ fold ช่วยลดการเผลอปรับสเกลหรือเลือก feature จากข้อมูล validation
+
+[อ่านคำอธิบายและตัวอย่าง](factor-model-validation.html)
+
+</section>
+
+<section class="glossary-term" id="pca">
+
+### Principal Component Analysis · PCA
+
+สร้างแกนตั้งฉากที่เรียงตาม variance ของข้อมูลที่ center แล้ว PCA บน covariance กับ correlation ให้ความหมายต่างกัน ส่วนแบ่ง variance ของข้อมูลไม่เท่ากับส่วนแบ่งความเสี่ยงของพอร์ตทุกน้ำหนัก
+
+[อ่านคำอธิบายและตัวอย่าง](pca-diversification.html)
+
+</section>
+
+<section class="glossary-term" id="asset-clustering">
+
+### Asset clustering · จัดกลุ่มสินทรัพย์
+
+แบ่งสินทรัพย์ตามความคล้ายกันภายใต้ feature และระยะทางที่เลือก กลุ่มที่ได้ขึ้นกับช่วงข้อมูลและวิธี ไม่ใช่หมวดหมู่ทางเศรษฐกิจที่แน่นอนหรือกฎเลือกน้ำหนักพอร์ตสำเร็จรูป
+
+[อ่านคำอธิบายและตัวอย่าง](asset-clustering.html)
+
+</section>
+
+<section class="glossary-term" id="partial-correlation">
+
+### Partial correlation · ความสัมพันธ์หลังปรับตัวแปรอื่น
+
+วัดความสัมพันธ์เชิงเส้นส่วนที่เหลือหลังหักความสัมพันธ์กับตัวแปรที่กำหนด สำหรับ multivariate Gaussian ค่า precision นอกแนวทแยงเป็นศูนย์เชื่อมกับ conditional independence แต่โดยทั่วไปไม่ใช่หลักฐานเชิงเหตุและผล
+
+[อ่านคำอธิบายและตัวอย่าง](asset-networks.html)
+
+</section>
+
+<section class="glossary-term" id="brier-score">
+
+### Brier score · Squared error ของ Probability
+
+ในโจทย์ binary คือค่าเฉลี่ย (p−y)² มีช่วง 0 ถึง 1 และยิ่งต่ำยิ่งดี บางแหล่งนิยาม QPS เป็นสองเท่าของค่านี้ ต้องดูสูตรก่อนเปรียบเทียบ
+
+[อ่านคำอธิบายและตัวอย่าง](event-probabilities.html)
+
+</section>
+
+<section class="glossary-term" id="probability-calibration">
+
+### Probability calibration · ความสอดคล้องของโอกาสกับความถี่
+
+ตรวจว่ากลุ่มคำพยากรณ์ที่ให้ probability ใกล้กันมีอัตราเกิดเหตุการณ์ใกล้ probability นั้นหรือไม่ ต้องประเมินนอกข้อมูลที่ใช้ปรับ probability และคำนึงถึงจำนวนตัวอย่างในแต่ละกลุ่ม
+
+[อ่านคำอธิบายและตัวอย่าง](event-probabilities.html)
+
+</section>
+
+<section class="glossary-term" id="market-regime">
+
+### Market regime · ภาวะตลาดในแบบจำลอง
+
+สถานะที่กำหนดให้ผลตอบแทนหรือความเสี่ยงมีลักษณะใกล้กันภายในช่วง เช่น ภาวะปกติและตึงเครียด นิยามจากตลาดหุ้นไม่จำเป็นต้องตรงกับภาวะถดถอยทางเศรษฐกิจ
+
+[อ่านคำอธิบายและตัวอย่าง](market-regimes.html)
+
+</section>
+
+<section class="glossary-term" id="transition-matrix">
+
+### Transition matrix · ความน่าจะเป็นเปลี่ยนสถานะ
+
+ตารางที่ระบุโอกาสจากสถานะปัจจุบันไปสถานะถัดไป ต้องระบุแถว/คอลัมน์และระยะเวลาหนึ่งช่วงให้ชัด เช่น ตารางรายเดือนไม่ควรถูกใช้เป็นรายปีโดยตรง
+
+[อ่านคำอธิบายและตัวอย่าง](market-regimes.html)
+
+</section>
+
+<section class="glossary-term" id="trend-filtering">
+
+### Trend filtering · ประมาณแนวโน้มด้วย Penalty
+
+หาค่าที่สมดุลระหว่างการ fit ข้อมูลกับการจำกัดความเปลี่ยนแปลง First-difference L1 ให้เส้นคงที่เป็นช่วง ส่วน second-difference L1 ให้เส้นตรงเป็นช่วง การใช้ทั้งประวัติอาจนำอนาคตมาแก้ค่าช่วงอดีต
+
+[อ่านคำอธิบายและตัวอย่าง](market-regimes.html)
+
+</section>
+
+<section class="glossary-term" id="scenario-probability">
+
+### Scenario probability · น้ำหนักความน่าจะเป็นของสถานการณ์
+
+โอกาสที่กำหนดให้แต่ละสถานการณ์ ต้องไม่ติดลบและรวมหนึ่ง ใช้คำนวณค่าเฉลี่ย ความเสี่ยง และ loss ของพอร์ตภายใต้ชุดสถานการณ์ที่ระบุ
+
+[อ่านคำอธิบายและตัวอย่าง](regime-scenarios.html)
+
+</section>
+
+</section>

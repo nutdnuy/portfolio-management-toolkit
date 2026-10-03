@@ -272,6 +272,166 @@
       "notebook": "notebooks/diversification-backtest.ipynb"
     },
     {
+      "file": "ml-foundations",
+      "title": "Machine Learning เรียนรู้อะไรจากข้อมูล",
+      "description": "เริ่มจากแถวข้อมูล Feature และ Target แยกการพยากรณ์ตัวเลข การจำแนกกลุ่ม และการค้นหารูปแบบ พร้อมตัวอย่าง Python ที่ระบุเวลารู้ข้อมูล",
+      "course": "machine-learning",
+      "module": 1,
+      "lesson": 1,
+      "group": "Machine Learning · เริ่มต้นเรียนรู้จากข้อมูล",
+      "notebook": "notebooks/ml-foundations.ipynb"
+    },
+    {
+      "file": "supervised-learning",
+      "title": "เริ่มพยากรณ์ด้วย Regression และเพื่อนบ้าน",
+      "description": "คำนวณ Linear Regression, Logistic Regression, KNN และแนวคิด SVM จากตัวอย่างเล็ก พร้อม Loss, Confusion Matrix และการปรับสเกล Features",
+      "course": "machine-learning",
+      "module": 1,
+      "lesson": 2,
+      "group": "Machine Learning · เริ่มต้นเรียนรู้จากข้อมูล",
+      "notebook": "notebooks/supervised-learning.ipynb"
+    },
+    {
+      "file": "model-validation",
+      "title": "ทดสอบโมเดลโดยไม่เห็นอนาคต",
+      "description": "แยก Train, Validation และ Test ตามเวลา เลือก KNN โดยไม่แตะ Holdout ตรวจ Data Leakage และทดลอง Cross-validation, Ensemble กับ Shrinkage",
+      "course": "machine-learning",
+      "module": 1,
+      "lesson": 3,
+      "group": "Machine Learning · เริ่มต้นเรียนรู้จากข้อมูล",
+      "notebook": "notebooks/model-validation.ipynb"
+    },
+    {
+      "file": "ml-portfolio-lab",
+      "title": "จากข้อมูลรายวันสู่พอร์ตที่ทดสอบได้",
+      "description": "ตรวจข้อมูลผลตอบแทน ทบต้นเป็นรายสัปดาห์ ประมาณ Mean–Covariance และจัดพอร์ต GMV/MSR ก่อนติดตาม Buy-and-hold, Cash และค่าซื้อขายในช่วงที่กันไว้",
+      "course": "machine-learning",
+      "module": 1,
+      "lesson": 4,
+      "group": "Machine Learning · เริ่มต้นเรียนรู้จากข้อมูล",
+      "notebook": "notebooks/ml-portfolio-lab.ipynb"
+    },
+    {
+      "file": "factor-model-estimation",
+      "title": "Factor Models: จัดข้อมูลและอ่านค่า Loading",
+      "description": "เริ่มจากผลตอบแทนรายเดือน ประมาณ factor loadings ด้วย OLS แยกความเสี่ยง และตรวจปัจจัยที่ให้ข้อมูลซ้ำกัน",
+      "course": "machine-learning",
+      "module": 2,
+      "lesson": 1,
+      "group": "Machine Learning · ประมาณ Factor Models",
+      "notebook": "notebooks/factor-model-estimation.ipynb"
+    },
+    {
+      "file": "regularized-factor-models",
+      "title": "Ridge, Lasso และ Elastic Net: ลดความแกว่งของ Factor Loadings",
+      "description": "คำนวณ penalty จากตัวอย่างเล็ก อ่าน objective ของ scikit-learn และปรับสเกลปัจจัยโดยรักษาหน่วยของ loading",
+      "course": "machine-learning",
+      "module": 2,
+      "lesson": 2,
+      "group": "Machine Learning · ประมาณ Factor Models",
+      "notebook": "notebooks/regularized-factor-models.ipynb"
+    },
+    {
+      "file": "factor-model-validation",
+      "title": "ตรวจ Factor Model ตามเวลา: เลือกค่า Penalty ก่อนดู Test",
+      "description": "แยก development และ final test เลือก hyperparameter ด้วย expanding windows และตรวจการรั่วไหลของข้อมูล",
+      "course": "machine-learning",
+      "module": 2,
+      "lesson": 3,
+      "group": "Machine Learning · ประมาณ Factor Models",
+      "notebook": "notebooks/factor-model-validation.ipynb"
+    },
+    {
+      "file": "pca-diversification",
+      "title": "PCA: พอร์ตมีความเสี่ยงกี่แหล่ง",
+      "description": "เริ่มจากจำนวนหุ้นและจำนวนความเสี่ยง คำนวณ eigenvectors, scores และ explained variance แล้วแยกสัดส่วนความแปรปรวนของข้อมูลออกจากความเสี่ยงของพอร์ต",
+      "course": "machine-learning",
+      "module": 3,
+      "lesson": 1,
+      "group": "Machine Learning · การกระจายพอร์ต",
+      "notebook": "notebooks/pca-diversification.ipynb"
+    },
+    {
+      "file": "asset-clustering",
+      "title": "จัดกลุ่มสินทรัพย์และเลือกตัวแทน",
+      "description": "แปลง correlation เป็นระยะห่าง เปรียบเทียบ medoids, k-means, hierarchical clustering และ affinity propagation แล้วตรวจพอร์ตตัวแทนด้วยข้อมูลที่ยังไม่ใช้เลือก",
+      "course": "machine-learning",
+      "module": 3,
+      "lesson": 2,
+      "group": "Machine Learning · การกระจายพอร์ต",
+      "notebook": "notebooks/asset-clustering.ipynb"
+    },
+    {
+      "file": "asset-networks",
+      "title": "เครือข่ายสินทรัพย์: อ่านความสัมพันธ์ก่อนเลือกพอร์ต",
+      "description": "เริ่มจาก correlation กับ conditional dependence คำนวณ precision และ partial correlation เรียน Graphical Lasso การเลือก penalty ตามเวลา และอ่านภาพเครือข่ายอย่างมีขอบเขต",
+      "course": "machine-learning",
+      "module": 3,
+      "lesson": 3,
+      "group": "Machine Learning · การกระจายพอร์ต",
+      "notebook": "notebooks/asset-networks.ipynb"
+    },
+    {
+      "file": "market-regimes",
+      "title": "Market Regimes: ภาวะตลาดและข้อมูลที่รู้ได้ในเวลานั้น",
+      "description": "อ่าน transition matrix คำนวณความน่าจะเป็นของภาวะตลาด แยก filtering จาก smoothing และทดลอง first-difference penalty โดยไม่ใช้ป้ายย้อนหลังเป็นสัญญาณล่วงหน้า",
+      "course": "machine-learning",
+      "module": 4,
+      "lesson": 1,
+      "group": "Machine Learning · ภาวะตลาด",
+      "notebook": "notebooks/market-regimes.ipynb"
+    },
+    {
+      "file": "regime-scenarios",
+      "title": "Regime Scenarios: รวมความเสี่ยงจากหลายภาวะตลาด",
+      "description": "คำนวณ mixture mean และ covariance รวม ตรวจความแปรปรวนจากสถานการณ์โดยตรง อ่าน expected shortfall แบบถ่วง probability และแยก Monte Carlo error จาก model error",
+      "course": "machine-learning",
+      "module": 4,
+      "lesson": 2,
+      "group": "Machine Learning · ภาวะตลาด",
+      "notebook": "notebooks/regime-scenarios.ipynb"
+    },
+    {
+      "file": "endowment-simulation",
+      "title": "Endowment Simulation: เงินทุน การใช้จ่าย และลำดับผลตอบแทน",
+      "description": "จำลองเงินกองทุนที่ปรับพอร์ตปีละครั้งและจ่ายเงินหลังรับผลตอบแทน แยกเงินจริงจากเงินตามราคา เปรียบเทียบ Markov กับ IID และวัดความไม่แน่นอนของ shortfall",
+      "course": "machine-learning",
+      "module": 4,
+      "lesson": 3,
+      "group": "Machine Learning · ภาวะตลาด",
+      "notebook": "notebooks/endowment-simulation.ipynb"
+    },
+    {
+      "file": "event-probabilities",
+      "title": "พยากรณ์เหตุการณ์: ความน่าจะเป็นบอกอะไร",
+      "description": "แยก Recession ออกจากตลาดขาลง กำหนดเวลาของ Target และข้อมูลที่เผยแพร่จริง แล้วอ่าน Odds, Brier Score, Log Loss และ Threshold จากตัวอย่างเล็ก",
+      "course": "machine-learning",
+      "module": 5,
+      "lesson": 1,
+      "group": "Machine Learning · พยากรณ์เหตุการณ์",
+      "notebook": "notebooks/event-probabilities.ipynb"
+    },
+    {
+      "file": "recession-models",
+      "title": "Lab: ทดสอบโมเดลพยากรณ์เหตุการณ์ตามเวลา",
+      "description": "สร้างข้อมูลสมมติที่รู้เวลาประกาศ เปรียบเทียบ Logistic, Tree, Forest และ Boosting ด้วย validation ตามเวลา แล้วทดสอบแบบ rolling โดยกัน label ที่ยังไม่พร้อมใช้",
+      "course": "machine-learning",
+      "module": 5,
+      "lesson": 2,
+      "group": "Machine Learning · พยากรณ์เหตุการณ์",
+      "notebook": "notebooks/recession-models.ipynb"
+    },
+    {
+      "file": "feature-selection",
+      "title": "เลือก Feature และตรวจความเสถียร",
+      "description": "เปรียบเทียบการเลือกตัวแปรด้วย validation ตามเวลา แยกค่าความสำคัญจากเหตุและผล แล้วตรวจ collinearity, block permutation และข้อจำกัดการเลือกซ้ำ",
+      "course": "machine-learning",
+      "module": 5,
+      "lesson": 3,
+      "group": "Machine Learning · พยากรณ์เหตุการณ์",
+      "notebook": "notebooks/feature-selection.ipynb"
+    },
+    {
       "file": "risk",
       "title": "ความเสี่ยงในการลงทุน",
       "description": "จากที่มาของแนวคิดความเสี่ยงและทฤษฎีพอร์ต สู่ Volatility, Drawdown, VaR, ES และ EWMA พร้อมตัวอย่างและตัวทดลอง",

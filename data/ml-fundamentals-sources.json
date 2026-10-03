@@ -1,0 +1,204 @@
+{
+  "course": {
+    "title": "Python and Machine Learning for Asset Management",
+    "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management",
+    "section": "Introducing the fundamentals of machine learning"
+  },
+  "accessed": "2026-10-03",
+  "coverage": {
+    "lectures": [
+      {
+        "title": "Welcome to the Python Machine-Learning for Investment management course",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/ueW5r/welcome-to-the-python-machine-learning-for-investment-management-course",
+        "review": "Full English transcript read in authenticated Coursera UI; no quiz responses submitted."
+      },
+      {
+        "title": "Introduction to machine-learning",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/bT5gM/introduction-to-machine-learning",
+        "review": "Full English transcript read in authenticated Coursera UI; no quiz responses submitted."
+      },
+      {
+        "title": "Financial applications",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/NEevd/financial-applications",
+        "review": "Full English transcript read in authenticated Coursera UI; no quiz responses submitted."
+      },
+      {
+        "title": "Supervised learning",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/U2fjL/supervised-learning",
+        "review": "Full English transcript read in authenticated Coursera UI; no quiz responses submitted."
+      },
+      {
+        "title": "First algorithms",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/AbO02/first-algorithms",
+        "review": "Full English transcript read in authenticated Coursera UI; no quiz responses submitted."
+      },
+      {
+        "title": "Highlights of best practice",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/4mqDE/highlights-of-best-practice",
+        "review": "Full English transcript read in authenticated Coursera UI; no quiz responses submitted."
+      },
+      {
+        "title": "Unsupervised learning",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/lFYle/unsupervised-learning",
+        "review": "Full English transcript read in authenticated Coursera UI; no quiz responses submitted."
+      },
+      {
+        "title": "Challenges ahead",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/1Ba4p/challenges-ahead",
+        "review": "Full English transcript read in authenticated Coursera UI; no quiz responses submitted."
+      },
+      {
+        "title": "Lab session optimal portfolio",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/fZLXq/lab-session-optimal-portfolio",
+        "review": "Full English transcript read in authenticated Coursera UI; no quiz responses submitted."
+      }
+    ],
+    "readings": [
+      {
+        "title": "Requirements",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/kdNU7/requirements",
+        "review": "Full supplement page read; linked works separately scoped below."
+      },
+      {
+        "title": "Material at your disposal",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/mA2QS/material-at-your-disposal",
+        "review": "Full supplement page read; linked works separately scoped below."
+      },
+      {
+        "title": "Machine Learning for Investment Decisions: A Brief Guided Tour",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/SEuOQ/machine-learning-for-investment-decisions-a-brief-guided-tour",
+        "review": "Full supplement page read; linked works separately scoped below."
+      },
+      {
+        "title": "References for introducing the fundamentals of machine learning",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/AFf5P/references-for-module-1-introducing-the-fundamentals-of-machine-learning",
+        "review": "Full supplement page read; linked works separately scoped below."
+      },
+      {
+        "title": "Lab session optimal portfolio",
+        "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/sk2he/lab-session-optimal-portfolio",
+        "review": "Full supplement page read; linked works separately scoped below."
+      }
+    ]
+  },
+  "course_code": {
+    "lab_url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/ungradedLab/sE0dm/python-lab-sessions",
+    "resource_url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/resources/Rix96",
+    "resource_title": "Lab session 1: optimal portfolio 03 Mar 2021",
+    "scope": "The launched Jupyter file listing was inspected read-only; the optimal-portfolio notebook was absent from the visible listing. The resource page exposed LAB1 optimal_portfolio_03March21.zip; browser download succeeded but macOS denied filesystem access to Downloads. No notebook cells or raw dataset from that ZIP were read or executed. The complete 40-minute lab video transcript was reviewed.",
+    "redistribution": "No instructor transcript, notebook, code or raw data is redistributed."
+  },
+  "linked_reading_limits": [
+    {
+      "url": "https://risk.edhec.edu/machine-learning-investment-decisions-brief-guided-tour",
+      "status": "Referenced by the supplement; original article URL could not be accessed. Do not cite as a fully read article."
+    },
+    {
+      "scope": "The course reference list was read; listed medical, deep-learning and reinforcement-learning papers and the entire Elements of Statistical Learning book were not read for this chapter group."
+    }
+  ],
+  "editorial_conventions": [
+    "Features X and target y are distinct; supervised learning includes regression and classification.",
+    "Logistic regression uses probabilistic log loss in the examples; squared distance to a separating line is not its standard likelihood objective.",
+    "Averaging or voting is not synonymous with boosting, and ensembles do not guarantee improvement.",
+    "Training, hyperparameter validation and final holdout are separate; preprocessing is fitted only within training data. Financial observations retain temporal order and label-availability constraints.",
+    "PCA creates component features and does not by itself select original columns or identify economic causes.",
+    "Graph layout position is not a centrality measure or evidence of causal influence.",
+    "The course portfolio lab explicitly uses the same training and evaluation dates; original public examples use a held-out period. Buy-and-hold drift can change realized portfolio moments independently of skewness or kurtosis.",
+    "A historical T-bill quote is not automatically a realized weekly risk-free return. Borrowing/lending and cash-volatility assumptions are stated explicitly.",
+    "Solver success is checked alongside feasibility; a success flag alone is not a proof of global optimality for arbitrary objectives."
+  ],
+  "original_lessons": [
+    "ml-foundations",
+    "supervised-learning",
+    "model-validation",
+    "ml-portfolio-lab"
+  ],
+  "example_scope": "Original fixed hypothetical fixtures and seeded simulations. All displayed numerical results are computed from these fixtures, not empirical market performance.",
+  "runtime": {
+    "numpy": "2.0.2",
+    "pandas": "2.3.3",
+    "scipy": "1.13.1",
+    "scikit-learn": "1.6.1"
+  },
+  "primary_references": [
+    {
+      "title": "Linear models",
+      "url": "https://scikit-learn.org/1.6/modules/linear_model.html",
+      "review_scope": "OLS, Ridge objective and logistic-regression loss/penalty conventions.",
+      "accessed": "2026-10-03"
+    },
+    {
+      "title": "Nearest neighbors",
+      "url": "https://scikit-learn.org/1.6/modules/neighbors.html",
+      "review_scope": "Classification/regression, distance weighting and equal-distance boundary caveat.",
+      "accessed": "2026-10-03"
+    },
+    {
+      "title": "StandardScaler",
+      "url": "https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html",
+      "review_scope": "Training mean, population-SD scaling and constant columns.",
+      "accessed": "2026-10-03"
+    },
+    {
+      "title": "Confusion matrix",
+      "url": "https://scikit-learn.org/1.6/modules/generated/sklearn.metrics.confusion_matrix.html",
+      "review_scope": "Rows are true labels; columns are predicted labels.",
+      "accessed": "2026-10-03"
+    },
+    {
+      "title": "Support vector machines",
+      "url": "https://scikit-learn.org/1.6/modules/svm.html",
+      "review_scope": "Linear decision function, margin, C and distinction from probabilities.",
+      "accessed": "2026-10-03"
+    },
+    {
+      "title": "PCA",
+      "url": "https://scikit-learn.org/1.6/modules/decomposition.html#pca",
+      "review_scope": "Centered linear component representation and explained variation.",
+      "accessed": "2026-10-03"
+    },
+    {
+      "title": "Voting ensembles",
+      "url": "https://scikit-learn.org/1.6/modules/ensemble.html#voting-classifier",
+      "review_scope": "Voting/averaging distinctions; no universal accuracy guarantee.",
+      "accessed": "2026-10-03"
+    },
+    {
+      "title": "Cross-validation",
+      "url": "https://scikit-learn.org/1.6/modules/cross_validation.html#cross-validation-of-time-series-data",
+      "review_scope": "Time-ordered evaluation and expanding training folds.",
+      "accessed": "2026-10-03"
+    },
+    {
+      "title": "Data leakage",
+      "url": "https://scikit-learn.org/1.6/common_pitfalls.html#data-leakage",
+      "review_scope": "Fit preprocessing only on training observations; Pipeline boundaries.",
+      "accessed": "2026-10-03"
+    },
+    {
+      "title": "TimeSeriesSplit",
+      "url": "https://scikit-learn.org/1.6/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+      "review_scope": "n_splits, test_size and gap count rows, not target-availability semantics.",
+      "accessed": "2026-10-03"
+    },
+    {
+      "title": "Resampler.prod",
+      "url": "https://pandas.pydata.org/pandas-docs/version/2.3/reference/api/pandas.core.resample.Resampler.prod.html",
+      "review_scope": "min_count rejects groups with insufficient non-missing values.",
+      "accessed": "2026-10-03"
+    },
+    {
+      "title": "SLSQP",
+      "url": "https://docs.scipy.org/doc/scipy-1.13.1/reference/optimize.minimize-slsqp.html",
+      "review_scope": "Constrained minimization and stopping options.",
+      "accessed": "2026-10-03"
+    },
+    {
+      "title": "brentq",
+      "url": "https://docs.scipy.org/doc/scipy-1.13.1/reference/generated/scipy.optimize.brentq.html",
+      "review_scope": "Bracketed continuous root solving used for self-financing transaction fees.",
+      "accessed": "2026-10-03"
+    }
+  ]
+}

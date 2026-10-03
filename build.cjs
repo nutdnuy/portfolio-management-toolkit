@@ -48,7 +48,7 @@ async function build() {
   });
   const search = [], renderedPages = new Map();
   for (const page of pages) {
-    const coursePrefix = page.course === 'advanced' ? 'Advanced · ' : '';
+    const coursePrefix = ({advanced: 'Advanced · ', 'machine-learning': 'Machine Learning · '})[page.course] || '';
     const searchSection = coursePrefix + page.title;
     const chunks = page.body.split(/(?=<h[23]\b)/);
     search.push({title:page.title, section:searchSection, url:`${page.file}.html`, text:coursePrefix + plain(page.body).slice(0, 600)});

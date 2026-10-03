@@ -1,4 +1,4 @@
-/* Focused checks for the Introduction and Advanced lessons and executable downloads. */
+/* Focused checks for all configured course lessons and executable downloads. */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -81,6 +81,14 @@ async function loadImages(page) {
       assert.match(await result.locator('small').textContent(),/^Advanced · /);
       report.search.push('Advanced');
     }
+    const machineLearning = pages.find(item => item.course === 'machine-learning');
+    if (machineLearning) {
+      for (const [query, target] of [['Machine Learning', 'ml-foundations'], ['Brier', 'event-probabilities'], ['Graphical Lasso', 'asset-networks']]) {
+        await page.locator('#search-input').fill(query);
+        await page.waitForFunction(prefix=>[...document.querySelectorAll('#search-results a')].some(a=>a.getAttribute('href').startsWith(prefix)), target+'.html');
+        report.search.push(query);
+      }
+    }
     await page.locator('#search-input').fill('course-no-result-874639');
     await page.waitForFunction(()=>document.querySelectorAll('#search-results a').length===0);
     await page.keyboard.press('Escape');
@@ -103,7 +111,7 @@ async function loadImages(page) {
     const charts = await browser.newContext({viewport:{width:800,height:650}});
     const chartPage = await charts.newPage();
     const advancedCharts = fs.readdirSync(path.join(root,'assets/charts'))
-      .filter(name=>name.startsWith('advanced-') && name.endsWith('.svg') && !name.endsWith('-mobile.svg'))
+      .filter(name=>(name.startsWith('advanced-') || name.startsWith('ml-')) && name.endsWith('.svg') && !name.endsWith('-mobile.svg'))
       .map(name=>name.slice(0,-4));
     for(const name of ['course-diversification','course-frontier','course-cppi','course-duration',...advancedCharts]){
       for(const suffix of ['', '-mobile']){

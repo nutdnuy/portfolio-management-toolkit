@@ -1,0 +1,134 @@
+{
+  "course": "Python and Machine Learning for Asset Management",
+  "source_url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/",
+  "accessed": "2026-10-03",
+  "section": "Factor model estimation",
+  "access_method": "Full authenticated rendered English transcript read for each listed lecture, including all lab segments. No graded assessments submitted.",
+  "videos": [
+    {
+      "title": "Basics of factor investing",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/lTGHZ/introduction-to-module-2-basics-of-factor-investing",
+      "coverage": "full transcript read",
+      "caption_segments": 170
+    },
+    {
+      "title": "Introducing factor models",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/PXj5n/introducing-factor-models",
+      "coverage": "full transcript read",
+      "caption_segments": 163
+    },
+    {
+      "title": "Typology of factor models",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/pH2yb/typology-of-factor-models",
+      "coverage": "full transcript read",
+      "caption_segments": 144
+    },
+    {
+      "title": "Using factor models in portfolio construction and analysis",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/JNYfl/using-factor-models-in-portfolio-construction-and-analysis",
+      "coverage": "full transcript read",
+      "caption_segments": 213
+    },
+    {
+      "title": "Penalty methods",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/xvqVH/penalty-methods",
+      "coverage": "full transcript read",
+      "caption_segments": 213
+    },
+    {
+      "title": "Setting factor loadings and examples",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/0Qh5m/setting-factor-loadings-and-examples",
+      "coverage": "full transcript read",
+      "caption_segments": 164
+    },
+    {
+      "title": "Shrinkage concepts",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/uLWa0/shrinkage-concepts",
+      "coverage": "full transcript read",
+      "caption_segments": 145
+    },
+    {
+      "title": "Lab session: Jupyter notebook on factor models",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/zxZH1/lab-session-jupiter-notebook-on-factor-models",
+      "coverage": "full transcript read",
+      "caption_segments": 1279
+    }
+  ],
+  "total_caption_segments": 2491,
+  "readings": [
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/MjrVV/references-for-module-2-machine-learning-techniques-for-robust-estimation-of",
+      "coverage": "full reference page read; listed publications are not thereby claimed as read"
+    }
+  ],
+  "notebook_access": "Instructor notebook and helper library were not directly inspected. The full lab transcript informs scope; all published examples and code are original.",
+  "raw_source_policy": "No raw transcripts, instructor source code or course datasets redistributed.",
+  "primary_sources": [
+    {
+      "url": "https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LinearRegression.html",
+      "coverage": "relevant API definitions and conventions read"
+    },
+    {
+      "url": "https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.Ridge.html",
+      "coverage": "relevant API definitions and conventions read"
+    },
+    {
+      "url": "https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.Lasso.html",
+      "coverage": "relevant API definitions and conventions read"
+    },
+    {
+      "url": "https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.ElasticNet.html",
+      "coverage": "relevant API definitions and conventions read"
+    },
+    {
+      "url": "https://scikit-learn.org/1.6/modules/generated/sklearn.preprocessing.StandardScaler.html",
+      "coverage": "relevant API definitions and conventions read"
+    },
+    {
+      "url": "https://scikit-learn.org/1.6/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+      "coverage": "relevant API definitions and conventions read"
+    },
+    {
+      "url": "https://scikit-learn.org/1.6/modules/generated/sklearn.model_selection.GridSearchCV.html",
+      "coverage": "relevant API definitions and conventions read"
+    },
+    {
+      "url": "https://scikit-learn.org/1.6/common_pitfalls.html",
+      "coverage": "data leakage and Pipeline sections read"
+    },
+    {
+      "url": "https://arxiv.org/pdf/1203.5610",
+      "coverage": "Morris and Lysy (2012), introductory Normal-means, equal-variance and aggregate-risk sections read; not a full paper review"
+    }
+  ],
+  "editorial_corrections": [
+    "OLS residuals are orthogonal to fitted regressors in-sample with an intercept, not necessarily statistically independent.",
+    "Strong negative correlation also contributes to collinearity; pairwise correlation is not a complete matrix-rank test.",
+    "Ridge uses squared L2; scikit-learn Ridge and Lasso/Elastic Net use different loss normalizations.",
+    "L1 is not the count of nonzero coefficients; best-subset constraints are combinatorial.",
+    "The lecture and lab illustrate different fold counts; the original examples use chronological expanding windows with fold-local scaling and a separate final test.",
+    "James-Stein Normal-means improvements require specified distribution, dimension and loss assumptions and do not guarantee each component or regression prediction improves.",
+    "Contemporaneous factor regressions and ex-post partitions by realized target sign do not establish an ex-ante trading forecast.",
+    "Monthly expectation multiplied by twelve is arithmetic annualization, not CAGR.",
+    "A factor proxy is not automatically a causal economic quantity."
+  ],
+  "pages": [
+    "factor-model-estimation",
+    "regularized-factor-models",
+    "factor-model-validation"
+  ],
+  "original_examples": {
+    "units": "monthly decimal returns",
+    "scikit_learn_version": "1.6.1",
+    "dependencies": [
+      "numpy",
+      "pandas",
+      "scikit-learn"
+    ],
+    "seeds": {
+      "regularized-factor-models": 20261003,
+      "factor-model-validation": 20261004
+    },
+    "validation": "120 synthetic months, development first 96, final test last 24; expanding training windows 60, 72 and 84 with 12-month validation blocks"
+  }
+}

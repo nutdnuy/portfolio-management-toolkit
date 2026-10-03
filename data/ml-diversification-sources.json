@@ -1,0 +1,192 @@
+{
+  "course": "Python and Machine Learning for Asset Management",
+  "course_url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management",
+  "section": "Machine learning techniques for efficient portfolio diversification",
+  "review_date": "2026-10-03",
+  "chapters": [
+    "pca-diversification",
+    "asset-clustering",
+    "asset-networks"
+  ],
+  "source_access": [
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/KSYhx/introduction-to-module-3-machine-learning-techniques-for-efficient-portfolio",
+      "title": "Introduction to machine-learning techniques for efficient portfolio diversification",
+      "access": "Full authenticated interactive transcript read through Coursera UI; no assessment or course-code execution"
+    },
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/16faT/benefits-of-portfolio-diversification",
+      "title": "Benefits of portfolio diversification",
+      "access": "Full authenticated interactive transcript read through Coursera UI; no assessment or course-code execution"
+    },
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/MWFae/portfolio-diversification-measures",
+      "title": "Portfolio diversification measures",
+      "access": "Full authenticated interactive transcript read through Coursera UI; no assessment or course-code execution"
+    },
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/XsYTH/principle-component-analysis",
+      "title": "Principle component analysis (course title)",
+      "access": "Full authenticated interactive transcript read through Coursera UI; no assessment or course-code execution"
+    },
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/zBksE/role-of-clustering",
+      "title": "Role of clustering",
+      "access": "Full authenticated interactive transcript read through Coursera UI; no assessment or course-code execution"
+    },
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/qhGsr/graphical-analysis",
+      "title": "Graphical analysis",
+      "access": "Full authenticated interactive transcript read through Coursera UI; no assessment or course-code execution"
+    },
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/Nhqjd/selecting-a-portfolio-of-assets",
+      "title": "Selecting a portfolio of assets",
+      "access": "Full authenticated interactive transcript read through Coursera UI; no assessment or course-code execution"
+    },
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/2vcIt/lab-session-graphical-network-analysis",
+      "title": "Lab session: Graphical Network Analysis",
+      "access": "Full authenticated interactive transcript read through Coursera UI; no assessment or course-code execution"
+    }
+  ],
+  "readings": [
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/m2Uwl/supplementary-material-pca",
+      "access": "Reading page and PDF link inspected. Browser downloaded MOOC_Module3_PCA.pdf, but local text extraction was denied by the OS. PDF body not read; no claims rely on it."
+    },
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/jKOWy/references-for-the-module-machine-learning-techniques-for-efficient-portfolio",
+      "access": "Full reading page viewed; identifies The Elements of Statistical Learning, 2nd edition, Hastie, Tibshirani and Friedman (2009). The book itself was not read in this task."
+    },
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/L0ZQs/reference-for-the-module-selecting-a-portfolio-of-assets",
+      "access": "Reading page and two attachment titles/links viewed: A Semiparametric Graphical Modelling - 2015.pdf and MOOC_Module3_StabilitySelection.pdf. Neither attached PDF body read."
+    }
+  ],
+  "primary_references": [
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html",
+      "scope": "Centering without automatic scaling, components orientation, n-1 explained variance, full SVD and whitening API"
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/decomposition.html",
+      "scope": "PCA and Sparse PCA sections, reconstruction and sparse-component formulation"
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.cluster.AffinityPropagation.html",
+      "scope": "Precomputed similarity, negative squared Euclidean convention, preference, damping, convergence warnings and exemplar semantics"
+    },
+    {
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html",
+      "scope": "Condensed pairwise-distance input, average/single/complete linkage and Ward Euclidean requirement"
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/covariance.html",
+      "scope": "Sparse inverse covariance objective, off-diagonal penalty and structure recovery cautions"
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.covariance.GraphicalLasso.html",
+      "scope": "alpha, convergence, covariance and precision estimator API"
+    },
+    {
+      "url": "https://scikit-learn.org/stable/modules/generated/sklearn.manifold.MDS.html",
+      "scope": "Metric/nonmetric MDS and stress terminology. Teaching implementation uses explicit classical MDS, not this estimator."
+    },
+    {
+      "url": "https://www.arpm.co/book/managing-diversification",
+      "scope": "Author resource page linked to Managing Diversification"
+    },
+    {
+      "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1358533",
+      "scope": "Author paper abstract indexed: ENB is entropy-based. Full paper not read in this task."
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5354361/",
+      "scope": "Publicly indexed article text read for Gaussian graphical model, elliptical-copula and equity-selection/stability-selection context; direct page later showed a browser check, so no claim of full-paper or attached-PDF reading."
+    }
+  ],
+  "lab_scope": {
+    "transcript_lines": 483,
+    "transcript_characters": 19719,
+    "described_input": "22 firms in banking, healthcare, energy and technology; CRSP returns and FRED T-bill data; course source data not redistributed",
+    "described_pipeline": [
+      "GraphicalLassoCV",
+      "AffinityPropagation",
+      "MDS"
+    ],
+    "instructor_code_executed": false,
+    "instructor_files_redistributed": false
+  },
+  "original_data": {
+    "status": "Hypothetical simulation, not empirical market data",
+    "frequency": "weekly simple returns in decimals",
+    "seed": 317,
+    "rows": 260,
+    "assets": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F"
+    ],
+    "training_weeks": [
+      1,
+      208
+    ],
+    "test_weeks": [
+      209,
+      260
+    ],
+    "mean_per_asset": 0.001,
+    "weekly_sd": [
+      0.025,
+      0.03,
+      0.02,
+      0.022,
+      0.035,
+      0.028
+    ],
+    "precision_before_volatility_scaling": {
+      "diagonal": 1,
+      "adjacent_offdiagonals": [
+        -0.55,
+        -0.2,
+        -0.45,
+        -0.15,
+        -0.5
+      ],
+      "other_offdiagonals": 0
+    },
+    "simulation": "IID Gaussian draws; fixed parameters; no volatility clustering or regime changes. No generated return is below -1, but Gaussian simple-return models do not guarantee this for arbitrary draws."
+  },
+  "conventions": [
+    "Covariance PCA uses ddof=1; explained variance is distinct from portfolio variance contributions.",
+    "Inverse HHI and entropy effective counts are reported separately with formulas and factor-basis dependence.",
+    "PCA scores are uncorrelated in the training sample; independence requires stronger assumptions.",
+    "Correlation distance sqrt((1-rho)/2) equals Euclidean distance between standardized histories divided by 2*sqrt(T-1).",
+    "Exact three-medoid selection enumerates all20 subsets and breaks objective ties within1e-12 by lexicographic order.",
+    "Affinity Propagation preference is a modeling choice; cluster labels have no ordering semantics; exemplar ties may vary numerically.",
+    "Network standardization uses ddof=0 to match empirical covariance normalization.",
+    "Graph alpha is selected on four chronological folds with fold-specific mean and SD; final52weeks excluded.",
+    "Precision zero means Gaussian conditional independence only under the model; estimated zeros are not population proofs or causal effects.",
+    "Overlapping-window edge frequencies are sensitivity diagnostics, not truth probabilities or a replication of formal stability selection.",
+    "Classical metric MDS projects a Gram matrix to two dimensions; relative distance error is explicitly defined, not mislabeled as sklearn stress.",
+    "Portfolio comparisons use weekly target-weight rebalancing, no fees, initial wealth1 before week209 and no forced terminal liquidation. One simulated path establishes no universal method ranking."
+  ],
+  "figures": {
+    "route": "no-image-generator",
+    "design_system": "QuantCorner / QuantSeras Material 2",
+    "generator": "scripts/make_ml_diversification_figures.py",
+    "numeric_data": "data/ml-diversification-figures.json",
+    "files": [
+      "assets/charts/ml-pca-risk-shares.svg",
+      "assets/charts/ml-pca-risk-shares-mobile.svg",
+      "assets/charts/ml-partial-correlation.svg",
+      "assets/charts/ml-partial-correlation-mobile.svg"
+    ],
+    "source": "Computed from the original executable chapter examples",
+    "logo": "No new logo layer. Existing site logos unmodified. Canonical Quantsera logo preflight passed."
+  }
+}

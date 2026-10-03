@@ -1,0 +1,74 @@
+{
+  "course": "Python and Machine Learning for Asset Management",
+  "source_url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/home/module/5",
+  "accessed": "2026-10-03",
+  "access_method": "Authenticated browser UI; full rendered English transcripts read, including all lab segments. No graded assessments submitted.",
+  "module": 5,
+  "videos": [
+    {
+      "title": "Introduction to module 5",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/ykx6A/introduction-to-module-5",
+      "coverage": "full transcript read"
+    },
+    {
+      "title": "Traditional approaches",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/JTrQp/traditional-approaches",
+      "coverage": "full transcript read"
+    },
+    {
+      "title": "Machine-Learning Processes",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/stfpc/machine-learning-processes",
+      "coverage": "full transcript read"
+    },
+    {
+      "title": "Several Machine Learning Methods",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/QRkFa/several-machine-learning-methods",
+      "coverage": "full transcript read"
+    },
+    {
+      "title": "Predicting recessions",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/MJFCY/predicting-recessions",
+      "coverage": "full transcript read"
+    },
+    {
+      "title": "Challenges ahead",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/SCXul/challenges-ahead",
+      "coverage": "full transcript read"
+    },
+    {
+      "title": "Lab session 5: Regime Prediction with Machine Learning",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/S1sjv/lab-session-5-regime-prediction-with-machine-learning",
+      "coverage": "full transcript read"
+    }
+  ],
+  "raw_source_policy": "No raw transcript, instructor code, private course asset or source PDF redistributed. All published calculations and datasets are original teaching examples.",
+  "notebook_access": "Instructor source notebook not directly audited; explanations use full video transcript and independently checked original code.",
+  "readings": [
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/10rNN/references-for-the-module-identifying-recessions-crash-regimes-and-features",
+      "status": "Page read in full"
+    },
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/HcS5W/to-be-continued-3",
+      "status": "Page read in full"
+    }
+  ],
+  "lab_segments": 894,
+  "editorial_corrections": [
+    "Recession labels and stock-market contraction labels describe different targets.",
+    "New lab explicitly demonstrates h=0 nowcasting; never report its result as advance crash forecasting.",
+    "Use feature release dates, vintages, target horizon and label announcement availability in every split; chronological indices alone cannot repair revised macro data or unavailable labels.",
+    "Choose hyperparameters and features within chronological development validation; freeze procedure before final evaluation.",
+    "ROC-AUC, average precision, probability calibration and decision costs are different criteria. Include rare-class baseline, confusion matrix and event counts.",
+    "QPS sometimes means twice Brier; state the exact convention.",
+    "Random Forest randomizes candidate features within bagged trees; gradient boosting fits sequential loss gradients, not simply majority voting over unchanged trees.",
+    "C is inverse regularization strength in sklearn LogisticRegression.",
+    "Feature transformations do not by themselves prove stationarity; feature importance is neither causal evidence nor proof of universal usefulness.",
+    "Omit obsolete current-events claims and unsupported data-growth statistics from the source."
+  ],
+  "pages": [
+    "event-probabilities",
+    "recession-models",
+    "feature-selection"
+  ]
+}

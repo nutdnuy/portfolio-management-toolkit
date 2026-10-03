@@ -15,7 +15,8 @@
     "check:extreme": "python3 qa/extreme-risk-checks.py",
     "notebook:course": "python3 scripts/make_course_notebooks.py",
     "check:course": "python3 qa/course-checks.py",
-    "check:advanced": "python3 qa/advanced-course-checks.py"
+    "check:advanced": "python3 qa/advanced-course-checks.py",
+    "check:ml": "python3 qa/ml-course-checks.py"
   },
   "engines": {
     "node": ">=22"

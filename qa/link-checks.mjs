@@ -12,7 +12,7 @@ assert.deepEqual(manifest.pages, config.pages.map(page => `${page.file}.html`));
 assert.equal(new Set(config.pages.map(page => page.file)).size, config.pages.length, 'Page filenames must be unique across courses');
 const lessonIds = new Set(), lessonNotebooks = new Set();
 for (const page of config.pages) {
-  if (page.course !== undefined) assert.ok(['introduction', 'advanced'].includes(page.course), `${page.file}: unknown course`);
+  if (page.course !== undefined) assert.ok(['introduction', 'advanced', 'machine-learning'].includes(page.course), `${page.file}: unknown course`);
   if (page.dataStatus !== undefined) assert.ok(typeof page.dataStatus === 'string' && page.dataStatus.trim(), `${page.file}: dataStatus must be nonempty text`);
   if (page.notebook !== undefined) assert.ok(page.notebook === false || (typeof page.notebook === 'string' && page.notebook.endsWith('.ipynb')), `${page.file}: notebook must be false or an ipynb path`);
   if (page.module === undefined) continue;

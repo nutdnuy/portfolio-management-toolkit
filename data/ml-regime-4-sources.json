@@ -1,0 +1,104 @@
+{
+  "course": "Python and Machine Learning for Asset Management",
+  "source_url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/home/module/4",
+  "accessed": "2026-10-03",
+  "access_method": "Authenticated browser UI; full rendered English transcripts read, including all lab segments. No graded assessments submitted.",
+  "module": 4,
+  "videos": [
+    {
+      "title": "Introduction to economic regimes",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/CHpGz/introduction-to-economic-regimes",
+      "coverage": "full transcript read"
+    },
+    {
+      "title": "Portfolio Decisions with Time-Varying Market Conditions",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/H2uZe/portfolio-decisions-with-time-varying-market-conditions",
+      "coverage": "full transcript read"
+    },
+    {
+      "title": "Trend filtering",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/vDLHd/trend-filtering",
+      "coverage": "full transcript read"
+    },
+    {
+      "title": "A scenario based portfolio model",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/ZtY1n/a-scenario-based-portfolio-model",
+      "coverage": "full transcript read"
+    },
+    {
+      "title": "A two regime portfolio example",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/xCMTv/a-two-regime-portfolio-example",
+      "coverage": "full transcript read"
+    },
+    {
+      "title": "A multi regime model for a University Endowment",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/84L90/a-multi-regime-model-for-a-university-endowment",
+      "coverage": "full transcript read"
+    },
+    {
+      "title": "NEW Lab session- Jupyter notebook on regime-based investment model",
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/031T3/new-lab-session-jupyter-notebook-on-regime-based-investment-model",
+      "coverage": "full transcript read"
+    }
+  ],
+  "raw_source_policy": "No raw transcript, instructor code, private course asset or source PDF redistributed. All published calculations and datasets are original teaching examples.",
+  "notebook_access": "Instructor source notebook not directly audited; explanations use full video transcript and independently checked original code.",
+  "readings": [
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/M2bDu/information-on-the-trend-filtering-video",
+      "status": "Page read in full; optional linked PDF reports not read"
+    },
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/KlXGS/information-on-scenario-based-portfolio-model-video",
+      "status": "Page read in full; optional linked PDF reports not read"
+    },
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/qmtwE/references-for-the-module-machine-learning-techniques-for-regime-analysis",
+      "status": "Page read in full; optional linked PDF reports not read"
+    },
+    {
+      "url": "https://www.coursera.org/learn/python-machine-learning-for-investment-management/supplement/5sfFH/regime-aware-asset-allocation",
+      "status": "Page read in full; optional linked PDF reports not read"
+    }
+  ],
+  "lab_segments": 695,
+  "editorial_corrections": [
+    "Transcript repeatedly says multinomial where discussion is multivariate Normal; preserve correct distribution distinctions.",
+    "Mean-variance calculations require finite second moments, not Normality as a mathematical necessity.",
+    "w-transpose Sigma w is variance, not volatility.",
+    "First-difference L1 penalty on returns gives piecewise constant fits; it penalizes total variation, not the literal number of sign switches. Second-difference L1 trend filtering gives piecewise linear fits.",
+    "Full-sample trend smoothing and HMM smoothed probabilities use future observations. Forward HMM filtering is causal only if its fitted parameters are also available at the decision time.",
+    "Scenario moment identity is exact for the same weighted finite scenarios. Random finite Gaussian draws only approximate externally specified moments; Normality is not needed for the identity.",
+    "Mixture covariance includes between-regime mean differences; matching just the average covariance omits risk.",
+    "Lecture and lab differ on spending trigger thresholds, loss thresholds, and monthly versus quarterly transitions. Original example must specify its own period and conventions instead of reproducing incompatible numbers.",
+    "Simulation can reveal sensitivity under assumptions; a two-regime model is not necessarily more accurate than a one-regime model in empirical use.",
+    "Withdrawals are cash flows, not negative investment returns; distinguish real terminal shortfall, drawdown and sequence risk."
+  ],
+  "primary_references": [
+    {
+      "url": "https://www.statsmodels.org/stable/examples/notebooks/generated/markov_autoregression.html",
+      "scope": "Filtered/smoothed probability definitions and Markov estimation context read"
+    },
+    {
+      "url": "https://www.statsmodels.org/stable/examples/notebooks/generated/markov_regression.html",
+      "scope": "Transition probabilities and expected duration sections read"
+    },
+    {
+      "url": "https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.multivariate_normal.html",
+      "scope": "Mean/covariance, Cholesky method and array shape API conventions read"
+    },
+    {
+      "url": "https://docs.scipy.org/doc/scipy/reference/optimize.minimize-lbfgsb.html",
+      "scope": "L-BFGS-B options, gtol and success conditions read"
+    },
+    {
+      "url": "https://web.stanford.edu/~boyd/papers/l1_trend_filter.html",
+      "scope": "Full landing page and abstract read; second-difference formulation checked, not a full paper review"
+    }
+  ],
+  "pages": [
+    "market-regimes",
+    "regime-scenarios",
+    "endowment-simulation"
+  ]
+}

@@ -96,6 +96,49 @@ Covariance เป็นเพียงส่วนหนึ่งของข้
 
 ตัวอย่างสี่สินทรัพย์และข้อมูลทดสอบเป็นข้อมูลสมมติที่สร้างเพื่อสอนวิธีคำนวณ ผลเปรียบเทียบไม่ได้ยืนยันว่าวิธีใดชนะตลาด
 
+## Machine Learning · เริ่มต้นเรียนรู้จากข้อมูล
+
+ชุดต่อเนื่องจากคอร์ส [Python and Machine Learning for Asset Management](https://www.coursera.org/learn/python-machine-learning-for-investment-management) เริ่มที่หนึ่งแถวข้อมูลหมายถึงอะไร แล้วค่อยสร้างโมเดลและตรวจว่าโมเดลใช้ข้อมูลซึ่งรู้แล้วในวันตัดสินใจจริงหรือไม่ แต่ละบทมีคำอธิบาย ตัวอย่างคำนวณ โค้ด Python และโจทย์พร้อมเฉลย
+
+1. [Machine Learning เริ่มจากข้อมูลและคำถาม](ml-foundations.html) แยก feature, target และชนิดของปัญหาก่อนเรียกใช้โมเดล
+2. [Supervised Learning จากตัวอย่างเล็ก](supervised-learning.html) เรียน Regression, Classification, Logistic และ KNN พร้อมอ่านค่าความผิดพลาด
+3. [ตรวจโมเดลโดยไม่แอบเห็นอนาคต](model-validation.html) แบ่ง train, validation และ test ตามเวลา แล้วทดลองปัญหา overfitting
+4. [Lab จัดพอร์ตและทดสอบกับข้อมูลใหม่](ml-portfolio-lab.html) คำนวณน้ำหนักจากอดีต เปรียบเทียบกับ Equal Weight และตรวจผลในช่วงที่กันไว้
+
+## Machine Learning · ประมาณ Factor Models
+
+เมื่อมีปัจจัยหลายตัว การ fit ได้ใกล้ข้อมูลเดิมอาจมาพร้อม coefficient ที่แกว่งมาก เราจะดูว่าการปรับสเกลและ regularization เปลี่ยนค่าประมาณอย่างไร
+
+1. [ประมาณ Factor Model](factor-model-estimation.html) คำนวณ intercept, loadings และ residual covariance ก่อนดูปัญหาตัวแปรเกือบซ้ำกัน
+2. [Ridge, Lasso และ Elastic Net](regularized-factor-models.html) อ่าน objective คำนวณ penalty และตรวจหน่วยของ coefficient
+3. [ทดสอบ Factor Model ตามเวลา](factor-model-validation.html) เลือก hyperparameter ภายใน training folds แล้วเปิดชุดทดสอบครั้งสุดท้าย
+
+## Machine Learning · การกระจายพอร์ต
+
+สินทรัพย์หลายชื่ออาจยังรับความเสี่ยงร่วมกัน PCA, clustering และเครือข่ายช่วยมองโครงสร้างนี้ แต่แต่ละวิธีตอบคำถามต่างกัน
+
+1. [PCA และการกระจายความเสี่ยง](pca-diversification.html) แยกส่วนแบ่งความแปรปรวนของข้อมูลออกจากส่วนแบ่งความเสี่ยงของพอร์ต
+2. [จัดกลุ่มสินทรัพย์](asset-clustering.html) เปลี่ยน correlation เป็นระยะทาง เลือกตัวแทนกลุ่ม และวัดผลนอกชุดฝึก
+3. [เครือข่ายความสัมพันธ์ของสินทรัพย์](asset-networks.html) อ่าน partial correlation, Graphical Lasso และข้อจำกัดของภาพเครือข่าย
+
+## Machine Learning · ภาวะตลาด
+
+แบบจำลองภาวะตลาดช่วยแยกสมมติฐานของผลตอบแทนในแต่ละสภาวะ เราจะตรวจทั้งเวลาที่ใช้ข้อมูล ความน่าจะเป็นของการเปลี่ยนภาวะ และผลต่อแผนใช้เงิน
+
+1. [ภาวะตลาดและข้อมูลที่ใช้มองมัน](market-regimes.html) อ่าน Markov transition แยก filtering จาก smoothing และทดลอง total variation
+2. [จากภาวะตลาดสู่สถานการณ์ลงทุน](regime-scenarios.html) รวม mean และ covariance ให้ครบทั้งภายในและระหว่างภาวะ ก่อนคำนวณ Expected Shortfall
+3. [จำลองเงินกองทุนที่ต้องจ่ายทุกปี](endowment-simulation.html) เปรียบเทียบลำดับผลตอบแทน เงินเฟ้อ การจ่ายเงินจริง และความไม่แน่นอนของ Monte Carlo
+
+## Machine Learning · พยากรณ์เหตุการณ์
+
+การทำนายภาวะถดถอยต้องเริ่มจากนิยามเหตุการณ์และเวลาที่ข้อมูลประกาศ ชุดนี้ใช้ข้อมูลจำลองที่เปิดสูตรไว้ เพื่อฝึกตรวจขั้นตอนโดยไม่สับสนกับผลพยากรณ์เศรษฐกิจจริง
+
+1. [ความน่าจะเป็นบอกอะไร](event-probabilities.html) กำหนด horizon และ label แล้วคำนวณ Brier, Log Loss, Threshold และ Confusion Matrix
+2. [Lab พยากรณ์เหตุการณ์ทีละเดือน](recession-models.html) เปรียบเทียบ Logistic, Tree และ Ensemble โดยใช้เฉพาะข้อมูลที่พร้อม ณ เดือนนั้น
+3. [เลือก Feature โดยไม่ใช้คำตอบชุดทดสอบ](feature-selection.html) แยกการเลือกตัวแปรออกจากการประเมินผล พร้อมตรวจความสำคัญของตัวแปรอย่างระมัดระวัง
+
+ทั้งสิบหกบทมี Notebook แยกกัน ตัวอย่างใหม่เป็นข้อมูลสมมติหรือการจำลองที่ระบุ seed ไม่ใช่ผลพยากรณ์ตลาดหรือข้อเสนอให้ซื้อขายสินทรัพย์
+
 ## บทอ่านประกอบ
 
 อ่าน **[ความเสี่ยงในการลงทุน](risk.html)** เพื่อทำความเข้าใจว่าความเสี่ยงหมายถึงอะไร แนวคิดนี้พัฒนามาอย่างไร และแต่ละทฤษฎีตอบคำถามใด ก่อนเปรียบเทียบ Volatility, Downside, Drawdown, VaR และ Expected Shortfall พร้อมทดลองเปลี่ยนลำดับผลตอบแทน ความเสียหายปลายหาง และน้ำหนักข้อมูลใน EWMA
@@ -108,7 +151,7 @@ Covariance เป็นเพียงส่วนหนึ่งของข้
 
 เปิดบทเรียนจากแถบด้านข้างแล้วอ่านต่อได้ตามลำดับ ถ้าเจอคำที่ยังไม่คุ้น แวะดู[หน้าคำศัพท์](glossary.html) แล้วกดกลับมายังตัวอย่างได้ ระหว่างอ่านจะมีเครื่องมือให้ลองปรับค่า แนะนำให้เปลี่ยนทีละตัว แล้วดูว่าผลที่ออกมาตรงกับเหตุผลที่เราคิดไว้หรือไม่
 
-สำหรับบทเรียนตั้งแต่การสร้างพอร์ตไปจนถึงชุด Advanced กด “ดาวน์โหลด Notebook” จากสารบัญของหน้าที่กำลังอ่าน เปิดไฟล์ `.ipynb` ใน Jupyter Notebook หรือ JupyterLab แล้วรันจากช่องแรกลงมา หากอยากเริ่มใหม่ให้ Restart Kernel แล้ว Run All เพื่อไม่ให้ค่าจากการทดลองก่อนหน้าค้างอยู่ Python ของชุดนี้ใช้ NumPy, pandas และ SciPy; หากยังไม่มีแพ็กเกจ ให้รัน `%pip install numpy pandas scipy` ในช่องของ Jupyter ก่อนแล้วเริ่ม kernel ใหม่ คำสั่งที่ขึ้นต้นด้วย `%` ใช้ใน Jupyter ไม่ใช่ไฟล์ Python ปกติ
+สำหรับบทเรียนตั้งแต่การสร้างพอร์ตไปจนถึงชุด Advanced และ Machine Learning กด “ดาวน์โหลด Notebook” จากสารบัญของหน้าที่กำลังอ่าน เปิดไฟล์ `.ipynb` ใน Jupyter Notebook หรือ JupyterLab แล้วรันจากช่องแรกลงมา หากอยากเริ่มใหม่ให้ Restart Kernel แล้ว Run All เพื่อไม่ให้ค่าจากการทดลองก่อนหน้าค้างอยู่ Python ของชุดนี้ใช้ NumPy, pandas และ SciPy; ชุด Machine Learning เพิ่ม scikit-learn หากยังไม่มีแพ็กเกจ ให้รัน `%pip install numpy pandas scipy scikit-learn==1.6.1` ในช่องของ Jupyter ก่อนแล้วเริ่ม kernel ใหม่ คำสั่งที่ขึ้นต้นด้วย `%` ใช้ใน Jupyter ไม่ใช่ไฟล์ Python ปกติ
 
 Notebook มีผลรันบันทึกไว้ให้เทียบ แต่ผู้อ่านควรรันใหม่และลองเปลี่ยนค่าทีละตัวด้วย บท [Portfolio Insurance มี Notebook ของตัวเอง](notebooks/portfolio-insurance.ipynb) แยกจากชุดบทเรียนข้างต้น
 
