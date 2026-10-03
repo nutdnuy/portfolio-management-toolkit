@@ -11,7 +11,7 @@ description: แยกความเสี่ยงพอร์ตเป็น�
 
 เราจะเริ่มจาก covariance ที่กำหนดให้ คำนวณส่วนของ A ด้วยมือ แล้วสร้างตารางครบทุกสินทรัพย์ บทนี้ใช้ volatility เป็นมาตรวัดความเสี่ยง จึงวัดการกระจายของผลตอบแทนรอบค่าเฉลี่ย ไม่ได้ครอบคลุมสภาพคล่อง ความเสียหายปลายหาง หรือความเสี่ยงผิดนัดทั้งหมด
 
-ตัวเลขและโค้ดเป็นตัวอย่างสมมติที่เขียนขึ้นใหม่ สินทรัพย์ A/B/C/D ใช้ผลตอบแทนหน่วยทศนิยมและ covariance ในหน่วยปี ไม่มีการประมาณจากราคาตลาด รันโค้ดตามลำดับใน Notebook ใหม่ได้ด้วย NumPy และ pandas เนื้อหาประกอบ [Measuring risk contributions](https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/rZNZ8/measuring-risk-contributions) ใน Advanced Module 4
+ตัวเลขและโค้ดเป็นตัวอย่างสมมติที่เขียนขึ้นใหม่ สินทรัพย์ A/B/C/D ใช้ผลตอบแทนหน่วยทศนิยมและ covariance ในหน่วยปี ไม่มีการประมาณจากราคาตลาด รันโค้ดตามลำดับใน Notebook ใหม่ได้ด้วย NumPy และ pandas เนื้อหาประกอบ [Measuring risk contributions](https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/rZNZ8/measuring-risk-contributions) ในคอร์ส Advanced Portfolio Construction and Analysis with Python
 
 <span id="risk-contribution-inputs"></span>
 

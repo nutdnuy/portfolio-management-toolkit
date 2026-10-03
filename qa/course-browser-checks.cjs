@@ -41,8 +41,7 @@ async function loadImages(page) {
         if (neighbor) assert.equal(await link.getAttribute('href'),neighbor.file+'.html');
         else assert.equal(await link.count(),0,`${item.file} has no ${relation} chapter`);
       }
-      const prefix = item.course === 'advanced' ? 'Advanced · ' : '';
-      assert.equal(await page.locator('.chapter-kicker').textContent(),`${prefix}Module ${item.module} · บทย่อย ${item.lesson}`);
+      assert.equal(await page.locator('.chapter-kicker').textContent(),`${item.group} · บทย่อย ${item.lesson}`);
       const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>document.documentElement.clientWidth+1);
       assert.equal(overflow,false,`${item.file} tablet overflow`);
       const details=page.locator('main details').first();

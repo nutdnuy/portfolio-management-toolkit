@@ -1,6 +1,6 @@
 ---
 title: How to Calculate return
-description: เริ่มจากเปอร์เซ็นต์และเงินทบต้น สู่ Python เบื้องต้นและการวัดความเสี่ยงตามหัวข้อ Module 1
+description: เริ่มจากเปอร์เซ็นต์และเงินทบต้น สู่ Python เบื้องต้นและการวัดความเสี่ยงของพอร์ต
 inline_math: true
 ---
 
@@ -10,7 +10,7 @@ inline_math: true
 
 บทนี้พาเริ่มจากการคิดกำไรเป็นบาทและเปอร์เซ็นต์ แล้วค่อยใช้ Python คำนวณกับข้อมูลหลายเดือน ก่อนถามต่อว่าเงินระหว่างทางแกว่งแรงหรือเคยลดลงมากเพียงใด ไม่จำเป็นต้องเคยเขียนโปรแกรมหรือเรียนสถิติขั้นสูงมาก่อน ให้ลองคำนวณตัวอย่างเล็กด้วยมือ แล้วใช้โค้ดตรวจคำตอบอีกครั้ง
 
-เรียบเรียงใหม่ประกอบหัวข้อ **Module 1 — Analysing returns** ของคอร์ส [Introduction to Portfolio Construction and Analysis with Python โดย EDHEC Business School](https://www.coursera.org/learn/introduction-portfolio-construction-python) โดยอ่าน Transcript และตรวจ Lab 101–106 เพิ่มคำอธิบายพื้นฐาน ตัวอย่าง และแบบฝึกหัดของบทนี้เอง ส่วน Log return เป็นบทอ่านต่อจากเนื้อหาเดิมของเว็บไซต์
+เรียบเรียงใหม่ประกอบหัวข้อ **Analysing returns** ของคอร์ส [Introduction to Portfolio Construction and Analysis with Python โดย EDHEC Business School](https://www.coursera.org/learn/introduction-portfolio-construction-python) โดยอ่าน Transcript และตรวจ Lab 101–106 เพิ่มคำอธิบายพื้นฐาน ตัวอย่าง และแบบฝึกหัดของบทนี้เอง ส่วน Log return เป็นบทอ่านต่อจากเนื้อหาเดิมของเว็บไซต์
 
 **ตัวเลขทั้งหมดในบทนี้เป็นข้อมูลสมมติสำหรับเรียนรู้** ไม่ใช่ผลการลงทุนจริงหรือการคาดการณ์ตลาด เว้นแต่ระบุเป็นอย่างอื่น ตัวอย่างไม่มีค่าธรรมเนียม ภาษี หรือฝากถอนระหว่างช่วง และจะกล่าวถึงปันผลแยกเมื่อใช้
 
@@ -355,7 +355,9 @@ print((annualized_return * 100).round(2))
 
 ถ้าผลตอบแทนหนึ่งเดือนเท่ากับ 1% การแปลงเป็นอัตราทบต้นต่อปีคือ `(1 + 0.01) ** 12 - 1` ได้ประมาณ **12.68%** ไม่ใช่ 12% สำหรับข้อมูลรายวันต้องระบุจำนวนวันต่อปีที่ใช้ เช่น 252 วันซื้อขายเป็นข้อตกลงหนึ่ง ไม่ควรใช้เลข 252 กับทุกตลาดหรือใช้กับข้อมูลรายเดือน สำหรับข้อมูลวันที่ไม่สม่ำเสมอ ควรตรวจระยะเวลาจริงก่อนเลือกสูตร annualization
 
-### กลับไปอ่าน Lab ของ Module 1 อย่างรู้ว่าแต่ละช่วงทำอะไร
+<span id="กล-บไปอ-าน-lab-ของ-module-1-อย-างร-ว-าแต-ละช-วงทำอะไร"></span>
+
+### กลับไปอ่าน Lab ผลตอบแทนและความเสี่ยง
 
 `lab_101.ipynb` ไล่จากราคาไปสู่ผลตอบแทน การจับคู่แถว การอ่าน CSV การทบต้น และการแปลงอัตราเป็นรายปี ส่วน `lab_102.ipynb` ใช้ชุดผลตอบแทนต่อเพื่อวัดความผันผวนและผลตอบแทนเมื่อเทียบกับความเสี่ยง ลองกลับไปอ่านสองไฟล์โดยถามทุกครั้งว่า **ตอนนี้ข้อมูลเป็นราคา ผลตอบแทน หรือเปอร์เซ็นต์ที่ใช้แสดงผล**
 
@@ -915,7 +917,9 @@ $$
 3. AlgoAddict Diary. *Simple Return VS Log Return ความแตกต่างที่ไม่ควรมองข้าม!*. 10 มกราคม 2019 — [Medium](https://medium.com/@info.algoaddict/simple-return-vs-log-return-c075d65f1739). ใช้เป็นจุดเริ่มต้นเรื่องการบวกผลตอบแทนข้ามเวลา สูตรแปลงกลับต้องเป็น $e^r-1$: $e^{\ln(1.5)}=1.5$ คือ gross return จึงต้องลบหนึ่งก่อนรายงานกำไร 50% ไม่จำเป็นต้องใช้ log เสมอไปหากทบต้น simple returns ถูกต้อง
 
 
-### แหล่งเรียนสำหรับ Module 1
+<span id="แหล-งเร-ยนสำหร-บ-module-1"></span>
+
+### แหล่งเรียนเรื่องผลตอบแทนและความเสี่ยง
 
 เนื้อหาที่เพิ่มในวันที่ 2 ตุลาคม 2026 ใช้ [Fundamentals of Returns](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/UL04V/fundamentals-of-returns) และ [Lab Session-Basics of returns](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/lLS6N/lab-session-basics-of-returns) โดย Vijay Vaidyanathan ร่วมกับบทความเสี่ยงของ Vijay Vaidyanathan และ Lionel Martellini ในคอร์ส EDHEC/Coursera แหล่งเฉพาะเรื่องเชื่อมไว้ใกล้หัวข้อที่เกี่ยวข้อง รวมทั้งประกาศแก้ไข Skewness และ Semi Deviation
 

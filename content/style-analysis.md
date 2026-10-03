@@ -9,7 +9,7 @@ description: สร้าง Benchmark ที่น้ำหนักรวม�
 
 ใน[บทหลาย Factor](multifactor-models.html) เราประมาณความไวของกองทุนต่อผลตอบแทนตลาด SMB และ HML บทนี้เปลี่ยนตัวแปรอธิบายเป็นผลตอบแทนของดัชนีสินทรัพย์ แล้วกำหนดให้น้ำหนักไม่ติดลบและรวมกันเป็นหนึ่ง คำตอบจึงอ่านเป็นส่วนผสมของพอร์ตอ้างอิงได้ เช่น หุ้น Value 50% หุ้น Growth 30% และพันธบัตร 20%
 
-การประมาณแบบนี้เรียกว่า [returns-based style analysis หรือ RBSA](glossary.html#style-analysis) ใช้ตรวจลักษณะการรับความเสี่ยงจากผลตอบแทนย้อนหลัง การจะทราบว่ากองทุนถือหลักทรัพย์ใดจริงยังต้องตรวจข้อมูล holdings เพิ่มเติม เนื้อหาส่วนนี้ประกอบ [Factor benchmarks and Style analysis](https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/nPLWC/factor-benchmarks-and-style-analysis) และ [Foundations Lab](https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/ZdgGw/module-1-lab-session-foundations) ของ Advanced Module 1
+การประมาณแบบนี้เรียกว่า [returns-based style analysis หรือ RBSA](glossary.html#style-analysis) ใช้ตรวจลักษณะการรับความเสี่ยงจากผลตอบแทนย้อนหลัง การจะทราบว่ากองทุนถือหลักทรัพย์ใดจริงยังต้องตรวจข้อมูล holdings เพิ่มเติม เนื้อหาส่วนนี้ประกอบ [Factor benchmarks and Style analysis](https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/nPLWC/factor-benchmarks-and-style-analysis) และ [Foundations Lab](https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/ZdgGw/module-1-lab-session-foundations) ของคอร์ส Advanced Portfolio Construction and Analysis with Python
 
 ตัวอย่างทั้งหมดในหน้านี้สร้างขึ้นเพื่อฝึกคำนวณ ใช้ผลตอบแทนรวมรายเดือนในหน่วยทศนิยมและสกุลเงินเดียวกัน ไม่มีค่าธรรมเนียมหรือภาษี โค้ดรันจากต้นหน้าใน Notebook ใหม่ได้ด้วย NumPy, pandas และ SciPy [ดาวน์โหลด Notebook](notebooks/style-analysis.ipynb)
 

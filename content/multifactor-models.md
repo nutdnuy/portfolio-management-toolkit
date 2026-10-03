@@ -11,7 +11,7 @@ description: สร้างและอ่าน SMB HML แยก SML ออ�
 
 เราจะสร้างกองทุนสมมติที่ทราบปัจจัยครบตั้งแต่ต้น แล้วลองซ่อนบางปัจจัยจากการวิเคราะห์ เรียนทั้งความหมายของ Fama–French model และคำสั่ง multiple regression ที่ทำให้ประมาณความไวหลายตัวพร้อมกันได้ ตัวเลขทั้งหมดในตัวอย่าง Python เขียนขึ้นเพื่อสอน ไม่มีข้อมูลราคาตลาดจริง และไม่ใช่หลักฐานว่าปัจจัยใดจะให้ผลตอบแทนบวกในอนาคต
 
-บทนี้ประกอบ Module 1 ของคอร์ส Advanced Portfolio Construction and Analysis with Python เปิด Notebook ใหม่และรันทุกช่องตามลำดับได้โดยไม่พึ่งตัวแปรจากบทก่อนหน้า [ดาวน์โหลด Notebook ของบทนี้](notebooks/multifactor-models.ipynb) หากยังไม่คุ้นกับ excess return หรือ residual ให้อ่าน[แบบจำลองปัจจัยเดียว](factor-investing.html#excess-return)ก่อน
+บทนี้ประกอบหัวข้อแบบจำลองหลายปัจจัยในคอร์ส Advanced Portfolio Construction and Analysis with Python เปิด Notebook ใหม่และรันทุกช่องตามลำดับได้โดยไม่พึ่งตัวแปรจากบทก่อนหน้า [ดาวน์โหลด Notebook ของบทนี้](notebooks/multifactor-models.ipynb) หากยังไม่คุ้นกับ excess return หรือ residual ให้อ่าน[แบบจำลองปัจจัยเดียว](factor-investing.html#excess-return)ก่อน
 
 <span id="fama-french-factors"></span>
 

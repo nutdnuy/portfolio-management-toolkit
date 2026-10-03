@@ -11,7 +11,7 @@ description: สร้าง sample covariance จากตารางผลต
 
 เราจะเริ่มจากผลตอบแทนสมมติแปดเดือนของสินทรัพย์สามตัว คำนวณแต่ละขั้นจนได้ covariance จากนั้นดูกรณีข้อมูลน้อย สินทรัพย์เกือบซ้ำกัน และ factor model ที่ลดจำนวนความสัมพันธ์ที่ต้องประมาณโดยเพิ่มสมมติฐาน
 
-เนื้อหาประกอบ Module 2 ของ Advanced Portfolio Construction and Analysis with Python เรื่อง The curse of dimensionality และ Estimating the Covariance Matrix with a Factor Model ตัวเลขทั้งหมดในหน้านี้เป็นตัวอย่างที่สร้างขึ้น ไม่มีข้อมูลหุ้นจริง โค้ดใช้ NumPy และ pandas รันตามลำดับใน Notebook ใหม่ได้ หากยังไม่คุ้นกับ beta หรือ residual ให้อ่าน[บทหลายปัจจัย](multifactor-models.html#matrix-ols)ประกอบ
+เนื้อหาประกอบหัวข้อการประมาณความเสี่ยงของคอร์ส Advanced Portfolio Construction and Analysis with Python เรื่อง The curse of dimensionality และ Estimating the Covariance Matrix with a Factor Model ตัวเลขทั้งหมดในหน้านี้เป็นตัวอย่างที่สร้างขึ้น ไม่มีข้อมูลหุ้นจริง โค้ดใช้ NumPy และ pandas รันตามลำดับใน Notebook ใหม่ได้ หากยังไม่คุ้นกับ beta หรือ residual ให้อ่าน[บทหลายปัจจัย](multifactor-models.html#matrix-ols)ประกอบ
 
 <span id="returns-matrix"></span>
 

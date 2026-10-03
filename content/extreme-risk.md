@@ -7,7 +7,7 @@ description: บทต่อจาก Returns อธิบาย Skewness, Kurto
 
 <p class="lead">ถ้าพอร์ตสองชุดมีผลตอบแทนเฉลี่ยและความผันผวนเท่ากัน เราจะมั่นใจได้หรือไม่ว่าความเสี่ยงขาดทุนรุนแรงเท่ากัน?</p>
 
-ในบท [How to Calculate return](returns.html) เราเริ่มจากเปอร์เซ็นต์ การทบต้น และภาพรวมของตัววัดความเสี่ยง บทนี้ขยาย **Section 2 — Beyond the Gaussian case: Extreme risk estimates** ของ Module 1 ให้ลงมือทำทีละขั้น เราจะดูรูปร่างข้อมูลก่อนเลือกตัววัด แล้วค่อยเก็บสูตรที่เข้าใจแล้วไว้ในไฟล์ Python ที่เรียกใช้ซ้ำได้
+ในบท [How to Calculate return](returns.html) เราเริ่มจากเปอร์เซ็นต์ การทบต้น และภาพรวมของตัววัดความเสี่ยง บทนี้ขยาย **Section 2 — Beyond the Gaussian case: Extreme risk estimates** ของคอร์ส EDHEC/Coursera ให้ลงมือทำทีละขั้น เราจะดูรูปร่างข้อมูลก่อนเลือกตัววัด แล้วค่อยเก็บสูตรที่เข้าใจแล้วไว้ในไฟล์ Python ที่เรียกใช้ซ้ำได้
 
 คำว่า **Gaussian** ในชื่อ Section หมายถึง Normal distribution ส่วน **ปลายหาง (tail)** หมายถึงบริเวณที่ผลตอบแทนอยู่ไกลจากกลุ่มส่วนใหญ่ เมื่อเรียงผลตอบแทนจากน้อยไปมาก หางซ้ายคือด้านที่ผลตอบแทนต่ำ ส่วนความรุนแรงและโอกาสเกิดต้องดูจากข้อมูลหรือแบบจำลองที่ใช้ ไม่ได้รู้จากชื่อสินทรัพย์
 
@@ -843,7 +843,7 @@ print(f"Cornish-Fisher one-day VaR (95%): {tail_cf_var:.3%}")
 
 ## แหล่งเรียนและวิธีตรวจตัวอย่าง
 
-บทนี้เรียบเรียงใหม่จากหัวข้อ **Section 2 ของ Module 1** ในคอร์ส EDHEC/Coursera และตรวจโค้ดใน `lab_104.ipynb`–`lab_106.ipynb` ประกอบ ตัวอย่างและฟังก์ชันในหน้านี้สร้างสำหรับบทเรียนนี้เอง จึงไม่ใช่การถอด Transcript หรือสำเนา toolkit ของคอร์ส
+บทนี้เรียบเรียงใหม่จากหัวข้อ **Beyond the Gaussian case: Extreme risk estimates** ในคอร์ส EDHEC/Coursera และตรวจโค้ดใน `lab_104.ipynb`–`lab_106.ipynb` ประกอบ ตัวอย่างและฟังก์ชันในหน้านี้สร้างสำหรับบทเรียนนี้เอง จึงไม่ใช่การถอด Transcript หรือสำเนา toolkit ของคอร์ส
 
 - [Deviations from Normality](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/fpkEu/deviations-from-normality)
 - [Correction to Deviations from Normality](https://www.coursera.org/learn/introduction-portfolio-construction-python/supplement/yrJGY/incorrect-statement-in-deviation-from-normality-video)

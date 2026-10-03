@@ -449,6 +449,6 @@ print(equity_metrics.round(6).to_string())
 
 ## แหล่งเรียน
 
-แนวคิดจาก Transcript ของ [Choosing the policy portfolio](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/IQo8M/choosing-the-policy-portfolio), [Beyond LDI](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/9OIfJ/beyond-ldi) และ [Liability-friendly equity portfolios](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/8hNda/liability-friendly-equity-portfolios) ใน Module 4 ประกอบโค้ด `lab_128.ipynb`, `lab_129.ipynb` และ toolkit ที่ผู้เรียนให้มา
+แนวคิดจาก Transcript ของ [Choosing the policy portfolio](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/IQo8M/choosing-the-policy-portfolio), [Beyond LDI](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/9OIfJ/beyond-ldi) และ [Liability-friendly equity portfolios](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/8hNda/liability-friendly-equity-portfolios) ในหัวข้อการจัดพอร์ตตามเป้าหมาย ประกอบโค้ด `lab_128.ipynb`, `lab_129.ipynb` และ toolkit ที่ผู้เรียนให้มา
 
 ตัวอย่างหน้านี้สร้างข้อมูลและกติกาคำนวณขึ้นใหม่ ตรวจการเรียงเวลาระหว่างน้ำหนัก ราคา และผลตอบแทนอย่างชัดเจน สถิติ shortfall แยกตัวหารทุกเส้นทางออกจากกลุ่มที่ขาด และรายงาน breach probability เป็นศูนย์เมื่อไม่พบเหตุการณ์ โดยไม่ตีความว่าแบบจำลองรับประกันผลในอนาคต

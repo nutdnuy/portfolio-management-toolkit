@@ -9,7 +9,7 @@ description: เริ่มอ่านปัจจัยร่วม ผลต
 
 สมมติว่าตลาดขึ้น 2% และกองทุนขึ้น 3% ในเดือนเดียวกัน เรารู้ว่ากองทุนได้ผลตอบแทนมากกว่า แต่ตัวเลขสองตัวนี้ยังแยกเหตุผลไม่ได้ กองทุนอาจถือหุ้นที่เคลื่อนไหวแรงตามตลาด อาจได้รับผลจากปัจจัยอื่น หรือมีข่าวเฉพาะหุ้นในเดือนนั้น เราจะเริ่มจากแบบจำลองที่ใช้การเคลื่อนไหวของตลาดเพียงปัจจัยเดียว แล้วคำนวณว่าส่วนใดสัมพันธ์กับตลาดและส่วนใดยังอธิบายไม่ได้
 
-บทนี้ประกอบ Module 1 ของคอร์ส Advanced Portfolio Construction and Analysis with Python โดยเรียบเรียงคำอธิบายและตัวอย่างใหม่จากบท Introduction to factor investing และ Factor models and the CAPM ตัวเลขทุกชุดเป็นข้อมูลสมมติ ไม่มีผลตอบแทนกองทุนหรือตลาดจริง ใช้ความรู้เรื่อง[ผลตอบแทน](returns.html#python-basics)และ[Covariance](portfolio-basics.html#covariance)จากบทก่อนหน้าได้ ส่วนคำสั่ง Python ที่ใช้เพิ่มจะอธิบายก่อนคำนวณ
+บทนี้ประกอบหัวข้อ Style & Factors ของคอร์ส Advanced Portfolio Construction and Analysis with Python โดยเรียบเรียงคำอธิบายและตัวอย่างใหม่จากบท Introduction to factor investing และ Factor models and the CAPM ตัวเลขทุกชุดเป็นข้อมูลสมมติ ไม่มีผลตอบแทนกองทุนหรือตลาดจริง ใช้ความรู้เรื่อง[ผลตอบแทน](returns.html#python-basics)และ[Covariance](portfolio-basics.html#covariance)จากบทก่อนหน้าได้ ส่วนคำสั่ง Python ที่ใช้เพิ่มจะอธิบายก่อนคำนวณ
 
 เปิด Notebook ใหม่แล้วรันตัวอย่างตามลำดับ โค้ดใช้ NumPy, pandas และ SciPy โดยไม่ต้องมีไฟล์ข้อมูลหรือ toolkit ของคอร์ส [ดาวน์โหลด Notebook ของบทนี้](notebooks/factor-investing.ipynb)
 

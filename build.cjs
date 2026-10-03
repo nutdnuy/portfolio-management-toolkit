@@ -68,7 +68,7 @@ async function build() {
     const notebookLink = notebook ? `<a href="${escape(notebook)}" download>ดาวน์โหลด Notebook</a>` : '';
     if (page.module) {
       const position = pages.indexOf(page), previous = pages[position - 1], next = pages[position + 1];
-      page.body = `<p class="chapter-kicker">${coursePrefix}Module ${page.module} · บทย่อย ${page.lesson}</p>` + page.body;
+      page.body = `<p class="chapter-kicker">${escape(page.group)} · บทย่อย ${page.lesson}</p>` + page.body;
       page.body += `<nav class="chapter-navigation" aria-label="บทเรียนก่อนหน้าและถัดไป">${previous ? `<a href="${previous.file}.html" rel="prev">บทก่อนหน้า: ${escape(previous.title)}</a>` : ''}${next ? `<a href="${next.file}.html" rel="next">อ่านต่อ: ${escape(next.title)}</a>` : ''}</nav>`;
     }
     const html = `<!doctype html><html lang="th" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="${escape(page.description)}"><title>${escape(page.title)} · ${escape(config.title)}</title><link rel="icon" href="assets/brand/favicon-32.png"><link rel="stylesheet" href="assets/katex/katex.min.css"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="app.css"><link rel="stylesheet" href="book.css">${['returns','risk','extreme-risk'].includes(page.file) ? `<link rel="stylesheet" href="${page.file}.css">` : ''}<script>try{document.documentElement.dataset.theme=localStorage.getItem('pmt-book-theme')==='dark'?'dark':'light'}catch(e){}</script></head><body class="book ${home ? 'welcome-page' : 'lesson-page'}" data-page="${page.file}">

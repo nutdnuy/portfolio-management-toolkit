@@ -9,7 +9,7 @@ description: สร้าง Constant-correlation target ทีละขั้�
 
 เมทริกซ์ [covariance](glossary.html#covariance) เป็นข้อมูลเข้าของพอร์ตความแปรปรวนต่ำสุด หาก covariance บางคู่ต่ำเพราะความบังเอิญของช่วงข้อมูล โปรแกรมอาจให้น้ำหนักมากกับการกระจายความเสี่ยงที่ดูดีเฉพาะช่วงนั้น วิธี [shrinkage](glossary.html#covariance-shrinkage) นำ sample covariance มาผสมกับเมทริกซ์ที่กำหนดโครงสร้างให้ง่ายขึ้น ก่อนนำไปหาน้ำหนักพอร์ต
 
-บทนี้เริ่มจากสินทรัพย์สมมติสามตัว เพื่อคำนวณทีละช่องในเมทริกซ์ แล้วทดลองกับสินทรัพย์สมมติแปดตัว โดยใช้ข้อมูลย้อนหลัง 36 เดือนเพื่อเลือกน้ำหนักสำหรับเดือนถัดไป เนื้อหาประกอบ [Honey I Shrunk the Covariance Matrix!](https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/szNVo/honey-i-shrunk-the-covariance-matrix) และ [Module 2 Lab Session — Covariance Estimation](https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/DLb5f/module-2-lab-session-covariance-estimation)
+บทนี้เริ่มจากสินทรัพย์สมมติสามตัว เพื่อคำนวณทีละช่องในเมทริกซ์ แล้วทดลองกับสินทรัพย์สมมติแปดตัว โดยใช้ข้อมูลย้อนหลัง 36 เดือนเพื่อเลือกน้ำหนักสำหรับเดือนถัดไป เนื้อหาประกอบ [Honey I Shrunk the Covariance Matrix!](https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/szNVo/honey-i-shrunk-the-covariance-matrix) และ [Lab Session — Covariance Estimation](https://www.coursera.org/learn/advanced-portfolio-construction-python/lecture/DLb5f/module-2-lab-session-covariance-estimation)
 
 ข้อมูลและโค้ดต่อไปนี้เขียนขึ้นใหม่ ใช้ผลตอบแทนรวมรายเดือนในหน่วยทศนิยม สกุลเงินเดียวกัน ไม่มีต้นทุนซื้อขายหรือภาษี เปิด Notebook ใหม่และรันจากต้นหน้าได้ด้วย NumPy, pandas และ SciPy [ดาวน์โหลด Notebook](notebooks/covariance-shrinkage.ipynb)
 

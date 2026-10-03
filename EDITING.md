@@ -60,7 +60,7 @@ Edit `content/extreme-risk.md`, placed after Returns. This is a beginner expansi
 
 ## Course continuation: Modules 2–4
 
-The ten new pages are selected by `module: 2`, `3` or `4` in `site.config.json`. `lesson` is the within-module reading order; `group` supplies the sidebar label. The builder adds previous/next links from configured page order. Keep these chapters in that order unless the owner asks to reorganize. Each has its own complete executed notebook, and no page depends on another chapter's Python namespace.
+The ten new pages are selected by `module: 2`, `3` or `4` in `site.config.json`. `lesson` is the within-group reading order; `group` supplies the sidebar and chapter-kicker labels. Keep course module numbers as internal metadata for export and verification; Nuth requested topic names without Module labels on the public site. The builder adds previous/next links from configured page order. Keep these chapters in that order unless the owner asks to reorganize. Each has its own complete executed notebook, and no page depends on another chapter's Python namespace.
 
 Edit the canonical Markdown in `content/`, then run `npm run notebook:course`, `npm run check:course`, `npm run build:pages` and `npm run check:site`. `scripts/make_course_notebooks.py` runs every Python fence in source order, captures stdout and embeds calculated SVG figures as notebook attachments. It replaces only the configured course notebooks matching the optional `--course` and `--module` filters. Use `--course introduction` for the ten Introduction notebooks. The check compares every cell and attachment, pins the Markdown hash and allows small numeric differences in stdout across operating systems. Preserve separately named reader experiments.
 
