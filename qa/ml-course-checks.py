@@ -177,6 +177,23 @@ def check_diversification(spaces):
         vector=n['mds_vectors'][:,axis]
         assert vector[np.argmax(np.abs(vector))]>0
     np.testing.assert_allclose(n['precision'], n['repeat_model'].precision_)
+    # A two-member symmetric cluster has equal within-cluster similarity sums.
+    # Refinement uses the first tied index and ignores arbitrary label numbers.
+    for namespace, similarity, labels in [(c,c['similarity'],c['ap_model'].labels_),
+                                           (n,-n['graph_distance']**2,n['graph_clusters'].labels_)]:
+        representatives=namespace['canonical_exemplars'](similarity,labels)
+        np.testing.assert_array_equal(representatives,[0,2,4])
+        np.testing.assert_array_equal(namespace['canonical_exemplars'](similarity,31-7*labels),representatives)
+        jitter=np.array([[0,1,-1,1,-1,1], [1,0,1,-1,1,-1], [-1,1,0,1,-1,1],
+                         [1,-1,1,0,1,-1], [-1,1,-1,1,0,1], [1,-1,1,-1,1,0]])*1e-16
+        np.testing.assert_array_equal(namespace['canonical_exemplars'](similarity+jitter,labels),representatives)
+        for label in set(labels):
+            members=[i for i,value in enumerate(labels) if value==label]
+            scores={j:sum(float(similarity[i,j]) for i in members) for j in members}
+            best=max(scores.values())
+            expected=min(j for j,score in scores.items() if best-score<=1e-12)
+            assert expected in representatives
+    np.testing.assert_array_equal(n['selected'],[0,2,4])
     for namespace in (c,n):
         # Sequential wealth oracle and initial observation for drawdown.
         wealth = np.ones(2); paths=[wealth.copy()]
@@ -191,6 +208,7 @@ def check_diversification(spaces):
             'PCA reconstruction, SVD residual and scale-correct portfolio risk',
             'exact medoid enumeration, validation and cluster membership',
             'full-dimensional distances versus projected distances',
+            'AP within-cluster exemplar objective, tie convention and label/ULP invariance',
             'partial correlation with common driver and Graphical Lasso KKT',
             'graph/CV future independence and quantified embedding distortion',
             'heldout scalar wealth and nonannualized initial-inclusive drawdown']

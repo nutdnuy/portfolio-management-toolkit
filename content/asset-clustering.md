@@ -188,6 +188,25 @@ Lab ของคอร์สใช้ Affinity Propagation ซึ่งค้น
 ฟังก์ชันต้องการ similarity ที่มากหมายถึงคล้ายกัน จึงใช้ $s_{ij}=-d_{ij}^2$ คู่ที่เหมือนกันมากมีค่าเข้าใกล้ศูนย์ คู่ที่ไกลกันมากมีค่าติดลบมากกว่า การส่งระยะบวกตรง ๆ จะกลับความหมาย
 
 ```python
+def canonical_exemplars(similarity, labels, tolerance=1e-12):
+    s = np.asarray(similarity, dtype=float)
+    labels = np.asarray(labels)
+    if labels.ndim != 1 or labels.size == 0 or s.shape != (labels.size, labels.size):
+        raise ValueError('Provide one label per row of a square similarity matrix')
+    if not np.isfinite(s).all() or not np.allclose(s, s.T, atol=1e-12, rtol=0):
+        raise ValueError('Similarity must be finite and symmetric')
+    if not np.issubdtype(labels.dtype, np.integer) or np.any(labels < 0):
+        raise ValueError('Labels must be nonnegative integers')
+    if not np.isfinite(tolerance) or tolerance < 0:
+        raise ValueError('Tolerance must be finite and nonnegative')
+    representatives = []
+    for group in np.unique(labels):
+        members = np.flatnonzero(labels == group)
+        scores = s[np.ix_(members, members)].sum(axis=0)
+        tied = members[scores >= scores.max() - tolerance]
+        representatives.append(int(tied[0]))
+    return np.sort(np.array(representatives, dtype=int))
+
 similarity = -(distance ** 2)
 ap_results = []
 ap_models = {}
@@ -197,15 +216,20 @@ for preference in [-.7, -.4, -.1]:
         model = AffinityPropagation(affinity='precomputed', preference=preference,
                                    damping=.8, max_iter=1000, random_state=7).fit(similarity)
     ap_models[preference] = model
-    ap_results.append({'preference': preference, 'clusters': len(model.cluster_centers_indices_),
-                       'exemplars': ','.join(assets[model.cluster_centers_indices_])})
+    refined = canonical_exemplars(similarity, model.labels_)
+    ap_results.append({'preference': preference, 'clusters': len(refined),
+                       'refined_exemplars': ','.join(assets[refined])})
 print(pd.DataFrame(ap_results).to_string(index=False))
 ap_model = ap_models[-.4]
 ```
 
-Preference −0.7, −0.4 และ −0.1 ให้ 2, 3 และ 6 กลุ่มตามลำดับในตัวอย่างนี้ ค่า −0.4 แยกเป็น AB/CD/EF เราเลือกค่านี้เพื่อแสดงกลุ่มสามคู่ที่อ่านง่าย ไม่ได้เลือกจากกำไรใน test set การเลือกจำนวนกลุ่มแบบ “อัตโนมัติ” จึงยังขึ้นกับสเกล similarity และ preference ที่เรากำหนด
+Preference −0.7, −0.4 และ −0.1 ให้ 2, 3 และ 6 กลุ่มตามลำดับในตัวอย่างนี้ ตัวแทนหลังใช้กฎของเราเป็น B/E, A/C/E และ A/B/C/D/E/F ค่า −0.4 แยกเป็น AB/CD/EF เราเลือกค่านี้เพื่อแสดงกลุ่มสามคู่ที่อ่านง่าย ไม่ได้เลือกจากกำไรใน test set การเลือกจำนวนกลุ่มแบบ “อัตโนมัติ” จึงยังขึ้นกับสเกล similarity และ preference ที่เรากำหนด
 
-`warnings.simplefilter('error', ConvergenceWarning)` ให้การคำนวณหยุดถ้าไม่ลู่เข้า แทนการนำ labels ที่ได้จากรอบที่ยังไม่นิ่งมาใช้ต่อ ชื่อ exemplar ภายในคู่ที่ใกล้เคียงกันอาจต่างตามรายละเอียดการคำนวณหรือรุ่นของไลบรารี ควรเปรียบเทียบทั้งสมาชิกกลุ่มและกฎเลือกตัวแทน ไม่ใช้หมายเลข labels เป็นรหัสธุรกิจถาวร
+`canonical_exemplars` เป็นกฎหลังจัดกลุ่มที่เขียนเพิ่มสำหรับตัวอย่างนี้ ไม่ใช่การอ่าน `cluster_centers_indices_` ของ scikit-learn โดยตรง เราคงสมาชิกกลุ่มจาก `model.labels_` แล้วให้สมาชิกแต่ละตัวเป็นผู้สมัคร เลือกตัวที่มีผลรวม similarity จากสมาชิกในกลุ่มสูงที่สุด ใช้ `similarity` เดิมก่อน noise ภายในอัลกอริทึม และไม่ปัดค่า หากคะแนนต่างจากค่าสูงสุดไม่เกิน $10^{-12}$ ถือว่าเสมอและเลือกดัชนีน้อยที่สุด ก่อนเรียงดัชนีตัวแทนที่คืนมา
+
+`np.ix_(members, members)` เลือกตาราง similarity เฉพาะกลุ่ม และ `sum(axis=0)` รวมคะแนนของผู้สมัครแต่ละคอลัมน์ คู่ A/B มีคะแนน $s_{AA}+s_{BA}=s_{AB}+s_{BB}$ เพราะ similarity สมมาตรและแนวทแยงเป็นศูนย์ จึงเลือก A ตามกฎเสมอเดียวกับ C ก่อน D และ E ก่อน F การแทนแนวทแยงด้วย scalar preference เดียวกันจะบวกค่าคงที่เท่ากันให้ผู้สมัครทุกตัว จึงไม่เปลี่ยนผู้ชนะภายในกลุ่มที่กำหนดแล้ว เรากำหนดกฎนี้ก่อนดู test และไม่ได้เปลี่ยนสมาชิกกลุ่มของ AP
+
+`warnings.simplefilter('error', ConvergenceWarning)` ให้การคำนวณหยุดถ้าไม่ลู่เข้า แทนการนำ labels ที่ได้จากรอบที่ยังไม่นิ่งมาใช้ต่อ กฎเลือกตัวแทนจัดการคะแนนเสมอภายในกลุ่ม แต่ไม่ได้รับประกันว่า AP จะให้สมาชิกกลุ่มเดิมเมื่อเปลี่ยนข้อมูลหรือรุ่นไลบรารี และไม่ควรใช้หมายเลข labels เป็นรหัสธุรกิจถาวร
 
 <span id="pca-before-clustering"></span>
 
@@ -363,4 +387,4 @@ Centroid เป็นค่าเฉลี่ยของเวกเตอร�
 
 อ่าน transcript เต็มของ Role of clustering และ Lab Graphical Network Analysis เมื่อ 3 ตุลาคม 2026 บทแรกอธิบายการเลือกตัวแทนด้วยโจทย์จำนวนเต็ม ส่วน Lab อธิบาย Affinity Propagation ร่วมกับ Graphical Lasso และ MDS ไม่ได้รันหรือเผยแพร่โค้ดของผู้สอน ตัวอย่าง medoids แบบตรวจครบ 20 ชุด, average linkage และ holdout ในหน้านี้เป็นส่วนที่เขียนเพิ่มเพื่อสอนการตรวจคำตอบ
 
-ตรวจรูปแบบ input และ linkage จากเอกสาร SciPy และตรวจ similarity, preference, damping และ convergence จากเอกสาร scikit-learn ที่ลิงก์ไว้ข้างต้น รันตัวอย่างด้วย NumPy 2.0.2, pandas 2.3.3, SciPy 1.13.1 และ scikit-learn 1.6.1 ชื่อกลุ่มและตัวแทนที่เสมอกันอาจเปลี่ยนตามรายละเอียดการคำนวณ โดยไม่เปลี่ยนคำถามทางสถิติที่กำลังตอบ
+ตรวจรูปแบบ input และ linkage จากเอกสาร SciPy และตรวจ similarity, preference, damping และ convergence จากเอกสาร scikit-learn ที่ลิงก์ไว้ข้างต้น รันตัวอย่างด้วย NumPy 2.0.2, pandas 2.3.3, SciPy 1.13.1 และ scikit-learn 1.6.1 ชื่อกลุ่มดิบอาจสลับตามรายละเอียดการคำนวณ เราจึงใช้สมาชิกกลุ่มและกฎแก้คะแนนเสมอที่แสดงไว้เลือกตัวแทน ไม่อ้างว่าค่า exemplar ดิบของไลบรารีต้องเหมือนกันทุกเครื่อง

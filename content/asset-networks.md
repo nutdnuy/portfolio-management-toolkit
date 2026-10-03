@@ -301,23 +301,49 @@ print(pd.DataFrame(network_coordinates, index=assets, columns=['Display x', 'Dis
 
 ## การเลือกหุ้นต้องเขียนกฎเพิ่มจากกราฟ
 
-เราจะให้ Affinity Propagation จัดกลุ่มจาก estimated correlation distance ใช้ preference −0.4 ที่กำหนดก่อนเปิด test แล้วเลือก exemplars เป็นตัวแทน ลงเงินเท่ากันในตัวแทนที่เลือก กฎนี้แสดงวิธีต่อ covariance estimation เข้ากับ clustering แต่ไม่ใช่การทำซ้ำวิธีเลือก isolated nodes ในงานวิจัยที่คอร์สอ้างถึง
+เราจะให้ Affinity Propagation จัดกลุ่มจาก estimated correlation distance ใช้ preference −0.4 ที่กำหนดก่อนเปิด test แล้วเลือกตัวแทนจากสมาชิกของแต่ละกลุ่มด้วยกฎคะแนนเสมอที่กำหนดไว้ ลงเงินเท่ากันในตัวแทนที่เลือก กฎนี้แสดงวิธีต่อ covariance estimation เข้ากับ clustering แต่ไม่ใช่การทำซ้ำวิธีเลือก isolated nodes ในงานวิจัยที่คอร์สอ้างถึง
+
+ใช้ฟังก์ชัน `canonical_exemplars` แบบเดียวกับ [บทจัดกลุ่มสินทรัพย์](asset-clustering.html#affinity-propagation) โดยใส่โค้ดครบเพื่อให้ Notebook นี้รันแยกได้ หลัง AP กำหนดสมาชิกกลุ่มแล้ว เรารวม similarity เดิมจากสมาชิกทุกตัวถึงผู้สมัครแต่ละตัว เลือกคะแนนสูงที่สุด และเมื่อคะแนนต่างจากค่าสูงสุดไม่เกิน $10^{-12}$ ให้เลือกดัชนีน้อยที่สุด การเลือกนี้ใช้เฉพาะข้อมูลฝึก ไม่ใช้ผลตอบแทน test ตัดสินระหว่างผู้สมัคร
 
 ```python
+def canonical_exemplars(similarity, labels, tolerance=1e-12):
+    s = np.asarray(similarity, dtype=float)
+    labels = np.asarray(labels)
+    if labels.ndim != 1 or labels.size == 0 or s.shape != (labels.size, labels.size):
+        raise ValueError('Provide one label per row of a square similarity matrix')
+    if not np.isfinite(s).all() or not np.allclose(s, s.T, atol=1e-12, rtol=0):
+        raise ValueError('Similarity must be finite and symmetric')
+    if not np.issubdtype(labels.dtype, np.integer) or np.any(labels < 0):
+        raise ValueError('Labels must be nonnegative integers')
+    if not np.isfinite(tolerance) or tolerance < 0:
+        raise ValueError('Tolerance must be finite and nonnegative')
+    representatives = []
+    for group in np.unique(labels):
+        members = np.flatnonzero(labels == group)
+        scores = s[np.ix_(members, members)].sum(axis=0)
+        tied = members[scores >= scores.max() - tolerance]
+        representatives.append(int(tied[0]))
+    return np.sort(np.array(representatives, dtype=int))
+
+graph_similarity = -(graph_distance ** 2)
 with warnings.catch_warnings():
     warnings.simplefilter('error', ConvergenceWarning)
     graph_clusters = AffinityPropagation(affinity='precomputed', preference=-.4,
-                                        damping=.8, max_iter=1000, random_state=7).fit(-(graph_distance ** 2))
-selected = graph_clusters.cluster_centers_indices_
+                                        damping=.8, max_iter=1000, random_state=7).fit(graph_similarity)
+selected = canonical_exemplars(graph_similarity, graph_clusters.labels_)
 selected_weights = np.zeros(6)
 selected_weights[selected] = 1 / len(selected)
 all_weights = np.full(6, 1 / 6)
-print('Cluster exemplars:', assets[selected])
+print('Refined cluster exemplars:', assets[selected])
 print('Network degrees:', adjacency.sum(axis=1))
 print('Weights:', selected_weights)
 ```
 
-ในสภาพแวดล้อมที่ตรวจ ได้ตัวแทน B/D/F และน้ำหนักแต่ละตัว $1/3$ ส่วน graph degree เป็นจำนวน edge ที่เชื่อม node นั้น ซึ่งในชุดนี้เท่ากับ 2, 5, 3, 4, 4, 4 ตามลำดับ A–F จำนวนเส้นต่ำอาจช่วยตั้งคำถามว่ารูปแบบการเคลื่อนไหวต่างจากตัวอื่นหรือไม่ แต่ยังไม่ได้รวมขนาด SD สภาพคล่อง ความเสี่ยงหาง หรือผลตอบแทนคาดหมาย
+ได้สมาชิกกลุ่ม AB/CD/EF แล้วกฎนี้เลือก A/C/E และน้ำหนักแต่ละตัว $1/3$ คู่ที่มีสองสมาชิกมีผลรวม similarity เท่ากันทางคณิตศาสตร์ เพราะเมทริกซ์สมมาตรและแนวทแยงเป็นศูนย์ จึงใช้ดัชนีแก้เสมอ การใช้ scalar preference เดียวกันแทนแนวทแยงก็เพิ่มคะแนนเท่ากันให้ผู้สมัครทุกตัวภายในกลุ่มเดิม
+
+ตัวแทนที่พิมพ์และใช้ลงทุนเป็นผลของกฎหลังจัดกลุ่มนี้ ไม่ใช่ค่า `cluster_centers_indices_` ดิบ เราไม่ปัด similarity ไม่แก้ `graph_clusters.labels_` และไม่เลือกตัวแทนจากผลตอบแทนช่วงท้าย การสลับชื่อป้ายกลุ่มไม่เปลี่ยนรายชื่อที่ฟังก์ชันคืนมา แต่หากสมาชิกกลุ่มเปลี่ยน ผลเลือกก็อาจเปลี่ยนได้
+
+ส่วน graph degree เป็นจำนวน edge ที่เชื่อม node นั้น ซึ่งในชุดนี้เท่ากับ 2, 5, 3, 4, 4, 4 ตามลำดับ A–F จำนวนเส้นต่ำอาจช่วยตั้งคำถามว่ารูปแบบการเคลื่อนไหวต่างจากตัวอื่นหรือไม่ แต่ยังไม่ได้รวมขนาด SD สภาพคล่อง ความเสี่ยงหาง หรือผลตอบแทนคาดหมาย
 
 การคัดหุ้นตาม momentum หรือ value ก่อนสร้าง graph เป็นการเลือก universe อีกขั้นหนึ่ง ต้องใช้ signals และสมาชิก universe ที่รู้ได้ในวันนั้น และแยกผลของการคัดตาม factor ออกจากผลของการกระจายพอร์ต การเปรียบเทียบกับพอร์ตที่ใช้ universe หรือรอบ rebalancing คนละแบบจะยังแยกไม่ได้ว่าความต่างเกิดจากกราฟเพียงอย่างเดียว
 
@@ -327,12 +353,12 @@ print('Weights:', selected_weights)
 
 ## วัดผลช่วงท้ายด้วยสมมติฐานเดียวกัน
 
-เปรียบเทียบพอร์ตครบหกตัวกับพอร์ต exemplars ใน test 52 สัปดาห์ ทั้งคู่ปรับสู่น้ำหนักเป้าหมายทุกต้นสัปดาห์ ไม่มีต้นทุน ไม่มี leverage และใช้ผลตอบแทนชุดเดียวกัน การทบต้นเริ่มจากเงิน 1 ก่อนสัปดาห์ 209 โดยไม่บังคับขายปิดสถานะตอนสิ้นช่วง
+เปรียบเทียบพอร์ตครบหกตัวกับพอร์ตตัวแทนหลังใช้กฎแก้เสมอ (`Refined exemplars`) ใน test 52 สัปดาห์ ทั้งคู่ปรับสู่น้ำหนักเป้าหมายทุกต้นสัปดาห์ ไม่มีต้นทุน ไม่มี leverage และใช้ผลตอบแทนชุดเดียวกัน การทบต้นเริ่มจากเงิน 1 ก่อนสัปดาห์ 209 โดยไม่บังคับขายปิดสถานะตอนสิ้นช่วง
 
 ```python
 heldout_returns = pd.DataFrame({
     'All 6': test.to_numpy() @ all_weights,
-    'Graph exemplars': test.to_numpy() @ selected_weights
+    'Refined exemplars': test.to_numpy() @ selected_weights
 }, index=test.index)
 heldout_wealth = pd.concat([
     pd.DataFrame(1., index=[208], columns=heldout_returns.columns),
@@ -346,7 +372,7 @@ heldout_summary = pd.DataFrame({
 print(heldout_summary.round(5))
 ```
 
-พอร์ตครบหกตัวให้ผลตอบแทนประมาณ 24.306% มี SD annualized 10.470% และ max drawdown −5.621% พอร์ต exemplars ชุด B/D/F ให้ผลตอบแทนประมาณ 26.220% แต่ SD สูงขึ้นเป็น 12.626% และ max drawdown ลึกขึ้นเป็น −7.165% ผลตอบแทนสูงกว่าในหนึ่งเส้นทางจึงไม่ได้แปลว่ากระจายความเสี่ยงดีกว่าในทุกมาตรวัด
+พอร์ตครบหกตัวให้ผลตอบแทนประมาณ 24.306% มี SD annualized 10.470% และ max drawdown −5.621% พอร์ตตัวแทน A/C/E ให้ผลตอบแทนประมาณ 22.117% มี SD 10.524% และ max drawdown −4.377% เส้นทางนี้จึงได้ผลตอบแทนต่ำกว่าและ SD สูงกว่าเล็กน้อย แต่ drawdown ตื้นกว่า การเลือกหนึ่งตัวต่อกลุ่มไม่ได้ทำให้ผลดีขึ้นพร้อมกันทุกมาตรวัด
 
 ทั้งสองพอร์ตสมมติซื้อขายฟรี หากจะประเมินการลงทุนต้องเพิ่ม turnover, ต้นทุน และข้อจำกัดการซื้อขาย ดูขั้นตอนบัญชีเงินที่ [บท Diversification backtest](diversification-backtest.html) ตัวอย่างนี้มี test เพียงหนึ่งปีจำลองและความสัมพันธ์คงที่ ผลจึงไม่ตอบว่ารายชื่อจะยังเหมาะเมื่อ correlation หรือ regime เปลี่ยน
 

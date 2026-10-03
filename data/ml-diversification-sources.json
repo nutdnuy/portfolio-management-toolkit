@@ -166,14 +166,16 @@
     "Inverse HHI and entropy effective counts are reported separately with formulas and factor-basis dependence.",
     "PCA scores are uncorrelated in the training sample; independence requires stronger assumptions.",
     "Correlation distance sqrt((1-rho)/2) equals Euclidean distance between standardized histories divided by 2*sqrt(T-1).",
-    "Exact three-medoid selection enumerates all20 subsets and breaks objective ties within1e-12 by lexicographic order.",
+    "Exact three-medoid selection enumerates all 20 subsets and breaks objective ties within 1e-12 by lexicographic order.",
     "Affinity Propagation preference is a modeling choice; cluster labels have no ordering semantics; exemplar ties may vary numerically.",
     "Network standardization uses ddof=0 to match empirical covariance normalization.",
-    "Graph alpha is selected on four chronological folds with fold-specific mean and SD; final52weeks excluded.",
+    "Graph alpha is selected on four chronological folds with fold-specific mean and SD; final 52 weeks excluded.",
     "Precision zero means Gaussian conditional independence only under the model; estimated zeros are not population proofs or causal effects.",
     "Overlapping-window edge frequencies are sensitivity diagnostics, not truth probabilities or a replication of formal stability selection.",
     "Classical metric MDS projects a Gram matrix to two dimensions; relative distance error is explicitly defined, not mislabeled as sklearn stress.",
-    "Portfolio comparisons use weekly target-weight rebalancing, no fees, initial wealth1 before week209 and no forced terminal liquidation. One simulated path establishes no universal method ranking."
+    "Portfolio comparisons use weekly target-weight rebalancing, no fees, initial wealth 1 before week 209 and no forced terminal liquidation. One simulated path establishes no universal method ranking.",
+    "For teaching reproducibility, AP memberships are followed by an explicit within-cluster exemplar refinement on unperturbed similarity. Select the highest total similarity; candidates within 1e-12 tie and the lowest asset index wins. Common scalar preferences do not change the within-cluster argmax. Portfolio weights use these refined representatives, not the raw library exemplar index. No holdout return enters the rule.",
+    "K-means nearest-member ties within 1e-12 use the lowest member index. MDS display axes orient the largest absolute loading positively; distances and statistical calculations are unchanged."
   ],
   "figures": {
     "route": "no-image-generator",
