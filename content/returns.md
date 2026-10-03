@@ -10,7 +10,7 @@ inline_math: true
 
 บทนี้พาเริ่มจากการคิดกำไรเป็นบาทและเปอร์เซ็นต์ แล้วค่อยใช้ Python คำนวณกับข้อมูลหลายเดือน ก่อนถามต่อว่าเงินระหว่างทางแกว่งแรงหรือเคยลดลงมากเพียงใด ไม่จำเป็นต้องเคยเขียนโปรแกรมหรือเรียนสถิติขั้นสูงมาก่อน ให้ลองคำนวณตัวอย่างเล็กด้วยมือ แล้วใช้โค้ดตรวจคำตอบอีกครั้ง
 
-เรียบเรียงใหม่ประกอบหัวข้อ **Analysing returns** ของคอร์ส [Introduction to Portfolio Construction and Analysis with Python โดย EDHEC Business School](https://www.coursera.org/learn/introduction-portfolio-construction-python) โดยอ่าน Transcript และตรวจ Lab 101–106 เพิ่มคำอธิบายพื้นฐาน ตัวอย่าง และแบบฝึกหัดของบทนี้เอง ส่วน Log return เป็นบทอ่านต่อจากเนื้อหาเดิมของเว็บไซต์
+เรียบเรียงใหม่ประกอบหัวข้อ Analysing returns ของคอร์ส [Introduction to Portfolio Construction and Analysis with Python โดย EDHEC Business School](https://www.coursera.org/learn/introduction-portfolio-construction-python) โดยอ่าน Transcript และตรวจ Lab 101–104 เพิ่มคำอธิบายพื้นฐาน ตัวอย่าง และแบบฝึกหัดของบทนี้เอง บทนี้สอนผลตอบแทน ความผันผวน Sharpe ratio และ Drawdown ส่วนการแจกแจงและความเสียหายปลายหางอ่านต่อใน [เมื่อผลตอบแทนไม่เป็น Normal](extreme-risk.html) และ Log return อยู่ในส่วนอ่านต่อท้ายหน้านี้
 
 **ตัวเลขทั้งหมดในบทนี้เป็นข้อมูลสมมติสำหรับเรียนรู้** ไม่ใช่ผลการลงทุนจริงหรือการคาดการณ์ตลาด เว้นแต่ระบุเป็นอย่างอื่น ตัวอย่างไม่มีค่าธรรมเนียม ภาษี หรือฝากถอนระหว่างช่วง และจะกล่าวถึงปันผลแยกเมื่อใช้
 
@@ -573,125 +573,29 @@ print(f"Compounded return: {compound_return(dd_returns):.2%}")
 
 ## ผลตอบแทนอาจไม่ได้มีรูปทรงแบบ Normal
 
-ลองนึกถึงการวางผลตอบแทนแต่ละงวดลงบนแกน จากขาดทุนมากทางซ้ายไปกำไรมากทางขวา แล้วนับจำนวนข้อมูลในแต่ละช่วง เราจะได้ histogram ที่ช่วยให้เห็นว่าข้อมูลรวมกันอยู่ตรงไหนและมีค่าที่ไกลจากกลุ่มแค่ไหน
+ความผันผวนสรุปว่าผลตอบแทนกระจายห่างจากค่าเฉลี่ยเพียงใด แต่สินทรัพย์ที่มีค่าเฉลี่ยและความผันผวนใกล้กันยังอาจมีโอกาสขาดทุนรุนแรงต่างกันได้ เราจึงต้องดูรูปร่างการแจกแจงเพิ่มเติม
 
-**Normal distribution** เป็นแบบจำลองรูปกระดิ่งสมมาตรที่ใช้ค่าเฉลี่ยและส่วนเบี่ยงเบนมาตรฐานกำหนดรูปทรงได้ แต่สินทรัพย์ที่มี mean และ std ใกล้กันอาจมีโอกาสขาดทุนรุนแรงต่างกัน จึงควรดูรูปร่างการแจกแจงเพิ่มเติม
+<span id="อ-านส-ตรเพ-มเต-มเม-อพร-อม"></span>
 
-| เครื่องมือ | ช่วยตอบอะไร | จุดที่ต้องระวัง |
-|---|---|---|
-| Skewness | ความไม่สมมาตรของการกระจาย โดยค่าที่ไกลจาก mean มีอิทธิพลมาก | ค่าลบไม่ได้บอกว่าจำนวนงวดใต้ mean มากกว่างวดเหนือ mean |
-| Kurtosis | ค่าที่ห่างจาก mean มากมีน้ำหนักใน fourth moment มากแค่ไหน | ไม่ได้เป็นความน่าจะเป็นขาดทุนโดยตรง และไวต่อ outlier |
-| Jarque–Bera | Skewness และ kurtosis ในข้อมูลสอดคล้องกับ Normal หรือไม่ | p-value สูงไม่ได้พิสูจน์ว่าแจกแจงปกติ |
-
-Skewness ติดลบมักเกี่ยวกับความไม่สมมาตรไปทางด้านผลตอบแทนต่ำ เช่น ผลขาดทุนบางงวดที่อยู่ไกลจากค่าเฉลี่ย ข้อมูลจำนวนมากอาจยังอยู่เหนือ mean ได้ จึงห้ามตีความเครื่องหมายจากการนับฝั่งอย่างเดียว คอร์สมี [หน้าแก้ไขคำอธิบาย skewness](https://www.coursera.org/learn/introduction-portfolio-construction-python/supplement/yrJGY/incorrect-statement-in-deviation-from-normality-video) สำหรับประเด็นนี้โดยเฉพาะ
-
-Kurtosis มีสอง convention ที่พบบ่อย: **Pearson kurtosis** ของ Normal เท่ากับ 3 ส่วน **excess kurtosis** ลบ 3 ออกแล้ว จึงเท่ากับ 0 ต้องดูให้ชัดว่าฟังก์ชันคืนแบบไหนก่อนเทียบตัวเลข
-
-### อ่านสูตรเพิ่มเติมเมื่อพร้อม
-
-ถ้า $m_k$ คือค่าเฉลี่ยของ $(R_t-\bar R)^k$ จะได้ moment-based skewness $S=m_3/m_2^{3/2}$ และ Pearson kurtosis $K=m_4/m_2^2$ การยกกำลังสามยังเก็บเครื่องหมายบวกหรือลบไว้ ส่วนกำลังสี่ทำให้ค่าที่ไกลจาก mean มีน้ำหนักสูงทั้งสองฝั่ง สูตรนี้ใช้ moment ที่หารด้วย $n$; ฟังก์ชันสถิติบางตัวมีการปรับ bias จึงอาจได้ค่าต่างกัน
-
-Jarque–Bera ใช้ความต่างจาก $S=0$ และ $K=3$ สร้างสถิติทดสอบ สมมติเราเลือกระดับนัยสำคัญ 1% ก่อนดูผล: ถ้า p-value ต่ำกว่า 0.01 ถือว่ามีหลักฐานให้ปฏิเสธสมมติฐาน Normal ภายใต้เงื่อนไขของการทดสอบ หากสูงกว่านั้นให้พูดว่า “ยังปฏิเสธไม่ได้” ไม่ใช่ “พิสูจน์ว่าเป็น Normal” และไม่ได้พิสูจน์ว่าผลตอบแทนแต่ละงวดเป็นอิสระกัน
-
-เราไม่ใช้ข้อมูลสมมติ 4 งวดข้างต้นสรุปผลทดสอบนี้ เพราะมีน้อยเกินไป SciPy ระบุว่า p-value แบบ asymptotic ของ [Jarque–Bera](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.jarque_bera.html) ต้องอาศัยตัวอย่างขนาดใหญ่และยกเกณฑ์มากกว่า 2,000 observations ไว้ในเอกสาร
+บท [เมื่อผลตอบแทนไม่เป็น Normal](extreme-risk.html#distribution-basics) เริ่มจาก Histogram แล้วคำนวณ Skewness, Kurtosis และทดสอบ Normality ทีละขั้น ใช้บทนั้นเมื่อพร้อมศึกษาว่าสิ่งใดที่ mean และ volatility ยังบอกไม่ได้
 
 <span id="risk-downside"></span>
 
 ## วัดเฉพาะด้านที่ไม่ต้องการ: ต้องบอกเกณฑ์ก่อน
 
-ถ้าไม่อยากนับการขึ้นแรงเป็นความเสี่ยง เราอาจวัดเฉพาะผลตอบแทนที่ต่ำกว่าเกณฑ์ แต่ต้องตอบสองเรื่องก่อน: **ต่ำกว่าอะไร** และ **หารด้วยจำนวนงวดใด** ชื่อ semideviation หรือ downside deviation เพียงอย่างเดียวอาจยังบอกสูตรไม่ครบ
+หากสนใจเฉพาะผลตอบแทนที่ต่ำกว่าเกณฑ์ ต้องระบุทั้งเกณฑ์ที่ใช้และจำนวนงวดที่นำมาหาร ชื่อ Downside deviation หรือ Semideviation เพียงอย่างเดียวอาจยังบอกสูตรไม่ครบ
 
-ในตัวอย่าง B มี returns −2%, 0%, +2%, +4% และ mean 1% สูตรสามแบบด้านล่างให้คำตอบต่างกันตามสิ่งที่ต้องการวัด
-
-| Convention | วิธีคำนวณ | ผลจาก B |
-|---|---|---:|
-| Semideviation ตามหน้าแก้ไขของคอร์ส | ลบ mean ของข้อมูลทั้งหมด เลือกเฉพาะ deviation ติดลบ ยกกำลังสองเฉลี่ยในกลุ่มนั้น แล้วถอดราก | **2.236%** |
-| ฟังก์ชันใน `lab_106` | เลือกเฉพาะ return ติดลบ แล้วหาส่วนเบี่ยงเบนมาตรฐานรอบ mean ของกลุ่มที่เลือก โดย `ddof=0` | **0%** |
-| Downside deviation รอบ target 0 แบบหารทุกงวด | คิดส่วนที่ต่ำกว่า 0; งวดที่ไม่ต่ำกว่าให้เป็น 0; ยกกำลังสองเฉลี่ยโดยหาร 4 แล้วถอดราก | **1.000%** |
-
-แบบแรกมี deviations ใต้ mean เท่ากับ −3 และ −1 percentage points จึงได้ $\sqrt{(0.03^2+0.01^2)/2}$ ส่วนแบบที่สองมี negative return เพียงค่าเดียวคือ −2% จึงไม่มีการกระจาย **ภายในกลุ่มนั้น** ค่า 0% ไม่ได้แปลว่าไม่มีการขาดทุน
-
-```python
-risk_centered = risk_returns - risk_returns.mean()
-risk_below_mean = risk_centered[risk_centered < 0]
-risk_semi_mean = (risk_below_mean.pow(2).mean()) ** 0.5
-
-risk_negative = risk_returns[risk_returns < 0]
-risk_negative_std = risk_negative.std(ddof=0)
-
-risk_target = 0.0
-risk_shortfalls = (risk_returns - risk_target).clip(upper=0)
-risk_downside_all = (risk_shortfalls.pow(2).mean()) ** 0.5
-
-print(f"Below full-sample mean: {risk_semi_mean:.3%}")
-print(f"Std within negative returns: {risk_negative_std:.3%}")
-print(f"Target-zero downside, all periods: {risk_downside_all:.3%}")
-```
-
-วงเล็บเหลี่ยมที่มีเงื่อนไข เช่น `risk_centered < 0` ใช้เลือกแถวที่เข้าเงื่อนไข ส่วน `.clip(upper=0)` ตัดค่าบวกให้เหลือศูนย์ สำหรับตัวอย่างไม่มีข้อมูลหาย `.mean()` จึงหารด้วยจำนวนสมาชิกตามกลุ่มที่เหลืออยู่จริง
-
-ส่วนนี้แยกสูตรตาม [คำแก้ไข Semi Deviation ของคอร์ส](https://www.coursera.org/learn/introduction-portfolio-construction-python/supplement/SzIC4/semi-deviation) ออกจาก code ใน Lab และจากสูตร target-based ที่ใช้ในหน้า [ความเสี่ยงของพอร์ต](risk.html) หากไม่มีกลุ่มข้อมูลต่ำกว่าเกณฑ์ ค่าเฉลี่ยของกลุ่มว่างไม่สามารถคำนวณได้ ต้องกำหนดวิธีรายงานไว้ ไม่ควรเปลี่ยนทุกกรณีเป็นศูนย์โดยอัตโนมัติ
+อ่านการเปรียบเทียบสูตรพร้อมตัวอย่างและ Python ใน [การวัดผลตอบแทนต่ำกว่าเกณฑ์](extreme-risk.html#downside-measures) ซึ่งแยกสูตรของเว็บไซต์ คำแก้ไขของคอร์ส และโค้ดใน Lab ไว้ด้วยกัน
 
 <span id="risk-var"></span>
 
 ## VaR และ CVaR: ขอบเขตหาง กับขนาดการขาดทุนในหาง
 
-ลองใช้ผลตอบแทนสมมติ **20 วัน** ที่เรียงจากแย่ที่สุดไปดีที่สุดเพื่อให้อ่านง่าย การเรียงนี้ใช้หาค่าทางสถิติ ไม่ใช่เส้นทางเวลาใหม่สำหรับคำนวณ drawdown
+VaR ระบุเส้นแบ่งผลขาดทุนตามระดับความเชื่อมั่นและช่วงเวลาที่กำหนด ส่วน CVaR หรือ Expected Shortfall สนใจผลขาดทุนเฉลี่ยในส่วนที่แย่ที่สุดนั้น ค่า VaR จึงยังไม่บอกว่าผลขาดทุนที่เลยเส้นแบ่งไปจะรุนแรงเพียงใด
 
-ในส่วนนี้เพิ่ม **NumPy** ซึ่งเป็นเครื่องมือคำนวณตัวเลขและ array โดย `import numpy as np` ตั้งชื่อย่อ `np` เพื่อเรียกฟังก์ชัน เช่น `np.quantile` ที่ใช้หาขอบตามสัดส่วนข้อมูล
+<span id="ถ-าเร-มจากแบบจำลองแทนการเร-ยงข-อม-ล"></span>
 
-```python
-import numpy as np
-
-tail_returns = pd.Series([
-    -0.120, -0.060, -0.040, -0.030, -0.025,
-    -0.020, -0.015, -0.010, -0.005,  0.000,
-     0.002,  0.004,  0.006,  0.008,  0.010,
-     0.012,  0.015,  0.020,  0.030,  0.040,
-])
-```
-
-**Historical VaR ที่ confidence 95%** ในหน้านี้ใช้ convention เดียวกับเครื่องมือของเว็บไซต์: เปลี่ยน return เป็น **loss** ด้วยการกลับเครื่องหมาย แล้วหา quantile 95% ของ loss แบบ empirical inverse CDF เราต้องระบุช่วงเวลาเสมอ: ข้อมูลชุดนี้ให้ **VaR หนึ่งวัน** ไม่ใช่หนึ่งปี
-
-เมื่อเรียง loss จากน้อยไปมาก จะมี 20 ค่า แต่ละค่ามีน้ำหนัก $1/20=5\%$ ค่าแรกที่ทำให้สัดส่วนสะสมถึง 95% คือ **อันดับที่ 19** ซึ่งเท่ากับ **6%** ส่วนอันดับที่ 20 คือขาดทุน 12% ดังนั้น 19 จาก 20 observations มี loss ไม่เกิน 6% และมีหนึ่ง observation ที่เกินขอบนี้
-
-```python
-tail_alpha = 0.05
-tail_losses = -tail_returns
-tail_var = np.quantile(tail_losses, 0.95, method="inverted_cdf")
-
-# Here 5% of 20 observations is exactly one observation.
-tail_count = 1
-tail_worst_returns = tail_returns.nsmallest(tail_count)
-tail_cvar = -tail_worst_returns.mean()
-
-print(f"One-day historical VaR (95%): {tail_var:.2%}")
-print(f"One-day historical CVaR (95%): {tail_cvar:.2%}")
-print(f"Observations in the worst 5%: {len(tail_worst_returns)}")
-```
-
-ได้ **VaR 6.00%**, **CVaR 12.00%** และมีข้อมูลในหาง 5% ที่เลือก 1 วันจาก 20 วัน `.nsmallest(1)` เลือก return ที่ต่ำที่สุดหนึ่งค่า ซึ่งคือ −12% หากพอร์ตมีมูลค่าปัจจุบัน 10,000 บาท การแปลงเชิงสัดส่วนของตัวเลขสมมตินี้คือ 600 บาทกับ 1,200 บาทตามลำดับ
-
-VaR ถามว่า “ขอบของส่วนผลลัพธ์ที่แย่อยู่ตรงไหน” ส่วน **CVaR หรือ Expected Shortfall** สนใจ “ในส่วนที่แย่นั้น ขาดทุนเฉลี่ยเท่าไร” สำหรับตัวอย่างที่ 5% ตรงกับหนึ่ง observation พอดี การเฉลี่ยวันเลวร้ายที่สุดจึงเห็นได้ตรง ๆ หากใช้ 90% แทน จะมีหาง 10% หรือสองวัน และ loss เฉลี่ยในหางจะเป็น $(12\%+6\%)/2=9\%$
-
-**ขอบในตัวอย่างขนาดจำกัดมีความสำคัญ:** อย่านำ loss ที่เท่ากับ VaR 6% มารวมเฉลี่ยทั้งก้อนกับ loss 12% สำหรับ ES 95% เพราะจะกลายเป็นหาง 10% แล้ว หากสัดส่วนหางไม่ลงตัวหรือมีค่าซ้ำบริเวณขอบ ต้องกำหนดน้ำหนักให้รวมเป็น 5% พอดี ไม่ใช่ใช้ `.mean()` ของทุกค่าที่ผ่าน cutoff โดยไม่ตรวจจำนวน วิธี `inverted_cdf` ที่ใช้ที่นี่ตั้ง quantile บน **loss**; สำหรับข้อมูลไม่ต่อเนื่อง การหา quantile 5% บน return แล้วกลับเครื่องหมายอาจเลือกขอบคนละค่าได้
-
-ค่า VaR 6% **ไม่ใช่เพดานการขาดทุน** และ 95% ไม่ใช่คำรับรองว่าอนาคตจะมีขาดทุนเกินขอบเพียง 5% เสมอ เรากำลังประมาณจากตัวอย่างอดีต ซึ่งอาจไม่ครอบคลุมสภาวะถัดไป ตัวอย่าง 20 วันมีไว้ฝึกเท่านั้น เพราะหาง 5% เหลือข้อมูลเพียงวันเดียว
-
-การเลือก quantile method อาจเปลี่ยนตัวเลขได้ โดยเฉพาะข้อมูลน้อย เอกสาร [NumPy quantile](https://numpy.org/doc/stable/reference/generated/numpy.quantile.html) จึงมีหลายวิธีให้เลือก เวลารายงานควรระบุทั้งระดับ confidence, ช่วงเวลา และวิธีคำนวณ
-
-### ถ้าเริ่มจากแบบจำลองแทนการเรียงข้อมูล
-
-| วิธี | คิดอย่างไร | ข้อจำกัดหลัก |
-|---|---|---|
-| Historical | ใช้ quantile จากผลตอบแทนที่สังเกต | เหตุการณ์ที่ไม่อยู่ในตัวอย่างจะไม่ปรากฏเอง และหางอาจมีข้อมูลน้อย |
-| Gaussian | สมมติ Normal แล้วใช้ mean, std และตำแหน่งในกระดิ่ง | อาจประเมินหางผิดเมื่อข้อมูลไม่สมมาตรหรือมีเหตุการณ์รุนแรงมากกว่าแบบจำลอง |
-| Parametric แบบไม่ใช่ Gaussian | เลือกรูปแจกแจงอื่น เช่น Student-t แล้วประมาณพารามิเตอร์ตำแหน่ง สเกล และรูปร่างหาง | ยังมีความเสี่ยงจากการเลือกรูปแจกแจงผิดและการประมาณพารามิเตอร์; หางที่หนากว่าไม่ได้รับรองว่าตรงกับข้อมูลจริง |
-| Cornish–Fisher | ปรับตำแหน่ง quantile ของ Normal ด้วย skewness และ kurtosis | เป็นค่าประมาณ ไม่ได้ทำให้ distribution ถูกต้องเสมอ และอาจไม่น่าเชื่อถือเมื่อ moments รุนแรงหรือประมาณไม่แม่น |
-
-สำหรับ Gaussian ถ้า $z_{0.05}\approx-1.645$ คือ quantile 5% ของ Standard Normal จะคำนวณขอบ return เป็น $\mu+z_{0.05}\sigma$ แล้วเปลี่ยนเครื่องหมายเพื่อรายงาน VaR ตัวอย่าง **แบบจำลองสมมติ** ที่ mean 0% และ std 2% ต่อวันให้ VaR ประมาณ $1.645\times2\%=3.29\%$ ต่อวัน
-
-Cornish–Fisher ไม่ใช่ปุ่มที่ทำให้ VaR สูงขึ้นหรือปลอดภัยขึ้นเสมอ ทิศทางการปรับขึ้นกับ moments และระดับ quantile หากกำลังเริ่มเรียน ให้เข้าใจว่าทั้งสี่วิธีใช้ข้อมูลและสมมติฐานอะไร ก่อนใช้ผลลัพธ์หลายตำแหน่งทศนิยมเปรียบเทียบกัน
+เรียนการเรียงผลขาดทุนและเลือก Quantile ใน [Historical VaR](extreme-risk.html#historical-loss-quantiles) ต่อด้วย [การเฉลี่ยปลายหางให้ได้น้ำหนักครบ](extreme-risk.html#expected-shortfall-weights) แล้วจึงเปรียบเทียบกับ [Gaussian และ Cornish–Fisher VaR](extreme-risk.html#gaussian-var-calculation) ตัวอย่าง โค้ด และข้อตกลงในการรายงานตัวเลขอยู่ในบทเดียวกัน
 
 <span id="risk-practice"></span>
 
@@ -700,20 +604,20 @@ Cornish–Fisher ไม่ใช่ปุ่มที่ทำให้ VaR ส�
 1. A กับ B มีค่าเฉลี่ย 1% เท่ากัน แปลว่า volatility เท่ากันหรือไม่?
 2. จาก B ทำไมจึงหารผลรวมความห่างยกกำลังสองด้วย 3 ไม่ใช่ 4 ใน sample variance?
 3. ถ้าเริ่ม 1,000 บาทแล้วจบงวดแรกที่ 900 บาท drawdown เป็นเท่าไร และทำไมต้องเก็บแถวก่อนเริ่ม?
-4. ถ้า Jarque–Bera ให้ p-value 0.20 ที่ระดับนัยสำคัญ 1% เราพิสูจน์แล้วหรือไม่ว่าข้อมูลเป็น Normal?
-5. ในตัวอย่างหาง 20 วัน VaR 6% กับ CVaR 12% ต่างกันเพราะอะไร?
-6. ฟังก์ชัน std ของ negative returns ให้ 0% จากข้อมูล B แปลว่า B ไม่เคยขาดทุนหรือไม่?
+4. Sharpe ratio 1.207 ในตัวอย่างมีหน่วยเปอร์เซ็นต์หรือไม่ และตัวเศษวัดอะไร?
+5. ถ้าสลับลำดับผลตอบแทนโดยไม่มีเงินเข้าออก เงินปลายทางกับ Drawdown จำเป็นต้องเปลี่ยนเหมือนกันหรือไม่?
+6. เหตุใด volatility ต่อปีจึงใช้รากที่สองของ 12 แทนการคูณ 12 และต้องมีสมมติฐานอะไร?
 
 <details>
 <summary>เปิดแนวคำตอบ</summary>
 
-**แนวคำตอบ:** (1) ไม่เท่า B กระจายมากกว่า (2) กำลังใช้ sample estimator ที่มีตัวหาร $n-1$ (3) −10%; เงินทุนก่อนเริ่มเป็นยอดสูงสุดที่ต้องนับด้วย (4) ยังปฏิเสธ Normal ไม่ได้ ไม่ใช่พิสูจน์ว่าใช่ (5) ตัวแรกคือขอบ quantile ที่เลือก ส่วนตัวหลังคือค่าเฉลี่ยของหาง ซึ่งในตัวอย่างมีวัน −12% เพียงวันเดียว (6) ไม่ใช่ มีขาดทุน −2% แต่กลุ่มที่เลือกมีค่าเดียวจึงไม่มีการกระจายภายในกลุ่ม
+แนวคำตอบ: (1) ไม่เท่า B กระจายมากกว่า (2) กำลังใช้ sample estimator ที่มีตัวหาร $n-1$ (3) −10%; เงินทุนก่อนเริ่มเป็นยอดสูงสุดที่ต้องนับด้วย (4) ไม่มีหน่วยเปอร์เซ็นต์ ตัวเศษคือค่าเฉลี่ยผลตอบแทนส่วนเกินเหนืออัตราอ้างอิง (5) ผลคูณของตัวคูณเงินลงทุนยังเท่าเดิม จึงได้เงินปลายทางเท่าเดิม แต่ Drawdown เปลี่ยนได้ตามลำดับ (6) ภายใต้ variance ต่อเดือนคงที่และไม่มี covariance ข้ามเดือน variance ของผลรวมเพิ่มเป็น 12 เท่า ส่วน SD จึงเพิ่มเป็นรากที่สองของ 12 เท่า เป็นการปรับสเกล ไม่ใช่สูตร exact ของผลตอบแทนทบต้นทั้งปี
 
 </details>
 
-หากต้องการทดสอบความเข้าใจเพิ่ม ให้เปลี่ยนผลตอบแทนงวดแรกใน `dd_returns` เป็น −20% แล้วรันส่วน drawdown ใหม่ ตรวจว่าแถวแรกหลังลงทุนยังเปรียบเทียบกับทุน 1,000 บาท และอธิบายความต่างระหว่าง **กำไรปลายทาง**, **ความผันผวน**, **maximum drawdown** และ **tail risk** ด้วยคำของตัวเอง
+หากต้องการทดสอบความเข้าใจเพิ่ม ให้เปลี่ยนผลตอบแทนงวดแรกใน `dd_returns` เป็น −20% แล้วรันส่วน drawdown ใหม่ ตรวจว่าแถวแรกหลังลงทุนยังเปรียบเทียบกับทุน 1,000 บาท และอธิบายความต่างระหว่างกำไรปลายทาง ความผันผวน และ maximum drawdown ด้วยคำของตัวเอง
 
-เนื้อหาส่วนนี้เรียบเรียงใหม่เป็นภาษาไทยโดยใช้ตัวอย่างสมมติใหม่ เพื่อเรียนต่อจากบทผลตอบแทน แหล่งเรียนต้นทางคือ EDHEC/Coursera: [Measures of Risk and Reward](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/QYHx1/measures-of-risk-and-reward), [Measuring Max Drawdown](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/0viQF/measuring-max-drawdown), [Deviations from Normality](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/fpkEu/deviations-from-normality), [Downside Risk Measures](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/Xeixz/downside-risk-measures) และ [Estimating VaR](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/Tlpi8/estimating-var) พร้อม Lab 102–106 ของ Vijay Vaidyanathan และหน้าแก้ไขที่เชื่อมไว้ในหัวข้อที่เกี่ยวข้อง
+เนื้อหาความผันผวน Sharpe ratio และ Drawdown เรียบเรียงจาก [Measures of Risk and Reward](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/QYHx1/measures-of-risk-and-reward), [Measuring Max Drawdown](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/0viQF/measuring-max-drawdown) และ Lab 102–104 ของ EDHEC/Coursera โดยใช้ตัวอย่างสมมติของบทนี้เอง ส่วน [Deviations from Normality](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/fpkEu/deviations-from-normality), [Downside Risk Measures](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/Xeixz/downside-risk-measures), [Estimating VaR](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/Tlpi8/estimating-var) และ Lab 105–106 เป็นแหล่งของบท [เมื่อผลตอบแทนไม่เป็น Normal](extreme-risk.html#references) ซึ่งรวมคำแก้ไขและข้อตกลงเรื่องปลายหางไว้
 
 <span id="log-returns"></span>
 
@@ -921,11 +825,11 @@ $$
 
 ### แหล่งเรียนเรื่องผลตอบแทนและความเสี่ยง
 
-เนื้อหาที่เพิ่มในวันที่ 2 ตุลาคม 2026 ใช้ [Fundamentals of Returns](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/UL04V/fundamentals-of-returns) และ [Lab Session-Basics of returns](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/lLS6N/lab-session-basics-of-returns) โดย Vijay Vaidyanathan ร่วมกับบทความเสี่ยงของ Vijay Vaidyanathan และ Lionel Martellini ในคอร์ส EDHEC/Coursera แหล่งเฉพาะเรื่องเชื่อมไว้ใกล้หัวข้อที่เกี่ยวข้อง รวมทั้งประกาศแก้ไข Skewness และ Semi Deviation
+เนื้อหาที่เพิ่มในวันที่ 2 ตุลาคม 2026 ใช้ [Fundamentals of Returns](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/UL04V/fundamentals-of-returns) และ [Lab Session-Basics of returns](https://www.coursera.org/learn/introduction-portfolio-construction-python/lecture/lLS6N/lab-session-basics-of-returns) โดย Vijay Vaidyanathan ร่วมกับบทความเสี่ยงของ Vijay Vaidyanathan และ Lionel Martellini ในคอร์ส EDHEC/Coursera แหล่งเฉพาะเรื่องเชื่อมไว้ใกล้หัวข้อที่เกี่ยวข้อง ส่วนประกาศแก้ไข Skewness และ Semi Deviation อยู่ในแหล่งอ้างอิงของ [บทการแจกแจงและความเสียหายปลายหาง](extreme-risk.html#references)
 
-ตรวจโค้ดอ้างอิงจาก `lab_101.ipynb` ถึง `lab_106.ipynb` ในชุด Notebook ที่ผู้เรียนให้มา แล้วสร้างตัวอย่างสอนใหม่ทั้งหมดในหน้านี้ ไฟล์ต้นทาง วิดีโอ Transcript และข้อมูลตลาดของคอร์สไม่ได้รวมในเว็บ ตัวอย่าง Python ใช้ pandas 2.3.3 และ NumPy 2.0.2 ในการตรวจผล; ไม่จำเป็นต้องมี CSV ของคอร์สเพื่อรันตัวอย่างในหน้านี้
+ตรวจโค้ดอ้างอิงจาก `lab_101.ipynb` ถึง `lab_104.ipynb` สำหรับพื้นฐานในหน้านี้ และใช้ `lab_105.ipynb` ถึง `lab_106.ipynb` ประกอบบทถัดไป แล้วสร้างตัวอย่างสอนใหม่จากหัวข้อเหล่านั้น ไฟล์ต้นทาง วิดีโอ Transcript และข้อมูลตลาดของคอร์สไม่ได้รวมในเว็บ ตัวอย่าง Python ในหน้านี้ตรวจผลด้วย pandas 2.3.3; ไม่จำเป็นต้องมี CSV ของคอร์สเพื่อรันตัวอย่างในหน้านี้
 
-เมื่ออ่านจบแล้ว ใช้บท [ความเสี่ยงในการลงทุน](risk.html) เพื่อศึกษาบริบทของตัววัด การกระจายความเสี่ยง และทดลองปรับข้อมูลด้วยเครื่องมือของเว็บไซต์ต่อได้
+ใช้บท [ความเสี่ยง: แนวคิดและการอ่านผลวัด](risk.html) เมื่อต้องการเชื่อมตัววัดกับคำถามลงทุน ดูประวัติแนวคิด และทดลองว่าตัววัดแต่ละชนิดเห็นหรือมองข้ามอะไร
 
 
-อ่านบทถัดไป: **[เมื่อผลตอบแทนไม่เป็น Normal](extreme-risk.html)** ขยาย Section 2 ด้วยตัวอย่างรูปร่างผลตอบแทน การทดสอบ Normality การสร้าง module และการคำนวณ VaR/CVaR ที่ลงรายละเอียดเรื่องข้อมูลปลายหาง
+อ่านบทถัดไป: [เมื่อผลตอบแทนไม่เป็น Normal](extreme-risk.html) เรียนรูปร่างผลตอบแทน การทดสอบ Normality การสร้าง Python module และการคำนวณ VaR/CVaR จากข้อมูลปลายหาง

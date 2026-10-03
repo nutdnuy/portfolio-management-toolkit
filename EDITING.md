@@ -12,6 +12,23 @@ Use an English kebab-case filename in `content/`. Add its name without `.md`, a 
 
 Write a learning question, introduce unfamiliar terms, calculate a concrete example, and then explain the formula and its assumptions. Use natural, connected Thai prose that walks through the reasoning with the reader. Prefer concrete verbs and short explanations to report-like phrasing; use “เรา” when useful, without inserting the assistant’s name or conversational particles. Preserve the depth, assumptions and evidence when smoothing the prose. Distinguish hypothetical teaching examples from thesis evidence. Keep printed and PDF page references traceable. Do not bundle the source PDF.
 
+## Keep each concept in one main lesson
+
+Before adding a course topic, check whether this book already teaches it. A new course mentioning the same concept does not require another full derivation. Link to the main explanation, then teach the new question or experiment. Keep imports, data setup and code-specific explanations when a Notebook must run independently.
+
+| Main explanation | Continuation |
+|---|---|
+| `returns`: returns, compounding, sample volatility, Sharpe and drawdown | `extreme-risk`: distributions, downside conventions and tail measures; `risk`: history, interpretation, interactive comparisons and reporting |
+| `cppi-dynamic-allocation`: Floor, Cushion, allocation timing and basic Gap risk | `portfolio-insurance`: comparison with options, TIPP, variable multiplier, execution limits and evidence; `monte-carlo`: many-path assessment |
+| `portfolio-insurance#tipp`: the ratchet rule and its comparison with CPPI | `cppi-dynamic-allocation#cppi-drawdown`: implement and check the rule in Python |
+| `factor-investing` and `multifactor-models`: factor interpretation and regression | `factor-model-estimation`: scikit-learn lab, residual covariance and unstable loadings |
+| `portfolio-basics`: covariance and portfolio variance | `covariance-estimation`: rank, singularity and factor covariance estimation |
+| `smart-beta`: capital weights, concentration and drift | `diversification-methods`: compare allocation objectives on one fixture |
+
+When consolidating prose, keep stable section IDs and source attribution, update the welcome page and glossary routes, and regenerate affected Notebooks so removed tutorials do not remain in downloads. Preserve useful examples that answer different questions.
+
+For a scoped layout check, `PMT_PAGES=index,portfolio-insurance,glossary node qa/browser-checks.cjs` limits the layout sweep to those configured pages. The script still runs its shared navigation, search, download and insurance interaction checks. With no filter it checks all pages.
+
 ## Interactive sections
 
 The Portfolio Insurance chapter mounts three components: `put-lab`, `allocation-guide` and `cppi-lab`. Their order follows the surrounding explanation. Edit calculations in `src/math.mjs`, application controls in `src/app.jsx`, and shared behavior in `src/site.js`. Do not insert independent landing pages or dashboard navigation into the book.

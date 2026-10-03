@@ -9,7 +9,9 @@ const axeSource = require('axe-core').source;
 const base = process.env.PMT_PREVIEW_URL || 'http://127.0.0.1:8764';
 const output = path.join(__dirname, 'output');
 const bookConfig = JSON.parse(fs.readFileSync(path.join(__dirname, '../site.config.json'), 'utf8'));
-const pages = bookConfig.pages.map(page => page.file);
+const pages = process.env.PMT_PAGES ? process.env.PMT_PAGES.split(',') : bookConfig.pages.map(page => page.file);
+assert.ok(pages.length && pages.every(name => bookConfig.pages.some(page => page.file === name)), 'PMT_PAGES must name configured pages');
+const insuranceTitle = bookConfig.pages.find(page => page.file === 'portfolio-insurance').title;
 const failures = [], passed = [], accessibility = [];
 fs.mkdirSync(output, { recursive: true });
 const format = (n, digits = 2) => Number(n).toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits });
@@ -96,7 +98,7 @@ async function range(page, selector, value) {
             const menu = page.locator('#menu-button');
             await menu.click();
             assert.equal(await menu.getAttribute('aria-expanded'), 'true');
-            await page.getByRole('navigation', { name: 'สารบัญ' }).getByRole('link', { name: 'Portfolio Insurance', exact: true }).click();
+            await page.getByRole('navigation', { name: 'สารบัญ' }).getByRole('link', { name: insuranceTitle, exact: true }).click();
             await page.waitForURL('**/portfolio-insurance.html');
             assert.equal(await menu.getAttribute('aria-expanded'), 'false');
             await menu.click();
@@ -117,7 +119,7 @@ async function range(page, selector, value) {
       assert.deepEqual(await page.getByRole('navigation', { name: 'สารบัญ', exact: true }).locator('a').allTextContents(), bookConfig.pages.map(page => page.title));
       await Promise.all([
         page.waitForURL('**/portfolio-insurance.html'),
-        page.getByRole('navigation', { name: 'สารบัญ', exact: true }).getByRole('link', { name: 'Portfolio Insurance', exact: true }).click()
+        page.getByRole('navigation', { name: 'สารบัญ', exact: true }).getByRole('link', { name: insuranceTitle, exact: true }).click()
       ]);
       const contents = page.getByRole('navigation', { name: 'หัวข้อในหน้านี้', exact: true });
       assert.ok(await contents.locator('a').count() >= 10, 'A chapter-length contents list');

@@ -129,6 +129,7 @@
   },
   "module1_extension": {
     "audience": "Beginners in finance and Python",
+    "reading_route": "Returns contains compounding, volatility, Sharpe and drawdown. The detailed distribution, downside and VaR/ES lessons are consolidated in extreme-risk.md; original source coverage and conventions below remain recorded for the combined sequence.",
     "hypothetical_data_only": true,
     "python_examples": "Inline executable examples, using pandas; no external market files required.",
     "conventions": [

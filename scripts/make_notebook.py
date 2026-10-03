@@ -215,18 +215,16 @@ show_svg(chart_svg(put_rows, [("wealth", "Stock + put at expiry", "#6200EE", "")
                    x_key="price", title="Protective put: terminal wealth and initial cost",
                    x_label="Stock price at expiry (units)"))
 print("This is a payoff diagram across terminal prices, not a time-series path.")''',
-    "allocation-guide": r'''# Worked allocation: initial 100, floor 90, multiplier 3, zero interest.
+    "allocation-guide": r'''# One-date comparison: change the protection target separately from risk per cushion.
 initial, floor_pct, multiplier = 100, 90, 3
-first = calculate_allocation(initial, floor_pct, multiplier)
-monthly_return = -0.10
-held_risky_after_return = first["exposure"] * (1+monthly_return)
-next_value = held_risky_after_return + first["safe"]
-second = allocate(next_value, initial*floor_pct/100, multiplier)
-print(f"Initial: cushion={first['cushion']:.2f}; risky={first['exposure']:.2f}; safe={first['safe']:.2f}")
-print(f"After a 10% risky-asset fall: wealth={next_value:.2f}; risky before trade={held_risky_after_return:.2f}")
-print(f"New risky target={second['exposure']:.2f}; sell={held_risky_after_return-second['exposure']:.2f}; safe={second['safe']:.2f}")
-close(next_value, 97); close(second["exposure"], 21)
-print("No future return was used to choose the preceding month's allocation.")''',
+selected = calculate_allocation(initial, floor_pct, multiplier)
+print(f"Selected: floor={initial*floor_pct/100:.2f}; risky={selected['exposure']:.2f}; safe={selected['safe']:.2f}")
+print("Same wealth, zero interest; each row is a separate choice, not a time step:")
+for chosen_floor, chosen_m, expected_risky in [(90, 3, 30), (95, 3, 15), (90, 6, 60)]:
+    allocation = calculate_allocation(100, chosen_floor, chosen_m)
+    close(allocation["exposure"], expected_risky)
+    print(f"Floor={chosen_floor}%, m={chosen_m}: risky={allocation['exposure']:.2f}; safe={allocation['safe']:.2f}")
+print("These allocations alone do not establish protection over a future price path.")''',
     "cppi-lab": r'''# Editable controls: rally, crash, whipsaw, or recovery; initial wealth 100.
 scenario, floor_pct, multiplier, rate = "crash", 90, 3, 0
 result = simulate(scenario=scenario, floor_pct=floor_pct, multiplier=multiplier, rate=rate)
@@ -343,40 +341,18 @@ close(continuous_cushion(10, 0.05, 0.08, 0.20, 1, 1, 0.25),
 print("This result assumes continuous trading/prices, no costs, and unconstrained exposure. It does not validate the discrete simulator's floor.")
 '''
 
-SECTION_SNIPPETS["cppi-example"] = r'''# Four rebalancing periods, all before maturity.
-returns = [-0.10, 0.20, -0.10, 0.10]
-value, floor, multiplier, turnover = 100, 90, 3, 0
-positions = allocate(value, floor, multiplier)
-expected = [
-    (27, 97, 7, 21, -6, 76),
-    (25.2, 101.2, 11.2, 33.6, 8.4, 67.6),
-    (30.24, 97.84, 7.84, 23.52, -6.72, 74.32),
-    (25.872, 100.192, 10.192, 30.576, 4.704, 69.616),
-]
-print("Period | held risky | wealth | cushion | new risky | trade | new safe")
-for step, (asset_return, answer) in enumerate(zip(returns, expected), 1):
-    held_risky = positions["exposure"]*(1+asset_return)
-    value = held_risky + positions["safe"]
-    positions = allocate(value, floor, multiplier)
-    trade = positions["exposure"]-held_risky
-    turnover += abs(trade)
-    values = (held_risky, value, positions["cushion"], positions["exposure"], trade, positions["safe"])
-    for actual, target in zip(values, answer):
-        close(actual, target)
-    close(positions["exposure"]+positions["safe"], value)
-    print(step, " | ".join(f"{number:.3f}" for number in values))
-close(turnover, 25.824)
-print(f"Turnover excluding initial allocation={turnover:.3f} monetary units, not fees.")
-# Cross-check the same four steps in the chapter's monthly simulator.
-same_steps = simulate(returns=returns+[0]*8)
-for row, answer in zip(same_steps["rows"][1:5], expected):
-    close(row["cppi"], answer[1]); close(row["exposure"], answer[3])
+SECTION_SNIPPETS["cppi-example"] = r'''# Equal initial/final asset prices, but different intervening paths.
+# All later returns are zero; the twelve-month model uses the same floor/rate.
 flat_path = simulate(returns=[0]*12)
 round_trip = simulate(returns=[0.10, -1/11]+[0]*10)
+for name, experiment in [("Flat", flat_path), ("Up then back", round_trip)]:
+    print(f"{name}: asset prices={[round(row['asset'], 6) for row in experiment['rows'][:3]]}")
+    print(f"  CPPI wealth={[round(row['cppi'], 6) for row in experiment['rows'][:3]]}")
 close(round_trip["rows"][2]["asset"], 100)
 close(round_trip["rows"][2]["cppi"], 99.45454545454545)
 close(flat_path["rows"][2]["cppi"], 100)
-print("Stock ends at 100 in both paths; flat CPPI=100, round-trip CPPI=99.454545.")
+close(39*(100/110)+64, round_trip["rows"][2]["cppi"])
+print("Same terminal stock price; flat CPPI=100, round-trip CPPI=99.454545, before costs.")
 '''
 
 SECTION_SNIPPETS["gap-risk"] = r'''# A one-period snapshot: F_now=90, not the preceding example's terminal floor.

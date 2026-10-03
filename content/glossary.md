@@ -141,7 +141,7 @@ description: คำศัพท์และสัญลักษณ์เรื�
 
 กฎจัดสรรเงินลงทุนเสี่ยงตามตัวคูณคงที่ของ Cushion เมื่อ Cushion เล็กลง เงินลงทุนเสี่ยงตามกฎจะลดลง รุ่นที่ไม่กู้และไม่ขายชอร์ตจะจำกัดเงินลงทุนเสี่ยงให้อยู่ระหว่างศูนย์กับมูลค่าพอร์ต
 
-[ดูสูตร CPPI](portfolio-insurance.html#cppi-rule) · แหล่งแนวคิด: พิมพ์ น. 13–15, 52–53 / PDF 40–42, 79–80
+[เรียนสูตรและตัวอย่าง CPPI](cppi-dynamic-allocation.html#cppi-basics) · [เปรียบเทียบกับการซื้อ Option](portfolio-insurance.html#cppi-rule)
 
 </section>
 
@@ -151,7 +151,7 @@ description: คำศัพท์และสัญลักษณ์เรื�
 
 ผลต่าง $C_t=V_t-F_t$ ระหว่างมูลค่าพอร์ตกับ Floor ณ เวลาเดียวกัน วัดเป็นหน่วยเงินเดียวกับพอร์ต ใน CPPI เป็นฐานที่นำไปคูณ Multiplier เพื่อกำหนดเงินลงทุนเสี่ยง
 
-[ดูตัวอย่างพอร์ต 100 และ Floor 90](portfolio-insurance.html#cppi-example) · แหล่งแนวคิด: พิมพ์ น. 13–15 / PDF 40–42
+[คำนวณจากพอร์ต 1,000 บาทและ Floor 800 บาท](cppi-dynamic-allocation.html#cppi-basics) · [ทดลองเปลี่ยน Floor](portfolio-insurance.html#cppi-example)
 
 </section>
 
@@ -161,7 +161,7 @@ description: คำศัพท์และสัญลักษณ์เรื�
 
 พารามิเตอร์ $m$ ที่แปลง Cushion เป็นเงินลงทุนในสินทรัพย์เสี่ยงก่อนใช้ข้อจำกัดอื่น ไม่มีหน่วย $m=3$ หมายถึงสามเท่าของ Cushion ไม่ใช่สามเท่าของมูลค่าพอร์ต
 
-[ดูกฎและเพดานเงินลงทุนเสี่ยง](portfolio-insurance.html#cppi-rule) · แหล่งแนวคิด: พิมพ์ น. 14–15, 52–53 / PDF 41–42, 79–80
+[ดูกฎและเพดานเงินลงทุนเสี่ยง](cppi-dynamic-allocation.html#cppi-basics) · [ต่อยอดเป็นตัวคูณที่ปรับได้](portfolio-insurance.html#variable-multiplier)
 
 </section>
 
@@ -171,7 +171,7 @@ description: คำศัพท์และสัญลักษณ์เรื�
 
 การซื้อขายเพื่อให้จำนวนเงินหรือสัดส่วนสินทรัพย์ตรงกับกฎหลังราคาและมูลค่าพอร์ตเปลี่ยน การกำหนดเป้าหมายต่อเนื่องในสูตรกับการซื้อขายจริงเป็นรอบให้ผลต่างกันได้
 
-[ดูการปรับพอร์ตหนึ่งรอบ](portfolio-insurance.html#cppi-example) · แหล่งแนวคิด: พิมพ์ น. 14–16, 52–53 / PDF 41–43, 79–80
+[ดูการปรับพอร์ตทีละเดือน](cppi-dynamic-allocation.html#cppi-worked-example) · [ทดลองปรับพอร์ต](portfolio-insurance.html#cppi-example)
 
 </section>
 
@@ -181,7 +181,7 @@ description: คำศัพท์และสัญลักษณ์เรื�
 
 ความเสี่ยงที่ราคาหรือมูลค่าพอร์ตเคลื่อนที่ผ่านระดับป้องกันก่อนจะลดการถือสินทรัพย์เสี่ยงได้ การขายหลังจากหลุดเกณฑ์ไม่ได้ทำให้พอร์ตกลับไปมีมูลค่าเท่าเกณฑ์โดยอัตโนมัติ
 
-[ดูตัวอย่างพอร์ต 100 เหลือ 88](portfolio-insurance.html#gap-risk) · แหล่งแนวคิด: พิมพ์ น. 32–33 / PDF 59–60
+[เรียน Gap risk จากตัวเลข](cppi-dynamic-allocation.html#cppi-gap-risk) · [ต่อยอดเมื่อมีดอกเบี้ยและเพดาน Exposure](portfolio-insurance.html#gap-risk)
 
 </section>
 
@@ -403,7 +403,7 @@ description: คำศัพท์และสัญลักษณ์เรื�
 
 การกระจายตัวของผลตอบแทนที่มักวัดด้วย Standard deviation รวมทั้งค่าที่สูงกว่าและต่ำกว่าค่าเฉลี่ย บทความเสี่ยงใช้ Sample standard deviation ตัวหาร $n-1$ และรายงานความถี่ของข้อมูลเสมอ
 
-[คำนวณความผันผวนรายเดือน](risk.html#volatility)
+[คำนวณความผันผวนรายเดือน](returns.html#risk-volatility)
 
 </section>
 
@@ -413,7 +413,7 @@ description: คำศัพท์และสัญลักษณ์เรื�
 
 รากที่สองของค่าเฉลี่ยกำลังสองของส่วนที่ผลตอบแทนต่ำกว่าเกณฑ์ บทนี้หารด้วยจำนวนช่วงทั้งหมด และกำหนดเกณฑ์ในความถี่เดียวกับผลตอบแทน จึงต้องตรวจนิยามก่อนเทียบคนละโปรแกรม
 
-[ดูตัวอย่างเกณฑ์ 0% ต่อเดือน](risk.html#downside)
+[เทียบเกณฑ์และตัวหารของ Downside deviation](extreme-risk.html#downside-measures)
 
 </section>
 
@@ -423,7 +423,7 @@ description: คำศัพท์และสัญลักษณ์เรื�
 
 ค่าเฉลี่ยของผลคูณระหว่างการเบี่ยงเบนจากค่าเฉลี่ยของตัวแปรสองตัว ใช้อธิบายว่าสินทรัพย์เคลื่อนไหวร่วมกันอย่างไร และเป็นส่วนหนึ่งของสูตร Variance ของพอร์ต หน่วยขึ้นกับตัวแปรทั้งสอง
 
-[ดูสูตรความเสี่ยงพอร์ตสองสินทรัพย์](risk.html#diversification)
+[คำนวณ Covariance ทีละขั้น](portfolio-basics.html#covariance) · [ใช้คำนวณความเสี่ยงพอร์ต](portfolio-basics.html#portfolio-variance)
 
 </section>
 
@@ -453,7 +453,7 @@ Covariance ที่หารด้วยผลคูณ Standard deviation ข�
 
 เส้นแบ่งของการแจกแจงผลขาดทุน ณ ระดับความน่าจะเป็นและช่วงเวลาที่กำหนด ต้องบอกสกุลเงินและแบบจำลองด้วย VaR ไม่ใช่ขาดทุนสูงสุด; ตัวอย่างข้อมูลจำกัดในบทใช้ Inverse empirical CDF
 
-[อ่านนิยามและตัวอย่าง VaR หนึ่งวัน](risk.html#var)
+[อ่านนิยามและตัวอย่าง Historical VaR](extreme-risk.html#historical-loss-quantiles)
 
 </section>
 
@@ -463,7 +463,7 @@ Covariance ที่หารด้วยผลคูณ Standard deviation ข�
 
 ค่าเฉลี่ยของผลขาดทุนในส่วนหางที่แย่ที่สุดตามสัดส่วนที่กำหนด เช่น ES 95% เฉลี่ยส่วนที่แย่ที่สุด 5% เมื่อมีค่าซ้ำตรง VaR ต้องจัดน้ำหนักให้ครอบคลุมมวลความน่าจะเป็น 5% พอดี; บางแหล่งใช้ชื่อ CVaR
 
-[ดู VaR เท่ากันแต่ ES ต่างกัน](risk.html#expected-shortfall)
+[คำนวณ Expected Shortfall](extreme-risk.html#expected-shortfall-weights) · [ทดลอง VaR เท่ากันแต่ ES ต่างกัน](risk.html#expected-shortfall)
 
 </section>
 

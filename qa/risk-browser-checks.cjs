@@ -61,10 +61,19 @@ const base=process.env.PMT_PREVIEW_URL||'http://127.0.0.1:8764';
   const query=page.locator('#glossary-query');
   for(const term of ['ความผันผวน','Expected Shortfall','EWMA']){await query.fill(term);assert.ok(await page.locator('.glossary-term:not([hidden])').count()>0)}
   await query.fill('no-risk-term-1234');assert.equal(await page.locator('.glossary-term:not([hidden])').count(),0);
-  await query.fill('Expected Shortfall');await page.locator('#expected-shortfall a').click();assert.equal(new URL(page.url()).hash,'#expected-shortfall');
+  await query.fill('Expected Shortfall');
+  await page.locator('#expected-shortfall a[href="extreme-risk.html#expected-shortfall-weights"]').click();
+  assert.equal(new URL(page.url()).hash,'#expected-shortfall-weights');
+  assert.ok(await page.locator('#expected-shortfall-weights').count());
+  await page.goto(base+'/glossary.html#expected-shortfall');
+  await page.locator('#expected-shortfall a[href="risk.html#expected-shortfall"]').click();
+  assert.equal(new URL(page.url()).hash,'#expected-shortfall');
   // Initial deep links must remain visible after charts and Thai fonts change layout.
   for(const width of [390,1440]){
    await page.setViewportSize({width,height:1000});
+   // A fresh document tests an incoming link; reusing the same URL after a
+   // resize preserves the reading position instead of navigating again.
+   await page.goto('about:blank');
    await page.goto(base+'/risk.html#expected-shortfall',{waitUntil:'networkidle'});
    await page.waitForFunction(()=>{const t=document.getElementById('expected-shortfall').parentElement.nextElementSibling.getBoundingClientRect().top;return t>=24&&t<180});
    await page.screenshot({path:path.join(output,`risk-anchor-${width}.png`)});

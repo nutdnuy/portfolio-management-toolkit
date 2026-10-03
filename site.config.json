@@ -17,7 +17,7 @@
     {
       "file": "returns",
       "title": "How to Calculate return",
-      "description": "เริ่มจากเปอร์เซ็นต์และเงินทบต้น สู่ Python เบื้องต้น ความผันผวน Sharpe ratio, Drawdown และ VaR พร้อมตัวอย่างและเฉลย",
+      "description": "เริ่มจากเปอร์เซ็นต์และเงินทบต้น สู่ Python เบื้องต้น ความผันผวน Sharpe ratio และ Drawdown พร้อมตัวอย่างและเฉลย",
       "notebook": false,
       "group": "ผลตอบแทนและความเสี่ยง",
       "course": "introduction"
@@ -313,8 +313,8 @@
     },
     {
       "file": "factor-model-estimation",
-      "title": "Factor Models: จัดข้อมูลและอ่านค่า Loading",
-      "description": "เริ่มจากผลตอบแทนรายเดือน ประมาณ factor loadings ด้วย OLS แยกความเสี่ยง และตรวจปัจจัยที่ให้ข้อมูลซ้ำกัน",
+      "title": "Lab Factor Model: ประมาณค่าและตรวจความเสถียร",
+      "description": "ฝึก scikit-learn จากข้อมูลรายเดือน ตรวจ residual covariance และปัจจัยเกือบซ้ำกัน ก่อนเรียน Ridge และ Lasso",
       "course": "machine-learning",
       "module": 2,
       "lesson": 1,
@@ -433,15 +433,15 @@
     },
     {
       "file": "risk",
-      "title": "ความเสี่ยงในการลงทุน",
-      "description": "จากที่มาของแนวคิดความเสี่ยงและทฤษฎีพอร์ต สู่ Volatility, Drawdown, VaR, ES และ EWMA พร้อมตัวอย่างและตัวทดลอง",
+      "title": "ความเสี่ยง: แนวคิดและการอ่านผลวัด",
+      "description": "ที่มาของแนวคิดความเสี่ยง การเลือกและอ่านตัววัด ห้องทดลอง Stress Test และการรายงานผล พร้อมลิงก์ไปบทคำนวณโดยละเอียด",
       "notebook": false,
       "group": "บทอ่านประกอบ"
     },
     {
       "file": "portfolio-insurance",
-      "title": "Portfolio Insurance",
-      "description": "Portfolio Insurance Strategies: Friend or Foe? เรียนรู้ Floor, CPPI, OBPI และต้นทุนการป้องกันพอร์ต ผ่านตัวอย่างและการทดลอง",
+      "title": "Portfolio Insurance: เปรียบเทียบวิธีป้องกันพอร์ต",
+      "description": "ต่อจาก CPPI พื้นฐาน: เปรียบเทียบ OBPI, TIPP, Stop Loss และตัวคูณที่ปรับได้ พร้อมต้นทุน ผลทดสอบ S&P 500 และความชอบของผู้ลงทุน",
       "group": "บทอ่านประกอบ"
     },
     {

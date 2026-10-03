@@ -1,13 +1,15 @@
 ---
-title: "Factor Models: จัดข้อมูลและอ่านค่า Loading"
-description: "เริ่มจากผลตอบแทนรายเดือน ประมาณ factor loadings ด้วย OLS แยกความเสี่ยง และตรวจปัจจัยที่ให้ข้อมูลซ้ำกัน"
+title: "Lab Factor Model: ประมาณค่าและตรวจความเสถียร"
+description: "ฝึกใช้ scikit-learn ประมาณ factor loadings ตรวจ residual covariance และทดลองว่าปัจจัยใกล้ซ้ำกับหน่วยข้อมูลทำให้ค่าประมาณเปลี่ยนอย่างไร"
 ---
 
-# Factor Models: จัดข้อมูลและอ่านค่า Loading
+<span id="factor-models-จ-ดข-อม-ลและอ-านค-า-loading"></span>
 
-<p class="lead">กองทุนสองกองที่ถือหุ้นคนละชุดอาจเคลื่อนไหวคล้ายกัน เพราะรับความเสี่ยงจากปัจจัยเดียวกัน การประมาณ <strong>Factor Model</strong> ช่วยวัดความสัมพันธ์นี้จากข้อมูล เช่น เมื่อผลตอบแทนตลาดเพิ่มขึ้น 1 จุดเปอร์เซ็นต์ ผลตอบแทนกองทุนสัมพันธ์กับการเปลี่ยนแปลงเท่าไร เมื่อควบคุมปัจจัยอื่นในสมการไว้</p>
+# Lab Factor Model: ประมาณค่าและตรวจความเสถียร
 
-บทนี้เริ่มจากตารางรายเดือนแปดแถว แล้วค่อยเพิ่มการประมาณค่า การอ่าน residual และปัญหาปัจจัยที่ซ้ำกัน ผู้อ่านที่ต้องการทบทวน CAPM และ Fama–French ดู [Factor Investing](factor-investing.html) และ [Multifactor Models](multifactor-models.html) ได้ ส่วนบทถัดไปจะใช้ [Ridge, Lasso และ Elastic Net](regularized-factor-models.html) จัดการกับค่าประมาณที่ไวต่อข้อมูล
+<p class="lead">Lab นี้ใช้ scikit-learn ประมาณ Factor Model จากข้อมูลที่รู้คำตอบ แล้วเปลี่ยนข้อมูลเพียงเล็กน้อยเพื่อดูว่า loading แกว่งได้มากเพียงใด เราจะตรวจทั้งค่าที่โมเดล fit ได้ ค่า residual และหน่วยของ coefficient ก่อนใช้ Ridge หรือ Lasso ในบทถัดไป</p>
+
+ใช้แนวคิด OLS และ residual จาก [Factor Investing](factor-investing.html#ols-from-scratch) และสมการหลายปัจจัยจาก [Multifactor Models](multifactor-models.html#matrix-ols) เป็นพื้นฐาน ตัวอย่างด้านล่างสร้างข้อมูลและ import ใหม่ทั้งหมด จึงรัน Lab นี้แยกได้ โดยเน้นการเรียกใช้ไลบรารีและตรวจผลที่โปรแกรมคืนมา
 
 <span id="factor-data-question"></span>
 
@@ -53,25 +55,13 @@ print((factor_data * 100).round(2))
 
 ตารางที่พิมพ์คูณ 100 เพื่อให้อ่านเป็นเปอร์เซ็นต์ เดือนแรกได้ Market −2%, Rate −1% และ Fund −1.4% ส่วนตัวแปร `factor_data` ยังเก็บทศนิยมเดิม เราสร้าง Fund ด้วย loading ที่รู้ล่วงหน้าเพื่อใช้ตรวจวิธีประมาณค่า นักวิเคราะห์ที่ใช้ข้อมูลจริงจะเห็นเพียงตารางและไม่รู้ค่าที่ใช้สร้างผลตอบแทน
 
+<span id="จากตารางไปเป-นสมการ"></span>
+
 <span id="factor-equation-shapes"></span>
 
-## จากตารางไปเป็นสมการ
+## จัด X และ y สำหรับส่งเข้า .fit
 
-ให้สมการรายเดือนเป็น
-
-$$
-y_t=a+\beta_M F_{t,M}+\beta_R F_{t,R}+e_t.
-$$
-
-$y_t$ คือผลตอบแทนกองทุน, $F_{t,M}$ และ $F_{t,R}$ คือผลตอบแทนปัจจัย, $a$ คือ intercept และ $e_t$ คือส่วนที่สมการอธิบายไม่ได้ ค่า $\beta$ เรียกว่า loading หรือความไวต่อปัจจัย โดยทั้งปัจจัยและกองทุนในตัวอย่างใช้หน่วยผลตอบแทนเดียวกัน loading จึงเป็นอัตราส่วนที่ไม่มีหน่วย
-
-สำหรับเดือนแรก สมการที่ใช้สร้างข้อมูลให้ส่วนที่อธิบายได้เท่ากับ
-
-$$
-0.001+0.8(-0.02)-0.4(-0.01)=-0.011.
-$$
-
-นั่นคือ −1.1% แต่กองทุนได้จริง −1.4% จึงเหลือ residual −0.3 จุดเปอร์เซ็นต์ ตัวเลข 0.8 หมายถึงความสัมพันธ์แบบเพิ่ม 0.8 จุดเปอร์เซ็นต์ต่อ Market ที่เพิ่ม 1 จุดเปอร์เซ็นต์ เมื่อ Rate คงที่ ไม่ใช่ถือหุ้นตลาด 80% และไม่ใช่คำยืนยันว่า Market เป็นสาเหตุทั้งหมดของการเปลี่ยนแปลง
+ใช้ [สมการหลายปัจจัย](multifactor-models.html#matrix-ols) กับ `Market` และ `Rate` ที่สร้างไว้: ผลตอบแทนกองทุนเท่ากับ intercept บวก loading คูณผลตอบแทนแต่ละปัจจัย แล้วบวก residual สำหรับ `LinearRegression` เราเก็บเฉพาะปัจจัยใน `X` และให้ estimator จัดการ intercept เอง จึงไม่เติมคอลัมน์หนึ่งเหมือนตัวอย่าง `np.linalg.lstsq` ในบทหลัก
 
 ```python
 factor_X = factor_data[["Market", "Rate"]]
@@ -82,22 +72,17 @@ print(f"First explained return: {100 * first_explained:.2f}%")
 print(f"First observed return: {100 * factor_y.iloc[0]:.2f}%")
 ```
 
-วงเล็บคู่ `[["Market", "Rate"]]` เลือกหลายคอลัมน์และคงรูปตาราง จึงได้ `X shape: (8, 2)` คือแปดเดือน สองปัจจัย ส่วนวงเล็บชั้นเดียวเลือก `Fund` เป็น Series รูป `(8,)` เครื่องหมาย `@` ทำ dot product: คูณสมาชิกที่ตรงกันแล้วรวมกัน ส่วน `.iloc[0]` เลือกแถวแรกตามตำแหน่งซึ่งเริ่มนับจากศูนย์
+วงเล็บคู่ `[["Market", "Rate"]]` เลือกตาราง `X` รูป `(8, 2)` ส่วน `factor_data["Fund"]` เลือก Series `y` รูป `(8,)` เครื่องหมาย `@` คูณสมาชิกที่ตรงกันแล้วรวม และ `.iloc[0]` เลือกเดือนแรก สมการที่ใช้สร้างข้อมูลให้ $0.001+0.8(-0.02)-0.4(-0.01)=-0.011$ หรือ −1.1% เทียบกับผลจริง −1.4% จึงเหลือ residual −0.3 จุดเปอร์เซ็นต์
 
-การจับคู่ $X_t$ กับ $y_t$ เป็นการอธิบายผลตอบแทนในเดือนเดียวกัน แม้ทดสอบสมการกับเดือนที่ไม่เคยใช้ฝึก ก็ยังต้องรู้ผลตอบแทนปัจจัยของเดือนนั้นก่อน จึงต้องแยกจากการพยากรณ์ก่อนเดือนเริ่ม ซึ่งยังไม่มี $X_t$ ให้ใส่สมการ
+แถว `X` และ `y` ต้องเป็นเดือนเดียวกัน การใส่ผลตอบแทนปัจจัยที่เกิดแล้วใช้ตรวจความสัมพันธ์ย้อนหลัง ส่วนการพยากรณ์ก่อนเดือนเริ่มยังต้องมีข้อสมมติของปัจจัย ตาม [เงื่อนไขด้านเวลา](multifactor-models.html#factor-data-timing)
+
+<span id="ols-เล-อก-loading-อย-างไร"></span>
 
 <span id="fit-and-residuals"></span>
 
-## OLS เลือก Loading อย่างไร
+## Fit ด้วย scikit-learn แล้วตรวจ residual
 
-OLS เลือก intercept และ loading ให้ผลรวม residual กำลังสองต่ำที่สุด:
-
-$$
-\min_{a,\boldsymbol\beta}
-\sum_{t=1}^{n}(y_t-a-\boldsymbol F_t^\mathsf T\boldsymbol\beta)^2.
-$$
-
-การยกกำลังสองทำให้ residual บวกและลบไม่หักล้างกัน และให้น้ำหนักมากขึ้นกับค่าคลาดเคลื่อนขนาดใหญ่ ใน Python เราสร้างตัวประมาณแล้วส่งข้อมูลเข้า `.fit(X, y)` โดยตัวอย่างนี้ให้โปรแกรมประมาณ intercept ด้วย
+`LinearRegression(fit_intercept=True)` แก้ [โจทย์ OLS](factor-investing.html#ols-from-scratch) โดยประมาณทั้ง loading และ intercept ส่งตารางปัจจัยเข้า `.fit(X, y)` แล้วอ่านผลจาก estimator ที่ fit แล้ว
 
 ```python
 factor_ols = LinearRegression(fit_intercept=True).fit(factor_X, factor_y)
@@ -128,21 +113,15 @@ print("X.T @ residual:", np.round(factor_cross, 12))
 
 OLS ที่มี intercept และแก้ปัญหาได้ตรงตามสมการให้ residual มีค่าเฉลี่ยศูนย์และมี dot product กับแต่ละคอลัมน์ของ X เป็นศูนย์ นี่คือความตั้งฉากในข้อมูลที่ใช้ฝึก ไม่ได้พิสูจน์ว่า residual เป็นตัวแปรสุ่มที่เป็นอิสระจากปัจจัย หรือว่าความสัมพันธ์จะเหมือนเดิมในอนาคต
 
-intercept บวกก็ยังไม่พอจะเรียกว่าเป็นฝีมือผู้จัดการ ต้องพิจารณาความไม่แน่นอนของค่าประมาณ ปัจจัยที่ตกหล่น ค่าใช้จ่าย และช่วงเวลาที่เลือกด้วย บท [ความคลาดเคลื่อนของ Expected Return](expected-return-estimation.html) อธิบายว่าทำไมค่าเฉลี่ยระยะสั้นจึงไม่นิ่ง
+การตีความ intercept ต้องประเมิน [ความไม่แน่นอนของ alpha](factor-investing.html#scipy-ols) และ [ผลจากปัจจัยที่ตกหล่น](multifactor-models.html#omitted-factor-alpha) แยกจากการตรวจว่า `.fit` คืนคำตอบถูกต้องหรือไม่
+
+<span id="ใช-สมการอธ-บายความเส-ยง"></span>
 
 <span id="factor-risk-covariance"></span>
 
-## ใช้สมการอธิบายความเสี่ยง
+## ตรวจ covariance ที่สร้างกลับจากผล fit
 
-เมื่อ residual ไม่มี covariance กับปัจจัย เราแยก variance ได้เป็น
-
-$$
-\operatorname{Var}(y)
-=\boldsymbol\beta^\mathsf T\Sigma_F\boldsymbol\beta
-+\operatorname{Var}(e),
-$$
-
-โดย $\Sigma_F$ คือ covariance ของปัจจัยทุกตัว พจน์แรกต้องรวม covariance ระหว่างปัจจัยด้วย หากปัจจัยสัมพันธ์กัน การนำเพียง $\beta_k^2\sigma_k^2$ มาบวกจะขาดพจน์ไขว้ ในตัวอย่างนี้เราจัดปัจจัยให้ไม่มี covariance กันเพื่อให้เริ่มคำนวณได้ง่าย
+ตรวจ [variance decomposition ของ Factor Model](multifactor-models.html#factor-risk-model) กับผลจาก `.fit` โดยคำนวณส่วน factor, residual และ variance ของ `y` แยกกัน ปัจจัยของชุดทดลองนี้ไม่มี covariance กัน แต่โค้ดยังคูณ covariance matrix เต็มเพื่อใช้ตรวจวิธีคำนวณ
 
 ```python
 factor_cov = factor_X.cov(ddof=0).to_numpy()
@@ -157,7 +136,7 @@ print(f"Monthly SD: {100 * np.sqrt(factor_total_variance):.4f}%")
 
 ตัวอย่างนี้ใช้ `ddof=0` ทุกพจน์เพื่อแยก variance ของแปดแถวที่มีอยู่ให้ตรงกัน ผลได้ 0.000272 จากปัจจัย และ 0.000009 จาก residual รวมเป็น 0.000281 หน่วยคือผลตอบแทนทศนิยมกำลังสองต่อหนึ่งเดือน ถอดรากได้ SD รายเดือน 1.6763% หากเลือก sample covariance แบบ `ddof=1` ต้องใช้ convention เดียวกันทุกพจน์ของการเปรียบเทียบ
 
-สำหรับหลายกองทุน ให้แต่ละแถวของ $B$ เป็น loading ของหนึ่งกองทุน และให้ $\Omega$ เป็น covariance ของ residual:
+สำหรับหลายกองทุน ให้แต่ละแถวของ $B$ เป็น loading ของหนึ่งกองทุน ให้ $\Sigma_F$ เป็น covariance ของปัจจัย และ $\Omega$ เป็น covariance ของ residual:
 
 $$
 \Sigma_Y=B\Sigma_F B^\mathsf T+\Omega.
@@ -221,7 +200,7 @@ correlation ติดลบใกล้ −1 ก็มีปัญหาเด�
 
 ## ขนาด Loading เปลี่ยนตามหน่วยข้อมูล
 
-ถ้าเปลี่ยน Rate จากทศนิยมเป็นตัวเลขเปอร์เซ็นต์ เช่น −0.01 เป็น −1 คอลัมน์นั้นจะใหญ่ขึ้น 100 เท่า OLS จะปรับ loading ให้เล็กลง 100 เท่าเพื่อคงค่าที่อธิบายได้เดิม
+ทดสอบ [การเปลี่ยนหน่วย factor](multifactor-models.html#multifactor-units) ด้วย `LinearRegression`: คูณเฉพาะ `Rate` ด้วย 100 แล้ว fit ใหม่ โดยคง `y` และปัจจัยอื่นไว้ ตรวจทั้ง coefficient และ fitted returns
 
 ```python
 unit_X = factor_X.copy()
@@ -232,7 +211,7 @@ print("Same fitted returns:", np.allclose(unit_ols.predict(unit_X), factor_fitte
 print(f"Correlation with negative proxy: {np.corrcoef(market, -near_X['Proxy'])[0, 1]:.9f}")
 ```
 
-loading ใหม่ของ Rate คือ −0.004 และ fitted returns ยังตรงกับเดิม การตัดสินว่าปัจจัยใดสำคัญกว่าจากขนาด loading ดิบอย่างเดียวจึงมีปัญหา แม้ใช้หน่วยเหมือนกัน ปัจจัยที่ผันผวนต่างกันก็ส่งผลต่อความแปรปรวนของกองทุนต่างกัน
+ผลได้ Rate loading −0.004 และ `Same fitted returns: True` ซึ่งยืนยันว่า coefficient ชดเชยหน่วยที่เปลี่ยนไป บรรทัดสุดท้ายยังตรวจกรณี proxy กลับเครื่องหมาย ได้ correlation ใกล้ −1
 
 บทถัดไปจะใช้ [standardization](glossary.html#standardization) เพื่อทำให้แต่ละคอลัมน์มีสเกลเทียบกันได้ก่อนลงโทษขนาด coefficient แล้วค่อยแปลง loading กลับสู่หน่วยเดิม โดยยังต้องดูความสัมพันธ์ระหว่างปัจจัยร่วมด้วย
 
@@ -313,4 +292,4 @@ $1.1\%-1.7\%=-0.6$ จุดเปอร์เซ็นต์ สัญญาณ
 
 เรียบเรียงใหม่จากการอ่าน Transcript ฉบับเต็มของ Coursera ได้แก่ [Basics of Factor Investing](https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/lTGHZ/introduction-to-module-2-basics-of-factor-investing), [Introducing Factor Models](https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/PXj5n/introducing-factor-models), [Typology of Factor Models](https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/pH2yb/typology-of-factor-models) และ [Using Factor Models](https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/JNYfl/using-factor-models-in-portfolio-construction-and-analysis) พร้อม [Factor Models Lab](https://www.coursera.org/learn/python-machine-learning-for-investment-management/lecture/zxZH1/lab-session-jupiter-notebook-on-factor-models) ตรวจเมื่อ 3 ตุลาคม 2026
 
-ตัวอย่างและโค้ดในหน้านี้เขียนใหม่ ไม่มีการแจก Transcript, notebook, ชุดข้อมูล หรือไลบรารีของผู้สอน รายละเอียด API อ้างอิง [LinearRegression](https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LinearRegression.html) เราใช้คำว่า residual ตั้งฉากกับ regressors ในข้อมูลฝึก แทนการสรุปว่าเป็นอิสระ และไม่ใช้ตัวเลขผลตอบแทนหรือสภาวะตลาดในวิดีโอเก่าเป็นข้อสมมติปัจจุบัน
+ตัวอย่างและโค้ดในหน้านี้เขียนใหม่ ไม่มีการแจก Transcript, notebook, ชุดข้อมูล หรือไลบรารีของผู้สอน รายละเอียดการเรียกใช้ไลบรารีอ้างอิง [LinearRegression](https://scikit-learn.org/1.6/modules/generated/sklearn.linear_model.LinearRegression.html) เราใช้คำว่า residual ตั้งฉากกับ regressors ในข้อมูลฝึก แทนการสรุปว่าเป็นอิสระ และไม่ใช้ตัวเลขผลตอบแทนหรือสภาวะตลาดในวิดีโอเก่าเป็นข้อสมมติปัจจุบัน
